@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MIVProject.supplier>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OIB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mivUser1.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplierCategory.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OIB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mivUser1.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplierCategory.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.mivUser }) |
+            @Html.ActionLink("Details", "Details", new { id=item.mivUser }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.mivUser })
+        </td>
+    </tr>
+}
+
+</table>

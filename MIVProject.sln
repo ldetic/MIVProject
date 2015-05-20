@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIVProject", "MIVProject\MIVProject.csproj", "{33D635BC-41D2-4A49-A58E-8D86A684E814}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{71A098FB-ED81-4310-BA6E-8FE135CA5D0F}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{AC52FCAB-A3A8-4ED2-8CF8-46817D2BD3A2}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\MIVProject-WAWS-dev.json = PublishScripts\Configurations\MIVProject-WAWS-dev.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9DF53E27-CF66-4555-9ED2-5905228ADEB0}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33D635BC-41D2-4A49-A58E-8D86A684E814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D635BC-41D2-4A49-A58E-8D86A684E814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D635BC-41D2-4A49-A58E-8D86A684E814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D635BC-41D2-4A49-A58E-8D86A684E814}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AC52FCAB-A3A8-4ED2-8CF8-46817D2BD3A2} = {71A098FB-ED81-4310-BA6E-8FE135CA5D0F}
+	EndGlobalSection
+EndGlobal

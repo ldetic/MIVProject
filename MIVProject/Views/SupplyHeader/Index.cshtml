@@ -1,0 +1,81 @@
+﻿@model IEnumerable<MIVProject.supplyHeader>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.paymentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deliveryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.currency1.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deliveryMethod1.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paymentMethod1.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.project1.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier1.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplyStatus.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.paymentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deliveryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.currency1.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deliveryMethod1.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paymentMethod1.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.project1.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplier1.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplyStatus.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.supplyID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.supplyID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.supplyID })
+        </td>
+    </tr>
+}
+
+</table>

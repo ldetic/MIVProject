@@ -1,0 +1,74 @@
+﻿@model MIVProject.supplyItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>supplyItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.item1.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.item1.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supplyHeader.supplyID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplyHeader.supplyID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

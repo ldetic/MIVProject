@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4ebec8b133064d2e97db178701785e26" Name="Diagram1">
+        <EntityTypeShape EntityType="mivModel.currency" Width="1.5" PointX="3" PointY="18.625" />
+        <EntityTypeShape EntityType="mivModel.deliveryMethod" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="mivModel.item" Width="1.5" PointX="5.25" PointY="21.875" />
+        <EntityTypeShape EntityType="mivModel.itemCategory" Width="1.5" PointX="0.75" PointY="22.25" />
+        <EntityTypeShape EntityType="mivModel.itemSubCategory" Width="1.5" PointX="3" PointY="22.125" />
+        <EntityTypeShape EntityType="mivModel.mivUser" Width="1.5" PointX="0.75" PointY="10" />
+        <EntityTypeShape EntityType="mivModel.paymentMethod" Width="1.5" PointX="0.75" PointY="4.25" />
+        <EntityTypeShape EntityType="mivModel.project" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="mivModel.projectItem" Width="1.5" PointX="5.25" PointY="8.75" />
+        <EntityTypeShape EntityType="mivModel.supplier" Width="1.5" PointX="3" PointY="8.75" />
+        <EntityTypeShape EntityType="mivModel.supplierCategory" Width="1.5" PointX="0.75" PointY="7.625" />
+        <EntityTypeShape EntityType="mivModel.supplyHeader" Width="1.5" PointX="5.25" PointY="3" />
+        <EntityTypeShape EntityType="mivModel.supplyItem" Width="1.5" PointX="7.5" PointY="3.625" />
+        <EntityTypeShape EntityType="mivModel.supplyStatus" Width="1.5" PointX="3" PointY="16.25" />
+        <EntityTypeShape EntityType="mivModel.userType" Width="1.5" PointX="1.5" PointY="13.5" />
+        <AssociationConnector Association="mivModel.FK__supplyHea__curre__1DB06A4F" />
+        <AssociationConnector Association="mivModel.FK__project__deliver__5BE2A6F2" />
+        <AssociationConnector Association="mivModel.FK__supplyHea__deliv__05D8E0BE" />
+        <AssociationConnector Association="mivModel.FK__item__subcategor__5812160E" />
+        <AssociationConnector Association="mivModel.FK__supplyItem__item__18EBB532" />
+        <AssociationConnector Association="mivModel.FK__itemSubCa__categ__7C4F7684" />
+        <AssociationConnector Association="mivModel.FK__mivUser__type__7D439ABD" />
+        <AssociationConnector Association="mivModel.FK__supplier__mivUse__1BC821DD" />
+        <AssociationConnector Association="mivModel.FK__project__payment__00200768" />
+        <AssociationConnector Association="mivModel.FK__supplyHea__payme__06CD04F7" />
+        <AssociationConnector Association="mivModel.FK__projectIt__proje__14270015" />
+        <AssociationConnector Association="mivModel.FK__supplyHea__proje__07C12930" />
+        <AssociationConnector Association="mivModel.FK__supplier__catego__1CBC4616" />
+        <AssociationConnector Association="mivModel.FK__supplyHea__suppl__09A971A2" />
+        <AssociationConnector Association="mivModel.FK__supplyHea__statu__08B54D69" />
+        <AssociationConnector Association="mivModel.FK__supplyIte__suppl__17F790F9" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

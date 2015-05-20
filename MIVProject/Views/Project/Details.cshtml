@@ -1,0 +1,66 @@
+﻿@model MIVProject.project
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>project</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paymentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paymentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deliveryMethod1.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deliveryMethod1.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paymentMethod1.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paymentMethod1.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
