@@ -317,6 +317,7 @@
       <DependentUpon>miv.edmx</DependentUpon>
       <LastGenOutput>miv.cs</LastGenOutput>
     </Content>
+    <Content Include="Properties\Publish-WebApplicationWebsite.ps1" />
     <None Include="Properties\PublishProfiles\MIVProject.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -453,6 +454,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Localized.hr.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Localized.en.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
