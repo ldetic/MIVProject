@@ -1,10 +1,13 @@
 ﻿@using Resources;
 @{
-    if (Culture == "hr-HR")
+    if (!Request["en-GB"].IsEmpty())
     {
-        
+        Culture = UICulture = "en-GB";
+    } else if (!Request["hr-HR"].IsEmpty())
+    {
+        Culture = UICulture = "hr-HR";
     }
-    
+
 }
 <!DOCTYPE html>
 <html>
@@ -36,7 +39,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("E-nabava", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(Local.appName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -51,15 +54,10 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - @Local.CompanyNameLong</p>
             <form method="post">
-                @Local.SelectLang
-                <select name="lang">
-                    <option></option>
-                    <option value="en-GB" @(Culture == "en-GB" ? "selected=\"selected\"" : "")>English</option>
-                    <option value="hr-HR" @(Culture == "fr-FR" ? "selected=\"selected\"" : "")>Hrvatski</option>
-                </select>
-                <input type="submit" value="@Local.Submit" />
+                <input type="submit" name="en-GB" class="btn btn-default" value="English" />
+                <input type="submit" name="hr-HR" class="btn btn-default" value="Hrvatski" />
             </form>
         </footer>
     </div>

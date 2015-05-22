@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E-nabava.
+        /// </summary>
+        internal static string appName {
+            get {
+                return ResourceManager.GetString("appName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Metalska industrija Varaždin.
         /// </summary>
         internal static string CompanyNameLong {
@@ -79,20 +88,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to odaberite jezik.
+        ///   Looks up a localized string similar to Prijava.
         /// </summary>
-        internal static string SelectLang {
+        internal static string login {
             get {
-                return ResourceManager.GetString("SelectLang", resourceCulture);
+                return ResourceManager.GetString("login", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to pohrani.
+        ///   Looks up a localized string similar to Registracija.
         /// </summary>
-        internal static string Submit {
+        internal static string registration {
             get {
-                return ResourceManager.GetString("Submit", resourceCulture);
+                return ResourceManager.GetString("registration", resourceCulture);
             }
         }
     }
