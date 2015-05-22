@@ -12,21 +12,16 @@ namespace MIVProject
     using System;
     using System.Collections.Generic;
     
-    public partial class item
+    public partial class criteria
     {
-        public item()
+        public criteria()
         {
-            this.supplyItem = new HashSet<supplyItem>();
+            this.itemCategory = new HashSet<itemCategory>();
         }
     
-        public int itemID { get; set; }
+        public int criteriaID { get; set; }
         public string name { get; set; }
-        public int subcategory { get; set; }
-        public string description { get; set; }
-        public string unitOfMeasure { get; set; }
-        public Nullable<double> quantity { get; set; }
     
-        public virtual itemSubCategory itemSubCategory { get; set; }
-        public virtual ICollection<supplyItem> supplyItem { get; set; }
+        public virtual ICollection<itemCategory> itemCategory { get; set; }
     }
 }

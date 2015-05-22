@@ -25,6 +25,7 @@ namespace MIVProject
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<criteria> criteria { get; set; }
         public virtual DbSet<currency> currency { get; set; }
         public virtual DbSet<deliveryMethod> deliveryMethod { get; set; }
         public virtual DbSet<item> item { get; set; }
@@ -40,5 +41,6 @@ namespace MIVProject
         public virtual DbSet<supplyItem> supplyItem { get; set; }
         public virtual DbSet<supplyStatus> supplyStatus { get; set; }
         public virtual DbSet<userType> userType { get; set; }
+        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     }
 }

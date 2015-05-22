@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="appName" xml:space="preserve">
-    <value>E-nabava</value>
-  </data>
-  <data name="companyNameLong" xml:space="preserve">
+  <data name="CompanyNameLong" xml:space="preserve">
     <value>Metalska industrija Varaždin</value>
   </data>
-  <data name="companyNameShort" xml:space="preserve">
+  <data name="CompanyNameShort" xml:space="preserve">
     <value>MiV</value>
+  </data>
+  <data name="SelectLang" xml:space="preserve">
+    <value>select language</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>submit</value>
   </data>
 </root>

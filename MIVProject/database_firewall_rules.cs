@@ -12,21 +12,13 @@ namespace MIVProject
     using System;
     using System.Collections.Generic;
     
-    public partial class item
+    public partial class database_firewall_rules
     {
-        public item()
-        {
-            this.supplyItem = new HashSet<supplyItem>();
-        }
-    
-        public int itemID { get; set; }
+        public int id { get; set; }
         public string name { get; set; }
-        public int subcategory { get; set; }
-        public string description { get; set; }
-        public string unitOfMeasure { get; set; }
-        public Nullable<double> quantity { get; set; }
-    
-        public virtual itemSubCategory itemSubCategory { get; set; }
-        public virtual ICollection<supplyItem> supplyItem { get; set; }
+        public string start_ip_address { get; set; }
+        public string end_ip_address { get; set; }
+        public System.DateTime create_date { get; set; }
+        public System.DateTime modify_date { get; set; }
     }
 }

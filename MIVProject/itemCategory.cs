@@ -17,11 +17,13 @@ namespace MIVProject
         public itemCategory()
         {
             this.itemSubCategory = new HashSet<itemSubCategory>();
+            this.criteria = new HashSet<criteria>();
         }
     
         public int categoryID { get; set; }
         public string name { get; set; }
     
         public virtual ICollection<itemSubCategory> itemSubCategory { get; set; }
+        public virtual ICollection<criteria> criteria { get; set; }
     }
 }

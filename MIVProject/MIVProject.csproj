@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <NuGetPackageImportStamp>6c48cea8</NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/60023496-2dd3-460b-af4e-cab6e54f8783/resourcegroups/MIVProject/providers/microsoft.insights/components/MIVProject</ApplicationInsightsResourceId>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -198,6 +199,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Local.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Local.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Local.en-GB.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Local.en-GB.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -221,7 +232,13 @@
     <Compile Include="Controllers\SupplyItemController.cs" />
     <Compile Include="Controllers\SupplyStatusController.cs" />
     <Compile Include="Controllers\UserTypeController.cs" />
+    <Compile Include="criteria.cs">
+      <DependentUpon>miv.tt</DependentUpon>
+    </Compile>
     <Compile Include="currency.cs">
+      <DependentUpon>miv.tt</DependentUpon>
+    </Compile>
+    <Compile Include="database_firewall_rules.cs">
       <DependentUpon>miv.tt</DependentUpon>
     </Compile>
     <Compile Include="deliveryMethod.cs">
@@ -456,13 +473,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Localized.hr.resx">
+    <Content Include="App_GlobalResources\Local.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Local.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Localized.en.resx">
+    <Content Include="App_GlobalResources\Local.en-GB.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Local.en-GB.designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
     </Content>
   </ItemGroup>
   <PropertyGroup>
