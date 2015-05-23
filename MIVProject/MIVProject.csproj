@@ -215,6 +215,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\criteriaController.cs" />
     <Compile Include="Controllers\CurrencyController.cs" />
     <Compile Include="Controllers\DeliveryMethodController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -236,9 +237,6 @@
       <DependentUpon>miv.tt</DependentUpon>
     </Compile>
     <Compile Include="currency.cs">
-      <DependentUpon>miv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="database_firewall_rules.cs">
       <DependentUpon>miv.tt</DependentUpon>
     </Compile>
     <Compile Include="deliveryMethod.cs">
@@ -458,6 +456,11 @@
     <Content Include="Views\SupplyItem\Details.cshtml" />
     <Content Include="Views\SupplyItem\Edit.cshtml" />
     <Content Include="Views\SupplyItem\Index.cshtml" />
+    <Content Include="Views\criteria\Create.cshtml" />
+    <Content Include="Views\criteria\Delete.cshtml" />
+    <Content Include="Views\criteria\Details.cshtml" />
+    <Content Include="Views\criteria\Edit.cshtml" />
+    <Content Include="Views\criteria\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

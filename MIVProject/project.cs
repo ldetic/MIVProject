@@ -27,6 +27,7 @@ namespace MIVProject
         public int deliveryMethod { get; set; }
         public Nullable<System.DateTime> deliveryDate { get; set; }
         public string description { get; set; }
+        public string src { get; set; }
     
         public virtual deliveryMethod deliveryMethod1 { get; set; }
         public virtual paymentMethod paymentMethod1 { get; set; }

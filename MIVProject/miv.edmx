@@ -90,6 +90,7 @@
           <Property Name="deliveryMethod" Type="int" Nullable="false" />
           <Property Name="deliveryDate" Type="datetime" />
           <Property Name="description" Type="text" />
+          <Property Name="src" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="projectItem">
           <Key>
@@ -166,24 +167,6 @@
           </Key>
           <Property Name="typeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="database_firewall_rules">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="start_ip_address" />
-            <PropertyRef Name="end_ip_address" />
-            <PropertyRef Name="create_date" />
-            <PropertyRef Name="modify_date" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="create_date" Type="datetime" Nullable="false" />
-          <Property Name="modify_date" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK__categoryC__crite__339FAB6E">
           <End Role="criteria" Type="Self.criteria" Multiplicity="1" />
@@ -419,16 +402,6 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <EntitySet Name="supplyItem" EntityType="Self.supplyItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="supplyStatus" EntityType="Self.supplyStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="userType" EntityType="Self.userType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
-            <DefiningQuery>SELECT 
-    [database_firewall_rules].[id] AS [id], 
-    [database_firewall_rules].[name] AS [name], 
-    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
-    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
-    [database_firewall_rules].[create_date] AS [create_date], 
-    [database_firewall_rules].[modify_date] AS [modify_date]
-    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__categoryC__crite__339FAB6E" Association="Self.FK__categoryC__crite__339FAB6E">
             <End Role="criteria" EntitySet="criteria" />
             <End Role="categoryCriteria" EntitySet="categoryCriteria" />
@@ -523,7 +496,6 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <EntitySet Name="supplyItem" EntityType="mivModel.supplyItem" />
           <EntitySet Name="supplyStatus" EntityType="mivModel.supplyStatus" />
           <EntitySet Name="userType" EntityType="mivModel.userType" />
-          <EntitySet Name="database_firewall_rules" EntityType="mivModel.database_firewall_rules" />
           <AssociationSet Name="FK__supplyHea__curre__1DB06A4F" Association="mivModel.FK__supplyHea__curre__1DB06A4F">
             <End Role="currency" EntitySet="currency" />
             <End Role="supplyHeader" EntitySet="supplyHeader" />
@@ -684,6 +656,7 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <Property Name="deliveryMethod" Type="Int32" Nullable="false" />
           <Property Name="deliveryDate" Type="DateTime" Precision="3" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="src" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="deliveryMethod1" Relationship="mivModel.FK__project__deliver__5BE2A6F2" FromRole="project" ToRole="deliveryMethod" />
           <NavigationProperty Name="paymentMethod1" Relationship="mivModel.FK__project__payment__00200768" FromRole="project" ToRole="paymentMethod" />
           <NavigationProperty Name="projectItem" Relationship="mivModel.FK__projectIt__proje__14270015" FromRole="project" ToRole="projectItem" />
@@ -780,22 +753,6 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <Property Name="typeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="mivUser" Relationship="mivModel.FK__mivUser__type__7D439ABD" FromRole="userType" ToRole="mivUser" />
-        </EntityType>
-        <EntityType Name="database_firewall_rules">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="start_ip_address" />
-            <PropertyRef Name="end_ip_address" />
-            <PropertyRef Name="create_date" />
-            <PropertyRef Name="modify_date" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK__supplyHea__curre__1DB06A4F">
           <End Type="mivModel.currency" Role="currency" Multiplicity="1" />
@@ -1076,6 +1033,7 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <EntitySetMapping Name="project">
             <EntityTypeMapping TypeName="mivModel.project">
               <MappingFragment StoreEntitySet="project">
+                <ScalarProperty Name="src" ColumnName="src" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="deliveryDate" ColumnName="deliveryDate" />
                 <ScalarProperty Name="deliveryMethod" ColumnName="deliveryMethod" />
@@ -1163,18 +1121,6 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
               <MappingFragment StoreEntitySet="userType">
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="typeID" ColumnName="typeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="database_firewall_rules">
-            <EntityTypeMapping TypeName="mivModel.database_firewall_rules">
-              <MappingFragment StoreEntitySet="database_firewall_rules">
-                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
-                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
