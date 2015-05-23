@@ -1,17 +1,16 @@
 ﻿@model MIVProject.project
-
+@using Resources
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Local.Details;
 }
 
-<h2>Details</h2>
+<h2>@Local.Details projekta @Html.DisplayFor(model => model.name)</h2>
 
 <div>
-    <h4>project</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            @Local.Name
         </dt>
 
         <dd>
@@ -19,7 +18,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.paymentDate)
+            @Local.PaymentDate
         </dt>
 
         <dd>
@@ -27,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.deliveryDate)
+            @Local.DeliveryDate
         </dt>
 
         <dd>
@@ -35,7 +34,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.description)
+            @Local.Description
         </dt>
 
         <dd>
@@ -43,7 +42,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.deliveryMethod1.name)
+            @Local.DeliveryMethod
         </dt>
 
         <dd>
@@ -51,7 +50,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.paymentMethod1.name)
+            @Local.PaymentMethod
         </dt>
 
         <dd>
@@ -61,6 +60,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(Local.Edit, "Edit", new { id = Model.id }) |
+    @Html.ActionLink(Local.Back, "Index")
 </p>

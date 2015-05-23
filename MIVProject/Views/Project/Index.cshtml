@@ -1,63 +1,88 @@
 ﻿@model IEnumerable<MIVProject.project>
-
+@using Resources;
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Local.Projects;
 }
 
-<h2>Index</h2>
+<h2>@Local.Projects</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.paymentDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.deliveryDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.deliveryMethod1.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.paymentMethod1.name)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.paymentDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.deliveryDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.deliveryMethod1.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.paymentMethod1.name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
-
-</table>
+<div id="toolbar">
+    @Html.ActionLink(Local.CreateNew, "Create")
+</div>
+<div class="table-responsive">
+    <table class="table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
+           data-search="true" data-toolbar="#toolbar" data-pagination="true" data-query-params="queryParams">
+        <thead>
+            <tr>
+                <th data-field="name" data-sortable="true">
+                    @Local.Name
+                </th>
+                <th>
+                    @Local.Description
+                </th>
+                <th data-field="paymentDate" data-sortable="true">
+                    @Local.PaymentDate
+                </th>
+                <th data-field="deliveryDate" data-sortable="true">
+                    @Local.DeliveryDate
+                </th>
+                <th data-field="deliveryMethod" data-sortable="true">
+                    @Local.DeliveryMethod
+                </th>
+                <th data-field="paymentMethod" data-sortable="true">
+                    @Local.PaymentMethod
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.paymentDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.deliveryDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.deliveryMethod1.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.paymentMethod1.name)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.id })">
+                            <span class="glyphicon glyphicon-edit"
+                                  aria-hidden="true" 
+                                  data-toggle="tooltip" 
+                                  data-placement="left"
+                                  title="@Local.Edit"></span>
+                        </a>
+                        <a href="@Url.Action("Details", new { id = item.id })">
+                            <span class="glyphicon glyphicon-list-alt"
+                                  aria-hidden="true"
+                                  data-toggle="tooltip"
+                                  data-placement="left"
+                                  title="@Local.Details"></span>
+                        </a>
+                        <a href="@Url.Action("Delete", new { id = item.id })">
+                            <span class="glyphicon glyphicon-trash"
+                                  aria-hidden="true"
+                                  data-toggle="tooltip"
+                                  data-placement="left"
+                                  title="@Local.Delete"></span>
+                        </a>
+</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

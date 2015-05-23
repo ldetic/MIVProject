@@ -87,15 +87,16 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description")] project project)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(project).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", project.deliveryMethod);
-            ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", project.paymentMethod);
-            return View(project);
+                if (ModelState.IsValid)
+                {
+                    db.Entry(project).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", project.deliveryMethod);
+                ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", project.paymentMethod);
+                return View(project);
+            
         }
 
         // GET: Project/Delete/5

@@ -126,10 +126,58 @@
   <data name="CompanyNameShort" xml:space="preserve">
     <value>MiV</value>
   </data>
-  <data name="login" xml:space="preserve">
+  <data name="Login" xml:space="preserve">
     <value>Prijava</value>
   </data>
-  <data name="registration" xml:space="preserve">
+  <data name="Registration" xml:space="preserve">
     <value>Registracija</value>
+  </data>
+  <data name="CreateNew" xml:space="preserve">
+    <value>Kreiraj novi</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Izbriši</value>
+  </data>
+  <data name="DeliveryDate" xml:space="preserve">
+    <value>Datum dostave</value>
+  </data>
+  <data name="DeliveryMethod" xml:space="preserve">
+    <value>Način dostave</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Opis</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detalji</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Ažuriraj</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Naziv</value>
+  </data>
+  <data name="PaymentDate" xml:space="preserve">
+    <value>Datum plaćanja</value>
+  </data>
+  <data name="PaymentMethod" xml:space="preserve">
+    <value>Način plaćanja</value>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>Projekti</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Natrag</value>
+  </data>
+  <data name="EditProject" xml:space="preserve">
+    <value>Ažuriraj projekt</value>
+  </data>
+  <data name="NewProject" xml:space="preserve">
+    <value>Novi projekt</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Pohrani</value>
+  </data>
+  <data name="ProjectDeleteQuery" xml:space="preserve">
+    <value>Jeste li sigurni da želite izbrisati projekt</value>
   </data>
 </root>

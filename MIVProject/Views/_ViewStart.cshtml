@@ -1,3 +1,13 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    if (!Request["en-GB"].IsEmpty())
+    {
+        Culture = UICulture = "en-GB";
+    }
+    else if (!Request["hr-HR"].IsEmpty())
+    {
+        Culture = UICulture = "hr-HR";
+    }
+    
 }

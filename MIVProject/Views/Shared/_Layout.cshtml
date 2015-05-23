@@ -1,14 +1,5 @@
 ﻿@using Resources;
-@{
-    if (!Request["en-GB"].IsEmpty())
-    {
-        Culture = UICulture = "en-GB";
-    } else if (!Request["hr-HR"].IsEmpty())
-    {
-        Culture = UICulture = "hr-HR";
-    }
 
-}
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +46,9 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - @Local.CompanyNameLong</p>
-            <form method="post">
+            
+            <form method="post" name="Localization">
+                @Html.AntiForgeryToken()
                 <input type="submit" name="en-GB" class="btn btn-default" value="English" />
                 <input type="submit" name="hr-HR" class="btn btn-default" value="Hrvatski" />
             </form>
@@ -64,6 +57,13 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    
     @RenderSection("scripts", required: false)
+
+    <!-- bootstrap table source-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.0/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.0/bootstrap-table.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.0/locale/bootstrap-table-zh-CN.min.js"></script>
+    @Scripts.Render("~/Scripts/main.js")
 </body>
 </html>
