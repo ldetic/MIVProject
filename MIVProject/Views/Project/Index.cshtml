@@ -5,14 +5,14 @@
 }
 
 <h2>@Local.Projects</h2>
-
-
+<div class="alerts"></div>
 <div id="toolbar">
     @Html.ActionLink(Local.CreateNew, "Create")
 </div>
 <div class="table-responsive">
     <table class="table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
-           data-search="true" data-toolbar="#toolbar" data-pagination="true" data-query-params="queryParams">
+           data-search="true" data-toolbar="#toolbar" data-pagination="true" 
+           data-query-params="queryParams()">
         <thead>
             <tr>
                 <th data-field="name" data-sortable="true">
@@ -39,7 +39,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr id="project-row-@Html.DisplayFor(modelItem => item.id)">
                     <td>
                         @Html.DisplayFor(modelItem => item.name)
                     </td>
@@ -61,8 +61,8 @@
                     <td>
                         <a href="@Url.Action("Edit", new { id = item.id })">
                             <span class="glyphicon glyphicon-edit"
-                                  aria-hidden="true" 
-                                  data-toggle="tooltip" 
+                                  aria-hidden="true"
+                                  data-toggle="tooltip"
                                   data-placement="left"
                                   title="@Local.Edit"></span>
                         </a>
@@ -73,16 +73,37 @@
                                   data-placement="left"
                                   title="@Local.Details"></span>
                         </a>
-                        <a href="@Url.Action("Delete", new { id = item.id })">
+                        <a href="#"
+                           data-target="#modalDelete"
+                           data-toggle="modal"
+                           data-project-name="@Html.DisplayFor(modelItem => item.name)"
+                           data-project-id="@Html.DisplayFor(modelItem => item.id)">
                             <span class="glyphicon glyphicon-trash"
                                   aria-hidden="true"
                                   data-toggle="tooltip"
                                   data-placement="left"
                                   title="@Local.Delete"></span>
                         </a>
-</td>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
+</div>
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                @Local.ProjectDeleteQuery <span class="modal-project-name"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modal-delete-confirm" class="btn btn-primary">Da</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ne</button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -125,6 +125,23 @@ namespace MIVProject.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: Project/DeleteAjax/5
+        [HttpPost, ActionName("DeleteAjax")]
+        
+        public String DeleteConfirmedAjax(int id)
+        {
+            try { 
+                project project = db.project.Find(id);
+                db.project.Remove(project);
+                db.SaveChanges();
+                return "OK";
+            } catch(Exception ex)
+            {
+                return "ERROR";
+            }
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
