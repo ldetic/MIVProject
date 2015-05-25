@@ -35,7 +35,7 @@
      *
      **/
     $('#projects-table').on('click', 'tr', function (event) {
-        console.log('test');
+        
 
     });
 
@@ -51,11 +51,18 @@
         var objectType = button.data('object-type');
         var objectToken = $('input[name="__RequestVerificationToken"]').val();
         var modal = $(this);
+        var rowIndex = button.parent().parent().data("index");
         modal.find('.modal-object-name').text(objectName);
         modal.find('.modal-title').text(objectName);
 
         //DEBUG
-        $("#projectTable").bootstrapTable("hideRow", 1);
+        console.log("deu");
+        var ids = $.map($("#projectTable").bootstrapTable('getSelections'), function (row) {
+            return row.id;
+        });
+        console.log(ids);
+
+        $("#projectTable").bootstrapTable("remove", { field: 'id', value: $.map(rowIndex) });
 
         modal.find('#modal-delete-confirm').click(function (e) {
             e.preventDefault();

@@ -47,12 +47,8 @@
         <footer>
             <p>&copy; @DateTime.Now.Year - @Local.CompanyNameLong</p>
             
-            <form method="post" name="Localization">
+            <form method="get" name="Localization">
                 @Html.AntiForgeryToken()
-                
-                @(!String.IsNullOrEmpty(ViewBag.ModelId) ?
-                    Html.Raw("<input type='hidden' id='id' name='id' value='" + ViewBag.ModelId + "' />") :
-                    Html.Raw(""))
                 <input type="submit" name="en-GB" class="btn btn-default" value="English" />
                 <input type="submit" name="hr-HR" class="btn btn-default" value="Hrvatski" />
             </form>
