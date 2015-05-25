@@ -10,10 +10,9 @@
 <div id="toolbar">
     @Html.ActionLink(Local.CreateNew, "Create")
 </div>
-<div class="table-responsive">
-    <table id="projects-table" class="table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
+    <table id="projects-table" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
            data-search="true" data-toolbar="#toolbar" data-pagination="true" 
-           data-query-params="queryParams">
+           data-query-params="queryParams" data-click-to-select="true">
         <thead>
             <tr>
                 <th data-field="state" data-checkbox="true"></th>
@@ -41,7 +40,8 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr id="object-row-@Html.DisplayFor(modelItem => item.id)">
+                <tr id="object-row-@Html.DisplayFor(modelItem => item.id)" class="selected">
+                    <td></td>
                     <td>
                         @Html.DisplayFor(modelItem => item.name)
                     </td>
@@ -93,7 +93,6 @@
             }
         </tbody>
     </table>
-</div>
 <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

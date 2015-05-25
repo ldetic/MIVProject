@@ -1,4 +1,17 @@
 ﻿$(document).ready(function(){
+    /**
+     *
+     * VARS & SETUP
+     *
+     **/
+    var tableView = "table";
+    var tableToggleThreshold = 974;
+    if ($(window).outerWidth() <= tableToggleThreshold) {
+        console.log("below threshold");
+        tableView = "card";
+        $(".object-table").bootstrapTable("toggleView");
+    }
+
     $('[data-toggle="tooltip"]').tooltip();
 
     /**
@@ -7,7 +20,6 @@
      *
      **/
     function queryParams() {
-        console.log("query");
         return {
             type: 'owner',
             sort: 'updated',
@@ -28,16 +40,29 @@
         $("#" + idAlert).append('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
         $("#" + idAlert).append(text);
     }
+    function winResize() {
+        var win = $(window);
+        console.log(win.outerWidth());
+        if (win.outerWidth() <= tableToggleThreshold && tableView === "table") {
+            tableView = "card";
+            $(".object-table").bootstrapTable("toggleView");
+        }
+        if (win.outerWidth() > tableToggleThreshold && tableView === "card") {
+            tableView = "table";
+            $(".object-table").bootstrapTable("toggleView");
+        }
+    }
 
     /**
      * 
      * PROJECT TABLE 
      *
      **/
-    $('#projects-table').on('click', 'tr', function (event) {
-        
-
-    });
+    //$('#projects-table').on('click', 'tr', function (event) {});
+    
+    winResize();
+    $(window).on('resize', winResize);
+    
 
     /**
      * 
@@ -51,18 +76,18 @@
         var objectType = button.data('object-type');
         var objectToken = $('input[name="__RequestVerificationToken"]').val();
         var modal = $(this);
-        var rowIndex = button.parent().parent().data("index");
+        
         modal.find('.modal-object-name').text(objectName);
         modal.find('.modal-title').text(objectName);
 
         //DEBUG
-        console.log("deu");
-        var ids = $.map($("#projectTable").bootstrapTable('getSelections'), function (row) {
+        var ids = $.map($(".object-table").bootstrapTable('getSelections'), function (row) {           
             return row.id;
         });
-        console.log(ids);
-
-        $("#projectTable").bootstrapTable("remove", { field: 'id', value: $.map(rowIndex) });
+        
+        var rowId = button.parent().parent().children().first().html();
+        //bug: doesn't work! find out why!
+        $(".object-table").bootstrapTable("remove", { field: 'id', value: [rowId] });
 
         modal.find('#modal-delete-confirm').click(function (e) {
             e.preventDefault();

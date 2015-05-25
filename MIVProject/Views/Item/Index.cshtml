@@ -9,8 +9,7 @@
 <div id="toolbar">
     @Html.ActionLink(Local.CreateNew, "Create")
 </div>
-<div class="table-responsive">
-    <table id="projects-table" class="table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
+    <table id="projects-table" class="table object-table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
            data-search="true" data-toolbar="#toolbar" data-pagination="true"
            data-query-params="queryParams">
         <thead>
@@ -86,7 +85,6 @@
             </tbody>
     </table>
 
-</div>
 <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
