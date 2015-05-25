@@ -2,6 +2,7 @@
 @using Resources;
 @{
     ViewBag.Title = Local.Projects;
+    
 }
 
 <h2>@Local.Projects</h2>
@@ -10,15 +11,15 @@
     @Html.ActionLink(Local.CreateNew, "Create")
 </div>
 <div class="table-responsive">
-    <table class="table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
+    <table id="projects-table" class="table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
            data-search="true" data-toolbar="#toolbar" data-pagination="true" 
-           data-query-params="queryParams()">
+           data-query-params="queryParams">
         <thead>
             <tr>
                 <th data-field="name" data-sortable="true">
                     @Local.Name
                 </th>
-                <th>
+                <th data-field="description">
                     @Local.Description
                 </th>
                 <th data-field="paymentDate" data-sortable="true">
@@ -39,7 +40,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr id="project-row-@Html.DisplayFor(modelItem => item.id)">
+                <tr id="object-row-@Html.DisplayFor(modelItem => item.id)">
                     <td>
                         @Html.DisplayFor(modelItem => item.name)
                     </td>
@@ -76,14 +77,16 @@
                         <a href="#"
                            data-target="#modalDelete"
                            data-toggle="modal"
-                           data-project-name="@Html.DisplayFor(modelItem => item.name)"
-                           data-project-id="@Html.DisplayFor(modelItem => item.id)">
+                           data-object-name="@Html.DisplayFor(modelItem => item.name)"
+                           data-object-id="@Html.DisplayFor(modelItem => item.id)"
+                           data-object-type="project">
                             <span class="glyphicon glyphicon-trash"
                                   aria-hidden="true"
                                   data-toggle="tooltip"
                                   data-placement="left"
                                   title="@Local.Delete"></span>
                         </a>
+                        @Html.AntiForgeryToken()
                     </td>
                 </tr>
             }
@@ -98,7 +101,7 @@
                 <h4 class="modal-title" id="exampleModalLabel"></h4>
             </div>
             <div class="modal-body">
-                @Local.ProjectDeleteQuery <span class="modal-project-name"></span>?
+                @Local.ProjectDeleteQuery <span class="modal-object-name"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" id="modal-delete-confirm" class="btn btn-primary">Da</button>

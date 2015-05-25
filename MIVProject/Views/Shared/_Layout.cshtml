@@ -34,8 +34,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Početna", "Index", "Home")</li>
-
+                    <li>@Html.ActionLink(Local.Projects, "Index", "Project")</li>
+                    <li>@Html.ActionLink(Local.Products, "Index", "Item")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -49,6 +49,10 @@
             
             <form method="post" name="Localization">
                 @Html.AntiForgeryToken()
+                
+                @(!String.IsNullOrEmpty(ViewBag.ModelId) ?
+                    Html.Raw("<input type='hidden' id='id' name='id' value='" + ViewBag.ModelId + "' />") :
+                    Html.Raw(""))
                 <input type="submit" name="en-GB" class="btn btn-default" value="English" />
                 <input type="submit" name="hr-HR" class="btn btn-default" value="Hrvatski" />
             </form>

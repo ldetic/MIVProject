@@ -120,6 +120,22 @@ namespace MIVProject.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: Item/DeleteViaAjax/5
+        [HttpPost, ActionName("DeleteViaAjax")]
+        [ValidateAntiForgeryToken]
+        public String DeleteConfirmedAjax(int id)
+        {
+            try {
+                item item = db.item.Find(id);
+                db.item.Remove(item);
+                db.SaveChanges();
+                return "OK";
+            } catch(Exception ex)
+            {
+                return "ERROR";
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -180,4 +180,19 @@
   <data name="ProjectDeleteQuery" xml:space="preserve">
     <value>Jeste li sigurni da želite izbrisati projekt</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>Kategorija</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Artikli</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Količina</value>
+  </data>
+  <data name="UnitOfMeasure" xml:space="preserve">
+    <value>Mjerna jedinica</value>
+  </data>
+  <data name="ItemDeleteQuery" xml:space="preserve">
+    <value>Jeste li sigurni da želite izbrisati artikl</value>
+  </data>
 </root>

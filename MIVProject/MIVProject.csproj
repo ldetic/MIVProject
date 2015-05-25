@@ -255,6 +255,9 @@
     <Compile Include="currency.cs">
       <DependentUpon>miv.tt</DependentUpon>
     </Compile>
+    <Compile Include="database_firewall_rules.cs">
+      <DependentUpon>miv.tt</DependentUpon>
+    </Compile>
     <Compile Include="deliveryMethod.cs">
       <DependentUpon>miv.tt</DependentUpon>
     </Compile>
@@ -363,7 +366,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

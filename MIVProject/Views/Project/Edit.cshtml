@@ -2,6 +2,8 @@
 @using Resources
 @{
     ViewBag.Title = Local.EditProject;
+    ViewBag.ModelId = Model.id.ToString();
+
 }
 
 <h2>@Local.EditProject</h2>
@@ -9,13 +11,12 @@
 
 @using (Html.BeginForm())
 {
+    @Html.HiddenFor(model => model.id);
     @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
-
+        
         <div class="form-group">
             @Html.LabelForModel(Local.Name, htmlAttributes: new { @class = "control-label col-md-2", @for="name" })
             <div class="col-md-10">
@@ -23,7 +24,7 @@
                 @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        
         <div class="form-group">
             @Html.LabelForModel(Local.PaymentMethod, htmlAttributes: new { @class = "control-label col-md-2", @for = "paymentMethod" })
             <div class="col-md-10">
@@ -61,6 +62,7 @@
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                
             </div>
         </div>
 

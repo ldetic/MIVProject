@@ -180,4 +180,19 @@
   <data name="ProjectDeleteQuery" xml:space="preserve">
     <value>Are you sure you want to delete project</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="UnitOfMeasure" xml:space="preserve">
+    <value>Unit of measure</value>
+  </data>
+  <data name="ItemDeleteQuery" xml:space="preserve">
+    <value>Are you sure you want to delete product</value>
+  </data>
 </root>

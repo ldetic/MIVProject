@@ -1,57 +1,106 @@
 ﻿@model IEnumerable<MIVProject.item>
-
+@using Resources
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Local.Products;
 }
 
-<h2>Index</h2>
+<h2>@Local.Products</h2>
+<div class="alerts"></div>
+<div id="toolbar">
+    @Html.ActionLink(Local.CreateNew, "Create")
+</div>
+<div class="table-responsive">
+    <table id="projects-table" class="table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
+           data-search="true" data-toolbar="#toolbar" data-pagination="true"
+           data-query-params="queryParams">
+        <thead>
+        <tr>
+            <th data-field="name" data-sortable="true">
+                @Local.Name
+            </th>
+            <th data-field="description">
+                @Local.Description
+            </th>
+            <th data-field="unitofmeasure" data-sortable="true">
+                @Local.UnitOfMeasure
+            </th>
+            <th data-field="quantity" data-sortable="true">
+                @Local.Quantity
+            </th>
+            <th data-field="category" data-sortable="true">
+                @Local.Category
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="object-row-@Html.DisplayFor(modelItem => item.itemID)">
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.unitOfMeasure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.itemSubCategory.name)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.itemID })">
+                        <span class="glyphicon glyphicon-edit"
+                              aria-hidden="true"
+                              data-toggle="tooltip"
+                              data-placement="left"
+                              title="@Local.Edit"></span>
+                    </a>
+                    <a href="@Url.Action("Details", new { id = item.itemID })">
+                        <span class="glyphicon glyphicon-list-alt"
+                              aria-hidden="true"
+                              data-toggle="tooltip"
+                              data-placement="left"
+                              title="@Local.Details"></span>
+                    </a>
+                    <a href="#"
+                       data-target="#modalDelete"
+                       data-toggle="modal"
+                       data-object-name="@Html.DisplayFor(modelItem => item.name)"
+                       data-object-id="@Html.DisplayFor(modelItem => item.itemID)"
+                       data-object-type="item">
+                        <span class="glyphicon glyphicon-trash"
+                              aria-hidden="true"
+                              data-toggle="tooltip"
+                              data-placement="left"
+                              title="@Local.Delete"></span>
+                    </a>
+                    @Html.AntiForgeryToken()
+                </td>
+            </tr>
+        }
+            </tbody>
+    </table>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.unitOfMeasure)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.itemSubCategory.name)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.unitOfMeasure)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.itemSubCategory.name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.itemID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.itemID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.itemID })
-        </td>
-    </tr>
-}
-
-</table>
+</div>
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                @Local.ItemDeleteQuery <span class="modal-object-name"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modal-delete-confirm" class="btn btn-primary">Da</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ne</button>
+            </div>
+        </div>
+    </div>
+</div>

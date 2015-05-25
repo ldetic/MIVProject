@@ -13,7 +13,7 @@ namespace MIVProject.Controllers
     public class ProjectController : Controller
     {
         private mivEntities db = new mivEntities();
-
+        private int currentEditId;
         // GET: Project
         public ActionResult Index()
         {
@@ -77,6 +77,7 @@ namespace MIVProject.Controllers
             }
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", project.deliveryMethod);
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", project.paymentMethod);
+            currentEditId = (int)id;
             return View(project);
         }
 
@@ -87,6 +88,7 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description")] project project)
         {
+            try {
                 if (ModelState.IsValid)
                 {
                     db.Entry(project).State = EntityState.Modified;
@@ -96,7 +98,10 @@ namespace MIVProject.Controllers
                 ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", project.deliveryMethod);
                 ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", project.paymentMethod);
                 return View(project);
-            
+            } catch(Exception ex)
+            {
+                return Edit(currentEditId);
+            }
         }
 
         // GET: Project/Delete/5
@@ -125,9 +130,9 @@ namespace MIVProject.Controllers
             return RedirectToAction("Index");
         }
 
-        // POST: Project/DeleteAjax/5
-        [HttpPost, ActionName("DeleteAjax")]
-        
+        // POST: Project/DeleteViaAjax/5
+        [HttpPost, ActionName("DeleteViaAjax")]
+        [ValidateAntiForgeryToken]
         public String DeleteConfirmedAjax(int id)
         {
             try { 

@@ -5,22 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4ebec8b133064d2e97db178701785e26" Name="Diagram1">
-        <EntityTypeShape EntityType="mivModel.criteria" Width="1.5" PointX="1.5" PointY="25.25" />
-        <EntityTypeShape EntityType="mivModel.currency" Width="1.5" PointX="3" PointY="7.625" />
-        <EntityTypeShape EntityType="mivModel.deliveryMethod" Width="1.5" PointX="0.75" PointY="1.25" />
-        <EntityTypeShape EntityType="mivModel.item" Width="1.5" PointX="5.25" PointY="21.875" />
-        <EntityTypeShape EntityType="mivModel.itemCategory" Width="1.5" PointX="0.75" PointY="22.25" />
-        <EntityTypeShape EntityType="mivModel.itemSubCategory" Width="1.5" PointX="3" PointY="22.125" />
-        <EntityTypeShape EntityType="mivModel.mivUser" Width="1.5" PointX="0.75" PointY="12.5" />
-        <EntityTypeShape EntityType="mivModel.paymentMethod" Width="1.5" PointX="0.75" PointY="4.25" />
+        <EntityTypeShape EntityType="mivModel.criteria" Width="1.5" PointX="1.5" PointY="19.25" />
+        <EntityTypeShape EntityType="mivModel.currency" Width="1.5" PointX="6" PointY="7.625" />
+        <EntityTypeShape EntityType="mivModel.deliveryMethod" Width="1.5" PointX="0.75" PointY="4.25" />
+        <EntityTypeShape EntityType="mivModel.item" Width="1.5" PointX="8.25" PointY="18.875" />
+        <EntityTypeShape EntityType="mivModel.itemCategory" Width="1.5" PointX="3.75" PointY="19.25" />
+        <EntityTypeShape EntityType="mivModel.itemSubCategory" Width="1.5" PointX="6" PointY="19.125" />
+        <EntityTypeShape EntityType="mivModel.mivUser" Width="1.5" PointX="3.75" PointY="12.5" />
+        <EntityTypeShape EntityType="mivModel.paymentMethod" Width="1.5" PointX="0.75" PointY="1.25" />
         <EntityTypeShape EntityType="mivModel.project" Width="1.5" PointX="3" PointY="3.5" />
-        <EntityTypeShape EntityType="mivModel.projectItem" Width="1.5" PointX="5.25" PointY="8.75" />
-        <EntityTypeShape EntityType="mivModel.supplier" Width="1.5" PointX="3" PointY="11.25" />
-        <EntityTypeShape EntityType="mivModel.supplierCategory" Width="1.5" PointX="0.75" PointY="10.125" />
-        <EntityTypeShape EntityType="mivModel.supplyHeader" Width="1.5" PointX="5.25" PointY="3" />
-        <EntityTypeShape EntityType="mivModel.supplyItem" Width="1.5" PointX="7.5" PointY="3.625" />
-        <EntityTypeShape EntityType="mivModel.supplyStatus" Width="1.5" PointX="3" PointY="18.875" />
-        <EntityTypeShape EntityType="mivModel.userType" Width="1.5" PointX="1.5" PointY="16" />
+        <EntityTypeShape EntityType="mivModel.projectItem" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="mivModel.supplier" Width="1.5" PointX="6" PointY="11.25" />
+        <EntityTypeShape EntityType="mivModel.supplierCategory" Width="1.5" PointX="3.75" PointY="10.125" />
+        <EntityTypeShape EntityType="mivModel.supplyHeader" Width="1.5" PointX="8.25" PointY="3" />
+        <EntityTypeShape EntityType="mivModel.supplyItem" Width="1.5" PointX="10.5" PointY="3.625" />
+        <EntityTypeShape EntityType="mivModel.supplyStatus" Width="1.5" PointX="6" PointY="15.875" />
+        <EntityTypeShape EntityType="mivModel.userType" Width="1.5" PointX="1.5" PointY="13" />
+        <EntityTypeShape EntityType="mivModel.database_firewall_rules" Width="1.5" PointX="0.75" PointY="7.75" />
         <AssociationConnector Association="mivModel.FK__supplyHea__curre__1DB06A4F" />
         <AssociationConnector Association="mivModel.FK__project__deliver__5BE2A6F2" />
         <AssociationConnector Association="mivModel.FK__supplyHea__deliv__05D8E0BE" />
