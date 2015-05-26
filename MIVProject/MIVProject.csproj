@@ -91,6 +91,10 @@
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -169,9 +173,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -331,27 +332,28 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="ApplicationInsights.config" />
-    <EntityDeploy Include="miv.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>miv.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <Content Include="miv.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>miv.edmx</DependentUpon>
       <LastGenOutput>miv.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="miv.edmx.diagram">
-      <DependentUpon>miv.edmx</DependentUpon>
     </Content>
     <Content Include="miv.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>miv.edmx</DependentUpon>
       <LastGenOutput>miv.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config" />
     <Content Include="Properties\Publish-WebApplicationWebsite.ps1" />
+    <EntityDeploy Include="miv.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>miv.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="miv.edmx.diagram">
+      <DependentUpon>miv.edmx</DependentUpon>
+    </Content>
+    <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\MIVProject.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -483,16 +485,17 @@
     <Content Include="Views\criteria\Details.cshtml" />
     <Content Include="Views\criteria\Edit.cshtml" />
     <Content Include="Views\criteria\Index.cshtml" />
+    <Content Include="Views\Project\CreateNew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Localization\" />
+    <Folder Include="Views\ProjectCreate\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>

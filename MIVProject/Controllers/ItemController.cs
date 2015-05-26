@@ -7,18 +7,80 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MIVProject;
+using Newtonsoft.Json;
+using System.Dynamic;
 
 namespace MIVProject.Controllers
 {
     public class ItemController : Controller
     {
         private mivEntities db = new mivEntities();
+        
 
         // GET: Item
         public ActionResult Index()
         {
             var item = db.item.Include(i => i.itemSubCategory);
             return View(item.ToList());
+        }
+
+        // GET: Item/AllJSON
+        [HttpGet, ActionName("AllJSON")]
+        public String AllJSON()
+        {
+            var item = db.item.Include(i => i.itemSubCategory);
+            List<Object> items = new List<object>();
+            dynamic itemObject = new ExpandoObject();
+            foreach (var it in item)
+            {
+                
+
+                var obj = new List<KeyValuePair<string, string>>();
+                obj.Add(new KeyValuePair<string, string>("id", it.itemID.ToString()));
+                itemObject.id = it.itemID;
+                if (!String.IsNullOrEmpty(it.name))
+                {
+                    itemObject.name = it.name;
+                } else
+                {
+                    itemObject.name = "";
+                }
+                if (!String.IsNullOrEmpty(it.description))
+                {
+                    //obj.Add(new KeyValuePair<string, string>("description", it.description.ToString()));
+                    itemObject.description = it.description;
+                } else
+                {
+                    itemObject.description = "";
+                }
+
+                //obj.Add(new KeyValuePair<string, string>("quantity", it.quantity.ToString()));
+                itemObject.quantity = it.quantity;
+
+                if (!String.IsNullOrEmpty(it.unitOfMeasure))
+                {
+                    //obj.Add(new KeyValuePair<string, string>("unitOfMeasuer", it.unitOfMeasure.ToString()));
+                    itemObject.unitOfMeasure = it.unitOfMeasure;
+                } else
+                {
+                    itemObject.unitOfMeasure = "";
+                }
+                if (!String.IsNullOrEmpty(it.itemSubCategory.name))
+                {
+                    //obj.Add(new KeyValuePair<string, string>("subCategory", it.itemSubCategory.name.ToString()));
+                    itemObject.subCategory = it.itemSubCategory.name;
+                } else
+                {
+                    itemObject.subCategory = "";
+                }
+                items.Add(JsonConvert.SerializeObject(itemObject));
+                
+            }
+        
+            //return Json(item, JsonRequestBehavior.AllowGet);
+
+            var serializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects };           
+            return JsonConvert.SerializeObject(items, Formatting.Indented, serializerSettings);
         }
 
         // GET: Item/Details/5

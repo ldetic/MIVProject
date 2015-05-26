@@ -44,6 +44,20 @@ namespace MIVProject.Controllers
             return View();
         }
 
+        // GET: Project/CreateNew
+        public ActionResult CreateNew()
+        {
+            var project = new MIVProject.project();
+            //var item = new MIVProject.item();
+            var projectItem = new MIVProject.projectItem();
+
+            var item = db.item.Include(i => i.itemSubCategory);
+            ViewBag.items = item;
+            ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name");
+            ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name");
+            return View(Tuple.Create(project, projectItem));
+        }
+
         // POST: Project/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

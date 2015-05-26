@@ -14,6 +14,7 @@ namespace MIVProject
     
     public partial class deliveryMethod
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public deliveryMethod()
         {
             this.project = new HashSet<project>();
@@ -23,7 +24,9 @@ namespace MIVProject
         public int deliveryID { get; set; }
         public string name { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<project> project { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<supplyHeader> supplyHeader { get; set; }
     }
 }

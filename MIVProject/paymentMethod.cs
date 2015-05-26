@@ -14,6 +14,7 @@ namespace MIVProject
     
     public partial class paymentMethod
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public paymentMethod()
         {
             this.project = new HashSet<project>();
@@ -23,7 +24,9 @@ namespace MIVProject
         public int paymentID { get; set; }
         public string name { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<project> project { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<supplyHeader> supplyHeader { get; set; }
     }
 }

@@ -1,22 +1,20 @@
-﻿@model MIVProject.project
-
+﻿@using Resources
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = Local.CreateNew;
 }
 
-<h2>Create</h2>
+<h2>@Local.CreateNew @Local.Projects</h2>
 
-
-@using (Html.BeginForm()) 
+@model MIVProject.project
+@using (Html.BeginForm("Create", "Project", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>project</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForModel(Local.Name, htmlAttributes: new { @class = "control-label col-md-2", @for="name" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
@@ -24,7 +22,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.paymentMethod, "paymentMethod", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForModel(Local.PaymentMethod, htmlAttributes: new { @class = "control-label col-md-2", @for="paymentMethod" })
             <div class="col-md-10">
                 @Html.DropDownList("paymentMethod", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.paymentMethod, "", new { @class = "text-danger" })
@@ -32,7 +30,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.paymentDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForModel(Local.PaymentDate, htmlAttributes: new { @class = "control-label col-md-2", @for = "paymentDate" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.paymentDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.paymentDate, "", new { @class = "text-danger" })
@@ -40,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.deliveryMethod, "deliveryMethod", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForModel(Local.DeliveryMethod, htmlAttributes: new { @class = "control-label col-md-2", @for="deliveryMethod" })
             <div class="col-md-10">
                 @Html.DropDownList("deliveryMethod", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.deliveryMethod, "", new { @class = "text-danger" })
@@ -48,7 +46,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.deliveryDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForModel(Local.DeliveryDate, htmlAttributes: new { @class = "control-label col-md-2", @for= "deliveryDate" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.deliveryDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.deliveryDate, "", new { @class = "text-danger" })
@@ -56,24 +54,54 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForModel(Local.Description, htmlAttributes: new { @class = "control-label col-md-2", @for="description" })
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
                
                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="@Local.Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
+@model MIVProject.item
+@using (Html.BeginForm("Create", "Project", FormMethod.Post))
+ {
 
+ }
+<table id="items-project-table" class="table object-table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
+       data-search="true" data-toolbar="#toolbar" data-pagination="true"
+       data-query-params="queryParams">
+    <thead>
+        <tr>
+            <th></th>
+            <th data-field="name" data-sortable="true">
+                @Local.Name
+            </th>
+            <th data-field="description">
+                @Local.Description
+            </th>
+            <th data-field="quantity" data-sortable="true">
+                @Local.Quantity
+            </th>
+            <th data-field="unitofmeasure" data-sortable="true">
+                @Local.UnitOfMeasure
+            </th>
+            <th data-field="category" data-sortable="true">
+                @Local.Category
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<br/>
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(Local.Back, "Index")
 </div>
 
 @section Scripts {

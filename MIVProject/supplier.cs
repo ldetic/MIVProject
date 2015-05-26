@@ -14,6 +14,7 @@ namespace MIVProject
     
     public partial class supplier
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public supplier()
         {
             this.supplyHeader = new HashSet<supplyHeader>();
@@ -28,6 +29,7 @@ namespace MIVProject
     
         public virtual mivUser mivUser1 { get; set; }
         public virtual supplierCategory supplierCategory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<supplyHeader> supplyHeader { get; set; }
     }
 }

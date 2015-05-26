@@ -14,6 +14,7 @@ namespace MIVProject
     
     public partial class userType
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public userType()
         {
             this.mivUser = new HashSet<mivUser>();
@@ -22,6 +23,7 @@ namespace MIVProject
         public int typeID { get; set; }
         public string type { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<mivUser> mivUser { get; set; }
     }
 }
