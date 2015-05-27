@@ -524,6 +524,7 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
     <edmx:ConceptualModels>
       <Schema Namespace="mivModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="mivEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="database_firewall_rules" EntityType="mivModel.database_firewall_rules" />
           <EntitySet Name="criteria" EntityType="mivModel.criteria" />
           <EntitySet Name="currency" EntityType="mivModel.currency" />
           <EntitySet Name="deliveryMethod" EntityType="mivModel.deliveryMethod" />
@@ -540,7 +541,6 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <EntitySet Name="supplyItem" EntityType="mivModel.supplyItem" />
           <EntitySet Name="supplyStatus" EntityType="mivModel.supplyStatus" />
           <EntitySet Name="userType" EntityType="mivModel.userType" />
-          <EntitySet Name="database_firewall_rules" EntityType="mivModel.database_firewall_rules" />
           <AssociationSet Name="FK__supplyHea__curre__1DB06A4F" Association="mivModel.FK__supplyHea__curre__1DB06A4F">
             <End Role="currency" EntitySet="currency" />
             <End Role="supplyHeader" EntitySet="supplyHeader" />
@@ -614,6 +614,22 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
             <End Role="itemCategory" EntitySet="itemCategory" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         <EntityType Name="criteria">
           <Key>
             <PropertyRef Name="criteriaID" />
@@ -804,22 +820,6 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <Property Name="typeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="mivUser" Relationship="mivModel.FK__mivUser__type__3C34F16F" FromRole="userType" ToRole="mivUser" />
-        </EntityType>
-        <EntityType Name="database_firewall_rules">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="start_ip_address" />
-            <PropertyRef Name="end_ip_address" />
-            <PropertyRef Name="create_date" />
-            <PropertyRef Name="modify_date" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK__supplyHea__curre__1DB06A4F">
           <End Type="mivModel.currency" Role="currency" Multiplicity="1" />
@@ -1035,6 +1035,18 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="mivModelStoreContainer" CdmEntityContainer="mivEntities">
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="mivModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="criteria">
             <EntityTypeMapping TypeName="mivModel.criteria">
               <MappingFragment StoreEntitySet="criteria">
@@ -1203,18 +1215,6 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
               <MappingFragment StoreEntitySet="userType">
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="typeID" ColumnName="typeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="database_firewall_rules">
-            <EntityTypeMapping TypeName="mivModel.database_firewall_rules">
-              <MappingFragment StoreEntitySet="database_firewall_rules">
-                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
-                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
