@@ -12,10 +12,9 @@
 </div>
     <table id="projects-table" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
            data-search="true" data-toolbar="#toolbar" data-pagination="true" 
-           data-query-params="queryParams" data-click-to-select="true">
+           data-query-params="queryParams">
         <thead>
             <tr>
-                <th data-field="state" data-checkbox="true"></th>
                 <th data-field="name" data-sortable="true">
                     @Local.Name
                 </th>
@@ -40,8 +39,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr id="object-row-@Html.DisplayFor(modelItem => item.id)" class="selected">
-                    <td></td>
+                <tr id="object-row-@Html.DisplayFor(modelItem => item.id)" >
                     <td>
                         @Html.DisplayFor(modelItem => item.name)
                     </td>
@@ -66,15 +64,13 @@
                                   aria-hidden="true"
                                   data-toggle="tooltip"
                                   data-placement="left"
-                                  title="@Local.Edit"></span>
-                        </a>
+                                  title="@Local.Edit"></span></a>
                         <a href="@Url.Action("Details", new { id = item.id })">
                             <span class="glyphicon glyphicon-list-alt"
                                   aria-hidden="true"
                                   data-toggle="tooltip"
                                   data-placement="left"
-                                  title="@Local.Details"></span>
-                        </a>
+                                  title="@Local.Details"></span></a>
                         <a href="#"
                            data-target="#modalDelete"
                            data-toggle="modal"
@@ -85,8 +81,8 @@
                                   aria-hidden="true"
                                   data-toggle="tooltip"
                                   data-placement="left"
-                                  title="@Local.Delete"></span>
-                        </a>
+                                  title="@Local.Delete"></span></a>
+
                         @Html.AntiForgeryToken()
                     </td>
                 </tr>

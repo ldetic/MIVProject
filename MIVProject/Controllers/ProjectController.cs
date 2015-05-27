@@ -30,6 +30,9 @@ namespace MIVProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             project project = db.project.Find(id);
+            IQueryable<projectItem> projectItems = db.projectItem.Where(c => c.project == id);
+            
+            ViewBag.projectItems = projectItems;
             if (project == null)
             {
                 return HttpNotFound();

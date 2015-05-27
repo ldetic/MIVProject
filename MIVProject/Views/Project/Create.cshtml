@@ -86,7 +86,7 @@
 
                 <table id="project-unselected-items-table" class="table object-table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
                        data-search="true" data-toolbar="#toolbar" data-pagination="true"
-                       data-query-params="queryParams" data-checkbox-header="false">
+                       data-query-params="queryParams" data-checkbox-header="false" click-to-select="true">
                     <thead>
                         <tr>
                             <th data-field="state" data-checkbox="true" data-formatter="stateFormatter"></th>
@@ -97,10 +97,10 @@
                             <th data-field="description">
                                 @Local.Description
                             </th>
-                            <th data-field="unitofmeasure" data-sortable="true">
+                            <th data-field="unitofmeasure" class="hidden">
                                 @Local.UnitOfMeasure
                             </th>
-                            <th data-field="quantity" data-sortable="true">
+                            <th data-field="quantity" class="hidden">
                                 @Local.Quantity
                             </th>
                             <th data-field="category" data-sortable="true">
@@ -122,10 +122,10 @@
                                 <td>
                                     @item.description
                                 </td>
-                                <td>
+                                <td class="hidden">
                                     @item.unitOfMeasure
                                 </td>
-                                <td>
+                                <td class="hidden">
                                     @item.quantity
                                 </td>
                                 <td>

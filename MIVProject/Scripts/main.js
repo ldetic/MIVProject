@@ -13,6 +13,10 @@
     }
 
     $('[data-toggle="tooltip"]').tooltip();
+    //bug fix for tooltips when state of table changes
+    $(".object-table").on("all.bs.table", function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 
     /**
      *
@@ -133,7 +137,9 @@
                 }).appendTo(".accordion");
 
                 //accordion title
-                var html = '<a class="accordion-section-title" id="accordion-section-title-' + val.id.trim() + '" href="#accordion-' + val.id.trim() + '">' + val.name.trim() + '</a>';
+                var html = '<a class="accordion-section-title" id="accordion-section-title-' + val.id.trim() + '" href="#accordion-' + val.id.trim() + '">' + val.name.trim();
+                html += '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>';
+                html += '</a>';
                 $("#accordion-section-" + val.id.trim()).append(html);
 
                 $("<div/>", {
@@ -142,9 +148,8 @@
                 }).appendTo("#accordion-section-" + val.id.trim());
 
                 html = '<div class="full-width">';
+                html += addInput("item-quantity-" + val.id.trim(), val.quantity.trim(), "Quantity", "number", "quantity", "col-xs-12 col-sm-6 col-md-3", val.unitofmeasure.trim());
 
-                html += addInput("item-quantity-" + val.id.trim(), val.quantity.trim(), "Quantity", "number", "quantity", "col-xs-12 col-sm-6 col-md-3");
-                html += addInput("item-unitofmeasure-" + val.id.trim(), val.unitofmeasure.trim(), "Unit of measure", "text", "unitofmeasure", "col-xs-12 col-sm-6 col-md-3");
                 html += addInput("item-price-" + val.id.trim(), "", "Price", "number", "price", "col-xs-12 col-sm-6 col-md-3");
                 html += addInput("item-shipdate-" + val.id.trim(), "", "Shipping Date", "date", "shipdate", "col-xs-12 col-sm-6 col-md-3");
                 html += '<input id="item-id-' + val.id.trim() + '" type="hidden" class="id" value="' + val.id.trim() +'">';
@@ -178,12 +183,25 @@
                 $('#modalUnselectedItems').modal('hide');
             });
 
+            $(".accordion-section-title .close").each(function (index, el) {
+                $(el).click(function (e) {
+                    e.stopPropagation();
+                    $(this).parent().parent().remove();
+                });
+            });
+
+            //cleanup
+            $("#project-unselected-items-table").bootstrapTable('uncheckAll');
+
         });
 
-        function addInput(id, value, label, type, className, wrapperClass) {
+        function addInput(id, value, label, type, className, wrapperClass, addition) {
             var cont = '<div class="' + wrapperClass + '">';
             cont += '<label for="' + id + '">' + label + ':</label>';
             cont += '<input id="' + id + '" type="' + type + '" class="form-control text-box ' + className +'" value="' + value + '"  />';
+            if (className == 'quantity') {
+                cont += '<span>' + addition + '</span>';
+            }
             cont += '</div>';
             return cont;
         }

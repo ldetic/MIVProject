@@ -22,6 +22,7 @@ namespace MIVProject
         public string quality { get; set; }
         public string comment { get; set; }
         public Nullable<System.DateTime> shipDate { get; set; }
+        public int supplyItemID { get; set; }
     
         public virtual item item1 { get; set; }
         public virtual supplyHeader supplyHeader { get; set; }

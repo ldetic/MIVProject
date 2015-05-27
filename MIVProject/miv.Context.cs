@@ -41,5 +41,6 @@ namespace MIVProject
         public virtual DbSet<supplyItem> supplyItem { get; set; }
         public virtual DbSet<supplyStatus> supplyStatus { get; set; }
         public virtual DbSet<userType> userType { get; set; }
+        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     }
 }

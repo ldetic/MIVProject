@@ -255,6 +255,9 @@
       <DependentUpon>miv.tt</DependentUpon>
     </Compile>
     <Compile Include="CustomAuthorize.cs" />
+    <Compile Include="database_firewall_rules.cs">
+      <DependentUpon>miv.tt</DependentUpon>
+    </Compile>
     <Compile Include="deliveryMethod.cs">
       <DependentUpon>miv.tt</DependentUpon>
     </Compile>

@@ -2,6 +2,7 @@
 @using Resources
 @{
     ViewBag.Title = Local.Details;
+    var projectItems = ViewBag.projectItems;
 }
 
 <h2>@Local.Details projekta @Html.DisplayFor(model => model.name)</h2>
@@ -59,7 +60,68 @@
 
     </dl>
 </div>
+<h4>@Local.Products</h4>
+
+
+<table id="project-items-table" class="table object-table" data-toggle="table" data-sort-order="asc"
+       data-pagination="true" data-query-params="queryParams">
+    <thead>
+        <tr>
+            <th data-field="name" data-sortable="true">
+                @Local.Name
+            </th>
+            <th data-field="quantity" data-sortable="true">
+                @Local.Quantity
+            </th>
+            <th data-field="price">
+                @Local.Price
+            </th>
+            <th data-field="shipDate" data-sortable="true">
+                @Local.shipDate
+            </th>
+            <th data-field="description" data-sortable="true">
+                @Local.Description
+            </th>
+            <th data-field="quality" data-sortable="true">
+                @Local.Quality
+            </th>
+            <th data-field="comment" data-sortable="true">
+                @Local.Comment
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in projectItems)
+            {
+            <tr id="object-row-" + @item.projectPosition>
+                <td>
+                    @item.item1.name
+                </td>
+                <td>
+                    @item.quantity@item.item1.unitOfMeasure
+                </td>
+                <td>
+                    @item.price
+                </td>
+                <td>
+                    @item.shipDate
+                </td>
+                <td>
+                    @item.description
+                </td>
+                <td>
+                    @item.quality
+                </td>
+                <td>
+                    @item.comment
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 <p>
     @Html.ActionLink(Local.Edit, "Edit", new { id = Model.id }) |
     @Html.ActionLink(Local.Back, "Index")
 </p>
+
