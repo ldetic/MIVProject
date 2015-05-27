@@ -63,6 +63,20 @@ namespace MIVProject.Controllers
             return View(projectItem);
         }
 
+        // POST: projectItem/CreateViaAjax
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public String CreateViaAjax([Bind(Include = "quantity,price,quality,description,projectPosition,project,comment,shipDate,item")] projectItem projectItem)
+        {
+            if (ModelState.IsValid)
+            {
+                db.projectItem.Add(projectItem);
+                db.SaveChanges();
+                return "OK";
+            }
+            return "ERROR";
+        }
+
         [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Edit(int? id)
         {

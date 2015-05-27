@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Komentar.
+        /// </summary>
+        internal static string Comment {
+            get {
+                return ResourceManager.GetString("Comment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Metalska industrija Varaždin.
         /// </summary>
         internal static string CompanyNameLong {
@@ -232,6 +241,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cijena.
+        /// </summary>
+        internal static string Price {
+            get {
+                return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Artikli.
         /// </summary>
         internal static string Products {
@@ -259,6 +277,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kvaliteta.
+        /// </summary>
+        internal static string Quality {
+            get {
+                return ResourceManager.GetString("Quality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Količina.
         /// </summary>
         internal static string Quantity {
@@ -282,6 +309,15 @@ namespace Resources {
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datum slanja.
+        /// </summary>
+        internal static string shipDate {
+            get {
+                return ResourceManager.GetString("shipDate", resourceCulture);
             }
         }
         
