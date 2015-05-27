@@ -14,16 +14,45 @@ namespace MIVProject.Controllers
     {
         private mivEntities db = new mivEntities();
 
-        // GET: SupplyItem
+        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Index()
         {
-            var supplyItem = db.supplyItem.Include(s => s.item1).Include(s => s.supplyHeader);
-            return View(supplyItem.ToList());
+
+            if (Session["type"].ToString() == "dobavljac")
+            {
+                string username = Session["username"].ToString();
+                var supplyItem = db.supplyItem.Include(s => s.item1).Include(s => s.supplyHeader).Where(x => x.supplyHeader.supplier1.mivUser1.username == username);
+                if (supplyItem != null)
+                {
+                    return View(supplyItem.ToList());
+                }
+                else
+                {
+                    return RedirectToAction("Create");
+                }
+            }
+            else
+            {
+                var supplyItem = db.supplyItem.Include(s => s.item1).Include(s => s.supplyHeader);
+                return View(supplyItem.ToList());
+            }
+            
         }
 
-        // GET: SupplyItem/Details/5
+        [CustomAuthorize(Roles = "administrator,referent,dobavljac,dobavljač")]
         public ActionResult Details(int? id)
         {
+
+            if (Session["type"].ToString() == "dobavljac")
+            {
+                string username = Session["username"].ToString();
+                if (!(db.supplyItem.Any(o => o.item == id && o.supplyHeader.supplier1.mivUser1.username == username)))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -36,11 +65,20 @@ namespace MIVProject.Controllers
             return View(supplyItem);
         }
 
-        // GET: SupplyItem/Create
+        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Create()
         {
             ViewBag.item = new SelectList(db.item, "itemID", "name");
-            ViewBag.supply = new SelectList(db.supplyHeader, "supplyID", "supplyID");
+            if (Session["type"].ToString() == "dobavljac")
+            {
+                string username = Session["username"].ToString();
+                var supplyHeader = db.supplyHeader.Where(x => x.supplier1.mivUser1.username == username);
+                ViewBag.supply = new SelectList(supplyHeader, "supplyID", "supplyID");
+            }
+            else
+            {
+                ViewBag.supply = new SelectList(db.supplyHeader, "supplyID", "supplyID");
+            }
             return View();
         }
 
@@ -63,7 +101,7 @@ namespace MIVProject.Controllers
             return View(supplyItem);
         }
 
-        // GET: SupplyItem/Edit/5
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -98,7 +136,7 @@ namespace MIVProject.Controllers
             return View(supplyItem);
         }
 
-        // GET: SupplyItem/Delete/5
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

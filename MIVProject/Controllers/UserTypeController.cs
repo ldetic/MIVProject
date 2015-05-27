@@ -10,6 +10,7 @@ using MIVProject;
 
 namespace MIVProject.Controllers
 {
+    [CustomAuthorize(Roles = "administrator")]
     public class UserTypeController : Controller
     {
         private mivEntities db = new mivEntities();

@@ -15,13 +15,14 @@ namespace MIVProject.Controllers
         private mivEntities db = new mivEntities();
         private int currentEditId;
         // GET: Project
+        //[CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Index()
         {
             var project = db.project.Include(p => p.deliveryMethod1).Include(p => p.paymentMethod1);
             return View(project.ToList());
         }
 
-        // GET: Project/Details/5
+        //[CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,26 +37,12 @@ namespace MIVProject.Controllers
             return View(project);
         }
 
-        // GET: Project/Create
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Create()
         {
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name");
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name");
             return View();
-        }
-
-        // GET: Project/CreateNew
-        public ActionResult CreateNew()
-        {
-            var project = new MIVProject.project();
-            //var item = new MIVProject.item();
-            var projectItem = new MIVProject.projectItem();
-
-            var item = db.item.Include(i => i.itemSubCategory);
-            ViewBag.items = item;
-            ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name");
-            ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name");
-            return View(Tuple.Create(project, projectItem));
         }
 
         // POST: Project/Create
@@ -77,7 +64,7 @@ namespace MIVProject.Controllers
             return View(project);
         }
 
-        // GET: Project/Edit/5
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -118,7 +105,7 @@ namespace MIVProject.Controllers
             }
         }
 
-        // GET: Project/Delete/5
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

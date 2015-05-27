@@ -19,7 +19,15 @@
      * FUNCTIONS
      *
      **/
-    
+    function queryParams() {
+        return {
+            type: 'owner',
+            sort: 'updated',
+            direction: 'desc',
+            per_page: 1,
+            page: 1
+        };
+    }
     function createAlert(type, text) {
         var idAlert = "alert-" + Math.floor(Math.random() * 100000);
 
@@ -34,6 +42,7 @@
     }
     function winResize() {
         var win = $(window);
+        console.log(win.outerWidth());
         if (win.outerWidth() <= tableToggleThreshold && tableView === "table") {
             tableView = "card";
             $(".object-table").bootstrapTable("toggleView");
@@ -113,92 +122,4 @@
         $(this).find('#modal-delete-confirm').unbind("click");
     });
 
-    /**
-     *
-     * PROJECT CREATE
-     *
-     **/
-    
-    var $table = $("#project-unselected-items-table");
-    if ($table.length > 0) {      
-        $button = $('#modal-add-items-confirm');
-        
-            $button.click(function () {
-                var data = $table.bootstrapTable('getSelections');
-                $.each(data, function (index, val) {
-
-                    $("<div/>", { //accordion section
-                        id: "accordion-section-" + val.id.trim(),
-                        class: "accordion-section"
-                    }).appendTo(".accordion");
-
-                    //accordion title
-                    var html = '<a class="accordion-section-title" id="accordion-section-title-' + val.id.trim() +'" href="#accordion-' + val.id.trim() + '">' + val.name.trim() + '</a>';
-                    $("#accordion-section-" + val.id.trim()).append(html);
-
-                    $("<div/>", {
-                        id: "accordion-" + val.id.trim(),
-                        class: "accordion-section-content"
-                    }).appendTo("#accordion-section-" + val.id.trim());
-
-                    html = '<div class="full-width">';
-
-                    html += addInput("item-quantity-" + val.id.trim(), val.quantity.trim(), "Quantity", "number", "col-xs-12 col-sm-6 col-md-3");
-                    html += addInput("item-unitofmeasure-" + val.id.trim(), val.unitofmeasure.trim(), "Unit of measure", "text", "col-xs-12 col-sm-6 col-md-3");
-                    html += addInput("item-price-" + val.id.trim(), "", "Price", "number", "col-xs-12 col-sm-6 col-md-3");
-                    html += addInput("item-shipdate-" + val.id.trim(), "", "Shipping Date", "date", "col-xs-12 col-sm-6 col-md-3");
-
-                    html += '</div>';
-                    
-                    html += addTextBox("item-description-" + val.id.trim(), val.description.trim(), "Description", "col-xs-12 col-sm-6 col-md-4");
-                    html += addTextBox("item-qualitiy-" + val.id.trim(), "", "Quality", "col-xs-12 col-sm-6 col-md-4");
-                    html += addTextBox("item-comment-" + val.id.trim(), "", "Comment", "col-xs-12 col-sm-6 col-md-4");
-
-                    $("#accordion-" + val.id.trim() + "").append(html);
-
-
-                    $('#accordion-section-title-' + val.id.trim()).click(function (e) {
-                        // Grab current anchor value
-                        var currentAttrValue = $(this).attr('href');
-
-                        if ($(e.target).is('.active')) {
-                            close_accordion_section();
-                        } else {
-                            close_accordion_section();
-
-                            // Add active class to section title
-                            $(this).addClass('active');
-                            // Open up the hidden content panel
-                            $('.accordion ' + currentAttrValue).slideDown(300).addClass('open').css("display", "inline-block");
-                        }
-
-                        e.preventDefault();
-                    });
-
-                    $('#modalUnselectedItems').modal('hide');
-                });
-                
-            });
-        
-            function addInput(id, value, label, type, wrapperClass) {
-                var cont = '<div class="' + wrapperClass + '">';
-                cont += '<label for="' + id + '">' + label + ':</label>';
-                cont += '<input id="' + id + '" type="' + type + '" class="form-control text-box" value="' + value + '"  />';
-                cont += '</div>';
-                return cont;
-            }
-            function addTextBox(id, value, label, wrapperClass) {
-                var cont = '<div class="' + wrapperClass + '">';
-                cont += '<label for="' + id + '">' + label + '</label>';
-                cont += '<br/>';
-                cont += '<textarea id="' + id + '" class="col-xs-12">' + value + '</textarea>';
-                cont += '</div>';
-                return cont;
-            }
-        function close_accordion_section() {
-            $('.accordion .accordion-section-title').removeClass('active');
-            $('.accordion .accordion-section-content').slideUp(300).removeClass('open');
-        }
-    }
 });
-

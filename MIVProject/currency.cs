@@ -14,7 +14,6 @@ namespace MIVProject
     
     public partial class currency
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public currency()
         {
             this.supplyHeader = new HashSet<supplyHeader>();
@@ -24,7 +23,6 @@ namespace MIVProject
         public string name { get; set; }
         public string abbreviation { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<supplyHeader> supplyHeader { get; set; }
     }
 }

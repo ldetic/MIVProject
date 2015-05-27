@@ -14,7 +14,6 @@ namespace MIVProject
     
     public partial class itemSubCategory
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public itemSubCategory()
         {
             this.item = new HashSet<item>();
@@ -24,7 +23,6 @@ namespace MIVProject
         public string name { get; set; }
         public int category { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item> item { get; set; }
         public virtual itemCategory itemCategory { get; set; }
     }

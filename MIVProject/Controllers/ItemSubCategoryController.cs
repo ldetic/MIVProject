@@ -10,6 +10,7 @@ using MIVProject;
 
 namespace MIVProject.Controllers
 {
+    [CustomAuthorize(Roles = "administrator,referent")]
     public class ItemSubCategoryController : Controller
     {
         private mivEntities db = new mivEntities();

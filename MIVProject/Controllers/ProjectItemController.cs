@@ -10,18 +10,18 @@ using MIVProject;
 
 namespace MIVProject.Controllers
 {
-    public class ProjectItemController : Controller
+    public class projectItemController : Controller
     {
         private mivEntities db = new mivEntities();
 
-        // GET: ProjectItem
+        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Index()
         {
-            var projectItem = db.projectItem.Include(p => p.project1);
+            var projectItem = db.projectItem.Include(p => p.item1).Include(p => p.project1);
             return View(projectItem.ToList());
         }
 
-        // GET: ProjectItem/Details/5
+        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,19 +36,20 @@ namespace MIVProject.Controllers
             return View(projectItem);
         }
 
-        // GET: ProjectItem/Create
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Create()
         {
+            ViewBag.item = new SelectList(db.item, "itemID", "name");
             ViewBag.project = new SelectList(db.project, "id", "name");
             return View();
         }
 
-        // POST: ProjectItem/Create
+        // POST: projectItem/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "quantity,price,quality,description,projectPosition,project,comment,shipDate")] projectItem projectItem)
+        public ActionResult Create([Bind(Include = "quantity,price,quality,description,projectPosition,project,comment,shipDate,item")] projectItem projectItem)
         {
             if (ModelState.IsValid)
             {
@@ -57,11 +58,12 @@ namespace MIVProject.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.item = new SelectList(db.item, "itemID", "name", projectItem.item);
             ViewBag.project = new SelectList(db.project, "id", "name", projectItem.project);
             return View(projectItem);
         }
 
-        // GET: ProjectItem/Edit/5
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,16 +75,17 @@ namespace MIVProject.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.item = new SelectList(db.item, "itemID", "name", projectItem.item);
             ViewBag.project = new SelectList(db.project, "id", "name", projectItem.project);
             return View(projectItem);
         }
 
-        // POST: ProjectItem/Edit/5
+        // POST: projectItem/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "quantity,price,quality,description,projectPosition,project,comment,shipDate")] projectItem projectItem)
+        public ActionResult Edit([Bind(Include = "quantity,price,quality,description,projectPosition,project,comment,shipDate,item")] projectItem projectItem)
         {
             if (ModelState.IsValid)
             {
@@ -90,11 +93,12 @@ namespace MIVProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.item = new SelectList(db.item, "itemID", "name", projectItem.item);
             ViewBag.project = new SelectList(db.project, "id", "name", projectItem.project);
             return View(projectItem);
         }
 
-        // GET: ProjectItem/Delete/5
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,7 +113,7 @@ namespace MIVProject.Controllers
             return View(projectItem);
         }
 
-        // POST: ProjectItem/Delete/5
+        // POST: projectItem/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

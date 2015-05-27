@@ -10,20 +10,31 @@ using MIVProject;
 
 namespace MIVProject.Controllers
 {
-    public class SupplierController : Controller
+    
+    public class supplierController : Controller
     {
         private mivEntities db = new mivEntities();
 
-        // GET: Supplier
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Index()
         {
             var supplier = db.supplier.Include(s => s.mivUser1).Include(s => s.supplierCategory);
             return View(supplier.ToList());
         }
 
-        // GET: Supplier/Details/5
+        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Details(int? id)
         {
+            if (Session["type"].ToString() == "dobavljac")
+            {
+                string username = Session["username"].ToString();
+                if (!(db.supplier.Any(o => o.mivUser == id && o.mivUser1.username == username)))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -36,7 +47,7 @@ namespace MIVProject.Controllers
             return View(supplier);
         }
 
-        // GET: Supplier/Create
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Create()
         {
             ViewBag.mivUser = new SelectList(db.mivUser, "userID", "username");
@@ -44,12 +55,12 @@ namespace MIVProject.Controllers
             return View();
         }
 
-        // POST: Supplier/Create
+        // POST: supplier/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "mivUser,name,phone,email,category,OIB")] supplier supplier)
+        public ActionResult Create([Bind(Include = "mivUser,name,phone,OIB,category")] supplier supplier)
         {
             if (ModelState.IsValid)
             {
@@ -63,9 +74,10 @@ namespace MIVProject.Controllers
             return View(supplier);
         }
 
-        // GET: Supplier/Edit/5
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Edit(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,12 +92,12 @@ namespace MIVProject.Controllers
             return View(supplier);
         }
 
-        // POST: Supplier/Edit/5
+        // POST: supplier/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "mivUser,name,phone,email,category,OIB")] supplier supplier)
+        public ActionResult Edit([Bind(Include = "mivUser,name,phone,OIB,category")] supplier supplier)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +110,7 @@ namespace MIVProject.Controllers
             return View(supplier);
         }
 
-        // GET: Supplier/Delete/5
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,7 +125,7 @@ namespace MIVProject.Controllers
             return View(supplier);
         }
 
-        // POST: Supplier/Delete/5
+        // POST: supplier/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

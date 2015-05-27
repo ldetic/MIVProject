@@ -10,20 +10,47 @@ using MIVProject;
 
 namespace MIVProject.Controllers
 {
+
     public class SupplyHeaderController : Controller
     {
         private mivEntities db = new mivEntities();
 
-        // GET: SupplyHeader
+        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Index()
         {
-            var supplyHeader = db.supplyHeader.Include(s => s.currency1).Include(s => s.deliveryMethod1).Include(s => s.paymentMethod1).Include(s => s.project1).Include(s => s.supplier1).Include(s => s.supplyStatus);
-            return View(supplyHeader.ToList());
+            if (Session["type"].ToString() == "dobavljac")
+            {
+                string username = Session["username"].ToString();
+                var supplyHeader = db.supplyHeader.Include(s => s.currency1).Include(s => s.deliveryMethod1).Include(s => s.paymentMethod1).Include(s => s.project1).Include(s => s.supplier1).Include(s => s.supplyStatus).Where(x => x.supplier1.mivUser1.username == username);
+                if (supplyHeader != null)
+                {
+                    return View(supplyHeader.ToList());
+                }
+                else
+                {
+                    return RedirectToAction("Create");
+                }
+            }
+            else
+            {
+                var supplyHeader = db.supplyHeader.Include(s => s.currency1).Include(s => s.deliveryMethod1).Include(s => s.paymentMethod1).Include(s => s.project1).Include(s => s.supplier1).Include(s => s.supplyStatus);
+                return View(supplyHeader.ToList());
+            }
         }
 
-        // GET: SupplyHeader/Details/5
+        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Details(int? id)
         {
+            if (Session["type"].ToString() == "dobavljac")
+            {
+                string username = Session["username"].ToString();
+                if (!(db.supplyHeader.Any(o => o.supplyID == id && o.supplier1.mivUser1.username == username)))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -36,15 +63,27 @@ namespace MIVProject.Controllers
             return View(supplyHeader);
         }
 
-        // GET: SupplyHeader/Create
+        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Create()
         {
             ViewBag.currency = new SelectList(db.currency, "currencyID", "name");
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name");
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name");
             ViewBag.project = new SelectList(db.project, "id", "name");
-            ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name");
+            
             ViewBag.status = new SelectList(db.supplyStatus, "statusID", "name");
+
+            if (Session["type"].ToString() == "dobavljac")
+            {
+                string username = Session["username"].ToString();
+                var supplier = db.supplier.Where(x => x.mivUser1.username == username);
+                ViewBag.supply = new SelectList(supplier, "supplyID", "supplyID");
+            }
+            else
+            {
+                ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name");
+            }
+
             return View();
         }
 
@@ -71,9 +110,10 @@ namespace MIVProject.Controllers
             return View(supplyHeader);
         }
 
-        // GET: SupplyHeader/Edit/5
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -114,7 +154,7 @@ namespace MIVProject.Controllers
             return View(supplyHeader);
         }
 
-        // GET: SupplyHeader/Delete/5
+        [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

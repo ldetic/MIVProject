@@ -17,9 +17,10 @@ namespace MIVProject
         public int userID { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        public int type { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
+        public Nullable<int> type { get; set; }
+        public string email { get; set; }
     
         public virtual userType userType { get; set; }
         public virtual supplier supplier { get; set; }

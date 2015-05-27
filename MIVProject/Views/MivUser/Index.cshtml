@@ -24,6 +24,9 @@
             @Html.DisplayNameFor(model => model.lastName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.userType.type)
         </th>
         <th>
@@ -45,6 +48,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.userType.type)

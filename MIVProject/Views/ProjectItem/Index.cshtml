@@ -30,6 +30,9 @@
             @Html.DisplayNameFor(model => model.shipDate)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.item1.name)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.project1.name)
         </th>
         <th></th>
@@ -54,6 +57,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.shipDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.item1.name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.project1.name)

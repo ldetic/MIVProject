@@ -14,7 +14,6 @@ namespace MIVProject
     
     public partial class project
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public project()
         {
             this.projectItem = new HashSet<projectItem>();
@@ -32,9 +31,7 @@ namespace MIVProject
     
         public virtual deliveryMethod deliveryMethod1 { get; set; }
         public virtual paymentMethod paymentMethod1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<projectItem> projectItem { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<supplyHeader> supplyHeader { get; set; }
     }
 }
