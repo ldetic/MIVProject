@@ -19,7 +19,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OIB, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OIB, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.OIB, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.OIB, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.category, "category", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("category", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("category", null, htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.category, "", new { @class = "text-danger" })
             </div>
         </div>
