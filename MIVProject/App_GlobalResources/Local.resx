@@ -195,4 +195,16 @@
   <data name="ItemDeleteQuery" xml:space="preserve">
     <value>Jeste li sigurni da želite izbrisati artikl</value>
   </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Komentar</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Cijena</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Kvaliteta</value>
+  </data>
+  <data name="shipDate" xml:space="preserve">
+    <value>Datum slanja</value>
+  </data>
 </root>

@@ -195,4 +195,16 @@
   <data name="ItemDeleteQuery" xml:space="preserve">
     <value>Are you sure you want to delete product</value>
   </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Quality</value>
+  </data>
+  <data name="shipDate" xml:space="preserve">
+    <value>Shipping date</value>
+  </data>
 </root>

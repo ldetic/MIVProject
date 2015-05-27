@@ -1,30 +1,27 @@
 ﻿@model MIVProject.project
-
+@using Resources
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
-
-@using (Html.BeginForm()) 
+<h2>CreateNew</h2>
+@using (Html.BeginForm("Create", "Project", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>project</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForModel(Local.Name, htmlAttributes: new { @class = "control-label col-md-2", @for = "name" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        
         <div class="form-group">
-            @Html.LabelFor(model => model.paymentMethod, "paymentMethod", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForModel(Local.PaymentMethod, htmlAttributes: new { @class = "control-label col-md-2", @for = "paymentMethod" })
             <div class="col-md-10">
                 @Html.DropDownList("paymentMethod", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.paymentMethod, "", new { @class = "text-danger" })
@@ -32,7 +29,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.paymentDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForModel(Local.PaymentDate, htmlAttributes: new { @class = "control-label col-md-2", @for = "paymentDate" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.paymentDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.paymentDate, "", new { @class = "text-danger" })
@@ -40,7 +37,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.deliveryMethod, "deliveryMethod", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForModel(Local.DeliveryMethod, htmlAttributes: new { @class = "control-label col-md-2", @for = "deliveryMethod" })
             <div class="col-md-10">
                 @Html.DropDownList("deliveryMethod", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.deliveryMethod, "", new { @class = "text-danger" })
@@ -48,7 +45,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.deliveryDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForModel(Local.DeliveryDate, htmlAttributes: new { @class = "control-label col-md-2", @for = "deliveryDate" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.deliveryDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.deliveryDate, "", new { @class = "text-danger" })
@@ -56,25 +53,97 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForModel(Local.Description, htmlAttributes: new { @class = "control-label col-md-2", @for = "description" })
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-               
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<input type="button" value="Dodaj novi artikl" data-target="#modalUnselectedItems" data-toggle="modal" class="btn btn-primary" />
+
+<br /><br />
+<div class="accordion">
 </div>
+<br/>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" id="submit-project" value="@Local.Save" class="btn btn-default" />
+    </div>
+</div>
+
+<div class="modal fade" id="modalUnselectedItems" tabindex="-1" role="dialog" aria-labelledby="modalUnselectedLabel" aria-hidden="true">
+    <div class="modal-dialog modal-large">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Artikli</h4>
+            </div>
+            <div class="modal-body">
+
+                <table id="project-unselected-items-table" class="table object-table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
+                       data-search="true" data-toolbar="#toolbar" data-pagination="true"
+                       data-query-params="queryParams" data-checkbox-header="false">
+                    <thead>
+                        <tr>
+                            <th data-field="state" data-checkbox="true" data-formatter="stateFormatter"></th>
+                            <th data-field="id" class="hidden"></th>
+                            <th data-field="name" data-sortable="true">
+                                @Local.Name
+                            </th>
+                            <th data-field="description">
+                                @Local.Description
+                            </th>
+                            <th data-field="unitofmeasure" data-sortable="true">
+                                @Local.UnitOfMeasure
+                            </th>
+                            <th data-field="quantity" data-sortable="true">
+                                @Local.Quantity
+                            </th>
+                            <th data-field="category" data-sortable="true">
+                                @Local.Category
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.items)
+                        {
+                            <tr id="object-row-@item.itemID">
+                                <td></td>
+                                <td>
+                                    @item.itemID
+                                </td>
+                                <td>
+                                    @item.name
+                                </td>
+                                <td>
+                                    @item.description
+                                </td>
+                                <td>
+                                    @item.unitOfMeasure
+                                </td>
+                                <td>
+                                    @item.quantity
+                                </td>
+                                <td>
+                                    @item.itemSubCategory.name
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modal-add-items-confirm" class="btn btn-primary">Dodaj</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Odustani</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

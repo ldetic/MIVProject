@@ -40,6 +40,10 @@ namespace MIVProject.Controllers
         [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Create()
         {
+            //included because we need to select items during process of creating new project
+            var item = db.item.Include(i => i.itemSubCategory);
+            ViewBag.items = item;
+
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name");
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name");
             return View();
@@ -62,6 +66,21 @@ namespace MIVProject.Controllers
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", project.deliveryMethod);
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", project.paymentMethod);
             return View(project);
+        }
+
+        // POST: Project/CreateViaAjax
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public String CreateViaAjax([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description")] project project)
+        {
+            if (ModelState.IsValid)
+            {
+                db.project.Add(project);
+                db.SaveChanges();
+                return project.id.ToString();
+            }
+
+            return "ERROR";
         }
 
         [CustomAuthorize(Roles = "administrator,referent")]
