@@ -49,12 +49,15 @@ namespace MIVProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "quantity,price,quality,description,projectPosition,project,comment,shipDate,item")] projectItem projectItem)
+        public ActionResult Create([Bind(Include = "quantity,price,quality,description,projectPosition,project,comment,shipDate,item, projectItemID")] projectItem projectItem)
         {
             if (ModelState.IsValid)
             {
-                db.projectItem.Add(projectItem);
-                db.SaveChanges();
+
+                db.Database.ExecuteSqlCommand("insert into projectItem(quantity,price,quality,description,project,comment,shipDate,item) values(@p0,@p1,@p2,@p3,@p4,@p5,@p6,@p7)",
+                    projectItem.quantity, projectItem.price, projectItem.quality, projectItem.description, projectItem.project, projectItem.comment, projectItem.shipDate, projectItem.item);
+                //db.projectItem.Add(projectItem);
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -70,8 +73,10 @@ namespace MIVProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.projectItem.Add(projectItem);
-                db.SaveChanges();
+                db.Database.ExecuteSqlCommand("insert into projectItem(quantity,price,quality,description,project,comment,shipDate,item) values(@p0,@p1,@p2,@p3,@p4,@p5,@p6,@p7)",
+                    projectItem.quantity, projectItem.price, projectItem.quality, projectItem.description, projectItem.project, projectItem.comment, projectItem.shipDate, projectItem.item);
+                //db.projectItem.Add(projectItem);
+                //db.SaveChanges();
                 return "OK";
             }
             return "ERROR";
@@ -103,8 +108,11 @@ namespace MIVProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(projectItem).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Database.ExecuteSqlCommand("update projectItem set quantity=@p0,price=@p1,quality=@p2,description=@p3,project=@p4,comment=@p5,shipDate=@p6,item=@p7 where projectItemID = @p8",
+                   projectItem.quantity, projectItem.price, projectItem.quality, projectItem.description, projectItem.project, projectItem.comment, projectItem.shipDate, projectItem.item, projectItem.projectItemID);
+
+                //db.Entry(projectItem).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.item = new SelectList(db.item, "itemID", "name", projectItem.item);

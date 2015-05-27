@@ -63,10 +63,10 @@
     </div>
 }
 
-<input type="button" value="Dodaj novi artikl" data-target="#modalUnselectedItems" data-toggle="modal" class="btn btn-primary" />
+<input type="button" id="add-new-items-btn" value="Dodaj novi artikl" data-target="#modalUnselectedItems" data-toggle="modal" class="btn btn-primary" />
 
 <br /><br />
-<div class="accordion">
+<div class="acc-items">
 </div>
 <br/>
 <div class="form-group">
@@ -85,7 +85,7 @@
             <div class="modal-body">
 
                 <table id="project-unselected-items-table" class="table object-table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
-                       data-search="true" data-toolbar="#toolbar" data-pagination="true"
+                       data-search="true" data-toolbar="#toolbar" data-pagination="true" data-click-to-select="true"  
                        data-query-params="queryParams" data-checkbox-header="false" click-to-select="true">
                     <thead>
                         <tr>

@@ -30,20 +30,20 @@ textarea {
 }
 
 /*----- Accordion -----*/
-.accordion, .accordion * {
+.acc-items, .acc-items * {
     -webkit-box-sizing:border-box; 
     -moz-box-sizing:border-box; 
     box-sizing:border-box;
 }
  
-.accordion {
+.acc-items {
     overflow:hidden;
     border-radius:3px;
     background:#f7f7f7;
 }
  
 /*----- Section Titles -----*/
-.accordion-section-title {
+.acc-items-section-title {
     width:100%;
     padding:15px;
     display:inline-block;
@@ -55,18 +55,18 @@ textarea {
     color:#000;
 }
  
-.accordion-section-title.active, .accordion-section-title:hover {
+.acc-items-section-title.active, .acc-items-section-title:hover {
     background:#ECECEC;
     /* Type */
     text-decoration:none;
 }
  
-.accordion-section:last-child .accordion-section-title {
+.acc-items-section:last-child .acc-items-section-title {
     border-bottom:none;
 }
  
 /*----- Section Content -----*/
-.accordion-section-content {
+.acc-items-section-content {
     padding:15px;
     display:none;
 }

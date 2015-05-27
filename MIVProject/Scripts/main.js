@@ -125,27 +125,55 @@
 
     var $table = $("#project-unselected-items-table");
     if ($table.length > 0) {
+
+        //FIX for chboxes
+        var selectedItems = [];
+        $table.on('check.bs.table', function (e, row) {
+            if (selectedItems.indexOf($("#" + row._id).data("index")) === -1) {
+                selectedItems.push($("#" + row._id).data("index"));
+            }
+        });
+        $table.on('uncheck.bs.table', function (e, row) {
+            selectedItems.splice(selectedItems.indexOf($("#" + row._id).data("index")), 1);
+        });
+        $table.on('page-change.bs.table', function (e, rows) {
+            console.log("page change");
+            $.each(selectedItems, function (index, el) {
+                if (el !== null) {
+                    $table.bootstrapTable('check', el);
+                }
+            });
+            
+        });
+        
+
+        $("#add-new-items-btn").click(function () {
+            selectedItems = [];
+        });
         $button = $('#modal-add-items-confirm');
 
         $button.click(function () {
             var data = $table.bootstrapTable('getSelections');
             $.each(data, function (index, val) {
-
+                var rand = Math.floor(Math.random() * 1000);
+                var accItemsSectionId = "acc-items-section-" + val.id.trim() + "-" + rand;
+                var accItemsSectionTitle = 'acc-items-section-title-' + val.id.trim() + rand;
+                var accItemsId = "acc-items-" + val.id.trim() + "-" + rand;
                 $("<div/>", { //accordion section
-                    id: "accordion-section-" + val.id.trim(),
-                    class: "accordion-section"
-                }).appendTo(".accordion");
+                    id: accItemsSectionId,
+                    class: "acc-items-section"
+                }).appendTo(".acc-items");
 
                 //accordion title
-                var html = '<a class="accordion-section-title" id="accordion-section-title-' + val.id.trim() + '" href="#accordion-' + val.id.trim() + '">' + val.name.trim();
+                var html = '<a class="acc-items-section-title" id="' + accItemsSectionTitle + '" href="#' + accItemsId + '">' + val.name.trim();
                 html += '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>';
                 html += '</a>';
-                $("#accordion-section-" + val.id.trim()).append(html);
+                $("#" + accItemsSectionId).append(html);
 
                 $("<div/>", {
-                    id: "accordion-" + val.id.trim(),
-                    class: "accordion-section-content"
-                }).appendTo("#accordion-section-" + val.id.trim());
+                    id: accItemsId,
+                    class: "acc-items-section-content"
+                }).appendTo("#" + accItemsSectionId);
 
                 html = '<div class="full-width">';
                 html += addInput("item-quantity-" + val.id.trim(), val.quantity.trim(), "Quantity", "number", "quantity", "col-xs-12 col-sm-6 col-md-3", val.unitofmeasure.trim());
@@ -159,13 +187,14 @@
                 html += addTextBox("item-qualitiy-" + val.id.trim(), "", "Quality", "quality", "col-xs-12 col-sm-6 col-md-4");
                 html += addTextBox("item-comment-" + val.id.trim(), "", "Comment", "comment", "col-xs-12 col-sm-6 col-md-4");
 
-                $("#accordion-" + val.id.trim() + "").append(html);
+                $("#" + accItemsId).append(html);
 
 
-                $('#accordion-section-title-' + val.id.trim()).click(function (e) {
+                $('#' + accItemsSectionTitle).click(function (e) {
                     // Grab current anchor value
+                    
                     var currentAttrValue = $(this).attr('href');
-
+                    console.log(currentAttrValue);
                     if ($(e.target).is('.active')) {
                         close_accordion_section();
                     } else {
@@ -174,7 +203,7 @@
                         // Add active class to section title
                         $(this).addClass('active');
                         // Open up the hidden content panel
-                        $('.accordion ' + currentAttrValue).slideDown(300).addClass('open').css("display", "inline-block");
+                        $('.acc-items ' + currentAttrValue).slideDown(300).addClass('open').css("display", "inline-block");
                     }
 
                     e.preventDefault();
@@ -183,7 +212,9 @@
                 $('#modalUnselectedItems').modal('hide');
             });
 
-            $(".accordion-section-title .close").each(function (index, el) {
+
+
+            $(".acc-items-section-title .close").each(function (index, el) {
                 $(el).click(function (e) {
                     e.stopPropagation();
                     $(this).parent().parent().remove();
@@ -214,8 +245,8 @@
             return cont;
         }
         function close_accordion_section() {
-            $('.accordion .accordion-section-title').removeClass('active');
-            $('.accordion .accordion-section-content').slideUp(300).removeClass('open');
+            $('.acc-items .acc-items-section-title').removeClass('active');
+            $('.acc-items .acc-items-section-content').slideUp(300).removeClass('open');
         }
 
         $("#submit-project").click(function () {
@@ -233,7 +264,7 @@
             console.log(project);
             //2. Getting project items
             var items = [];
-            $(".accordion .accordion-section").each(function (index, el) {
+            $(".acc-items .acc-items-section").each(function (index, el) {
                 items.push({
                     item: $(el).find(".id").val(),
                     quantity: $(el).find(".quantity").val(),
