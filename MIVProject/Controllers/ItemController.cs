@@ -15,7 +15,7 @@ namespace MIVProject.Controllers
     {
         private mivEntities db = new mivEntities();
 
-        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
+        //[CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Index()
         {
             var item = db.item.Include(i => i.itemSubCategory);
@@ -24,7 +24,7 @@ namespace MIVProject.Controllers
             return View(item.ToList());
         }
 
-        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
+        //[CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Details(int? id)
         {
             if (id == null)

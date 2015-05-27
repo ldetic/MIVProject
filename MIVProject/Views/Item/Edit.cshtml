@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.subcategory, "subcategory", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("subcategory", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("subcategory", null, htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.subcategory, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.unitOfMeasure, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.unitOfMeasure, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.unitOfMeasure, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.unitOfMeasure, "", new { @class = "text-danger" })
             </div>
         </div>

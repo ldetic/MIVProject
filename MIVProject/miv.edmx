@@ -143,9 +143,7 @@
         </EntityType>
         <EntityType Name="supplyItem">
           <Key>
-            <PropertyRef Name="supply" />
-            <PropertyRef Name="item" />
-            <PropertyRef Name="itemNumber" />
+            <PropertyRef Name="supplyItemID" />
           </Key>
           <Property Name="supply" Type="int" Nullable="false" />
           <Property Name="item" Type="int" Nullable="false" />
@@ -155,6 +153,7 @@
           <Property Name="quality" Type="varchar" MaxLength="500" />
           <Property Name="comment" Type="varchar" MaxLength="500" />
           <Property Name="shipDate" Type="datetime" />
+          <Property Name="supplyItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="supplyStatus">
           <Key>
@@ -749,9 +748,7 @@
         </EntityType>
         <EntityType Name="supplyItem">
           <Key>
-            <PropertyRef Name="supply" />
-            <PropertyRef Name="item" />
-            <PropertyRef Name="itemNumber" />
+            <PropertyRef Name="supplyItemID" />
           </Key>
           <Property Name="supply" Type="Int32" Nullable="false" />
           <Property Name="item" Type="Int32" Nullable="false" />
@@ -761,6 +758,7 @@
           <Property Name="quality" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="shipDate" Type="DateTime" Precision="3" />
+          <Property Name="supplyItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="item1" Relationship="mivModel.FK__supplyItem__item__18EBB532" FromRole="supplyItem" ToRole="item" />
           <NavigationProperty Name="supplyHeader" Relationship="mivModel.FK__supplyIte__suppl__17F790F9" FromRole="supplyItem" ToRole="supplyHeader" />
         </EntityType>
@@ -1136,6 +1134,7 @@
           <EntitySetMapping Name="supplyItem">
             <EntityTypeMapping TypeName="mivModel.supplyItem">
               <MappingFragment StoreEntitySet="supplyItem">
+                <ScalarProperty Name="supplyItemID" ColumnName="supplyItemID" />
                 <ScalarProperty Name="shipDate" ColumnName="shipDate" />
                 <ScalarProperty Name="comment" ColumnName="comment" />
                 <ScalarProperty Name="quality" ColumnName="quality" />

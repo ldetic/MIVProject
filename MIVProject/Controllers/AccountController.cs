@@ -61,6 +61,7 @@ namespace MIVProject.Controllers
                 //FormsAuthentication.SetAuthCookie(mivUser.username, false);
                 var u = mivEntities.Database.SqlQuery<mivUser>("Select * from mivUser where username = @p0", mivUser.username);                         
                 Session["username"] = mivUser.username;
+                Session["userID"] = u.First().userID;
                 userType userType = mivEntities.userType.Find(u.First().type);
                 if (userType != null)
                 {
@@ -70,7 +71,10 @@ namespace MIVProject.Controllers
                 {
                     Session["type"] = mivUser.type;
                 }
-                return RedirectToAction("Index", "Home");
+
+
+                return Redirect(FormsAuthentication.GetRedirectUrl(Session["username"].ToString(), false));
+                //return RedirectToAction("Index", "Home");
             }
             
         }
@@ -135,9 +139,10 @@ namespace MIVProject.Controllers
                         mivEntities.mivUser.Remove(mivUser);
                         mivEntities.SaveChanges();
                         ViewBag.Msg = "Neispravni podaci";
-                        return RedirectToAction("Register");
+                        return View();
                     }
-                    return RedirectToAction("Index", "Home");
+                    
+                return RedirectToAction("Registered");
                 }
 
             else
@@ -149,6 +154,12 @@ namespace MIVProject.Controllers
             
 
         }
+
+        public ActionResult Registered()
+        {
+            return View();
+        }
+
 
         public static string CreateRandomPassword(int PasswordLength)
         {
@@ -209,14 +220,15 @@ namespace MIVProject.Controllers
             string newPassword = GetMD5HashData(CreateRandomPassword(7));
 
             mivEntities.Database.ExecuteSqlCommand("Update mivUser set password = @p0 where username = @p1", newPassword, Request.Form["username"]);
-            string email = mivEntities.Database.ExecuteSqlCommand("Select email from mivUser where username = @p0", Request.Form["username"]).ToString();
-        
-            if (email.CompareTo("")!=0)
+            string username =  Request.Form["username"].ToString();
+            var user = mivEntities.mivUser.Where(x => x.username == username);
+
+            if (user!= null)
                 {
                     
-                            if (SendEmail(mivUser.email, newPassword) != 0)
+                            if (SendEmail(user.First().email.ToString(), newPassword) != 0)
                             {
-                                ViewBag.Msg = "Nova lozinka poslana je na vašu e-mail adresu";
+                                return RedirectToAction("PasswordGenerated");
 
                             }
                             else
@@ -231,9 +243,15 @@ namespace MIVProject.Controllers
             else
             {
                 ViewBag.Msg = "Ovo korisničko ime ne postoji.";
-               
+                return View();
             }
 
+            
+        }
+
+        [HttpGet]
+        public ActionResult PasswordGenerated()
+        {
             return View();
         }
     }

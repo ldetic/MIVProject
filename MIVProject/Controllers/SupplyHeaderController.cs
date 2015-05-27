@@ -18,7 +18,7 @@ namespace MIVProject.Controllers
         [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Index()
         {
-            if (Session["type"].ToString() == "dobavljac")
+            if (Session["type"].ToString() == "dobavljač" || Session["type"].ToString() == "dobavljac")
             {
                 string username = Session["username"].ToString();
                 var supplyHeader = db.supplyHeader.Include(s => s.currency1).Include(s => s.deliveryMethod1).Include(s => s.paymentMethod1).Include(s => s.project1).Include(s => s.supplier1).Include(s => s.supplyStatus).Where(x => x.supplier1.mivUser1.username == username);
@@ -41,7 +41,7 @@ namespace MIVProject.Controllers
         [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Details(int? id)
         {
-            if (Session["type"].ToString() == "dobavljac")
+            if (Session["type"].ToString() == "dobavljač" || Session["type"].ToString() == "dobavljac")
             {
                 string username = Session["username"].ToString();
                 if (!(db.supplyHeader.Any(o => o.supplyID == id && o.supplier1.mivUser1.username == username)))
@@ -73,11 +73,12 @@ namespace MIVProject.Controllers
             
             ViewBag.status = new SelectList(db.supplyStatus, "statusID", "name");
 
-            if (Session["type"].ToString() == "dobavljac")
+            if (Session["type"].ToString() == "dobavljač"|| Session["type"].ToString() == "dobavljac")
             {
                 string username = Session["username"].ToString();
                 var supplier = db.supplier.Where(x => x.mivUser1.username == username);
-                ViewBag.supply = new SelectList(supplier, "supplyID", "supplyID");
+                //ViewBag.supply = new SelectList(supplier, "supplyID", "supplyID");
+                ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name");
             }
             else
             {
@@ -94,6 +95,13 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "supplyID,paymentMethod,deliveryMethod,paymentDate,deliveryDate,supplier,date,project,status,currency")] supplyHeader supplyHeader)
         {
+            if (Session["type"].ToString() == "dobavljač" || Session["type"].ToString() == "dobavljac")
+            {
+                supplyHeader.supplier = Convert.ToInt32(Session["userID"]);
+                var supplyStatus = db.supplyStatus.Where(x => x.name == "U izradi");
+                supplyHeader.status = supplyStatus.First().statusID;
+                //supplyHeader.supplier1.mivUser1.username = Session["username"].ToString();
+            }
             if (ModelState.IsValid)
             {
                 db.supplyHeader.Add(supplyHeader);
