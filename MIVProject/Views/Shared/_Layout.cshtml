@@ -21,7 +21,6 @@
     </script>
 </head>
 <body>
-
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -42,9 +41,40 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
+        <div class="row">
+        @if ((string)Session["type"] == "dobavljac" && (ViewBag.HideSidebar == null || ViewBag.HideSidebar == false))
+        {
+        <div class="body-content-wrap col-sm-9 col-md-10">
+            @RenderBody()
+        </div>
+        }
+        else
+        {
+            <div class="body-content-wrap col-sm-12">
+                @RenderBody()
+            </div>
+        }
+        @if ((string)Session["type"] == "dobavljac" && (ViewBag.HideSidebar == null || ViewBag.HideSidebar == false))
+        {
+            <div class="moderator-sidebar-wrapper col-sm-3 col-md-2">
+                <div class="moderator-sidebar">
+                    <div class="header">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Ponude
+                    </div>
+                    <hr />
+                    <div class="body">
+                        cart body
+                    </div>
+                    <hr/>
+                    <div class="footer">
+                        <a href="#">checkout</a>
+                    </div>
+                </div> 
+            </div>
+        }
+        </div>
+        <hr/>
+        <footer class="col-xs-12 row">
             <p>&copy; @DateTime.Now.Year - @Local.CompanyNameLong</p>
             
             <form method="get" name="Localization">
@@ -54,7 +84,7 @@
             </form>
         </footer>
     </div>
-
+    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     

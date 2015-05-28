@@ -75,3 +75,16 @@ textarea {
     width: 100%;
     display: inline-block;
 }
+
+/*----- Moderator sidebar -----*/
+.moderator-sidebar-wrapper {
+    margin-top: 74px;
+    min-height: 300px;
+}
+.moderator-sidebar {
+    background: #ebebeb;
+    padding: 8px;
+}
+.moderator-sidebar .header {}
+.moderator-sidebar .footer {}
+.moderator-sidebar .body {}
