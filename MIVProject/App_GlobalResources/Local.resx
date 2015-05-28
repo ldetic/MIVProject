@@ -243,4 +243,52 @@
   <data name="UserType" xml:space="preserve">
     <value>Tipovi korisnika</value>
   </data>
+  <data name="Create" xml:space="preserve">
+    <value>Kreiraj</value>
+  </data>
+  <data name="Delete2" xml:space="preserve">
+    <value>Brisanje</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="ForgottenPassword" xml:space="preserve">
+    <value>Zaboravljena lozinka</value>
+  </data>
+  <data name="FurtherWork" xml:space="preserve">
+    <value>Za nastavak rada molimo da se</value>
+  </data>
+  <data name="log_in" xml:space="preserve">
+    <value>prijavite</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Lozinka</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registriraj se</value>
+  </data>
+  <data name="Registered" xml:space="preserve">
+    <value>Uspješna registracija</value>
+  </data>
+  <data name="SendRequest" xml:space="preserve">
+    <value>Pošalji zahtjev</value>
+  </data>
+  <data name="SureYouWantToDelete" xml:space="preserve">
+    <value>Jeste li sigurni da ovo želite obrisati?</value>
+  </data>
+  <data name="ThankYouForYourRegistration" xml:space="preserve">
+    <value>Zahvaljujemo na Vašoj registraciji</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>Neautorizirani pristup</value>
+  </data>
+  <data name="Unauthorized_msg" xml:space="preserve">
+    <value>Pokušavate pristupiti sadržaju koji ne postoji ili za koji nemate dozvolu pristupa.</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>Korisničko ime</value>
+  </data>
 </root>

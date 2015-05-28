@@ -1,9 +1,9 @@
-﻿
+﻿@using Resources
 @{
-    ViewBag.Title = "Registered";
+    ViewBag.Title = Local.Registered;
 }
 
-<h2>Uspješna registracija</h2>
+<h2>@Local.Registered</h2>
 <div>
-    <span>Zahvaljujemo na Vašoj registraciji. Za nastavak rada molimo da se @Html.ActionLink("prijavite", "Login", "Account").</span>
+    <span>@Local.ThankYouForYourRegistration. @Local.FurtherWork @Html.ActionLink(@Local.log_in, "Login", "Account").</span>
 </div>

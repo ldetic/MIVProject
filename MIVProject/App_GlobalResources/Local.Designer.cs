@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kreiraj.
+        /// </summary>
+        internal static string Create {
+            get {
+                return ResourceManager.GetString("Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kreiraj novi.
         /// </summary>
         internal static string CreateNew {
@@ -147,6 +156,15 @@ namespace Resources {
         internal static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Brisanje.
+        /// </summary>
+        internal static string Delete2 {
+            get {
+                return ResourceManager.GetString("Delete2", resourceCulture);
             }
         }
         
@@ -205,6 +223,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E-mail.
+        /// </summary>
+        internal static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zaboravljena lozinka.
+        /// </summary>
+        internal static string ForgottenPassword {
+            get {
+                return ResourceManager.GetString("ForgottenPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Za nastavak rada molimo da se.
+        /// </summary>
+        internal static string FurtherWork {
+            get {
+                return ResourceManager.GetString("FurtherWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kategorije artikala.
         /// </summary>
         internal static string ItemCategory {
@@ -241,6 +286,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to prijavite.
+        /// </summary>
+        internal static string log_in {
+            get {
+                return ResourceManager.GetString("log_in", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Korisnici.
         /// </summary>
         internal static string MivUser {
@@ -268,6 +322,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lozinka.
+        /// </summary>
+        internal static string password {
+            get {
+                return ResourceManager.GetString("password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Datum plaćanja.
         /// </summary>
         internal static string PaymentDate {
@@ -282,6 +345,15 @@ namespace Resources {
         internal static string PaymentMethod {
             get {
                 return ResourceManager.GetString("PaymentMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefon.
+        /// </summary>
+        internal static string Phone {
+            get {
+                return ResourceManager.GetString("Phone", resourceCulture);
             }
         }
         
@@ -349,6 +421,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Registriraj se.
+        /// </summary>
+        internal static string Register {
+            get {
+                return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uspješna registracija.
+        /// </summary>
+        internal static string Registered {
+            get {
+                return ResourceManager.GetString("Registered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Registracija.
         /// </summary>
         internal static string Registration {
@@ -363,6 +453,15 @@ namespace Resources {
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pošalji zahtjev.
+        /// </summary>
+        internal static string SendRequest {
+            get {
+                return ResourceManager.GetString("SendRequest", resourceCulture);
             }
         }
         
@@ -421,11 +520,56 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Jeste li sigurni da ovo želite obrisati?.
+        /// </summary>
+        internal static string SureYouWantToDelete {
+            get {
+                return ResourceManager.GetString("SureYouWantToDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zahvaljujemo na Vašoj registraciji.
+        /// </summary>
+        internal static string ThankYouForYourRegistration {
+            get {
+                return ResourceManager.GetString("ThankYouForYourRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neautorizirani pristup.
+        /// </summary>
+        internal static string Unauthorized {
+            get {
+                return ResourceManager.GetString("Unauthorized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pokušavate pristupiti sadržaju koji ne postoji ili za koji nemate dozvolu pristupa..
+        /// </summary>
+        internal static string Unauthorized_msg {
+            get {
+                return ResourceManager.GetString("Unauthorized_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mjerna jedinica.
         /// </summary>
         internal static string UnitOfMeasure {
             get {
                 return ResourceManager.GetString("UnitOfMeasure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Korisničko ime.
+        /// </summary>
+        internal static string username {
+            get {
+                return ResourceManager.GetString("username", resourceCulture);
             }
         }
         

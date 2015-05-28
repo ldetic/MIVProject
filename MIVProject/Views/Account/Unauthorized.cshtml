@@ -1,8 +1,8 @@
-﻿
+﻿@using Resources
 @{
-    ViewBag.Title = "Unauthorized";
+    ViewBag.Title = @Local.Unauthorized;
 }
 
-<h2>Greška</h2>
-<span>Pokušavate pristupiti sadržaju koji ne postoji ili za koji nemate dozvolu pristupa. </span>
+<h2>@Local.Error</h2>
+<span>@Local.Unauthorized_msg </span>
 
