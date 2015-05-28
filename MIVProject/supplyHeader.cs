@@ -39,7 +39,7 @@ namespace MIVProject
         public Nullable<System.DateTime> deliveryDate { get; set; }
 
         public int supplier { get; set; }
-
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> date { get; set; }
 
         public Nullable<int> project { get; set; }

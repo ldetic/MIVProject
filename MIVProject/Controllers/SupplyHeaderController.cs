@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MIVProject;
+using System.Configuration;
+using System.Net.Mail;
 
 namespace MIVProject.Controllers
 {
@@ -14,6 +16,36 @@ namespace MIVProject.Controllers
     public class SupplyHeaderController : Controller
     {
         private mivEntities db = new mivEntities();
+
+        public int SendEmail(string email, string body, string subject)
+        {
+            try
+            {
+                var fromEmailAddress = ConfigurationManager.AppSettings["FromEmailAddress"].ToString();
+                var fromEmailDisplayName = ConfigurationManager.AppSettings["FromEmailDisplayName"].ToString();
+                var fromEmailPassword = ConfigurationManager.AppSettings["FromEmailPassword"].ToString();
+                var smtpHost = ConfigurationManager.AppSettings["SMTPHost"].ToString();
+                var smtpPort = ConfigurationManager.AppSettings["SMTPPort"].ToString();
+
+
+                MailMessage message = new MailMessage(new MailAddress(fromEmailAddress, fromEmailDisplayName), new MailAddress(email, ""));
+                message.Subject = subject;
+                message.IsBodyHtml = true;
+                message.Body = body;
+
+                var client = new SmtpClient();
+                client.Credentials = new NetworkCredential(fromEmailAddress, fromEmailPassword);
+                client.Host = smtpHost;
+                client.EnableSsl = true;
+                client.Port = !string.IsNullOrEmpty(smtpPort) ? Convert.ToInt32(smtpPort) : 0;
+                client.Send(message);
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
 
         [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Index()
@@ -70,10 +102,10 @@ namespace MIVProject.Controllers
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name");
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name");
             ViewBag.project = new SelectList(db.project, "id", "name");
-            
+
             ViewBag.status = new SelectList(db.supplyStatus, "statusID", "name");
 
-            if (Session["type"].ToString() == "dobavljač"|| Session["type"].ToString() == "dobavljac")
+            if (Session["type"].ToString() == "dobavljač" || Session["type"].ToString() == "dobavljac")
             {
                 string username = Session["username"].ToString();
                 var supplier = db.supplier.Where(x => x.mivUser1.username == username);
@@ -106,6 +138,10 @@ namespace MIVProject.Controllers
             {
                 db.supplyHeader.Add(supplyHeader);
                 db.SaveChanges();
+                var supplier = db.supplier.Where(x => x.mivUser == supplyHeader.supplier);
+                string body = "Predana je nova ponuda, dobavljača" + supplier.First().name;
+                string subject = "Nova ponuda dobavljača:" + supplier.First().name;
+                SendEmail("ljdetic@gmail.com", body, subject);
                 return RedirectToAction("Index");
             }
 
@@ -115,6 +151,7 @@ namespace MIVProject.Controllers
             ViewBag.project = new SelectList(db.project, "id", "name", supplyHeader.project);
             ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name", supplyHeader.supplier);
             ViewBag.status = new SelectList(db.supplyStatus, "statusID", "name", supplyHeader.status);
+            
             return View(supplyHeader);
         }
 

@@ -17,6 +17,37 @@ namespace MIVProject.Controllers
     {
         mivEntities mivEntities = new mivEntities();
 
+
+        public int SendEmail(string email, string body, string subject)
+        {
+            try
+            {
+                var fromEmailAddress = ConfigurationManager.AppSettings["FromEmailAddress"].ToString();
+                var fromEmailDisplayName = ConfigurationManager.AppSettings["FromEmailDisplayName"].ToString();
+                var fromEmailPassword = ConfigurationManager.AppSettings["FromEmailPassword"].ToString();
+                var smtpHost = ConfigurationManager.AppSettings["SMTPHost"].ToString();
+                var smtpPort = ConfigurationManager.AppSettings["SMTPPort"].ToString();
+
+
+                MailMessage message = new MailMessage(new MailAddress(fromEmailAddress, fromEmailDisplayName), new MailAddress(email, ""));
+                message.Subject = subject;
+                message.IsBodyHtml = true;
+                message.Body = body;
+
+                var client = new SmtpClient();
+                client.Credentials = new NetworkCredential(fromEmailAddress, fromEmailPassword);
+                client.Host = smtpHost;
+                client.EnableSsl = true;
+                client.Port = !string.IsNullOrEmpty(smtpPort) ? Convert.ToInt32(smtpPort) : 0;
+                client.Send(message);
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
         private string GetMD5HashData(string data)
         {
             //create new instance of md5
@@ -151,7 +182,14 @@ namespace MIVProject.Controllers
                     return View();
                 }
 
+
+                string body = "Registriran je novi dobavljač te čeka na potvrdu. Ime dobavljača: " + supplier.name;
+                string subject = "Registracija " + supplier.name;
+
+                SendEmail("ljdetic@gmail.com", body, subject);
                 return RedirectToAction("Registered");
+
+                
             }
 
             else
@@ -187,35 +225,6 @@ namespace MIVProject.Controllers
         }
 
 
-        public int SendEmail(string email, string password)
-        {
-            try
-            {
-                var fromEmailAddress = ConfigurationManager.AppSettings["FromEmailAddress"].ToString();
-                var fromEmailDisplayName = ConfigurationManager.AppSettings["FromEmailDisplayName"].ToString();
-                var fromEmailPassword = ConfigurationManager.AppSettings["FromEmailPassword"].ToString();
-                var smtpHost = ConfigurationManager.AppSettings["SMTPHost"].ToString();
-                var smtpPort = ConfigurationManager.AppSettings["SMTPPort"].ToString();
-
-                string body = "Vaša nova lozinka: / Your new password: " + password;
-                MailMessage message = new MailMessage(new MailAddress(fromEmailAddress, fromEmailDisplayName), new MailAddress(email, ""));
-                message.Subject = "Vaša nova lozinka / Your new password";
-                message.IsBodyHtml = true;
-                message.Body = body;
-
-                var client = new SmtpClient();
-                client.Credentials = new NetworkCredential(fromEmailAddress, fromEmailPassword);
-                client.Host = smtpHost;
-                client.EnableSsl = true;
-                client.Port = !string.IsNullOrEmpty(smtpPort) ? Convert.ToInt32(smtpPort) : 0;
-                client.Send(message);
-                return 1;
-            }
-            catch
-            {
-                return 0;
-            }
-        }
 
         [HttpGet]
         public ActionResult GeneratePassword()
@@ -232,10 +241,13 @@ namespace MIVProject.Controllers
             string username = Request.Form["username"].ToString();
             var user = mivEntities.mivUser.Where(x => x.username == username);
 
+            string body = "Vaša nova lozinka: / Your new password: " + newPassword;
+            string subject = "Vaša nova lozinka / Your new password"; 
+
             if (user != null)
             {
 
-                if (SendEmail(user.First().email.ToString(), newPassword) != 0)
+                if (SendEmail(user.First().email.ToString(), body, subject) != 0)
                 {
                     return RedirectToAction("PasswordGenerated");
 
