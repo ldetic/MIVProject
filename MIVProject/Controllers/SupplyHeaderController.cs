@@ -47,10 +47,10 @@ namespace MIVProject.Controllers
             }
         }
 
-        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
+        [CustomAuthorize(Roles = "administrator,referent,dobavljac")]
         public ActionResult Index()
         {
-            if (Session["type"].ToString() == "dobavljač" || Session["type"].ToString() == "dobavljac")
+            if (Session["type"].ToString() == "dobavljac")
             {
                 string username = Session["username"].ToString();
                 var supplyHeader = db.supplyHeader.Include(s => s.currency1).Include(s => s.deliveryMethod1).Include(s => s.paymentMethod1).Include(s => s.project1).Include(s => s.supplier1).Include(s => s.supplyStatus).Where(x => x.supplier1.mivUser1.username == username);
@@ -70,10 +70,10 @@ namespace MIVProject.Controllers
             }
         }
 
-        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
+        [CustomAuthorize(Roles = "administrator,referent,dobavljac")]
         public ActionResult Details(int? id)
         {
-            if (Session["type"].ToString() == "dobavljač" || Session["type"].ToString() == "dobavljac")
+            if (Session["type"].ToString() == "dobavljac")
             {
                 string username = Session["username"].ToString();
                 if (!(db.supplyHeader.Any(o => o.supplyID == id && o.supplier1.mivUser1.username == username)))

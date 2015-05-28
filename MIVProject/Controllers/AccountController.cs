@@ -104,11 +104,13 @@ namespace MIVProject.Controllers
                 userType userType = mivEntities.userType.Find(u.First().type);
                 if (userType != null)
                 {
-                    Session["type"] = userType.type;
+                    if (userType.type == "administrator" || userType.type == "admin") Session["type"] = "administrator";
+                    else if (userType.type == "dobavljač" || userType.type == "dobavljac" || userType.type == "supplier") Session["type"] = "dobavljac";
+                    else Session["type"] = "referent";
                 }
                 else
                 {
-                    Session["type"] = mivUser.type;
+                    Session["type"] = null;
                 }
 
 

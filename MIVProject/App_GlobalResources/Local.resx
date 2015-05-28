@@ -207,4 +207,40 @@
   <data name="shipDate" xml:space="preserve">
     <value>Datum slanja</value>
   </data>
+  <data name="Criteria" xml:space="preserve">
+    <value>Kriteriji odabira</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Valute</value>
+  </data>
+  <data name="ItemCategory" xml:space="preserve">
+    <value>Kategorije artikala</value>
+  </data>
+  <data name="ItemSubCategory" xml:space="preserve">
+    <value>Podkategorije artikala</value>
+  </data>
+  <data name="MivUser" xml:space="preserve">
+    <value>Korisnici</value>
+  </data>
+  <data name="ProjectItem" xml:space="preserve">
+    <value>Stavke projekta</value>
+  </data>
+  <data name="Supplier" xml:space="preserve">
+    <value>Dobavljači</value>
+  </data>
+  <data name="SupplierCategory" xml:space="preserve">
+    <value>Kategorije dobavljača</value>
+  </data>
+  <data name="SupplyHeader" xml:space="preserve">
+    <value>Ponude dobavljača</value>
+  </data>
+  <data name="SupplyItem" xml:space="preserve">
+    <value>Stavke ponude</value>
+  </data>
+  <data name="SupplyStatus" xml:space="preserve">
+    <value>Status ponude</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>Tipovi korisnika</value>
+  </data>
 </root>
