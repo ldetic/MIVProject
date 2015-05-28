@@ -31,7 +31,7 @@ namespace MIVProject.Controllers
             }
             project project = db.project.Find(id);
             IQueryable<projectItem> projectItems = db.projectItem.Where(c => c.project == id);
-            
+
             ViewBag.projectItems = projectItems;
             if (project == null)
             {
@@ -111,7 +111,8 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description")] project project)
         {
-            try {
+            try
+            {
                 if (ModelState.IsValid)
                 {
                     db.Entry(project).State = EntityState.Modified;
@@ -121,7 +122,8 @@ namespace MIVProject.Controllers
                 ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", project.deliveryMethod);
                 ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", project.paymentMethod);
                 return View(project);
-            } catch(Exception ex)
+            }
+            catch
             {
                 return Edit(currentEditId);
             }
@@ -158,12 +160,14 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public String DeleteConfirmedAjax(int id)
         {
-            try { 
+            try
+            {
                 project project = db.project.Find(id);
                 db.project.Remove(project);
                 db.SaveChanges();
                 return "OK";
-            } catch(Exception ex)
+            }
+            catch
             {
                 return "ERROR";
             }

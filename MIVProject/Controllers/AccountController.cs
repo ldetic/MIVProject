@@ -16,7 +16,7 @@ namespace MIVProject.Controllers
     public class AccountController : Controller
     {
         mivEntities mivEntities = new mivEntities();
-       
+
         private string GetMD5HashData(string data)
         {
             //create new instance of md5
@@ -39,7 +39,13 @@ namespace MIVProject.Controllers
 
         }
 
-       
+
+        // GET: Accounts
+        public ActionResult Unauthorized()
+        {
+            return View();
+        }
+
         // GET: Accounts
         public ActionResult Login()
         {
@@ -50,16 +56,18 @@ namespace MIVProject.Controllers
         [HttpPost]
         public ActionResult Login(mivUser mivUser)
         {
-            
+
             mivUser.password = GetMD5HashData(mivUser.password.ToString());
             int count = mivEntities.mivUser.Where(x => x.username == mivUser.username && x.password == mivUser.password).Count();
-            if (count == 0) {
+            if (count == 0)
+            {
                 ViewBag.Msg = "Invalid username or password";
                 return View();
             }
-            else {
+            else
+            {
                 //FormsAuthentication.SetAuthCookie(mivUser.username, false);
-                var u = mivEntities.Database.SqlQuery<mivUser>("Select * from mivUser where username = @p0", mivUser.username);                         
+                var u = mivEntities.Database.SqlQuery<mivUser>("Select * from mivUser where username = @p0", mivUser.username);
                 Session["username"] = mivUser.username;
                 Session["userID"] = u.First().userID;
                 userType userType = mivEntities.userType.Find(u.First().type);
@@ -76,7 +84,7 @@ namespace MIVProject.Controllers
                 return Redirect(FormsAuthentication.GetRedirectUrl(Session["username"].ToString(), false));
                 //return RedirectToAction("Index", "Home");
             }
-            
+
         }
 
         public ActionResult Logout()
@@ -94,64 +102,65 @@ namespace MIVProject.Controllers
         [HttpPost]
         public ActionResult Register(int a = 0)
         {
-            
+
             mivUser mivUser = new mivUser();
             supplier supplier = new supplier();
             mivUser.username = Request.Form["username"];
             mivUser.password = GetMD5HashData(Request.Form["password"].ToString());
             mivUser.email = Request.Form["email"];
-            if (mivUser.username.CompareTo("") != 0 && mivUser.password.CompareTo("") != 0 && mivUser.email.CompareTo("") != 0) 
-            { 
-                mivEntities.mivUser.Add(mivUser);         
-                try{
+            if (mivUser.username.CompareTo("") != 0 && mivUser.password.CompareTo("") != 0 && mivUser.email.CompareTo("") != 0)
+            {
+                mivEntities.mivUser.Add(mivUser);
+                try
+                {
                     mivEntities.SaveChanges();
                 }
                 catch
                 {
-                     ViewBag.Msg = "Neispravni podaci";
-                     return View();
+                    ViewBag.Msg = "Neispravni podaci";
+                    return View();
                 }
 
                 int user = mivUser.userID;
 
-                    supplier.mivUser = user;
-                    supplier.name = Request.Form["name"];                   
-                    supplier.phone = Request.Form["phone"];
-                    supplier.OIB = Request.Form["oib"];
+                supplier.mivUser = user;
+                supplier.name = Request.Form["name"];
+                supplier.phone = Request.Form["phone"];
+                supplier.OIB = Request.Form["oib"];
 
-                    if (supplier.name.CompareTo("") != 0 && supplier.phone.CompareTo("") != 0 && supplier.OIB.CompareTo("") != 0)
+                if (supplier.name.CompareTo("") != 0 && supplier.phone.CompareTo("") != 0 && supplier.OIB.CompareTo("") != 0)
+                {
+                    mivEntities.supplier.Add(supplier);
+                    try
                     {
-                        mivEntities.supplier.Add(supplier);
-                        try
-                        {
-                            mivEntities.SaveChanges();
-                        }
-                        catch
-                        {
-                            mivEntities.mivUser.Remove(mivUser);
-                            mivEntities.SaveChanges();
-                            ViewBag.Msg = "Neispravni podaci";
-                            return View();
-                        }
+                        mivEntities.SaveChanges();
                     }
-                    else
+                    catch
                     {
                         mivEntities.mivUser.Remove(mivUser);
                         mivEntities.SaveChanges();
                         ViewBag.Msg = "Neispravni podaci";
                         return View();
                     }
-                    
-                return RedirectToAction("Registered");
                 }
+                else
+                {
+                    mivEntities.mivUser.Remove(mivUser);
+                    mivEntities.SaveChanges();
+                    ViewBag.Msg = "Neispravni podaci";
+                    return View();
+                }
+
+                return RedirectToAction("Registered");
+            }
 
             else
             {
                 ViewBag.Msg = "Neispravni podaci";
                 return View();
             }
-            
-            
+
+
 
         }
 
@@ -188,7 +197,7 @@ namespace MIVProject.Controllers
                 var smtpHost = ConfigurationManager.AppSettings["SMTPHost"].ToString();
                 var smtpPort = ConfigurationManager.AppSettings["SMTPPort"].ToString();
 
-                string body = "Vaša nova lozinka: / Your new password: "+ password;
+                string body = "Vaša nova lozinka: / Your new password: " + password;
                 MailMessage message = new MailMessage(new MailAddress(fromEmailAddress, fromEmailDisplayName), new MailAddress(email, ""));
                 message.Subject = "Vaša nova lozinka / Your new password";
                 message.IsBodyHtml = true;
@@ -202,7 +211,7 @@ namespace MIVProject.Controllers
                 client.Send(message);
                 return 1;
             }
-            catch (Exception ex)
+            catch
             {
                 return 0;
             }
@@ -220,25 +229,25 @@ namespace MIVProject.Controllers
             string newPassword = GetMD5HashData(CreateRandomPassword(7));
 
             mivEntities.Database.ExecuteSqlCommand("Update mivUser set password = @p0 where username = @p1", newPassword, Request.Form["username"]);
-            string username =  Request.Form["username"].ToString();
+            string username = Request.Form["username"].ToString();
             var user = mivEntities.mivUser.Where(x => x.username == username);
 
-            if (user!= null)
-                {
-                    
-                            if (SendEmail(user.First().email.ToString(), newPassword) != 0)
-                            {
-                                return RedirectToAction("PasswordGenerated");
+            if (user != null)
+            {
 
-                            }
-                            else
-                            {
-                                ViewBag.Msg = "Problem sa slanjem emaila";
-                                return View();
-                            }
-                                         
-                    
+                if (SendEmail(user.First().email.ToString(), newPassword) != 0)
+                {
+                    return RedirectToAction("PasswordGenerated");
+
                 }
+                else
+                {
+                    ViewBag.Msg = "Problem sa slanjem emaila";
+                    return View();
+                }
+
+
+            }
 
             else
             {
@@ -246,7 +255,7 @@ namespace MIVProject.Controllers
                 return View();
             }
 
-            
+
         }
 
         [HttpGet]

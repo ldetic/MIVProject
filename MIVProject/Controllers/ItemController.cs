@@ -10,7 +10,7 @@ using MIVProject;
 
 namespace MIVProject.Controllers
 {
-    
+
     public class ItemController : Controller
     {
         private mivEntities db = new mivEntities();
@@ -19,8 +19,8 @@ namespace MIVProject.Controllers
         public ActionResult Index()
         {
             var item = db.item.Include(i => i.itemSubCategory);
-            
-             
+
+
             return View(item.ToList());
         }
 
@@ -128,12 +128,14 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public String DeleteConfirmedAjax(int id)
         {
-            try {
+            try
+            {
                 item item = db.item.Find(id);
                 db.item.Remove(item);
                 db.SaveChanges();
                 return "OK";
-            } catch(Exception ex)
+            }
+            catch
             {
                 return "ERROR";
             }

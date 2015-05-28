@@ -52,7 +52,7 @@ namespace MIVProject.Controllers
                  {
                      return View(mivUser.ToList());
                  }
-                 else return RedirectToAction("Index", "Home");
+                 else return RedirectToAction("Unauthorized", "Account");
                
             }
             else
@@ -109,18 +109,47 @@ namespace MIVProject.Controllers
     
         public ActionResult Edit(int? id)
         {
+
+            mivUser mivUser = null;
+
+                
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            mivUser mivUser = db.mivUser.Find(id);
+            if (Session["type"].ToString() == "referent")
+            {
+                var user = db.mivUser.Find(id);
+                if (user.userType.type == "dobavljac" || user.userType.type == "dobavljač" || user.type == null)
+                {
+                    mivUser = user;
+                }
+                
+            }
+            else
+            {
+                mivUser = db.mivUser.Find(id);
+            }
             if (mivUser == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Unauthorized", "Account");
             }
             ViewBag.type = new SelectList(db.userType, "typeID", "type", mivUser.type);
             ViewBag.userID = new SelectList(db.supplier, "mivUser", "name", mivUser.userID);
             return View(mivUser);
+        }
+
+        public ActionResult CheckSupplier(int? id)
+        {
+            var user = db.mivUser.Find(id);
+            if (user.type == null)
+            {
+                db.Database.ExecuteSqlCommand("Update mivUser set type = (select typeID from userType where type like 'dobavlja%') where userID=@p0", id);
+                return RedirectToAction("Index");
+            }
+            else return RedirectToAction("Unauthorized", "Account");
+            
         }
 
         // POST: mivUser/Edit/5

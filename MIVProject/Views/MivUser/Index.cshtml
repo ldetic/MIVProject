@@ -59,7 +59,12 @@
             @Html.DisplayFor(modelItem => item.supplier.name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.userID }) |
+            @if (item.type != null) { 
+            @Html.ActionLink("Edit", "Edit", new { id=item.userID })
+            } 
+            else{
+            @Html.ActionLink("Check", "CheckSupplier", new { id = item.userID })
+            }
             @Html.ActionLink("Details", "Details", new { id=item.userID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.userID })
         </td>

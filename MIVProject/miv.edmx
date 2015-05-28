@@ -104,7 +104,7 @@
           <Property Name="projectPosition" Type="int" Nullable="false" />
           <Property Name="project" Type="int" Nullable="false" />
           <Property Name="comment" Type="varchar" MaxLength="500" />
-          <Property Name="shipDate" Type="datetime" />
+          <Property Name="shipDate" Type="date" />
           <Property Name="item" Type="int" Nullable="false" />
           <Property Name="projectItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
@@ -151,7 +151,7 @@
           <Property Name="price" Type="money" />
           <Property Name="quality" Type="varchar" MaxLength="500" />
           <Property Name="comment" Type="varchar" MaxLength="500" />
-          <Property Name="shipDate" Type="datetime" />
+          <Property Name="shipDate" Type="date" />
           <Property Name="supplyItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="supplyStatus">
@@ -740,7 +740,7 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <Property Name="projectPosition" Type="Int32" Nullable="false" />
           <Property Name="project" Type="Int32" Nullable="false" />
           <Property Name="comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="shipDate" Type="DateTime" Precision="3" />
+          <Property Name="shipDate" Type="DateTime" Precision="0" />
           <Property Name="item" Type="Int32" Nullable="false" />
           <Property Name="projectItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="item1" Relationship="mivModel.FK__projectIte__item__3A4CA8FD" FromRole="projectItem" ToRole="item" />
@@ -800,7 +800,7 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="quality" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="shipDate" Type="DateTime" Precision="3" />
+          <Property Name="shipDate" Type="DateTime" Precision="0" />
           <Property Name="supplyItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="item1" Relationship="mivModel.FK__supplyItem__item__18EBB532" FromRole="supplyItem" ToRole="item" />
           <NavigationProperty Name="supplyHeader" Relationship="mivModel.FK__supplyIte__suppl__17F790F9" FromRole="supplyItem" ToRole="supplyHeader" />
