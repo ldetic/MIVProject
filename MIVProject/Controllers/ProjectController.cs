@@ -144,14 +144,19 @@ namespace MIVProject.Controllers
             return View(project);
         }
 
+        
         // POST: Project/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            project project = db.project.Find(id);
-            db.project.Remove(project);
-            db.SaveChanges();
+
+            db.Database.ExecuteSqlCommand("Delete from projectItem where project=@p0", id);
+            db.Database.ExecuteSqlCommand("Update SupplyHeader set project = null where project=@p0", id);
+            db.Database.ExecuteSqlCommand("Delete from project where id=@p0", id);
+           // project project = db.project.Find(id);
+           // db.project.Remove(project);
+          //  db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -160,11 +165,15 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public String DeleteConfirmedAjax(int id)
         {
+             
             try
             {
-                project project = db.project.Find(id);
-                db.project.Remove(project);
-                db.SaveChanges();
+                db.Database.ExecuteSqlCommand("Delete from projectItem where project=@p0", id);
+                db.Database.ExecuteSqlCommand("Update SupplyHeader set project = null where project=@p0", id);
+                db.Database.ExecuteSqlCommand("Delete from project where id=@p0", id);
+              //  project project = db.project.Find(id);
+              //  db.project.Remove(project);
+             //   db.SaveChanges();
                 return "OK";
             }
             catch

@@ -291,4 +291,22 @@
   <data name="username" xml:space="preserve">
     <value>Korisničko ime</value>
   </data>
+  <data name="Check" xml:space="preserve">
+    <value>Potvrdi</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Greška</value>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>Artikl</value>
+  </data>
+  <data name="PasswordGenerated" xml:space="preserve">
+    <value>Nova lozinka</value>
+  </data>
+  <data name="PasswordGeneratedSuccesfull" xml:space="preserve">
+    <value>Uspješno promijenjena lozinka</value>
+  </data>
+  <data name="YourPasswordIsChanged" xml:space="preserve">
+    <value>Vaša lozinka je promijenjena, a e-mail sa detaljima poslan je na Vašu adresu.</value>
+  </data>
 </root>

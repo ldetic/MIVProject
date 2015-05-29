@@ -1,17 +1,17 @@
 ﻿@model MIVProject.mivUser
-
+@using Resources
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = Local.Edit;
 }
 
-<h2>Edit</h2>
+<h2>@Local.Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>mivUser</h4>
+        <h4>@Local.MivUser</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.userID)
@@ -73,5 +73,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(Local.Back, "Index")
 </div>

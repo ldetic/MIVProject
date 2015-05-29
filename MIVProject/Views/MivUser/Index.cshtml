@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<MIVProject.mivUser>
-
+@using Resources
 @{
     ViewBag.Title = "Index";
 }
@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(Local.CreateNew, "Create")
 </p>
 <table class="table">
     <tr>
@@ -60,13 +60,13 @@
         </td>
         <td>
             @if (item.type != null) { 
-            @Html.ActionLink("Edit", "Edit", new { id=item.userID })
+            @Html.ActionLink(Local.Edit, "Edit", new { id=item.userID })
             } 
             else{
-            @Html.ActionLink("Check", "CheckSupplier", new { id = item.userID })
+            @Html.ActionLink(Local.Check, "CheckSupplier", new { id = item.userID })
             }
-            @Html.ActionLink("Details", "Details", new { id=item.userID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.userID })
+            @Html.ActionLink(Local.Details, "Details", new { id=item.userID }) |
+            @Html.ActionLink(Local.Delete, "Delete", new { id = item.userID })
         </td>
     </tr>
 }

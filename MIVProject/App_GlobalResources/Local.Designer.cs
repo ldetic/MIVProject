@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Potvrdi.
+        /// </summary>
+        internal static string Check {
+            get {
+                return ResourceManager.GetString("Check", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Komentar.
         /// </summary>
         internal static string Comment {
@@ -232,6 +241,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Greška.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zaboravljena lozinka.
         /// </summary>
         internal static string ForgottenPassword {
@@ -246,6 +264,15 @@ namespace Resources {
         internal static string FurtherWork {
             get {
                 return ResourceManager.GetString("FurtherWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Artikl.
+        /// </summary>
+        internal static string Item {
+            get {
+                return ResourceManager.GetString("Item", resourceCulture);
             }
         }
         
@@ -327,6 +354,24 @@ namespace Resources {
         internal static string password {
             get {
                 return ResourceManager.GetString("password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nova lozinka.
+        /// </summary>
+        internal static string PasswordGenerated {
+            get {
+                return ResourceManager.GetString("PasswordGenerated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uspješno promijenjena lozinka.
+        /// </summary>
+        internal static string PasswordGeneratedSuccesfull {
+            get {
+                return ResourceManager.GetString("PasswordGeneratedSuccesfull", resourceCulture);
             }
         }
         
@@ -579,6 +624,15 @@ namespace Resources {
         internal static string UserType {
             get {
                 return ResourceManager.GetString("UserType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vaša lozinka je promijenjena, a e-mail sa detaljima poslan je na Vašu adresu..
+        /// </summary>
+        internal static string YourPasswordIsChanged {
+            get {
+                return ResourceManager.GetString("YourPasswordIsChanged", resourceCulture);
             }
         }
     }
