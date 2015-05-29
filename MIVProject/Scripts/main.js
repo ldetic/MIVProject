@@ -353,14 +353,19 @@
                     form.price.val("");
                     form.date.val("");
                     form.comment.val("");
+
+                    modalElements.dismissBtn.unbind("click");
+                    modalElements.addBtn.unbind("click");
+                    console.log("cleaned");
                 }
                 modalElements.title.html(product.name);
                 modalElements.quantity.html(product.quantityMax);
                 form.quantity.attr("max", product.quantityMax);
                 modalElements.unitOfMeasure.html(product.unitofmeasure);
-                modalElements.dismissBtn.click(function () {
-                    clean();
-                });
+
+                modalElements.dismissBtn.click(clean);
+                $(".modal-dialog .close").click(clean);
+
                 modalElements.addBtn.click(function () {
                     //1. get data (update product)
                     product.tempId = Math.random().toString(36).slice(2);
@@ -403,9 +408,13 @@
             cart = JSON.parse(cart);
             var cartBody = $("#cart .body");
             $.each(cart, function (index, el) {
-                console.log(el.tempId);
                 if (cartBody.find("#" + el.tempId).length == 0) {
-                    cartBody.append("<div class='cart-item' id='" + el.tempId + "'><span class='name'>" + el.name + "</span>, <span class='price'>" + el.price + "</span></div>");
+                     $("<tr/>", {
+                        id: el.tempId,
+                        class: "cart-item",
+                        role: "cart-item",
+                        html: "<td class='name'>" + el.name + "</td><td class='price'>" + el.price + "</td>"
+                    }).appendTo(cartBody);
                 }
             });
         }

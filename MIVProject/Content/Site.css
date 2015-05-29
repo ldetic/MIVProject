@@ -101,3 +101,10 @@ textarea {
     height: 34px;
     padding: 7px 0px 0px 6px;
 }
+#cart .cart-item {
+    background: #fff;
+    border-bottom: 1px dashed black;
+}
+#cart .body {
+    width: 100%;
+}

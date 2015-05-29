@@ -44,7 +44,7 @@
         <div class="row">
         @if ((string)Session["type"] == "dobavljac" && (ViewBag.HideSidebar == null || ViewBag.HideSidebar == false))
         {
-        <div class="body-content-wrap col-sm-9 col-md-10">
+        <div class="body-content-wrap col-sm-9 col-md-9">
             @RenderBody()
         </div>
         }
@@ -56,14 +56,14 @@
         }
         @if ((string)Session["type"] == "dobavljac" && (ViewBag.HideSidebar == null || ViewBag.HideSidebar == false))
         {
-            <div class="moderator-sidebar-wrapper col-sm-3 col-md-2">
+            <div class="moderator-sidebar-wrapper col-sm-3 col-md-3">
                 <div class="moderator-sidebar">
                     <div id="cart">
                         <div class="header">
                         <span class="glyphicon glyphicon-shopping-cart"></span> Ponude
                         </div>
                         <hr />
-                        <div class="body"></div>
+                        <table class="body"></table>
                         <hr/>
                         <div class="footer">
                             <a href="#">checkout</a>
