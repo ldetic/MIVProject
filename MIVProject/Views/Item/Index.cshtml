@@ -9,19 +9,17 @@
 <div id="toolbar">
     @Html.ActionLink(Local.CreateNew, "Create")
 </div>
-    <table id="projects-table" class="table object-table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
+    <table id="products-table" class="table object-table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
            data-search="true" data-toolbar="#toolbar" data-pagination="true"
            data-query-params="queryParams">
         <thead>
         <tr>
+            <th class="hidden"></th>
             <th data-field="name" data-sortable="true">
                 @Local.Name
             </th>
             <th data-field="description">
                 @Local.Description
-            </th>
-            <th data-field="unitofmeasure" data-sortable="true">
-                @Local.UnitOfMeasure
             </th>
             <th data-field="quantity" data-sortable="true">
                 @Local.Quantity
@@ -36,19 +34,17 @@
         @foreach (var item in Model)
         {
             <tr id="object-row-@Html.DisplayFor(modelItem => item.itemID)">
-                <td>
+                <td class="item-id hidden">@Html.DisplayFor(modelItem => item.itemID)</td>
+                <td class="item-name">
                     @Html.DisplayFor(modelItem => item.name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.description)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.unitOfMeasure)
+                <td class="item-value">
+                    <span class="item-quantity">@Html.DisplayFor(modelItem => item.quantity)</span><span class="item-unitofmeasure">@Html.DisplayFor(modelItem => item.unitOfMeasure)</span>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.quantity)
-                </td>
-                <td>
+                <td class="item-subcategory">
                     @Html.DisplayFor(modelItem => item.itemSubCategory.name)
                 </td>
                 <td>
@@ -78,6 +74,15 @@
                               data-placement="left"
                               title="@Local.Delete"></span>
                     </a>
+                    <a href="#" class="shopping-cart-link"
+                       data-target="#modalItemToCart"
+                       data-toggle="modal">
+                        <span class="glyphicon glyphicon-shopping-cart"
+                              aria-hidden="true"
+                              data-toggle="tooltip"
+                              data-placement="left"
+                              title="Dodaj u košaricu"></span>
+                    </a>
                     @Html.AntiForgeryToken()
                 </td>
             </tr>
@@ -90,7 +95,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel"></h4>
+                <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
                 @Local.ItemDeleteQuery <span class="modal-object-name"></span>?
@@ -98,6 +103,54 @@
             <div class="modal-footer">
                 <button type="button" id="modal-delete-confirm" class="btn btn-primary">Da</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Ne</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalItemToCart" tabindex="-1" role="dialog" aria-labelledby="modalItemToCartLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="form-group">
+                    <label for="supply-item-quantity" class="control-label col-md-2">@Local.Quantity:</label>
+                    <div class="col-md-10">
+                        <input id="supply-item-quantity" class="form-control text-box single-line" type="number"  required/>
+                        <div class="supply-item-quantity-info">/ <span class="item-quantity"></span><span class="item-unitofmeasure"></span></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="supply-item-price" class="control-label col-md-2">@Local.Price:</label>
+                    <div class="col-md-10">
+                        <input id="supply-item-price" class="form-control text-box single-line" type="number" step="0.01"  required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="supply-item-date" class="control-label col-md-2">@Local.shipDate:</label>
+                    <div class="col-md-10">
+                        <input id="supply-item-date" class="form-control text-box single-line" type="date" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="supply-item-quality" class="control-label col-md-2">@Local.Quality:</label>
+                    <div class="col-md-10">
+                        <textarea id="supply-item-quality" class="form-control text-box" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="supply-item-comment" class="control-label col-md-2">@Local.Comment:</label>
+                    <div class="col-md-10">
+                        <textarea id="supply-item-comment" class="form-control text-box" required></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="add-to-cart-btn" class="btn btn-primary">Dodaj</button>
+                <button type="button" id="dismiss-btn" class="btn btn-default" data-dismiss="modal">Odbaci</button>
             </div>
         </div>
     </div>

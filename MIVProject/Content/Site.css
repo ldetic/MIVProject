@@ -88,3 +88,16 @@ textarea {
 .moderator-sidebar .header {}
 .moderator-sidebar .footer {}
 .moderator-sidebar .body {}
+
+/*----- Items - cart -----*/
+#modalItemToCart label {
+    float: left;
+}
+#modalItemToCart #supply-item-quantity {
+    float: left;
+}
+#modalItemToCart .supply-item-quantity-info {
+    float: left;
+    height: 34px;
+    padding: 7px 0px 0px 6px;
+}

@@ -20,7 +20,6 @@ namespace MIVProject.Controllers
         {
             var item = db.item.Include(i => i.itemSubCategory);
 
-
             return View(item.ToList());
         }
 
