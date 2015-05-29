@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>CreateNew</h2>
+<h2>@Local.CreateNew</h2>
 @using (Html.BeginForm("Create", "Project", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
