@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<MIVProject.deliveryMethod>
-
+@using Resources
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Local.DeliveryMethod;
 }
 
-<h2>Index</h2>
+<h2>@Local.DeliveryMethod</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(Local.CreateNew, "Create")
 </p>
 <table class="table">
     <tr>
@@ -23,9 +23,8 @@
             @Html.DisplayFor(modelItem => item.name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.deliveryID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.deliveryID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.deliveryID })
+            @Html.ActionLink(Local.Edit, "Edit", new { id=item.deliveryID }) |           
+            @Html.ActionLink(Local.Delete, "Delete", new { id = item.deliveryID })
         </td>
     </tr>
 }

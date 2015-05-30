@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<MIVProject.itemSubCategory>
-
+@using Resources
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Local.ItemSubCategory;
 }
 
-<h2>Index</h2>
+<h2>@Local.ItemSubCategory</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(Local.CreateNew, "Create")
 </p>
 <table class="table">
     <tr>
@@ -29,9 +29,8 @@
             @Html.DisplayFor(modelItem => item.itemCategory.name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.subCategoryID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.subCategoryID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.subCategoryID })
+            @Html.ActionLink(Local.Edit, "Edit", new { id=item.subCategoryID }) |            
+            @Html.ActionLink(Local.Delete, "Delete", new { id=item.subCategoryID })
         </td>
     </tr>
 }
