@@ -472,7 +472,6 @@
      *
      **/
     if ($(".supply-header-create").length > 0) {
-        console.log("supply-header-create");
         if (sessionStorage.length > 0) {
             cart = JSON.parse(sessionStorage.getItem("cart"));
             $.each(cart, function (index, el) {
@@ -544,6 +543,94 @@
                 });
                 
             });
+
+            $("#save-btn").click(function () {
+                saveData("save");
+            });
+            $("#send-btn").click(function () {
+                saveData("send");
+            });
+
+            //paymentMethod,deliveryMethod,paymentDate,deliveryDate,supplier,date,project,status,currency
+            function saveData(statusType) {
+                var projectID;
+                //1. set offer status
+                var status = 1;
+                if (statusType == "send") {
+                    status = 2;
+                }
+                //2. set data
+                var reqToken = $('input[name="__RequestVerificationToken"]').val();
+                var supplyHeader = {
+                    paymentMethod: $("#paymentMethod").val(),
+                    deliveryMethod: $("#deliveryMethod").val(),
+                    paymentDate: $("#paymentDate").val(),
+                    deliveryDate: $("#deliveryDate").val(),
+                    date: $("#date").val(),
+                    status: status,
+                    currency: $("#currency").val(),
+                    __RequestVerificationToken: reqToken
+                }
+                console.log(supplyHeader);
+                //save supplyHeader
+                $.ajax({
+                        url: "CreateViaAjax",
+                        type: "POST",
+                        data: supplyHeader
+                    }).done(function (data) {
+                        if (data == "ERROR") {
+                            console.log("error");
+                            errorRaised = true;
+                            errorMsg = "Došlo je pogreške prilikom pohranjivanja ponude. Provjerite podatke i pokušajte ponovno!";
+                        } else {
+                            projectID = data;
+                            console.log("projectID: " + projectID);
+                            //Saving supply items
+
+                            // supply, item, quantity, price, quality, comment, shipDate
+                            $(".acc-items .acc-items-section").each(function (index, el) {
+                                var supplyItem = {
+                                    supply: projectID,
+                                    __RequestVerificationToken: reqToken
+                                };
+                                $(el).find("input").each(function (index, subel) {
+                                    if ($(subel).hasClass("quantity")) {
+                                        supplyItem.quantity = $(subel).val();
+                                    } else if ($(subel).hasClass("price")) {
+                                        supplyItem.price = $(subel).val();
+                                    } else if ($(subel).hasClass("shipdate")) {
+                                        supplyItem.shipDate = $(subel).val();
+                                    } else if ($(subel).hasClass("id")) {
+                                        supplyItem.item = $(subel).val();
+                                    }
+                                });
+                                $(el).find("textarea").each(function (index, subel) {
+                                    if ($(subel).hasClass("quality")) {
+                                        supplyItem.quality = $(subel).html();
+                                    } else if ($(subel).hasClass("comment")) {
+                                        supplyItem.comment = $(subel).html();
+                                    }
+                                });
+                                
+                                $.ajax({
+                                    url: "/SupplyItem/CreateViaAjax",
+                                    type: "POST",
+                                    data: supplyItem
+                                }).done(function (data) {
+                                    console.log("SupplyItem: " + data);
+                                });
+                            });
+                            sessionStorage.clear();
+                            window.location.href = "/supplyHeader/Details/" + projectID;
+
+
+                        }
+                    }).error(function () {
+                        console.log("nema veze");
+                        errorRaised = true;
+                        errorMsg = "Došlo je pogreške prilikom pohranjivanja projekta. Provjerite podatke i pokušajte ponovno!";
+                    });
+            } //function saveData
         }
     }
 });

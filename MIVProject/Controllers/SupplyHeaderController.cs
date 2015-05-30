@@ -155,6 +155,28 @@ namespace MIVProject.Controllers
             return View(supplyHeader);
         }
 
+        // POST: SupplyHeader/CreateViaAJax
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public String CreateViaAjax([Bind(Include = "supplyID,paymentMethod,deliveryMethod,paymentDate,deliveryDate,supplier,date,project,status,currency")] supplyHeader supplyHeader)
+        {
+            if (Session["type"].ToString() == "dobavljač" || Session["type"].ToString() == "dobavljac")
+            {
+                supplyHeader.supplier = Convert.ToInt32(Session["userID"]);
+            }
+            if (ModelState.IsValid)
+            {
+                db.supplyHeader.Add(supplyHeader);
+                db.SaveChanges();
+                var supplier = db.supplier.Where(x => x.mivUser == supplyHeader.supplier);
+                string body = "Predana je nova ponuda, dobavljača " + supplier.First().name;
+                string subject = "Nova ponuda dobavljača: " + supplier.First().name;
+                SendEmail("ljdetic@gmail.com", body, subject);
+                return supplyHeader.supplyID.ToString();
+            }
+            return "ERROR";
+        }
+
         [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Edit(int? id)
         {

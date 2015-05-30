@@ -66,13 +66,6 @@
                 @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            <label class = "control-label col-md-2" >@Local.Project</label>
-            <div class="col-md-10">
-                @Html.DropDownList("project", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.project, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             <label class = "control-label col-md-2" >@Local.Currency</label>
@@ -86,7 +79,10 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value=@Local.Create class="btn btn-default" />
+                <input id="save-btn" type="button" value="Sačuvaj" class="btn btn-default" />
+            </div>
+            <div class="col-md-offset-2 col-md-10">
+                <input id="send-btn" type="button" value="Pošalji" class="btn btn-default" />
             </div>
         </div>
     </div>

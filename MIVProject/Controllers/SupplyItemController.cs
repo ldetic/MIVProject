@@ -105,6 +105,20 @@ namespace MIVProject.Controllers
             return View(supplyItem);
         }
 
+        // POST: SupplyItem/CreateViaAjax
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public String CreateViaAjax([Bind(Include = "supply,item,itemNumber,quantity,price,quality,comment,shipDate,supplyItemID")] supplyItem supplyItem)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Database.ExecuteSqlCommand("Insert into supplyItem(supply, item, quantity, price, quality, comment,shipDate) values(@p0,@p1,@p2,@p3,@p4,@p5,@p6)",
+                    supplyItem.supply, supplyItem.item, supplyItem.quantity, supplyItem.price, supplyItem.quality, supplyItem.comment, supplyItem.shipDate);
+                return "OK";
+            }
+            return "ERROR";
+        }
+
         [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Edit(int? id)
         {
