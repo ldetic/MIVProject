@@ -92,6 +92,14 @@ namespace MIVProject.Controllers
             {
                 return HttpNotFound();
             }
+            IQueryable<supplyItem> supplyItems = db.supplyItem.Where(a => a.supply == id);
+            ViewBag.supplyItems = supplyItems;
+            if (supplyHeader == null)
+            {
+                return HttpNotFound();
+            }
+
+
             return View(supplyHeader);
         }
 

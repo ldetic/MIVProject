@@ -84,6 +84,63 @@
 
     </dl>
 </div>
+<table id="offer-items-table" class="table object-table" data-toggle="table"
+       data-pagination="true" data-query-params="queryParams">
+    <thead>
+        <tr>
+            <th data-field="number">
+                #
+            </th>
+            <th data-field="name">
+                @Local.Name
+            </th>
+            <th data-field="quality">
+                @Local.Quality
+            </th>
+            <th data-field="quantity">
+                @Local.Quantity
+            </th>
+            <th data-field="price">
+                @Local.Price
+            </th>
+            <th data-field="shipDate">
+                @Local.shipDate
+            </th>
+            <th data-field="comment">
+                @Local.Comment
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.supplyItems)
+            {
+            supplyItem si = (supplyItem)item;
+            <tr id="object-row-@si.supplyItemID">
+                <td>
+                    @si.itemNumber
+                </td>
+                <td>
+                    @si.item1.name
+                </td>
+                <td>
+                    @si.quality
+                </td>
+                <td>
+                    @si.quantity @si.item1.unitOfMeasure
+                </td>
+                <td>
+                    @si.price
+                </td>
+                <td>
+                    @si.shipDate
+                </td>
+                <td>
+                    @si.comment
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 <p>
     @Html.ActionLink(Local.Edit, "Edit", new { id = Model.supplyID }) |
     @Html.ActionLink(Local.Back, "Index")
