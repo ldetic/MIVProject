@@ -12,24 +12,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.username)
+            @Local.username
         </th>
         
         <th>
-            @Html.DisplayNameFor(model => model.firstName)
+            @Local.FirstName
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.lastName)
+            @Local.LastName
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.email)
+            @Local.Email
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.userType.type)
+            @Local.Type
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.supplier.name)
-        </th>
+       
         <th></th>
     </tr>
 
@@ -51,16 +49,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.userType.type)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.supplier.name)
-        </td>
+        
         <td>
             @if (item.type != null) { 
             @Html.ActionLink(Local.Edit, "Edit", new { id=item.userID })
             } 
             else{
             @Html.ActionLink(Local.Check, "CheckSupplier", new { id = item.userID })
-            }
+            } |
             @Html.ActionLink(Local.Details, "Details", new { id=item.userID }) |
             @Html.ActionLink(Local.Delete, "Delete", new { id = item.userID })
         </td>

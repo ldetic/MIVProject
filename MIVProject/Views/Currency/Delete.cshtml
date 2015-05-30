@@ -1,7 +1,7 @@
 ﻿@model MIVProject.currency
 @using Resources
 @{
-    ViewBag.Title = @Local.Delete;
+    ViewBag.Title = Local.Delete;
 }
 
 <h2>@Local.Delete</h2>
@@ -12,7 +12,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            @Local.Name
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.abbreviation)
+            @Local.Abbreviation
         </dt>
 
         <dd>

@@ -133,7 +133,7 @@
     <value>Registracija</value>
   </data>
   <data name="CreateNew" xml:space="preserve">
-    <value>Kreiraj novi</value>
+    <value>Kreiraj</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Izbriši</value>
@@ -320,5 +320,32 @@
   </data>
   <data name="PasswordIsChanged" xml:space="preserve">
     <value>Vaša lozinka uspješno je promijenjena.</value>
+  </data>
+  <data name="Abbreviation" xml:space="preserve">
+    <value>Skraćenica</value>
+  </data>
+  <data name="Checkout" xml:space="preserve">
+    <value>Ponudi</value>
+  </data>
+  <data name="DidYouForgetYourPass" xml:space="preserve">
+    <value>Zaboravili ste lozinku?</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Ime</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Prezime</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Odjava</value>
+  </data>
+  <data name="Supply" xml:space="preserve">
+    <value>Ponuda</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Dobro došli</value>
   </data>
 </root>

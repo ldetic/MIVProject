@@ -12,7 +12,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            @Local.Name
         </dt>
 
         <dd>
@@ -25,7 +25,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value=@Local.Delete class="btn btn-default" /> |
             @Html.ActionLink(Local.Back, "Index")
         </div>
     }

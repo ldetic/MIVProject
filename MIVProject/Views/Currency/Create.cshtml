@@ -1,7 +1,7 @@
 ﻿@model MIVProject.currency
 @using Resources
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = Local.CreateNew;
 }
 
 <h2>@Local.CreateNew</h2>
@@ -16,7 +16,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Name</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.abbreviation, htmlAttributes: new { @class = "control-label col-md-2" })
+           <label class = "control-label col-md-2">@Local.Abbreviation</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.abbreviation, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.abbreviation, "", new { @class = "text-danger" })

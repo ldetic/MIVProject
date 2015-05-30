@@ -1,19 +1,19 @@
 ﻿@model IEnumerable<MIVProject.userType>
 @using Resources
 @{
-    ViewBag.Title = @Local.UserType;
+    ViewBag.Title = Local.UserType;
     //Layout = "~/Views/Shared/_LayoutCMS.cshtml";
 }
 
 <h2>@Local.UserType</h2>
 
 <p>
-    @Html.ActionLink(@Local.CreateNew, "Create")
+    @Html.ActionLink(Local.CreateNew, "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.type)
+            @Local.Type
         </th>
         <th></th>
     </tr>

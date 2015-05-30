@@ -1,7 +1,7 @@
 ﻿@model MIVProject.currency
 @using Resources
 @{
-    ViewBag.Title = @Local.Edit;
+    ViewBag.Title = Local.Edit;
 }
 
 <h2>@Local.Edit</h2>
@@ -18,7 +18,7 @@
         @Html.HiddenFor(model => model.currencyID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class= "control-label col-md-2" >@Local.Name</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.abbreviation, htmlAttributes: new { @class = "control-label col-md-2" })
+           <label class = "control-label col-md-2" >@Local.Abbreviation</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.abbreviation, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.abbreviation, "", new { @class = "text-danger" })

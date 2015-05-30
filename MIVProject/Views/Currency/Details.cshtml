@@ -1,31 +1,25 @@
 ﻿@model MIVProject.currency
 @using Resources
 @{
-    ViewBag.Title = @Local.Details;
+    ViewBag.Title = Local.Details;
 }
-
 <h2>@Local.Details</h2>
-
 <div>
     <h4>@Local.Currency</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            @Local.Name
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.name)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.abbreviation)
+            @Local.Abbreviation
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.abbreviation)
         </dd>
-
     </dl>
 </div>
 <p>

@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Skraćenica.
+        /// </summary>
+        internal static string Abbreviation {
+            get {
+                return ResourceManager.GetString("Abbreviation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E-nabava.
         /// </summary>
         internal static string appName {
@@ -115,6 +124,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ponudi.
+        /// </summary>
+        internal static string Checkout {
+            get {
+                return ResourceManager.GetString("Checkout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Komentar.
         /// </summary>
         internal static string Comment {
@@ -160,7 +178,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kreiraj novi.
+        ///   Looks up a localized string similar to Kreiraj.
         /// </summary>
         internal static string CreateNew {
             get {
@@ -241,6 +259,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zaboravili ste lozinku?.
+        /// </summary>
+        internal static string DidYouForgetYourPass {
+            get {
+                return ResourceManager.GetString("DidYouForgetYourPass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ažuriraj.
         /// </summary>
         internal static string Edit {
@@ -273,6 +300,15 @@ namespace Resources {
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ime.
+        /// </summary>
+        internal static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
             }
         }
         
@@ -331,11 +367,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Prezime.
+        /// </summary>
+        internal static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prijava.
         /// </summary>
         internal static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odjava.
+        /// </summary>
+        internal static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
             }
         }
         
@@ -574,6 +628,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ponuda.
+        /// </summary>
+        internal static string Supply {
+            get {
+                return ResourceManager.GetString("Supply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ponude dobavljača.
         /// </summary>
         internal static string SupplyHeader {
@@ -619,6 +682,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tip.
+        /// </summary>
+        internal static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Neautorizirani pristup.
         /// </summary>
         internal static string Unauthorized {
@@ -660,6 +732,15 @@ namespace Resources {
         internal static string UserType {
             get {
                 return ResourceManager.GetString("UserType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dobro došli.
+        /// </summary>
+        internal static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
             }
         }
         

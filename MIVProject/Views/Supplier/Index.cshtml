@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MIVProject.supplier>
 @using Resources
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Local.Supplier;
 }
 <h2>Index</h2>
 <p>
@@ -10,23 +10,23 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.name)
+            @Local.Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.mivUser1.username)
+           @Local.username
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.mivUser1.email)
+            @Local.Email
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.phone)
+           @Local.Phone
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OIB)
+            OIB
         </th>
     
         <th>
-            @Html.DisplayNameFor(model => model.supplierCategory.name)
+            @Local.Category
         </th>
         <th></th>
     </tr>
@@ -47,10 +47,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OIB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.mivUser1.username)
-            </td>
+            </td>         
             <td>
                 @Html.DisplayFor(modelItem => item.supplierCategory.name)
             </td>
