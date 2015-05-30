@@ -160,6 +160,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Potvrdite ponudu.
+        /// </summary>
+        internal static string Confirm {
+            get {
+                return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ponovno upišite lozinku.
         /// </summary>
         internal static string ConfirmPassword {
@@ -201,6 +210,15 @@ namespace Resources {
         internal static string Currency {
             get {
                 return ResourceManager.GetString("Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datum.
+        /// </summary>
+        internal static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
             }
         }
         
@@ -403,6 +421,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mjerna jedinica.
+        /// </summary>
+        internal static string MeasureUnit {
+            get {
+                return ResourceManager.GetString("MeasureUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Korisnici.
         /// </summary>
         internal static string MivUser {
@@ -511,6 +538,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Projekt.
+        /// </summary>
+        internal static string Project {
+            get {
+                return ResourceManager.GetString("Project", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jeste li sigurni da želite izbrisati projekt.
         /// </summary>
         internal static string ProjectDeleteQuery {
@@ -583,6 +619,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string s {
+            get {
+                return ResourceManager.GetString("s", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pohrani.
         /// </summary>
         internal static string Save {
@@ -606,6 +651,15 @@ namespace Resources {
         internal static string shipDate {
             get {
                 return ResourceManager.GetString("shipDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Podkategorija.
+        /// </summary>
+        internal static string SubCategory {
+            get {
+                return ResourceManager.GetString("SubCategory", resourceCulture);
             }
         }
         

@@ -142,7 +142,7 @@
     <value>Delivery Date</value>
   </data>
   <data name="DeliveryMethod" xml:space="preserve">
-    <value>Delivery method</value>
+    <value>Delivery methods</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
@@ -160,7 +160,7 @@
     <value>Payment Date</value>
   </data>
   <data name="PaymentMethod" xml:space="preserve">
-    <value>Payment method</value>
+    <value>Payment methods</value>
   </data>
   <data name="Projects" xml:space="preserve">
     <value>Projects</value>
@@ -207,7 +207,160 @@
   <data name="shipDate" xml:space="preserve">
     <value>Shipping date</value>
   </data>
-  <data name="String1" xml:space="preserve">
+  <data name="Abbreviation" xml:space="preserve">
+    <value>Abbreviation</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>Check</value>
+  </data>
+  <data name="Checkout" xml:space="preserve">
+    <value>Checkout</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm your purchase</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Criteria" xml:space="preserve">
+    <value>Criteria</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Currencies</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DidYouForgetYourPass" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="ForgottenPassword" xml:space="preserve">
+    <value>Forgotten Password</value>
+  </data>
+  <data name="FurtherWork" xml:space="preserve">
+    <value>To continue your work please</value>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="ItemCategory" xml:space="preserve">
+    <value>Item Categories</value>
+  </data>
+  <data name="ItemSubCategory" xml:space="preserve">
+    <value>Item Subcategories</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+  <data name="log_in" xml:space="preserve">
+    <value>log in</value>
+  </data>
+  <data name="MeasureUnit" xml:space="preserve">
+    <value>Measure Unit</value>
+  </data>
+  <data name="MivUser" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordGenerated" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="PasswordGeneratedSuccesfull" xml:space="preserve">
+    <value>Successfully Generated Password</value>
+  </data>
+  <data name="PasswordIsChanged" xml:space="preserve">
+    <value>You have successfully changed your password.</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Project" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="ProjectItem" xml:space="preserve">
+    <value>Project Items</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Registered" xml:space="preserve">
+    <value>You have successfully registered.</value>
+  </data>
+  <data name="s" xml:space="preserve">
     <value />
+  </data>
+  <data name="SendRequest" xml:space="preserve">
+    <value>Send Request</value>
+  </data>
+  <data name="SubCategory" xml:space="preserve">
+    <value>Subcategory</value>
+  </data>
+  <data name="Supplier" xml:space="preserve">
+    <value>Suppliers</value>
+  </data>
+  <data name="SupplierCategory" xml:space="preserve">
+    <value>Supplier Categories</value>
+  </data>
+  <data name="Supply" xml:space="preserve">
+    <value>Supply</value>
+  </data>
+  <data name="SupplyHeader" xml:space="preserve">
+    <value>Supply</value>
+  </data>
+  <data name="SupplyItem" xml:space="preserve">
+    <value>Supply Items</value>
+  </data>
+  <data name="SupplyStatus" xml:space="preserve">
+    <value>Supply Status</value>
+  </data>
+  <data name="SureYouWantToDelete" xml:space="preserve">
+    <value>Are you sure you want to delete this record?</value>
+  </data>
+  <data name="ThankYouForYourRegistration" xml:space="preserve">
+    <value>Thank you for your registration</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>Unauthorized access</value>
+  </data>
+  <data name="Unauthorized_msg" xml:space="preserve">
+    <value>You are trying to access content that does not exist or for which you do not have You are trying to access content that does not exist or for which you do not have You are trying to access content that does not exist or for which you do not have permission to access.</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>User Types</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="YourPasswordIsChanged" xml:space="preserve">
+    <value>Your password has been changed, and e-mail with the details was sent to your address.</value>
   </data>
 </root>

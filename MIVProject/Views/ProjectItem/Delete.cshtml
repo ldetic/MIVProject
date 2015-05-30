@@ -1,18 +1,18 @@
 ﻿@model MIVProject.projectItem
-
+@using Resources
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = Local.Delete;
 }
 
-<h2>Delete</h2>
+<h2>@Local.Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>@Local.SureYouWantToDelete</h3>
 <div>
-    <h4>projectItem</h4>
+    <h4>@Local.ProjectItem</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.quantity)
+            @Local.Quantity
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.price)
+            @Local.Price
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.quality)
+            @Local.Quality
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.description)
+            @Local.Description
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.comment)
+            @Local.Comment
         </dt>
 
         <dd>
@@ -52,7 +52,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.shipDate)
+            @Local.shipDate
         </dt>
 
         <dd>
@@ -60,7 +60,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.item1.name)
+            @Local.Item
         </dt>
 
         <dd>
@@ -68,7 +68,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.project1.name)
+            @Local.Project
         </dt>
 
         <dd>
@@ -81,8 +81,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value=@Local.Delete class="btn btn-default" /> |
+            @Html.ActionLink(Local.Back, "Index")
         </div>
     }
 </div>

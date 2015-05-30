@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MIVProject.supplyItem>
-
+@using Resources
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Local.SupplyItem;
 }
 
-<h2>Index</h2>
+<h2>@Local.SupplyItem</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,25 +12,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.quantity)
+            @Local.Quantity
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.price)
+            @Local.Price
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.quality)
+            @Local.Quality
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.comment)
+            @Local.Comment
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.shipDate)
+            @Local.shipDate
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.item1.name)
+            @Local.Item
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.supplyHeader.supplyID)
+            @Local.Supply
         </th>
         <th></th>
     </tr>
@@ -59,9 +59,9 @@
             @Html.DisplayFor(modelItem => item.supplyHeader.supplyID)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.supplyItemID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.supplyItemID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.supplyItemID })
+            @Html.ActionLink(Local.Edit, "Edit", new {  id=item.supplyItemID }) |
+            @Html.ActionLink(Local.Details, "Details", new { id = item.supplyItemID }) |
+            @Html.ActionLink(Local.Delete, "Delete", new { id = item.supplyItemID })
         </td>
     </tr>
 }

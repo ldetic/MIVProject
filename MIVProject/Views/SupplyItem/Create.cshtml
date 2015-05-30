@@ -1,10 +1,10 @@
 ﻿@model MIVProject.supplyItem
-
+@using Resources
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = Local.CreateNew;
 }
 
-<h2>Create</h2>
+<h2>@Local.CreateNew</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,13 +12,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>supplyItem</h4>
+        <h4>@Local.SupplyItem</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 @if (Session["type"].ToString() != "dobavljač" && Session["type"].ToString() != "dobavljac") { }
-<span>IZBACITI ZA DOBAVLJAČA!</span>
+
         <div class="form-group">
-            @Html.LabelFor(model => model.supply, "supply", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Supply</label>
             <div class="col-md-10">
                 @Html.DropDownList("supply", null, htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.supply, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.item, "item", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Item</label>
             <div class="col-md-10">
                 @Html.DropDownList("item", null, htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.item, "", new { @class = "text-danger" })
@@ -36,7 +36,7 @@
        
 
         <div class="form-group">
-            @Html.LabelFor(model => model.quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Quantity</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Price</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
@@ -52,7 +52,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.quality, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Quality</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.quality, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.quality, "", new { @class = "text-danger" })
@@ -60,7 +60,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Comment</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.comment, new { htmlAttributes = new { @class = "form-control",  } })
                 @Html.ValidationMessageFor(model => model.comment, "", new { @class = "text-danger" })
@@ -68,7 +68,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.shipDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.shipDate</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.shipDate, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.shipDate, "", new { @class = "text-danger" })
@@ -77,14 +77,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value=@Local.Create class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(Local.Back, "Index")
 </div>
 
 @section Scripts {

@@ -1,17 +1,17 @@
 ﻿@model MIVProject.projectItem
-
+@using Resources
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Local.Details;
 }
 
-<h2>Details</h2>
+<h2>@Local.Details</h2>
 
 <div>
-    <h4>projectItem</h4>
+    <h4>@Local.ProjectItem</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.quantity)
+            @Local.Quantity
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.price)
+            @Local.Price
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.quality)
+            @Local.Quality
         </dt>
 
         <dd>
@@ -35,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.description)
+            @Local.Description
         </dt>
 
         <dd>
@@ -43,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.comment)
+            @Local.Comment
         </dt>
 
         <dd>
@@ -51,7 +51,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.shipDate)
+            @Local.shipDate
         </dt>
 
         <dd>
@@ -59,7 +59,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.item1.name)
+            @Local.Item
         </dt>
 
         <dd>
@@ -67,7 +67,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.project1.name)
+            @Local.Project
         </dt>
 
         <dd>
@@ -77,6 +77,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(Local.Edit, "Edit", new { id = Model.projectItemID }) |
+    @Html.ActionLink(Local.Back, "Index")
 </p>

@@ -1,9 +1,10 @@
 ﻿@model MIVProject.supplyHeader
+@using Resources
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = Local.Confirm;
     ViewBag.HideSidebar = true;
 }
-<h2>Potvrdi ponudu</h2>
+<h2>@Local.Confirm</h2>
 
 @using (Html.BeginForm())
 {
@@ -14,28 +15,28 @@
         <span>@ViewBag.Msg</span>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.paymentMethod, "paymentMethod", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.PaymentMethod</label>
             <div class="col-md-10">
                 @Html.DropDownList("paymentMethod", null, htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.paymentMethod, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.deliveryMethod, "deliveryMethod", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.DeliveryMethod</label>
             <div class="col-md-10">
                 @Html.DropDownList("deliveryMethod", null, htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.deliveryMethod, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.paymentDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.PaymentDate</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.paymentDate, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.paymentDate, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.deliveryDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.DeliveryDate</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.deliveryDate, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.deliveryDate, "", new { @class = "text-danger" })
@@ -43,7 +44,7 @@
         </div>
         @if (Session["type"].ToString() != "dobavljač" && Session["type"].ToString() != "dobavljac")
         {<div class="form-group">
-            @Html.LabelFor(model => model.supplier, "supplier", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class= "control-label col-md-2" >@Local.Supplier</label>
             <div class="col-md-10">
                 @Html.DropDownList("supplier", null, htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.supplier, "", new { @class = "text-danger" })
@@ -51,7 +52,7 @@
         </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.status, "status", htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class = "control-label col-md-2" >@Local.SupplyStatus</label>
                 <div class="col-md-10">
                     @Html.DropDownList("status", null, htmlAttributes: new { @class = "form-control", required = "required" })
                     @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
@@ -59,14 +60,14 @@
             </div>
         }
         <div class="form-group">
-            @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Date</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.project, "project", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Project</label>
             <div class="col-md-10">
                 @Html.DropDownList("project", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.project, "", new { @class = "text-danger" })
@@ -74,7 +75,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.currency, "currency", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Currency</label>
             <div class="col-md-10">
                 @Html.DropDownList("currency", null, htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.currency, "", new { @class = "text-danger" })
@@ -85,7 +86,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value=@Local.Create class="btn btn-default" />
             </div>
         </div>
     </div>

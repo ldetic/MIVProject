@@ -1,10 +1,10 @@
 ﻿@model MIVProject.supplyItem
-
+@using Resources
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = Local.Edit;
 }
 
-<h2>Edit</h2>
+<h2>@Local.Edit</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>supplyItem</h4>
+        <h4>@Local.SupplyItem</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.supply)
@@ -22,7 +22,7 @@
         @Html.HiddenFor(model => model.itemNumber)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Quantity</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
@@ -30,7 +30,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Price</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.quality, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Quality</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.quality, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.quality, "", new { @class = "text-danger" })
@@ -46,7 +46,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.Comment</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.comment, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.comment, "", new { @class = "text-danger" })
@@ -54,7 +54,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.shipDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class = "control-label col-md-2" >@Local.shipDate</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.shipDate, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.shipDate, "", new { @class = "text-danger" })
@@ -63,14 +63,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value=@Local.Save class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(Local.Back, "Index")
 </div>
 
 @section Scripts {

@@ -1,18 +1,18 @@
 ﻿@model MIVProject.supplyHeader
-
+@using Resources
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = Local.Delete;
 }
 
-<h2>Delete</h2>
+<h2>@Local.Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>@Local.SureYouWantToDelete</h3>
 <div>
-    <h4>supplyHeader</h4>
+    <h4>@Local.Supply</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.paymentDate)
+            @Local.PaymentDate
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.deliveryDate)
+            @Local.DeliveryDate
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.date)
+           @Local.Date
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.currency1.name)
+            @Local.Currency
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.deliveryMethod1.name)
+           @Local.DeliveryMethod
         </dt>
 
         <dd>
@@ -52,7 +52,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.paymentMethod1.name)
+            @Local.PaymentMethod
         </dt>
 
         <dd>
@@ -60,7 +60,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.project1.name)
+            @Local.Project
         </dt>
 
         <dd>
@@ -68,7 +68,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.supplier1.name)
+            @Local.Supplier
         </dt>
 
         <dd>
@@ -76,7 +76,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.supplyStatus.name)
+            @Local.SupplyStatus
         </dt>
 
         <dd>
@@ -89,8 +89,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value=@Local.Delete class="btn btn-default" /> |
+            @Html.ActionLink(Local.Back, "Index")
         </div>
     }
 </div>

@@ -1,42 +1,42 @@
 ﻿@model IEnumerable<MIVProject.supplyHeader>
-
+@using Resources
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Local.Supply;
 }
 
-<h2>Index</h2>
+<h2>@Local.Supply</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(Local.CreateNew, "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.paymentDate)
+           @Local.PaymentDate
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.deliveryDate)
+            @Local.DeliveryDate
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.date)
+            @Local.Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.currency1.name)
+            @Local.Currency
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.deliveryMethod1.name)
+            @Local.DeliveryMethod
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.paymentMethod1.name)
+            @Local.PaymentMethod
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.project1.name)
+            @Local.Project
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.supplier1.name)
+            @Local.Supplier
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.supplyStatus.name)
+            @Local.SupplyStatus
         </th>
         <th></th>
     </tr>
@@ -71,9 +71,9 @@
             @Html.DisplayFor(modelItem => item.supplyStatus.name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id= item.supplyID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.supplyID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.supplyID })
+            @Html.ActionLink(Local.Edit, "Edit", new { id= item.supplyID }) |
+            @Html.ActionLink(Local.Details, "Details", new { id=item.supplyID }) |
+            @Html.ActionLink(Local.Delete, "Delete", new { id = item.supplyID })
         </td>
     </tr>
 }
