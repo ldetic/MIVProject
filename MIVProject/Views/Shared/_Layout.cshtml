@@ -40,6 +40,10 @@
             </div>
         </div>
     </div>
+    @if (Session["type"] == "administrator" || Session["type"] == "referent")
+    {
+        @Html.Partial("_CMS")
+    }
     <div class="container body-content">
         <div class="row">
         @if ((string)Session["type"] == "dobavljac" && (ViewBag.HideSidebar == null || ViewBag.HideSidebar == false))
