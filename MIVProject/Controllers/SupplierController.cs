@@ -144,5 +144,17 @@ namespace MIVProject.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult CheckSupplier(int? id)
+        {
+            var user = db.mivUser.Find(id);
+            if (user.type == null)
+            {
+                db.Database.ExecuteSqlCommand("Update mivUser set type = (select typeID from userType where type like 'dobavlja%') where userID=@p0", id);
+                return RedirectToAction("Index");
+            }
+            else return RedirectToAction("Unauthorized", "Account");
+
+        }
     }
 }

@@ -1,13 +1,11 @@
 ﻿@model IEnumerable<MIVProject.supplier>
-
+@using Resources
 @{
     ViewBag.Title = "Index";
 }
-
 <h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(Local.CreateNew, "Create")
 </p>
 <table class="table">
     <tr>
@@ -15,43 +13,61 @@
             @Html.DisplayNameFor(model => model.name)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.mivUser1.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mivUser1.email)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.phone)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.OIB)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mivUser1.username)
-        </th>
+    
         <th>
             @Html.DisplayNameFor(model => model.supplierCategory.name)
         </th>
         <th></th>
     </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mivUser1.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mivUser1.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OIB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mivUser1.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.supplierCategory.name)
+            </td>
+            <td>
+                @if (item.mivUser1.type == null)
+                {
+                    //@Html.ActionLink(Local.Check, "CheckSupplier", new { controller = "mivUser", id = item.mivUser });
+                    @Html.ActionLink(Local.Check, "CheckSupplier", new { id = item.mivUser });
+                }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OIB)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mivUser1.username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.supplierCategory.name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.mivUser }) |
-            @Html.ActionLink("Details", "Details", new { id=item.mivUser }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.mivUser })
-        </td>
-    </tr>
-}
-
+                else
+                {
+                    @Html.ActionLink(Local.Edit, "Edit", new { id = item.mivUser })
+                } |
+                @Html.ActionLink(Local.Details, "Details", new { id = item.mivUser }) |
+                @Html.ActionLink(Local.Delete, "Delete", new { id = item.mivUser })
+            </td>
+        </tr>
+    }
 </table>

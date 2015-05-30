@@ -309,4 +309,16 @@
   <data name="YourPasswordIsChanged" xml:space="preserve">
     <value>Vaša lozinka je promijenjena, a e-mail sa detaljima poslan je na Vašu adresu.</value>
   </data>
+  <data name="Change" xml:space="preserve">
+    <value>Promijeni</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Promjena lozinke</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Ponovno upišite lozinku</value>
+  </data>
+  <data name="PasswordIsChanged" xml:space="preserve">
+    <value>Vaša lozinka uspješno je promijenjena.</value>
+  </data>
 </root>

@@ -82,7 +82,7 @@ namespace MIVProject.Controllers
         {
             return View();
         }
-
+        
 
         [HttpPost]
         public ActionResult Login(mivUser mivUser)
@@ -237,13 +237,14 @@ namespace MIVProject.Controllers
         [HttpPost]
         public ActionResult GeneratePassword(mivUser mivUser)
         {
-            string newPassword = GetMD5HashData(CreateRandomPassword(7));
+            string plainPassword = CreateRandomPassword(7);
+            string newPassword = GetMD5HashData(plainPassword);
 
             mivEntities.Database.ExecuteSqlCommand("Update mivUser set password = @p0 where username = @p1", newPassword, Request.Form["username"]);
             string username = Request.Form["username"].ToString();
             var user = mivEntities.mivUser.Where(x => x.username == username);
 
-            string body = "Vaša nova lozinka: / Your new password: " + newPassword;
+            string body = "Vaša nova lozinka: / Your new password: " + plainPassword;
             string subject = "Vaša nova lozinka / Your new password"; 
 
             if (user != null)
@@ -272,8 +273,40 @@ namespace MIVProject.Controllers
 
         }
 
+        
         [HttpGet]
         public ActionResult PasswordGenerated()
+        {
+            return View();
+        }
+
+
+        [CustomAuthorize(Roles = "administrator,referent,dobavljac")]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(int a = 1){
+
+            string pass = Request.Form["password"];
+            string confPass = Request.Form["confirmedPassword"];
+            
+            if(pass == confPass){
+
+                string newPassword = GetMD5HashData(pass);
+                int userID = (int)Session["userID"];
+                mivEntities.Database.ExecuteSqlCommand("Update mivUser set password = @p0 where userID = @p1", newPassword, userID);
+                return RedirectToAction("PasswordIsChanged");
+            }
+            else{
+            ViewBag.Msg = "Lozinke se ne podudaraju";
+            return View();
+            }
+            
+        }
+        public ActionResult PasswordIsChanged()
         {
             return View();
         }

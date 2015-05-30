@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MIVProject.criteria>
 @using Resources
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Local.Criteria;
 }
 
-<h2>Index</h2>
+<h2>@Local.Criteria</h2>
 
 <p>
     @Html.ActionLink(Local.CreateNew, "Create")
@@ -23,8 +23,7 @@
             @Html.DisplayFor(modelItem => item.name)
         </td>
         <td>
-            @Html.ActionLink(Local.Edit, "Edit", new { id=item.criteriaID }) |
-            @Html.ActionLink(Local.Details, "Details", new { id=item.criteriaID }) |
+            @Html.ActionLink(Local.Edit, "Edit", new { id=item.criteriaID }) |            
             @Html.ActionLink(Local.Delete, "Delete", new { id=item.criteriaID })
         </td>
     </tr>

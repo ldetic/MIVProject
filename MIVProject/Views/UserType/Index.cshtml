@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<MIVProject.userType>
-
+@using Resources
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = @Local.UserType;
     //Layout = "~/Views/Shared/_LayoutCMS.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@Local.UserType</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(@Local.CreateNew, "Create")
 </p>
 <table class="table">
     <tr>
@@ -24,9 +24,8 @@
             @Html.DisplayFor(modelItem => item.type)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.typeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.typeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.typeID })
+            @Html.ActionLink(Local.Edit, "Edit", new { id=item.typeID }) |            
+            @Html.ActionLink(Local.Delete, "Delete", new { id=item.typeID })
         </td>
     </tr>
 }

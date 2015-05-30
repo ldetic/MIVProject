@@ -230,7 +230,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CMSController.cs" />
     <Compile Include="Controllers\criteriaController.cs" />
     <Compile Include="Controllers\CurrencyController.cs" />
     <Compile Include="Controllers\DeliveryMethodController.cs" />
@@ -471,8 +470,9 @@
     <Content Include="Views\Account\Registered.cshtml" />
     <Content Include="Views\Account\PassworGenerated.cshtml" />
     <Content Include="Views\Account\Unauthorized.cshtml" />
-    <Content Include="Views\Shared\_LayoutCMS.cshtml" />
-    <Content Include="Views\CMS\Index.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\PasswordIsChanged.cshtml" />
+    <Content Include="Views\Shared\_CMS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

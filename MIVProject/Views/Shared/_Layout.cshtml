@@ -8,7 +8,7 @@
     <title>@ViewBag.Title - @Local.CompanyNameShort</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    
+
     <script type="text/javascript">
         var appInsights = window.appInsights || function (config) {
             function s(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, r = document, f = window, e = "script", o = r.createElement(e), i, u; for (o.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", r.getElementsByTagName(e)[0].parentNode.appendChild(o), t.cookie = r.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;) s("track" + i.pop()); return config.disableExceptionTracking || (i = "onerror", s("_" + i), u = f[i], f[i] = function (config, r, f, e, o) { var s = u && u(config, r, f, e, o); return s !== !0 && t["_" + i](config, r, f, e, o), s }), t
@@ -36,47 +36,52 @@
                     <li>@Html.ActionLink(Local.Projects, "Index", "Project")</li>
                     <li>@Html.ActionLink(Local.Products, "Index", "Item")</li>
                 </ul>
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+    @if (Session["type"] == "administrator" || Session["type"] == "referent")
+    {
+        @Html.Partial("_CMS")
+    }
     <div class="container body-content">
         <div class="row">
-        @if ((string)Session["type"] == "dobavljac" && (ViewBag.HideSidebar == null || ViewBag.HideSidebar == false))
-        {
-        <div class="body-content-wrap col-sm-9 col-md-9">
-            @RenderBody()
-        </div>
-        }
-        else
-        {
-            <div class="body-content-wrap col-sm-12">
-                @RenderBody()
-            </div>
-        }
-        @if ((string)Session["type"] == "dobavljac" && (ViewBag.HideSidebar == null || ViewBag.HideSidebar == false))
-        {
-            <div class="moderator-sidebar-wrapper col-sm-3 col-md-3">
-                <div class="moderator-sidebar">
-                    <div id="cart">
-                        <div class="header">
-                        <span class="glyphicon glyphicon-shopping-cart"></span> Ponude
-                        </div>
-                        <hr />
-                        <table class="body"></table>
-                        <hr/>
-                        <div class="footer">
-                            <a href="#">checkout</a>
+            @if ((string)Session["type"] == "dobavljac" && (ViewBag.HideSidebar == null || ViewBag.HideSidebar == false))
+            {
+                <div class="body-content-wrap col-sm-9 col-md-9">
+                    @RenderBody()
+                </div>
+            }
+            else
+            {
+                <div class="body-content-wrap col-sm-12">
+                    @RenderBody()
+                </div>
+            }
+            @if ((string)Session["type"] == "dobavljac" && (ViewBag.HideSidebar == null || ViewBag.HideSidebar == false))
+            {
+                <div class="moderator-sidebar-wrapper col-sm-3 col-md-3">
+                    <div class="moderator-sidebar">
+                        <div id="cart">
+                            <div class="header">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> Ponude
+                            </div>
+                            <hr />
+                            <table class="body"></table>
+                            <hr />
+                            <div class="footer">
+                                <a href="#">checkout</a>
+                            </div>
                         </div>
                     </div>
-                </div> 
-            </div>
-        }
+                </div>
+            }
         </div>
-        <hr/>
+        <hr />
         <footer class="col-xs-12 row">
             <p>&copy; @DateTime.Now.Year - @Local.CompanyNameLong</p>
-            
+
             <form method="get" name="Localization">
                 @Html.AntiForgeryToken()
                 <input type="submit" name="en-GB" class="btn btn-default" value="English" />
@@ -84,10 +89,10 @@
             </form>
         </footer>
     </div>
-    
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    
+
     @RenderSection("scripts", required: false)
 
     <!-- bootstrap table source-->
