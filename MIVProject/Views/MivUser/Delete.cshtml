@@ -1,14 +1,14 @@
 ﻿@model MIVProject.mivUser
-@using Resources
+
 @{
-    ViewBag.Title = Local.Delete;
+    ViewBag.Title = "Delete";
 }
 
-<h2>@Local.Delete</h2>
+<h2>Delete</h2>
 
-<h3>@Local.SureYouWantToDelete</h3>
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>@Local..MivUser</h4>
+    <h4>mivUser</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -65,8 +65,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value=@Local.Delete class="btn btn-default" /> |
-            @Html.ActionLink(Local.Back, "Index")
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

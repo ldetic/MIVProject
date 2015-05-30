@@ -1,7 +1,7 @@
-﻿@using Resources
+﻿
 @{
-    ViewBag.Title = Local.PassworGenerated;
+    ViewBag.Title = "PassworGenerated";
 }
 
-<h2>@Local.PasswordGeneratedSuccesfull</h2>
-<span>@Local.YourPasswordIsChanged. @Local.FurtherWork  @Html.ActionLink(Local.log_in, "Login", "Account").</span>
+<h2>Uspješno promijenjena lozinka</h2>
+<span>Vaša lozinka je promijenjena, a e-mail sa detaljima poslan je na Vašu adresu. Prilikom iduće @Html.ActionLink("prijave", "Login", "Account") molimo prijavite se sa novom lozinkom.</span>

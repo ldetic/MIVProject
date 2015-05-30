@@ -1,17 +1,17 @@
 ﻿@model MIVProject.mivUser
-@using Resources
+
 @{
-    ViewBag.Title = Local.CreateNew;
+    ViewBag.Title = "Create";
 }
 
-<h2>@Local.CreateNew</h2>
+<h2>Create</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>@Local.MivUser</h4>
+        <h4>mivUser</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -57,7 +57,7 @@
         <div class="form-group">
             <label class = "control-label col-md-2" >@Local.Email</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", required = "required", type="email" } })
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -71,5 +71,5 @@
 }
 
 <div>
-    @Html.ActionLink(Local.Back, "Index")
+    @Html.ActionLink("Back to List", "Index")
 </div>

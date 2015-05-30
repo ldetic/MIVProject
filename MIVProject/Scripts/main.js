@@ -47,6 +47,27 @@
             $(".object-table").bootstrapTable("toggleView");
         }
     }
+    function addInput(id, value, label, type, className, wrapperClass, addition, attrs) {
+        if (attrs == null || attrs == undefined) {
+            attrs = "";
+        }
+        var cont = '<div class="' + wrapperClass + '">';
+        cont += '<label for="' + id + '">' + label + ':</label>';
+        cont += '<input id="' + id + '" type="' + type + '" class="form-control text-box ' + className + '" value="' + value + '" ' + attrs + '  />';
+        if (className == 'quantity') {
+            cont += '<span>' + addition + '</span>';
+        }
+        cont += '</div>';
+        return cont;
+    }
+    function addTextBox(id, value, label, className, wrapperClass) {
+        var cont = '<div class="' + wrapperClass + '">';
+        cont += '<label for="' + id + '">' + label + '</label>';
+        cont += '<br/>';
+        cont += '<textarea id="' + id + '" class="col-xs-12 ' + className + '">' + value + '</textarea>';
+        cont += '</div>';
+        return cont;
+    }
 
     /**
      * 
@@ -54,7 +75,6 @@
      *
      **/
     //$('#projects-table').on('click', 'tr', function (event) {});
-
     winResize();
     $(window).on('resize', winResize);
 
@@ -220,24 +240,6 @@
 
         });
 
-        function addInput(id, value, label, type, className, wrapperClass, addition) {
-            var cont = '<div class="' + wrapperClass + '">';
-            cont += '<label for="' + id + '">' + label + ':</label>';
-            cont += '<input id="' + id + '" type="' + type + '" class="form-control text-box ' + className +'" value="' + value + '"  />';
-            if (className == 'quantity') {
-                cont += '<span>' + addition + '</span>';
-            }
-            cont += '</div>';
-            return cont;
-        }
-        function addTextBox(id, value, label, className, wrapperClass) {
-            var cont = '<div class="' + wrapperClass + '">';
-            cont += '<label for="' + id + '">' + label + '</label>';
-            cont += '<br/>';
-            cont += '<textarea id="' + id + '" class="col-xs-12 ' + className + '">' + value + '</textarea>';
-            cont += '</div>';
-            return cont;
-        }
         function close_accordion_section() {
             $('.acc-items .acc-items-section-title').removeClass('active');
             $('.acc-items .acc-items-section-content').slideUp(300).removeClass('open');
@@ -326,6 +328,7 @@
     function cartSetup() {
         $(".shopping-cart-link").each(function (index, el) {
             $(el).click(function (e) {
+                console.log("cart click");
                 //MODAL setup
                 e.preventDefault();
                 var row = $(this).parent().parent();
@@ -335,7 +338,24 @@
                     quantityMax: row.children(".item-value").children(".item-quantity").html().trim(),
                     unitofmeasure: row.children(".item-value").children(".item-unitofmeasure").html().trim()
                 }
-                
+
+                //show only defined inputs - CRITERIAS
+                $(this).parent().parent().children(".item-criterias").children("span").each(function (index, el) {
+                    if ($(el).html() == "kolicina") {
+                        $(".form-quantity").removeClass("hidden");
+                        $("#supply-item-quantity").prop("required", true);
+                    } else if ($(el).html() == "napomena") {
+                        $(".form-comment").removeClass("hidden");
+                        $("#supply-item-comment").prop("required", true);
+                    } else if ($(el).html() == "kvaliteta sukladna specifikaciji") {
+                        $(".form-quality").removeClass("hidden");
+                        $("#supply-item-quality").prop("required", true);
+                    } else if ($(el).html() == "rok isporuke") {
+                        $(".form-date").removeClass("hidden");
+                        $("#supply-item-date").prop("required", true);
+                    }
+                });
+
                 var modalElements = {
                     title: modalCart.find(".modal-title"),
                     quantity: modalCart.find(".item-quantity"),
@@ -354,19 +374,39 @@
                     form.date.val("");
                     form.comment.val("");
 
+                    if (!$(".form-quantity").hasClass("hidden")) {
+                        $(".form-quantity").addClass("hidden");
+                        $("#supply-item-quantity").prop("required", false);
+                    }
+                    if (!$(".form-comment").hasClass("hidden")) {
+                        $(".form-comment").addClass("hidden");
+                        $("#supply-item-comment").prop("required", false);
+                    }
+                    if (!$(".form-quality").hasClass("hidden")) {
+                        $(".form-quality").addClass("hidden");
+                        $("#supply-item-quality").prop("required", false);
+                    }
+                    if (!$(".form-date").hasClass("hidden")) {
+                        $(".form-date").addClass("hidden");
+                        $("#supply-item-date").prop("required", false);
+                    }
+
                     modalElements.dismissBtn.unbind("click");
                     modalElements.addBtn.unbind("click");
-                    console.log("cleaned");
                 }
                 modalElements.title.html(product.name);
                 modalElements.quantity.html(product.quantityMax);
                 form.quantity.attr("max", product.quantityMax);
                 modalElements.unitOfMeasure.html(product.unitofmeasure);
 
-                modalElements.dismissBtn.click(clean);
-                $(".modal-dialog .close").click(clean);
+                //modalElements.dismissBtn.click(clean);
+                //$(".modal-dialog .close").click(clean);
+                $("#modalItemToCart").on("hidden.bs.modal", clean);
 
-                modalElements.addBtn.click(function () {
+
+                //VALIDATION SETUP
+                $("#add-to-cart-form").unbind("submit").bind("submit", function () {
+                    
                     //1. get data (update product)
                     product.tempId = Math.random().toString(36).slice(2);
                     product.quality = form.quality.val();
@@ -374,50 +414,136 @@
                     product.price = form.price.val();
                     product.date = form.date.val();
                     product.comment = form.comment.val();
-                    
+
                     //2. add to session
                     var cart = JSON.parse(sessionStorage.getItem("cart"));
                     if (cart == null) {
                         cart = [];
                     }
+                    console.log("cart push");
                     cart.push(product);
-                    sessionStorage.removeItem("cart");
+                    //sessionStorage.removeItem("cart");
                     sessionStorage.setItem("cart", JSON.stringify(cart));
                     //3. update cart
                     cartUpdate();
                     modalCart.modal('hide');
                     clean();
+                    return false;
                 });
             });
         });
     }
     cartSetup();
     cartUpdate();
-    $("#products-table").on('page-change.bs.table', function (e, rows) {
+    $("#products-table").on("post-body.bs.table", function (e, rows) {
         cartSetup();
     });
+
     //session storage listener
     $(window).bind('storage', function (e) {
         cartUpdate();
         //console.log(e.originalEvent.key, e.originalEvent.newValue);
     });
     function cartUpdate() {
-        //sessionStorage.clear();
-        cart = sessionStorage.getItem("cart");
-        if (cart != null) {
-            cart = JSON.parse(cart);
-            var cartBody = $("#cart .body");
+        if($(".moderator-sidebar #cart").length > 0) {
+            //sessionStorage.clear();
+            cart = sessionStorage.getItem("cart");
+            if (cart != null) {
+                cart = JSON.parse(cart);
+                console.log(cart);
+                var cartBody = $("#cart .body");
+                $.each(cart, function (index, el) {
+                    if (cartBody.find("#" + el.tempId).length == 0) {
+                        $("<tr/>", {
+                            id: el.tempId,
+                            class: "cart-item",
+                            role: "cart-item",
+                            html: "<td class='name'>" + el.name + "</td><td class='price'>" + el.price + "</td>"
+                        }).appendTo(cartBody);
+                    }
+                });
+            }
+        }
+    }
+
+    /**
+     *
+     * ITEM PURCHASE CONFIRMATION
+     *
+     **/
+    if ($(".supply-header-create").length > 0) {
+        console.log("supply-header-create");
+        if (sessionStorage.length > 0) {
+            cart = JSON.parse(sessionStorage.getItem("cart"));
             $.each(cart, function (index, el) {
-                if (cartBody.find("#" + el.tempId).length == 0) {
-                     $("<tr/>", {
-                        id: el.tempId,
-                        class: "cart-item",
-                        role: "cart-item",
-                        html: "<td class='name'>" + el.name + "</td><td class='price'>" + el.price + "</td>"
-                    }).appendTo(cartBody);
+
+                var rand = Math.floor(Math.random() * 1000);
+                var accItemsSectionId = "acc-items-section-" + el.tempId;
+                var accItemsSectionTitle = 'acc-items-section-title-' + el.tempId;
+                var accItemsId = "acc-items-" + el.tempId;
+                $("<div/>", { //accordion section
+                    id: accItemsSectionId,
+                    class: "acc-items-section"
+                }).appendTo(".acc-items");
+
+                //accordion title
+                var html = '<a class="acc-items-section-title" id="' + accItemsSectionTitle + '" href="#' + accItemsId + '">' + el.name;
+                html += '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>';
+                html += '</a>';
+                $("#" + accItemsSectionId).append(html);
+
+                $("<div/>", {
+                    id: accItemsId,
+                    class: "acc-items-section-content"
+                }).appendTo("#" + accItemsSectionId);
+                
+                html = '<div class="full-width">';
+                if (el.quantity != "") {
+                    html += addInput("item-quantity-" + el.id, el.quantity, "Quantity", "number", "quantity", "col-xs-12 col-sm-6 col-md-3", el.unitofmeasure, 'max="' + el.quantityMax + '"');
                 }
+                if (el.price != "") {
+                    html += addInput("item-price-" + el.id, el.price, "Price", "number", "price", "col-xs-12 col-sm-6 col-md-3");
+                }
+                if (el.date != "") {
+                    html += addInput("item-shipdate-" + el.id, el.date, "Shipping Date", "date", "shipdate", "col-xs-12 col-sm-6 col-md-3");
+                }
+                html += '<input id="item-id-' + el.id + '" type="hidden" class="id" value="' + el.id + '">';
+                html += '</div>';
+
+                if (el.quality != "") {
+                    html += addTextBox("item-qualitiy-" + el.id, el.quality, "Quality", "quality", "col-xs-12 col-sm-6 col-md-4");
+                }
+                if (el.comment != "") {
+                    html += addTextBox("item-comment-" + el.id, el.comment, "Comment", "comment", "col-xs-12 col-sm-6 col-md-4");
+                }
+                $("#" + accItemsId).append(html);
+                
+                $('#' + accItemsSectionTitle).click(function (e) {
+                    // Grab current anchor value
+
+                    var currentAttrValue = $(this).attr('href');
+                    if ($(e.target).is('.active')) {
+                        close_accordion_section();
+                    } else {
+                        close_accordion_section();
+
+                        // Add active class to section title
+                        $(this).addClass('active');
+                        // Open up the hidden content panel
+                        $('.acc-items ' + currentAttrValue).slideDown(300).addClass('open').css("display", "inline-block");
+                    }
+
+                    e.preventDefault();
+                });
+
+                $(".acc-items-section-title .close").each(function (index, el) {
+                    $(el).click(function (e) {
+                        e.stopPropagation();
+                        $(this).parent().parent().remove();
+                    });
+                });
+                
             });
         }
     }
 });
-

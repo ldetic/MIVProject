@@ -18,7 +18,8 @@ namespace MIVProject.Controllers
         //[CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Index()
         {
-            var item = db.item.Include(i => i.itemSubCategory);
+            //var item = db.item.Include(i => i.itemSubCategory);
+            var item = db.item.Include(i => i.itemSubCategory).Include(i => i.itemSubCategory.itemCategory);
 
             return View(item.ToList());
         }

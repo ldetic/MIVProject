@@ -1,0 +1,95 @@
+﻿@using Resources;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - @Local.CompanyNameShort</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+    <script type="text/javascript">
+        var appInsights = window.appInsights || function (config) {
+            function s(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, r = document, f = window, e = "script", o = r.createElement(e), i, u; for (o.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", r.getElementsByTagName(e)[0].parentNode.appendChild(o), t.cookie = r.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;) s("track" + i.pop()); return config.disableExceptionTracking || (i = "onerror", s("_" + i), u = f[i], f[i] = function (config, r, f, e, o) { var s = u && u(config, r, f, e, o); return s !== !0 && t["_" + i](config, r, f, e, o), s }), t
+        }({
+            instrumentationKey: "5f057de5-4199-47d4-a83d-93852b51239c"
+        });
+
+        window.appInsights = appInsights;
+        appInsights.trackPageView();
+    </script>
+</head>
+<body>
+    <!--lijevi sidebar-->
+    <div class="navbar navbar-inverse navbar-fixed-left">
+        <div class="container">           
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">                    
+                    <li>@Html.ActionLink(Local.Products, "Index", "Item")</li>   
+                    <li>@Html.ActionLink(Local.Projects, "Index", "Project")</li>
+                    <li>@Html.ActionLink(Local.Criteria, "Index", "Criteria")</li>     
+                    <li>@Html.ActionLink(Local.Currency, "Index", "Currency")</li>
+                    <li>@Html.ActionLink(Local.DeliveryMethod, "Index", "DeliveryMethod")</li>                       
+                    <li>@Html.ActionLink(Local.ItemCategory, "Index", "ItemCategory")</li>     
+                    <li>@Html.ActionLink(Local.ItemSubCategory, "Index", "ItemSubCategory")</li>
+                    <li>@Html.ActionLink(Local.PaymentMethod, "Index", "PaymentMethod")</li>     
+                    <li>@Html.ActionLink(Local.ProjectItem, "Index", "projectItem")</li>
+                    <li>@Html.ActionLink(Local.SupplierCategory, "Index", "SupplierCategory")</li>
+                    <li>@Html.ActionLink(Local.Supplier, "Index", "Supplier")</li>    
+                    <li>@Html.ActionLink(Local.SupplyHeader, "Index", "SupplyHeader")</li>
+                    <li>@Html.ActionLink(Local.SupplyItem, "Index", "SupplyItem")</li>  
+                    <li>@Html.ActionLink(Local.SupplyStatus, "Index", "SupplyStatus")</li>
+                    <li>@Html.ActionLink(Local.UserType, "Index", "UserType")</li>      
+                    <li>@Html.ActionLink(Local.MivUser, "Index", "mivUser")</li>                    
+                </ul>
+               
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink(Local.appName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">                    
+                    <li>@Html.ActionLink(Local.Projects, "Index", "Project")</li>
+                    <li>@Html.ActionLink(Local.Products, "Index", "Item")</li>                        -
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - @Local.CompanyNameLong</p>
+            
+            <form method="get" name="Localization">
+                @Html.AntiForgeryToken()
+                <input type="submit" name="en-GB" class="btn btn-default" value="English" />
+                <input type="submit" name="hr-HR" class="btn btn-default" value="Hrvatski" />
+            </form>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+    @RenderSection("scripts", required: false)
+
+    <!-- bootstrap table source-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.0/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.0/bootstrap-table.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.0/locale/bootstrap-table-en-US.min.js"></script>
+    @Scripts.Render("~/Scripts/main.js")
+</body>
+</html>

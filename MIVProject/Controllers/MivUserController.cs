@@ -12,7 +12,7 @@ using System.Text;
 
 namespace MIVProject.Controllers
 {
-    [CustomAuthorize(Roles = "administrator")]
+    [CustomAuthorize(Roles = "administrator,referent")]
     public class mivUserController : Controller
     {
         private mivEntities db = new mivEntities();
@@ -38,7 +38,6 @@ namespace MIVProject.Controllers
             return returnValue.ToString();
 
         }
-
 
 
       
@@ -141,7 +140,17 @@ namespace MIVProject.Controllers
             return View(mivUser);
         }
 
-    
+        public ActionResult CheckSupplier(int? id)
+        {
+            var user = db.mivUser.Find(id);
+            if (user.type == null)
+            {
+                db.Database.ExecuteSqlCommand("Update mivUser set type = (select typeID from userType where type like 'dobavlja%') where userID=@p0", id);
+                return RedirectToAction("Index");
+            }
+            else return RedirectToAction("Unauthorized", "Account");
+            
+        }
 
         // POST: mivUser/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -150,14 +159,7 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "userID,username,password,firstName,lastName,type,email")] mivUser mivUser)
         {
-            mivEntities mivEntities = new mivEntities();
-            int userID = mivUser.userID;
-            var user = mivEntities.mivUser.Find(userID);
-            if (user.password != mivUser.password)
-            {
-                mivUser.password = GetMD5HashData(mivUser.password.ToString());
-            }
-           
+            mivUser.password = GetMD5HashData(mivUser.password.ToString());
             if (ModelState.IsValid)
             {
                 db.Entry(mivUser).State = EntityState.Modified;
@@ -169,18 +171,6 @@ namespace MIVProject.Controllers
             return View(mivUser);
         }
 
-
-        public ActionResult CheckSupplier(int? id)
-        {
-            var user = db.mivUser.Find(id);
-            if (user.type == null)
-            {
-                db.Database.ExecuteSqlCommand("Update mivUser set type = (select typeID from userType where type like 'dobavlja%') where userID=@p0", id);
-                return RedirectToAction("Index");
-            }
-            else return RedirectToAction("Unauthorized", "Account");
-
-        }
        
         public ActionResult Delete(int? id)
         {

@@ -1,7 +1,7 @@
 ﻿@model MIVProject.criteria
 @using Resources
 @{
-    ViewBag.Title = Local.Details;
+    ViewBag.Title = @Local.Details;
 }
 
 <h2>@Local.Details</h2>
@@ -21,6 +21,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink(Local.Edit, "Edit", new { id = Model.criteriaID }) |
-    @Html.ActionLink(Local.Back, "Index")
+    @Html.ActionLink(@Local.Edit, "Edit", new { id = Model.criteriaID }) |
+    @Html.ActionLink(@Local.Back, "Index")
 </p>

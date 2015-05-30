@@ -1,7 +1,7 @@
 ﻿@model MIVProject.criteria
 @using Resources
 @{
-    ViewBag.Title = Local.Delete2;
+    ViewBag.Title = @Local.Delete2;
 }
 
 <h2>@Local.Delete2</h2>
@@ -26,7 +26,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value=@Local.Delete class="btn btn-default" /> |
-            @Html.ActionLink(Local.Back, "Index")
+            @Html.ActionLink(@Local.Back, "Index")
         </div>
     }
 </div>

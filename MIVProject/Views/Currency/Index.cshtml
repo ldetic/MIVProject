@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<MIVProject.currency>
-@using Resources
+
 @{
-    ViewBag.Title = Local.Currency;
+    ViewBag.Title = "Index";
 }
 
-<h2>@Local.Currency</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink(Local.CreateNew, "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -29,8 +29,9 @@
             @Html.DisplayFor(modelItem => item.abbreviation)
         </td>
         <td>
-            @Html.ActionLink(Local.Edit, "Edit", new { id = item.currencyID }) |           
-            @Html.ActionLink(Local.Delete, "Delete", new { id=item.currencyID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.currencyID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.currencyID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.currencyID })
         </td>
     </tr>
 }

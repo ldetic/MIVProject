@@ -1,13 +1,13 @@
 ﻿@model MIVProject.paymentMethod
-@using Resources
+
 @{
-    ViewBag.Title = Local.Details;
+    ViewBag.Title = "Details";
 }
 
-<h2>@Local.Details</h2>
+<h2>Details</h2>
 
 <div>
-    <h4>@Local.PaymentMethod</h4>
+    <h4>paymentMethod</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -21,6 +21,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink(Local.Edit, "Edit", new { id = Model.paymentID }) |
-    @Html.ActionLink(Local.Back, "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.paymentID }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>
