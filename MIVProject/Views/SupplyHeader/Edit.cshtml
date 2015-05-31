@@ -11,7 +11,7 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+    <div class="form-horizontal supply-header-edit">
         <h4>@Local.SupplyHeader</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -36,7 +36,7 @@
         <div class="form-group">
             <label class = "control-label col-md-2" >@Local.PaymentDate</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.paymentDate, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.EditorFor(model => model.paymentDate.Value.ToString("yyyy-MM-dd"), new { htmlAttributes = new { @class = "form-control", required = "required", @type="date" } })
                 @Html.ValidationMessageFor(model => model.paymentDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="form-group">
             <label class = "control-label col-md-2" >@Local.DeliveryDate</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.deliveryDate, new { htmlAttributes = new { @class = "form-control",  required = "required" } })
+                @Html.EditorFor(model => model.deliveryDate, new { htmlAttributes = new { @class = "form-control",  required = "required", @type="date" } })
                 @Html.ValidationMessageFor(model => model.deliveryDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -60,7 +60,7 @@
         <div class="form-group">
             <label class = "control-label col-md-2" >@Local.Date</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control",  required = "required" } })
+                @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control",  required = "required", @type="date" } })
                 @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -91,63 +91,61 @@
         </div>
     </div>
 }
-<table id="offer-items-table" class="table object-table" data-toggle="table"
-       data-pagination="true" data-query-params="queryParams">
-    <thead>
-        <tr>
-            <th data-field="number">
-                #
-            </th>
-            <th data-field="name">
-                @Local.Name
-            </th>
-            <th data-field="quality">
-                @Local.Quality
-            </th>
-            <th data-field="quantity">
-                @Local.Quantity
-            </th>
-            <th data-field="price">
-                @Local.Price
-            </th>
-            <th data-field="shipDate">
-                @Local.shipDate
-            </th>
-            <th data-field="comment">
-                @Local.Comment
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in ViewBag.supplyItems)
-        {
-            supplyItem si = (supplyItem)item;
-            <tr id="object-row-@si.supplyItemID">
-                <td>
-                    @si.itemNumber
-                </td>
-                <td>
-                    @si.item1.name
-                </td>
-                <td>
-                    @si.quality
-                </td>
-                <td>
-                    @si.quantity @si.item1.unitOfMeasure
-                </td>
-                <td>
-                    @si.price
-                </td>
-                <td>
-                    @si.shipDate
-                </td>
-                <td>
-                    @si.comment
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="items-wrapper">
+    <div class="acc-items">
+    @foreach (var item in ViewBag.supplyItems)
+    {
+        supplyItem si = (supplyItem)item;
+        <div id="acc-items-section-@si.itemNumber" class="acc-items-section">
+            <a class="acc-items-section-title" id="acc-items-section-title-@si.itemNumber" href="#acc-items-@si.itemNumber">
+                @si.item1.name
+                <div type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></div>              
+            </a>
+            <div class="acc-items-section-content" id="acc-items-@si.itemNumber">
+                <div class="full-width">
+                    @if (si.quantity >= 0)
+                    {
+                        <div>
+                            <label for="item-quantity-@si.itemNumber">@Local.Quantity:</label>
+                            <input id="item-quantity-@si.itemNumber" type="number" class="form-control text-box quantity valid" value="@si.quantity" min="0" max="@si.item1.quantity" aria-invalid="false">
+                            <span>@si.item1.unitOfMeasure</span>
+                        </div>
+                    }
+                    @if (si.price != null)
+                    {
+                        <div>
+                            <label for="item-price-@si.itemNumber">@Local.Price:</label>
+                            <input id="item-price-@si.itemNumber" type="number" class="form-control text-box price valid" value="@si.price" min="0" step="0.01" aria-invalid="false">
+                        </div>
+                    }
+                    
+                    @if (si.shipDate.HasValue)
+                    {
+                        <div>
+                            <label for="item-date-@si.itemNumber">@Local.shipDate:</label>
+                            <input id="item-date-@si.itemNumber" type="date" class="form-control text-box price valid" value="@si.shipDate.Value.ToString("yyyy-MM-dd")" aria-invalid="false">
+                        </div>
+                    }
+                    @if (si.quality != null)
+                    {
+                        <div>
+                            <label for="item-quality-@si.itemNumber">@Local.Quality:</label>
+                            <textarea id="item-quality-@si.itemNumber" class="form-control text-box price valid" aria-invalid="false">@si.quality</textarea>
+                        </div>
+                    }
+                    @if (si.comment != null)
+                    {
+                        <div>
+                            <label for="item-comment-@si.itemNumber">@Local.Comment:</label>
+                            <textarea id="item-comment-@si.itemNumber" class="form-control text-box price valid" aria-invalid="false">@si.comment</textarea>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+</div>
 
 
 <div class="form-group">

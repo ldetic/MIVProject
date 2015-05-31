@@ -687,4 +687,46 @@
             } //function saveData
         }
     }
+
+
+    /**
+     *
+     * SUPPLY HEADER EDIT
+     *
+     **/
+    accSupplyEditSetup = function() {
+        var sectionTitleClick = function (e) {
+            var currentAttrValue = $(this).attr('href');
+            if ($(e.target).is('.active')) {
+                accCloseSection();
+            } else {
+                accCloseSection();
+                $(this).addClass('active');
+                $('.acc-items' + " " + currentAttrValue).slideDown(300).addClass('open').css("display", "inline-block");
+            }
+            e.preventDefault();
+        }
+
+        $(".acc-items-section-title").each(function (index, el) {
+            $(el).click(sectionTitleClick);
+        });
+
+        $(".acc-items-section-title .close").each(function (index, el) {
+            $(el).click(function (e) {
+                e.stopPropagation();
+                $(this).parent().parent().remove();
+            });
+        });
+
+        //cleanup
+        $("#project-unselected-items-table").bootstrapTable('uncheckAll');
+    }
+    accCloseSection = function () {
+        $('.acc-items .acc-items-section-title').removeClass('active');
+        $('.acc-items .acc-items-section-content').slideUp(300).removeClass('open');
+
+    }
+    if ($(".supply-header-edit").length > 0) {
+        accSupplyEditSetup();
+    }
 });
