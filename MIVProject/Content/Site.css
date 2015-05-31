@@ -93,7 +93,7 @@ textarea {
 #modalItemToCart label {
     float: left;
 }
-#modalItemToCart #supply-item-quantity {
+#modalItemToCart #supply-item-quantity, #modalItemToCart #supply-item-price {
     float: left;
 }
 #modalItemToCart .supply-item-quantity-info {

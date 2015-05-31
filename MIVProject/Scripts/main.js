@@ -448,6 +448,7 @@
                 parent.modal.title.html(product.name);
                 parent.modal.quantity.html(product.quantityMax);
                 parent.form.quantity.attr("max", product.quantityMax);
+               
                 parent.modal.unitOfMeasure.html(product.unitofmeasure);
 
                 setupByCriterias(this);
@@ -456,11 +457,11 @@
                 $("#add-to-cart-form").unbind("submit").bind("submit", function () {
                     //1. get data (update product)
                     product.tempId = randomString();
-                    product.quality = form.quality.val();
-                    product.quantity = form.quantity.val();
-                    product.price = form.price.val();
-                    product.date = form.date.val();
-                    product.comment = form.comment.val();
+                    product.quality = parent.form.quality.val();
+                    product.quantity = parent.form.quantity.val();
+                    product.price = parent.form.price.val();
+                    product.date = parent.form.date.val();
+                    product.comment = parent.form.comment.val();
 
                     //2. add to session
                     var sessionCart = JSON.parse(sessionStorage.getItem("cart"));
@@ -595,7 +596,7 @@
             $("#send-btn").click(function () {
                 saveData("send");
             });
-
+            
             //paymentMethod,deliveryMethod,paymentDate,deliveryDate,supplier,date,project,status,currency
             function saveData(statusType) {
                 var projectID;
@@ -616,7 +617,7 @@
                     currency: $("#currency").val(),
                     __RequestVerificationToken: reqToken
                 }
-                console.log(supplyHeader);
+                
                 //save supplyHeader
                 $.ajax({
                         url: "CreateViaAjax",
@@ -632,6 +633,12 @@
                             console.log("projectID: " + projectID);
                             //Saving supply items
 
+                            //used for redirect
+                            var itemFlags = [];
+                            $(".acc-items .acc-items-section").each(function (i, el) {
+                                itemFlags.push(i);
+                            });
+                            
                             // supply, item, quantity, price, quality, comment, shipDate
                             $(".acc-items .acc-items-section").each(function (index, el) {
                                 var supplyItem = {
@@ -662,12 +669,14 @@
                                     type: "POST",
                                     data: supplyItem
                                 }).done(function (data) {
-                                    console.log("SupplyItem: " + data);
+                                    itemFlags.pop();
+                                    if (itemFlags.length == 0) {
+                                        console.log("done");
+                                        sessionStorage.clear();
+                                        window.location.href = "/supplyHeader/Details/" + projectID;
+                                    }
                                 });
                             });
-                            sessionStorage.clear();
-                            window.location.href = "/supplyHeader/Details/" + projectID;
-
 
                         }
                     }).error(function () {
