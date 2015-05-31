@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O nama.
+        /// </summary>
+        internal static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Razvojnu karakteristiku poduzeća čine stalna proširivanja proizvodnih pogona i njihova modernizacija, rast kvalitete proizvoda i širenje proizvodnog programa, sve veće sudjelovanje u poslovima međunarodne suradnje i sve veći udio inozemnog tržišta u ukupnoj prodaji..
         /// </summary>
         internal static string About1 {
@@ -120,6 +129,15 @@ namespace Resources {
         internal static string About6 {
             get {
                 return ResourceManager.GetString("About6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adresa.
+        /// </summary>
+        internal static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
             }
         }
         
@@ -228,6 +246,15 @@ namespace Resources {
         internal static string ConfirmPassword {
             get {
                 return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kontakt.
+        /// </summary>
+        internal static string Contact {
+            get {
+                return ResourceManager.GetString("Contact", resourceCulture);
             }
         }
         
@@ -540,7 +567,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to e- mail:.
+        ///   Looks up a localized string similar to E-mail.
         /// </summary>
         internal static string MIVmail {
             get {

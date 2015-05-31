@@ -1,17 +1,89 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿@using Resources
+@{
+    ViewBag.Title = Local.Contact;
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h2>@Local.Contact.</h2>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<table>
+    <tr>
+        <td>@Local.Phone</td>
+        <td>@Local.MIVtel1<br />@Local.MIVtel2</td>
+    </tr>
+    <tr>
+        <td>@Local.Address</td>
+        <td>@Local.MIVaddress</td>
+    </tr>
+    <tr>
+        <td>@Local.telCroatiaText</td>
+        <td>@Local.MIVCroatia</td>
+    </tr>
+    <tr>
+        <td>@Local.telYugoslaviaText</td>
+        <td>@Local.MIVYugoslavia</td>
+    </tr>
+    <tr>
+        <td>@Local.telEUText</td>
+        <td>@Local.MIVEU</td>
+    </tr>
+    <tr>
+        <td>@Local.telMiddleEastText</td>
+        <td>@Local.MIVEast</td>
+    </tr>
+    <tr>
+        <td>@Local.MIVSales</td>
+        <td>@Local.telefaxSales</td>
+    </tr>
+    <tr>
+        <td>@Local.MIVPurchase</td>
+        <td>@Local.telefaxPurchase</td>
+    </tr>
+    <tr>
+        <td>@Local.Email</td>
+        <td>
+            <a href="mailto:miv@miv.hr">@Local.MIVmail1</a><br />
+            <a href="mailto:sales@miv.hr">@Local.MIVmail2</a><br />
+            <a href="mailto:prodaja@miv.hr">@Local.MIVmail3</a><br />
+            <a href="mailto:nabava@miv.hr">@Local.MIVmail4</a><br />
+            <a href="mailto:financije@miv.hr">@Local.MIVmail5</a>
+        </td>
+    </tr>
+    <tr>
+        <td>URL</td>
+        <td><a href="http://www.miv.hr/">@Local.MIVurl</a></td>
+    </tr>
+</table>
+<br />
+<br />
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+
+<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
+<div style='overflow:hidden;height:479px;width:443px;'>
+    <div id='gmap_canvas' style='height:479px;width:443px;'></div>
+    <style>
+        #gmap_canvas img {
+            max-width: none !important;
+            background: none !important;
+        }
+    </style>
+</div>
+<a href='http://casinovergleich24.net'>auf CasinoVergleich24.net</a>
+<script type='text/javascript' src='http://embedmaps.com/google-maps-authorization/script.js?id=49dbc07573015cd41462bec91c305e3d47dc1ca6'></script>
+<script type='text/javascript'>
+ function init_map(){
+var myOptions = {
+zoom:13,center:new google.maps.LatLng(46.3205457,16.32384860000002),
+mapTypeId: google.maps.MapTypeId.ROADMAP};
+map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(46.3205457,16.32384860000002)});
+infowindow = new google.maps.InfoWindow({
+content:'<strong>MIV d.o.o</strong><br>'+
+'Fabijanska 33<br>'+
+'42000 Varaždin<br>'
+});
+google.maps.event.addListener(marker, 'click', function(){
+infowindow.open(map,marker);
+});
+infowindow.open(map,marker);
+}
+google.maps.event.addDomListener(window, 'load', init_map);
+</script>

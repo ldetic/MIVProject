@@ -223,6 +223,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Local.en-GB.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Local.en-GB1.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Local.en-GB.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -496,8 +501,8 @@
   <ItemGroup>
     <Content Include="App_GlobalResources\Local.en-GB.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Local.en-GB.designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
+      <LastGenOutput>Local.en-GB1.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <PropertyGroup>
