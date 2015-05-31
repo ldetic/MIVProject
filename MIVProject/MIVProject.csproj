@@ -243,6 +243,7 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ItemSubCategoryController.cs" />
     <Compile Include="Controllers\LocalizationController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\mivUserController.cs" />
     <Compile Include="Controllers\PaymentMethodController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
@@ -276,6 +277,9 @@
       <DependentUpon>miv.tt</DependentUpon>
     </Compile>
     <Compile Include="itemSubCategory.cs">
+      <DependentUpon>miv.tt</DependentUpon>
+    </Compile>
+    <Compile Include="logs.cs">
       <DependentUpon>miv.tt</DependentUpon>
     </Compile>
     <Compile Include="miv.Context.cs">
@@ -476,6 +480,11 @@
     <Content Include="Views\Account\PassworGenerated.cshtml" />
     <Content Include="Views\Account\Unauthorized.cshtml" />
     <Content Include="Views\Shared\_CMS.cshtml" />
+    <Content Include="Views\Log\Create.cshtml" />
+    <Content Include="Views\Log\Delete.cshtml" />
+    <Content Include="Views\Log\Details.cshtml" />
+    <Content Include="Views\Log\Edit.cshtml" />
+    <Content Include="Views\Log\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

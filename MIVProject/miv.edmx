@@ -61,6 +61,16 @@
           <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="category" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" />
+          <Property Name="username" Type="varchar" MaxLength="20" />
+          <Property Name="msg" Type="varchar" MaxLength="500" />
+          <Property Name="date" Type="datetime" />
+        </EntityType>
         <EntityType Name="mivUser">
           <Key>
             <PropertyRef Name="userID" />
@@ -422,6 +432,7 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="itemCategory" EntityType="Self.itemCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="itemSubCategory" EntityType="Self.itemSubCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="logs" EntityType="Self.logs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mivUser" EntityType="Self.mivUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="paymentMethod" EntityType="Self.paymentMethod" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="project" EntityType="Self.project" Schema="dbo" store:Type="Tables" />
@@ -613,6 +624,7 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
             <End Role="criteria" EntitySet="criteria" />
             <End Role="itemCategory" EntitySet="itemCategory" />
           </AssociationSet>
+          <EntitySet Name="logs" EntityType="mivModel.logs" />
         </EntityContainer>
         <EntityType Name="database_firewall_rules">
           <Key>
@@ -1029,6 +1041,16 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <End Type="mivModel.criteria" Role="criteria" Multiplicity="*" />
           <End Type="mivModel.itemCategory" Role="itemCategory" Multiplicity="*" />
         </Association>
+        <EntityType Name="logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="msg" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1226,6 +1248,17 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
               <ScalarProperty Name="criteriaID" ColumnName="criteria" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="logs">
+            <EntityTypeMapping TypeName="mivModel.logs">
+              <MappingFragment StoreEntitySet="logs">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="msg" ColumnName="msg" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

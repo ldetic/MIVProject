@@ -14,7 +14,6 @@ namespace MIVProject
 
 using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
 public partial class supplyItem
 {
@@ -32,7 +31,7 @@ public partial class supplyItem
     public string quality { get; set; }
 
     public string comment { get; set; }
-    [DataType(DataType.Date)]
+
     public Nullable<System.DateTime> shipDate { get; set; }
 
     public int supplyItemID { get; set; }

@@ -479,4 +479,7 @@ Gospodarska bb (prodaja armatura i fazona)
   <data name="telYugoslaviaText" xml:space="preserve">
     <value>Tel. referenata za tržište bivše Jugoslavije</value>
   </data>
+  <data name="Logs" xml:space="preserve">
+    <value>Logovi</value>
+  </data>
 </root>

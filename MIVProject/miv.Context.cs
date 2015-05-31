@@ -66,6 +66,8 @@ public partial class mivEntities : DbContext
 
     public virtual DbSet<userType> userType { get; set; }
 
+    public virtual DbSet<logs> logs { get; set; }
+
 }
 
 }
