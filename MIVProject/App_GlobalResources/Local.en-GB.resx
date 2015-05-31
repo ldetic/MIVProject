@@ -412,7 +412,7 @@ Gospodarska bb, 42 000 Varaždin, Croatia
     <value>Finance Department</value>
   </data>
   <data name="MIVmail" xml:space="preserve">
-    <value>e- mail:</value>
+    <value>E-mail</value>
   </data>
   <data name="MIVmail1" xml:space="preserve">
     <value>miv@miv.hr</value>
@@ -467,5 +467,32 @@ Gospodarska bb, 42 000 Varaždin, Croatia
   </data>
   <data name="telYugoslaviaText" xml:space="preserve">
     <value>Tel. for sales executive for ex-Yugoslavia market</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="About11" xml:space="preserve">
+    <value>Originally as a foundry and after that as fittings and foundry works, the today's enterprise was established in 1939.</value>
+  </data>
+  <data name="About21" xml:space="preserve">
+    <value>The characteristics of the later development of the enterprise are: continuous extensions of the finishing plants and their modernization, improving quality of the products and widening of the production programme, increasing participation in foreign business and cooperation with foreign companies. The portions of the exports in the total sales were ever increasing.</value>
+  </data>
+  <data name="About31" xml:space="preserve">
+    <value>In cooperation and business connections with large valve producers in Europe the enterprise is selling today 70% of its products on foreign markets. The valves are exported to all continents. Our valves and fittings are installed in water-pipe and sewerage systems of some of the world metropolises. With an annual production of 9000 tons of castings and 7500 tons of valves and fittings, the "MIV" is classed with the greatest producers of such equipments in Europe.</value>
+  </data>
+  <data name="About41" xml:space="preserve">
+    <value>The integrity of the production process: foundries for grey cast iron, spheroidal graphite cast iron and nonferrous metals, machining operations, steel constructions, fitting, testing and surface protection, allows checking and monitoring of the manufacturing course at each of its stages. Certificate of Production process control, according to Standard ISO 9001:2000, received from LRQA dated 22.05.2007. The great reliability of our production programme and safety of our products in application are achieved in that way. The quality of our products is certified by classification societies: Lloyd's register, Bureau Veritas, Det norske Veritas, Croatian register.</value>
+  </data>
+  <data name="About51" xml:space="preserve">
+    <value>The enterprise is organized as a joint stock company with approximately 700 employees. A well developed commercial and engineering cooperation make the "MIV" to a reliable business partner.</value>
+  </data>
+  <data name="About61" xml:space="preserve">
+    <value>Great possibilities of further development and extension of the production programme offer also you, our honoured customer, a chance to find your own interest in cooperation with our enterprise.</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
   </data>
 </root>

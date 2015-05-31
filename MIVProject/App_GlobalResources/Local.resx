@@ -378,6 +378,9 @@
   <data name="NewSupply" xml:space="preserve">
     <value>Predana je nova ponuda. Dobavljač:</value>
   </data>
+  <data name="About" xml:space="preserve">
+    <value>O nama</value>
+  </data>
   <data name="About1" xml:space="preserve">
     <value>Razvojnu karakteristiku poduzeća čine stalna proširivanja proizvodnih pogona i njihova modernizacija, rast kvalitete proizvoda i širenje proizvodnog programa, sve veće sudjelovanje u poslovima međunarodne suradnje i sve veći udio inozemnog tržišta u ukupnoj prodaji.</value>
   </data>
@@ -395,6 +398,12 @@
   </data>
   <data name="About6" xml:space="preserve">
     <value>Kvalitetu naših proizvoda verificiraju klasifikacijska društva: Lloyd's register, Bureau Veritas, Det norske Veritas, Hrvatski registar.</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Adresa</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Kontakt</value>
   </data>
   <data name="MIVaddress" xml:space="preserve">
     <value>Fabijanska 33 (uprava, ljevaonica)
@@ -414,7 +423,7 @@ Gospodarska bb (prodaja armatura i fazona)
     <value>Financije</value>
   </data>
   <data name="MIVmail" xml:space="preserve">
-    <value>e- mail:</value>
+    <value>E-mail</value>
   </data>
   <data name="MIVmail1" xml:space="preserve">
     <value>miv@miv.hr</value>
