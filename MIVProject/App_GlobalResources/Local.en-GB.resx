@@ -360,4 +360,112 @@
   <data name="YourPasswordIsChanged" xml:space="preserve">
     <value>Your password has been changed, and e-mail with the details was sent to your address.</value>
   </data>
+  <data name="InvalidData" xml:space="preserve">
+    <value>Invalid Data</value>
+  </data>
+  <data name="NewSupplierRegistered" xml:space="preserve">
+    <value>New supplier is registered</value>
+  </data>
+  <data name="PassDoesntMatch" xml:space="preserve">
+    <value>Passwords don't match</value>
+  </data>
+  <data name="SendingMailProblem" xml:space="preserve">
+    <value>An error occured while sending e-mail.</value>
+  </data>
+  <data name="NewSupply" xml:space="preserve">
+    <value>There is a new supply. Supplier: </value>
+  </data>
+  <data name="About1" xml:space="preserve">
+    <value>Originally as a foundry and after that as fittings and foundry works, the today's enterprise was established in 1939.</value>
+  </data>
+  <data name="About2" xml:space="preserve">
+    <value>The characteristics of the later development of the enterprise are: continuous extensions of the finishing plants and their modernization, improving quality of the products and widening of the production programme, increasing participation in foreign business and cooperation with foreign companies. The portions of the exports in the total sales were ever increasing.</value>
+  </data>
+  <data name="About3" xml:space="preserve">
+    <value>In cooperation and business connections with large valve producers in Europe the enterprise is selling today 70% of its products on foreign markets. The valves are exported to all continents. Our valves and fittings are installed in water-pipe and sewerage systems of some of the world metropolises. With an annual production of 9000 tons of castings and 7500 tons of valves and fittings, the "MIV" is classed with the greatest producers of such equipments in Europe.</value>
+  </data>
+  <data name="About4" xml:space="preserve">
+    <value>The integrity of the production process: foundries for grey cast iron, spheroidal graphite cast iron and nonferrous metals, machining operations, steel constructions, fitting, testing and surface protection, allows checking and monitoring of the manufacturing course at each of its stages. Certificate of Production process control, according to Standard ISO 9001:2000, received from LRQA dated 22.05.2007. The great reliability of our production programme and safety of our products in application are achieved in that way. The quality of our products is certified by classification societies: Lloyd's register, Bureau Veritas, Det norske Veritas, Croatian register.</value>
+  </data>
+  <data name="About5" xml:space="preserve">
+    <value>The enterprise is organized as a joint stock company with approximately 700 employees. A well developed commercial and engineering cooperation make the "MIV" to a reliable business partner.</value>
+  </data>
+  <data name="About6" xml:space="preserve">
+    <value>Great possibilities of further development and extension of the production programme offer also you, our honoured customer, a chance to find your own interest in cooperation with our enterprise.</value>
+  </data>
+  <data name="MIVaddress" xml:space="preserve">
+    <value>Fabijanska 33, 42 000 Varaždin, Croatia
+(main office, foundry)
+Gospodarska bb, 42 000 Varaždin, Croatia
+(sales office, production of valves and fittings)</value>
+  </data>
+  <data name="MIVCroatia" xml:space="preserve">
+    <value>+385 42 404-107;-108:-162</value>
+  </data>
+  <data name="MIVEast" xml:space="preserve">
+    <value>+385 42 404-105;-124;-126</value>
+  </data>
+  <data name="MIVEU" xml:space="preserve">
+    <value>+385 42 404-115;-120;-129;-156;-161</value>
+  </data>
+  <data name="MIVFinance" xml:space="preserve">
+    <value>Finance Department</value>
+  </data>
+  <data name="MIVmail" xml:space="preserve">
+    <value>e- mail:</value>
+  </data>
+  <data name="MIVmail1" xml:space="preserve">
+    <value>miv@miv.hr</value>
+  </data>
+  <data name="MIVmail2" xml:space="preserve">
+    <value>sales@miv.hr</value>
+  </data>
+  <data name="MIVmail3" xml:space="preserve">
+    <value>prodaja@miv.hr</value>
+  </data>
+  <data name="MIVmail4" xml:space="preserve">
+    <value>nabava@miv.hr</value>
+  </data>
+  <data name="MIVmail5" xml:space="preserve">
+    <value>financije@miv.hr</value>
+  </data>
+  <data name="MIVPurchase" xml:space="preserve">
+    <value>Purchase Department</value>
+  </data>
+  <data name="MIVSales" xml:space="preserve">
+    <value>Sales Department</value>
+  </data>
+  <data name="MIVtel1" xml:space="preserve">
+    <value>tel. : + 385 42 404 100; Gospodarska bb</value>
+  </data>
+  <data name="MIVtel2" xml:space="preserve">
+    <value>tel. : + 385 42 290 100; Fabijanska 33</value>
+  </data>
+  <data name="MIVurl" xml:space="preserve">
+    <value>http://www.miv.hr</value>
+  </data>
+  <data name="MIVYugoslavia" xml:space="preserve">
+    <value>+385 42 404-104;-163</value>
+  </data>
+  <data name="telCroatiaText" xml:space="preserve">
+    <value>Tel. for sales executive for Croatian market</value>
+  </data>
+  <data name="telefaxFinance" xml:space="preserve">
+    <value>+385 42 330-133</value>
+  </data>
+  <data name="telefaxPurchase" xml:space="preserve">
+    <value>+385 42 330-358</value>
+  </data>
+  <data name="telefaxSales" xml:space="preserve">
+    <value>+385 42 242-004</value>
+  </data>
+  <data name="telEUText" xml:space="preserve">
+    <value>Tel. for sales executive for EU market</value>
+  </data>
+  <data name="telMiddleEastText" xml:space="preserve">
+    <value>Tel. for sales executive for Middle East market</value>
+  </data>
+  <data name="telYugoslaviaText" xml:space="preserve">
+    <value>Tel. for sales executive for ex-Yugoslavia market</value>
+  </data>
 </root>

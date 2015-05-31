@@ -360,10 +360,114 @@
   <data name="Project" xml:space="preserve">
     <value>Projekt</value>
   </data>
-  <data name="s" xml:space="preserve">
-    <value />
-  </data>
   <data name="SubCategory" xml:space="preserve">
     <value>Podkategorija</value>
+  </data>
+  <data name="InvalidData" xml:space="preserve">
+    <value>Neispravni podaci</value>
+  </data>
+  <data name="NewSupplierRegistered" xml:space="preserve">
+    <value>Registriran je novi dobavljač te čeka na potvrdu. Ime dobavljača:</value>
+  </data>
+  <data name="PassDoesntMatch" xml:space="preserve">
+    <value>Lozinke se ne podudaraju.</value>
+  </data>
+  <data name="SendingMailProblem" xml:space="preserve">
+    <value>Problem sa slanjem e-maila.</value>
+  </data>
+  <data name="NewSupply" xml:space="preserve">
+    <value>Predana je nova ponuda. Dobavljač:</value>
+  </data>
+  <data name="About1" xml:space="preserve">
+    <value>Razvojnu karakteristiku poduzeća čine stalna proširivanja proizvodnih pogona i njihova modernizacija, rast kvalitete proizvoda i širenje proizvodnog programa, sve veće sudjelovanje u poslovima međunarodne suradnje i sve veći udio inozemnog tržišta u ukupnoj prodaji.</value>
+  </data>
+  <data name="About2" xml:space="preserve">
+    <value>Prateći zahtjeve domaćeg i inozemnog tržišta, poduzeće se kod uvođenja novih proizvodnih postupaka, moderniziranja opreme i pogona, promjena u proizvodnom programu i poboljšanju kvalitete proizvoda, oslanja na vlastite stručne kadrove koji rade u konstrukcionim i projektnim biroima, razvojnim odjelima i istraživanju. Odjel istraživanja i razvoja danas čini 6 diplomiranih inženjera strojarstva, koji za projektrianje koriste programe, kao što su Solid edge i Microstation. Kontinuirani razvoj današnjeg proizvodnog programa dokazuje i razvoj preko 3 000 standardnih proizvoda kao i preko 30 000 njihovih modifikacija.</value>
+  </data>
+  <data name="About3" xml:space="preserve">
+    <value>U poslovnoj suradnji s velikim proizvođačima armature u Europi, danas poduzeće plasira na inozemno tržište 70% svojih proizvoda. Armatura se izvozi na tržišta svih kontinenata, a ugrađena je u vodovodne i kanalizacijske sustave nekih svjetskih metropola. S godišnjom proizvodnjom od 9000 tona odljevaka i 7500 tona armatura i fazona “MIV” se ubraja među najveće proizvođače ovakve opreme u Europi.</value>
+  </data>
+  <data name="About4" xml:space="preserve">
+    <value>Cjelovitost tehnološkog procesa: izrada modela, ljevaonica nodularnog lijeva i obojenih metala, strojna obrada, gradnja čeličnih konstrukcija, montaža, ispitivanje i površinska zaštita, omogućuje kontrolu proizvodnog procesa u svim njegovim fazama.Taljenje sirovine vrši se u ekološki prihvatljivoj srednje-frekventnoj peći kapaciteta 5 tona na sat.</value>
+  </data>
+  <data name="About5" xml:space="preserve">
+    <value>Potvrda kontrole proizvodnog procesa prema normi ISO 9001:2008, dobivena je od LRQA 22.svibnja 2007. Time je osigurana visoka pouzdanost našeg proizvodnog programa i sigurnost naših proizvoda u eksploataciji.</value>
+  </data>
+  <data name="About6" xml:space="preserve">
+    <value>Kvalitetu naših proizvoda verificiraju klasifikacijska društva: Lloyd's register, Bureau Veritas, Det norske Veritas, Hrvatski registar.</value>
+  </data>
+  <data name="MIVaddress" xml:space="preserve">
+    <value>Fabijanska 33 (uprava, ljevaonica)
+Gospodarska bb (prodaja armatura i fazona)
+42 000 Varaždin, Hrvatska</value>
+  </data>
+  <data name="MIVCroatia" xml:space="preserve">
+    <value>+385 42 404-107;-108:-162</value>
+  </data>
+  <data name="MIVEast" xml:space="preserve">
+    <value>+385 42 404-105;-124;-126</value>
+  </data>
+  <data name="MIVEU" xml:space="preserve">
+    <value>+385 42 404-115;-120;-129;-156;-161</value>
+  </data>
+  <data name="MIVFinance" xml:space="preserve">
+    <value>Financije</value>
+  </data>
+  <data name="MIVmail" xml:space="preserve">
+    <value>e- mail:</value>
+  </data>
+  <data name="MIVmail1" xml:space="preserve">
+    <value>miv@miv.hr</value>
+  </data>
+  <data name="MIVmail2" xml:space="preserve">
+    <value>sales@miv.hr</value>
+  </data>
+  <data name="MIVmail3" xml:space="preserve">
+    <value>prodaja@miv.hr</value>
+  </data>
+  <data name="MIVmail4" xml:space="preserve">
+    <value>nabava@miv.hr</value>
+  </data>
+  <data name="MIVmail5" xml:space="preserve">
+    <value>financije@miv.hr</value>
+  </data>
+  <data name="MIVPurchase" xml:space="preserve">
+    <value>Nabava</value>
+  </data>
+  <data name="MIVSales" xml:space="preserve">
+    <value>Prodaja</value>
+  </data>
+  <data name="MIVtel1" xml:space="preserve">
+    <value>tel. : + 385 42 404 100; Gospodarska bb</value>
+  </data>
+  <data name="MIVtel2" xml:space="preserve">
+    <value>tel. : + 385 42 290 100; Fabijanska 33</value>
+  </data>
+  <data name="MIVurl" xml:space="preserve">
+    <value>http://www.miv.hr</value>
+  </data>
+  <data name="MIVYugoslavia" xml:space="preserve">
+    <value>+385 42 404-104;-163</value>
+  </data>
+  <data name="telCroatiaText" xml:space="preserve">
+    <value>Tel. referenata za tržište Hrvatske</value>
+  </data>
+  <data name="telefaxFinance" xml:space="preserve">
+    <value>+385 42 330-133</value>
+  </data>
+  <data name="telefaxPurchase" xml:space="preserve">
+    <value>+385 42 330-358</value>
+  </data>
+  <data name="telefaxSales" xml:space="preserve">
+    <value>+385 42 242-004</value>
+  </data>
+  <data name="telEUText" xml:space="preserve">
+    <value>Tel. referenata za EU tržište</value>
+  </data>
+  <data name="telMiddleEastText" xml:space="preserve">
+    <value>Tel. referenata za tržište Bliskog istoka</value>
+  </data>
+  <data name="telYugoslaviaText" xml:space="preserve">
+    <value>Tel. referenata za tržište bivše Jugoslavije</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resources;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -92,7 +93,7 @@ namespace MIVProject.Controllers
             int count = mivEntities.mivUser.Where(x => x.username == mivUser.username && x.password == mivUser.password).Count();
             if (count == 0)
             {
-                ViewBag.Msg = "Invalid username or password";
+                ViewBag.Msg = Local.InvalidData;
                 return View();
             }
             else
@@ -150,7 +151,7 @@ namespace MIVProject.Controllers
                 }
                 catch
                 {
-                    ViewBag.Msg = "Neispravni podaci";
+                    ViewBag.Msg = Local.InvalidData;
                     return View();
                 }
 
@@ -172,7 +173,7 @@ namespace MIVProject.Controllers
                     {
                         mivEntities.mivUser.Remove(mivUser);
                         mivEntities.SaveChanges();
-                        ViewBag.Msg = "Neispravni podaci";
+                        ViewBag.Msg = Local.InvalidData;
                         return View();
                     }
                 }
@@ -180,13 +181,13 @@ namespace MIVProject.Controllers
                 {
                     mivEntities.mivUser.Remove(mivUser);
                     mivEntities.SaveChanges();
-                    ViewBag.Msg = "Neispravni podaci";
+                    ViewBag.Msg = Local.InvalidData;
                     return View();
                 }
 
 
-                string body = "Registriran je novi dobavljač te čeka na potvrdu. Ime dobavljača: " + supplier.name;
-                string subject = "Registracija " + supplier.name;
+                string body = Local.NewSupplierRegistered + ": " + supplier.name;
+                string subject = Local.Registration +" " + supplier.name;
 
                 SendEmail("ljdetic@gmail.com", body, subject);
                 return RedirectToAction("Registered");
@@ -196,7 +197,7 @@ namespace MIVProject.Controllers
 
             else
             {
-                ViewBag.Msg = "Neispravni podaci";
+                ViewBag.Msg = Local.InvalidData;
                 return View();
             }
 
@@ -244,8 +245,8 @@ namespace MIVProject.Controllers
             string username = Request.Form["username"].ToString();
             var user = mivEntities.mivUser.Where(x => x.username == username);
 
-            string body = "Vaša nova lozinka: / Your new password: " + plainPassword;
-            string subject = "Vaša nova lozinka / Your new password"; 
+            string body = Local.PasswordIsChanged + ". " + Local.PasswordGenerated + ": " + plainPassword;
+            string subject = Local.PasswordIsChanged; 
 
             if (user != null)
             {
@@ -257,7 +258,7 @@ namespace MIVProject.Controllers
                 }
                 else
                 {
-                    ViewBag.Msg = "Problem sa slanjem emaila";
+                    ViewBag.Msg = Local.SendingMailProblem;
                     return View();
                 }
 
@@ -266,7 +267,7 @@ namespace MIVProject.Controllers
 
             else
             {
-                ViewBag.Msg = "Ovo korisničko ime ne postoji.";
+                ViewBag.Msg = Local.InvalidData;
                 return View();
             }
 
@@ -301,7 +302,7 @@ namespace MIVProject.Controllers
                 return RedirectToAction("PasswordIsChanged");
             }
             else{
-            ViewBag.Msg = "Lozinke se ne podudaraju";
+                ViewBag.Msg = Local.PassDoesntMatch;
             return View();
             }
             

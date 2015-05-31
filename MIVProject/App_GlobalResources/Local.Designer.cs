@@ -70,6 +70,60 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Razvojnu karakteristiku poduzeća čine stalna proširivanja proizvodnih pogona i njihova modernizacija, rast kvalitete proizvoda i širenje proizvodnog programa, sve veće sudjelovanje u poslovima međunarodne suradnje i sve veći udio inozemnog tržišta u ukupnoj prodaji..
+        /// </summary>
+        internal static string About1 {
+            get {
+                return ResourceManager.GetString("About1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prateći zahtjeve domaćeg i inozemnog tržišta, poduzeće se kod uvođenja novih proizvodnih postupaka, moderniziranja opreme i pogona, promjena u proizvodnom programu i poboljšanju kvalitete proizvoda, oslanja na vlastite stručne kadrove koji rade u konstrukcionim i projektnim biroima, razvojnim odjelima i istraživanju. Odjel istraživanja i razvoja danas čini 6 diplomiranih inženjera strojarstva, koji za projektrianje koriste programe, kao što su Solid edge i Microstation. Kontinuirani razvoj današnjeg proizvo [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string About2 {
+            get {
+                return ResourceManager.GetString("About2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to U poslovnoj suradnji s velikim proizvođačima armature u Europi, danas poduzeće plasira na inozemno tržište 70% svojih proizvoda. Armatura se izvozi na tržišta svih kontinenata, a ugrađena je u vodovodne i kanalizacijske sustave nekih svjetskih metropola. S godišnjom proizvodnjom od 9000 tona odljevaka i 7500 tona armatura i fazona “MIV” se ubraja među najveće proizvođače ovakve opreme u Europi..
+        /// </summary>
+        internal static string About3 {
+            get {
+                return ResourceManager.GetString("About3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cjelovitost tehnološkog procesa: izrada modela, ljevaonica nodularnog lijeva i obojenih metala, strojna obrada, gradnja čeličnih konstrukcija, montaža, ispitivanje i površinska zaštita, omogućuje kontrolu proizvodnog procesa u svim njegovim fazama.Taljenje sirovine vrši se u ekološki prihvatljivoj srednje-frekventnoj peći kapaciteta 5 tona na sat..
+        /// </summary>
+        internal static string About4 {
+            get {
+                return ResourceManager.GetString("About4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potvrda kontrole proizvodnog procesa prema normi ISO 9001:2008, dobivena je od LRQA 22.svibnja 2007. Time je osigurana visoka pouzdanost našeg proizvodnog programa i sigurnost naših proizvoda u eksploataciji..
+        /// </summary>
+        internal static string About5 {
+            get {
+                return ResourceManager.GetString("About5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kvalitetu naših proizvoda verificiraju klasifikacijska društva: Lloyd&apos;s register, Bureau Veritas, Det norske Veritas, Hrvatski registar..
+        /// </summary>
+        internal static string About6 {
+            get {
+                return ResourceManager.GetString("About6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E-nabava.
         /// </summary>
         internal static string appName {
@@ -349,6 +403,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Neispravni podaci.
+        /// </summary>
+        internal static string InvalidData {
+            get {
+                return ResourceManager.GetString("InvalidData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Artikl.
         /// </summary>
         internal static string Item {
@@ -430,11 +493,166 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fabijanska 33 (uprava, ljevaonica)
+        ///Gospodarska bb (prodaja armatura i fazona)
+        ///42 000 Varaždin, Hrvatska.
+        /// </summary>
+        internal static string MIVaddress {
+            get {
+                return ResourceManager.GetString("MIVaddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +385 42 404-107;-108:-162.
+        /// </summary>
+        internal static string MIVCroatia {
+            get {
+                return ResourceManager.GetString("MIVCroatia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +385 42 404-105;-124;-126.
+        /// </summary>
+        internal static string MIVEast {
+            get {
+                return ResourceManager.GetString("MIVEast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +385 42 404-115;-120;-129;-156;-161.
+        /// </summary>
+        internal static string MIVEU {
+            get {
+                return ResourceManager.GetString("MIVEU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Financije.
+        /// </summary>
+        internal static string MIVFinance {
+            get {
+                return ResourceManager.GetString("MIVFinance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to e- mail:.
+        /// </summary>
+        internal static string MIVmail {
+            get {
+                return ResourceManager.GetString("MIVmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to miv@miv.hr.
+        /// </summary>
+        internal static string MIVmail1 {
+            get {
+                return ResourceManager.GetString("MIVmail1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sales@miv.hr.
+        /// </summary>
+        internal static string MIVmail2 {
+            get {
+                return ResourceManager.GetString("MIVmail2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to prodaja@miv.hr.
+        /// </summary>
+        internal static string MIVmail3 {
+            get {
+                return ResourceManager.GetString("MIVmail3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nabava@miv.hr.
+        /// </summary>
+        internal static string MIVmail4 {
+            get {
+                return ResourceManager.GetString("MIVmail4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to financije@miv.hr.
+        /// </summary>
+        internal static string MIVmail5 {
+            get {
+                return ResourceManager.GetString("MIVmail5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nabava.
+        /// </summary>
+        internal static string MIVPurchase {
+            get {
+                return ResourceManager.GetString("MIVPurchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prodaja.
+        /// </summary>
+        internal static string MIVSales {
+            get {
+                return ResourceManager.GetString("MIVSales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tel. : + 385 42 404 100; Gospodarska bb.
+        /// </summary>
+        internal static string MIVtel1 {
+            get {
+                return ResourceManager.GetString("MIVtel1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tel. : + 385 42 290 100; Fabijanska 33.
+        /// </summary>
+        internal static string MIVtel2 {
+            get {
+                return ResourceManager.GetString("MIVtel2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://www.miv.hr.
+        /// </summary>
+        internal static string MIVurl {
+            get {
+                return ResourceManager.GetString("MIVurl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Korisnici.
         /// </summary>
         internal static string MivUser {
             get {
                 return ResourceManager.GetString("MivUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +385 42 404-104;-163.
+        /// </summary>
+        internal static string MIVYugoslavia {
+            get {
+                return ResourceManager.GetString("MIVYugoslavia", resourceCulture);
             }
         }
         
@@ -453,6 +671,33 @@ namespace Resources {
         internal static string NewProject {
             get {
                 return ResourceManager.GetString("NewProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registriran je novi dobavljač te čeka na potvrdu. Ime dobavljača:.
+        /// </summary>
+        internal static string NewSupplierRegistered {
+            get {
+                return ResourceManager.GetString("NewSupplierRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predana je nova ponuda. Dobavljač:.
+        /// </summary>
+        internal static string NewSupply {
+            get {
+                return ResourceManager.GetString("NewSupply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lozinke se ne podudaraju..
+        /// </summary>
+        internal static string PassDoesntMatch {
+            get {
+                return ResourceManager.GetString("PassDoesntMatch", resourceCulture);
             }
         }
         
@@ -619,20 +864,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string s {
-            get {
-                return ResourceManager.GetString("s", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Pohrani.
         /// </summary>
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Problem sa slanjem e-maila..
+        /// </summary>
+        internal static string SendingMailProblem {
+            get {
+                return ResourceManager.GetString("SendingMailProblem", resourceCulture);
             }
         }
         
@@ -723,6 +968,69 @@ namespace Resources {
         internal static string SureYouWantToDelete {
             get {
                 return ResourceManager.GetString("SureYouWantToDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tel. referenata za tržište Hrvatske.
+        /// </summary>
+        internal static string telCroatiaText {
+            get {
+                return ResourceManager.GetString("telCroatiaText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +385 42 330-133.
+        /// </summary>
+        internal static string telefaxFinance {
+            get {
+                return ResourceManager.GetString("telefaxFinance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +385 42 330-358.
+        /// </summary>
+        internal static string telefaxPurchase {
+            get {
+                return ResourceManager.GetString("telefaxPurchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +385 42 242-004.
+        /// </summary>
+        internal static string telefaxSales {
+            get {
+                return ResourceManager.GetString("telefaxSales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tel. referenata za EU tržište.
+        /// </summary>
+        internal static string telEUText {
+            get {
+                return ResourceManager.GetString("telEUText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tel. referenata za tržište Bliskog istoka.
+        /// </summary>
+        internal static string telMiddleEastText {
+            get {
+                return ResourceManager.GetString("telMiddleEastText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tel. referenata za tržište bivše Jugoslavije.
+        /// </summary>
+        internal static string telYugoslaviaText {
+            get {
+                return ResourceManager.GetString("telYugoslaviaText", resourceCulture);
             }
         }
         

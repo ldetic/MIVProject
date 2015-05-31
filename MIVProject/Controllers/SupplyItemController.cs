@@ -15,7 +15,7 @@ namespace MIVProject.Controllers
     {
         private mivEntities db = new mivEntities();
 
-        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
+        [CustomAuthorize(Roles = "administrator,referent,dobavljac")]
         public ActionResult Index()
         {
 
@@ -40,7 +40,7 @@ namespace MIVProject.Controllers
 
         }
 
-        [CustomAuthorize(Roles = "administrator,referent,dobavljac,dobavljač")]
+        [CustomAuthorize(Roles = "administrator,referent,dobavljac")]
         public ActionResult Details(int? id)
         {
 
@@ -66,7 +66,7 @@ namespace MIVProject.Controllers
             return View(supplyItem);
         }
 
-        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
+        [CustomAuthorize(Roles = "administrator,referent,dobavljac")]
         public ActionResult Create()
         {
             ViewBag.item = new SelectList(db.item, "itemID", "name");

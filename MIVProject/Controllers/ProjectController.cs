@@ -149,6 +149,11 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var supply = db.Database.SqlQuery<supplyHeader>("Select * from supply where project = @p0", id);
+            if (supply.Count() == 0)
+            {
+                db.Database.ExecuteSqlCommand("Delete from projectItem where project = @p0", id);
+            }
             project project = db.project.Find(id);
             db.project.Remove(project);
             db.SaveChanges();

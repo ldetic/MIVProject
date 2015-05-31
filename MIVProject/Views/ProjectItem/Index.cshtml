@@ -65,9 +65,9 @@
             @Html.DisplayFor(modelItem => item.project1.name)
         </td>
         <td>
-            @Html.ActionLink(Local.Edit, "Edit", new { id = item.projectPosition }) |
-            @Html.ActionLink(Local.Details, "Details", new { id = item.projectPosition }) |
-            @Html.ActionLink(Local.Delete, "Delete", new { id = item.projectPosition })
+            @Html.ActionLink(Local.Edit, "Edit", new { id = item.projectItemID }) |
+            @Html.ActionLink(Local.Details, "Details", new { id = item.projectItemID }) |
+            @Html.ActionLink(Local.Delete, "Delete", new { id = item.projectItemID })
         </td>
     </tr>
 }

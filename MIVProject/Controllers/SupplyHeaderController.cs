@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using MIVProject;
 using System.Configuration;
 using System.Net.Mail;
+using Resources;
 
 namespace MIVProject.Controllers
 {
@@ -147,8 +148,8 @@ namespace MIVProject.Controllers
                 db.supplyHeader.Add(supplyHeader);
                 db.SaveChanges();
                 var supplier = db.supplier.Where(x => x.mivUser == supplyHeader.supplier);
-                string body = "Predana je nova ponuda, dobavljača" + supplier.First().name;
-                string subject = "Nova ponuda dobavljača:" + supplier.First().name;
+                string body = Local.NewSupply + " " + supplier.First().name;
+                string subject = Local.NewSupply + " " + supplier.First().name;
                 SendEmail("ljdetic@gmail.com", body, subject);
                 return RedirectToAction("Index");
             }
@@ -177,8 +178,8 @@ namespace MIVProject.Controllers
                 db.supplyHeader.Add(supplyHeader);
                 db.SaveChanges();
                 var supplier = db.supplier.Where(x => x.mivUser == supplyHeader.supplier);
-                string body = "Predana je nova ponuda, dobavljača " + supplier.First().name;
-                string subject = "Nova ponuda dobavljača: " + supplier.First().name;
+                string body = Local.NewSupply + " " + supplier.First().name;
+                string subject = Local.NewSupply + " " + supplier.First().name;
                 SendEmail("ljdetic@gmail.com", body, subject);
                 return supplyHeader.supplyID.ToString();
             }
@@ -254,6 +255,8 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            db.Database.ExecuteSqlCommand("Delete from supplyItem where supply = @p0", id);
+            
             supplyHeader supplyHeader = db.supplyHeader.Find(id);
             db.supplyHeader.Remove(supplyHeader);
             db.SaveChanges();
