@@ -7,10 +7,11 @@
     var tableView = "table";
     var tableToggleThreshold = 974;
     if ($(window).outerWidth() <= tableToggleThreshold) {
-        console.log("below threshold");
         tableView = "card";
         $(".object-table").bootstrapTable("toggleView");
     }
+    winResize();
+    $(window).on('resize', winResize);
 
     $('[data-toggle="tooltip"]').tooltip();
     //bug fix for tooltips when state of table changes
@@ -20,12 +21,15 @@
 
     /**
      *
-     * FUNCTIONS
+     * GLOBAL FUNCTIONS
      *
      **/
-
+    //4 using
+    function randomString() {
+        return Math.random().toString(36).slice(2);
+    }
     function createAlert(type, text) {
-        var idAlert = "alert-" + Math.floor(Math.random() * 100000);
+        var idAlert = "alert-" + randomString();
 
         $("<div/>", {
             id: idAlert,
@@ -68,15 +72,6 @@
         cont += '</div>';
         return cont;
     }
-
-    /**
-     * 
-     * PROJECT TABLE 
-     *
-     **/
-    //$('#projects-table').on('click', 'tr', function (event) {});
-    winResize();
-    $(window).on('resize', winResize);
 
 
     /**
@@ -142,111 +137,119 @@
      * PROJECT CREATE
      *
      **/
+    var accordionItem = {};
+    accordionItem.createSection = function () {
+        $("<div/>", {
+            id: this.sectionId,
+            class: "acc-items-section"
+        }).appendTo("." + this.className);
+    }
+    accordionItem.createTitle = function () {
+        //accordion title
+        var html = '<a class="acc-items-section-title" id="' + this.sectionTitle + '" href="#' + this.id + '">' + this.val.name.trim();
+        html += '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>';
+        html += '</a>';
+        $("#" + this.sectionId).append(html);
+    }
+    accordionItem.createSectionContent = function (className) {
+        $("<div/>", {
+            id: accordionItem.id,
+            class: "acc-items-section-content"
+        }).appendTo("#" + accordionItem.sectionId);
+    }
+    accordionItem.createInputs = function () {
+        var html = '<div class="full-width">';
+        html += addInput("item-quantity-" + this.val.id.trim(), this.val.quantity.trim(), "Quantity", "number", "quantity", "col-xs-12 col-sm-6 col-md-3", this.val.unitofmeasure.trim());
 
-    var $table = $("#project-unselected-items-table");
-    if ($table.length > 0) {
+        html += addInput("item-price-" + this.val.id.trim(), "", "Price", "number", "price", "col-xs-12 col-sm-6 col-md-3");
+        html += addInput("item-shipdate-" + this.val.id.trim(), "", "Shipping Date", "date", "shipdate", "col-xs-12 col-sm-6 col-md-3");
+        html += '<input id="item-id-' + this.val.id.trim() + '" type="hidden" class="id" value="' + this.val.id.trim() + '">';
+        html += '</div>';
 
-        //FIX for chboxes
-        var selectedItems = [];
-        $table.on('check.bs.table', function (e, row) {
-            if (selectedItems.indexOf($("#" + row._id).data("index")) === -1) {
-                selectedItems.push($("#" + row._id).data("index"));
+        html += addTextBox("item-description-" + this.val.id.trim(), this.val.description.trim(), "Description", "description", "col-xs-12 col-sm-6 col-md-4");
+        html += addTextBox("item-qualitiy-" + this.val.id.trim(), "", "Quality", "quality", "col-xs-12 col-sm-6 col-md-4");
+        html += addTextBox("item-comment-" + this.val.id.trim(), "", "Comment", "comment", "col-xs-12 col-sm-6 col-md-4");
+
+        $("#" + accordionItem.id).append(html);
+    }
+    accordionItem.setup = function () {
+        this.createSection();
+        this.createTitle();
+        this.createSectionContent();
+        this.createInputs();
+        this.eventsSetup();
+    }
+    accordionItem.closeSection = function () {
+        $('.' + this.className + ' .acc-items-section-title').removeClass('active');
+        $('.' + this.className + ' .acc-items-section-content').slideUp(300).removeClass('open');
+
+    }
+    accordionItem.eventsSetup = function () {
+        var parent = this;
+        var sectionTitleClick = function (e) {
+            // Grab current anchor value
+            var currentAttrValue = $(this).attr('href');
+            if ($(e.target).is('.active')) {
+                parent.closeSection();
+            } else {
+                parent.closeSection();
+                // Add active class to section title
+                $(this).addClass('active');
+                // Open up the hidden content panel
+                $('.' + parent.className + " " + currentAttrValue).slideDown(300).addClass('open').css("display", "inline-block");
             }
-        });
-        $table.on('uncheck.bs.table', function (e, row) {
-            selectedItems.splice(selectedItems.indexOf($("#" + row._id).data("index")), 1);
-        });
-        $table.on('page-change.bs.table', function (e, rows) {
-            $.each(selectedItems, function (index, el) {
-                if (el !== null) {
-                    $table.bootstrapTable('check', el);
-                }
-            });
-        });
 
-        $("#add-new-items-btn").click(function () {
-            selectedItems = [];
-        });
-        $button = $('#modal-add-items-confirm');
-
-        $button.click(function () {
-            var data = $table.bootstrapTable('getSelections');
-            $.each(data, function (index, val) {
-                var rand = Math.floor(Math.random() * 1000);
-                var accItemsSectionId = "acc-items-section-" + val.id.trim() + "-" + rand;
-                var accItemsSectionTitle = 'acc-items-section-title-' + val.id.trim() + rand;
-                var accItemsId = "acc-items-" + val.id.trim() + "-" + rand;
-                $("<div/>", { //accordion section
-                    id: accItemsSectionId,
-                    class: "acc-items-section"
-                }).appendTo(".acc-items");
-
-                //accordion title
-                var html = '<a class="acc-items-section-title" id="' + accItemsSectionTitle + '" href="#' + accItemsId + '">' + val.name.trim();
-                html += '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>';
-                html += '</a>';
-                $("#" + accItemsSectionId).append(html);
-
-                $("<div/>", {
-                    id: accItemsId,
-                    class: "acc-items-section-content"
-                }).appendTo("#" + accItemsSectionId);
-
-                html = '<div class="full-width">';
-                html += addInput("item-quantity-" + val.id.trim(), val.quantity.trim(), "Quantity", "number", "quantity", "col-xs-12 col-sm-6 col-md-3", val.unitofmeasure.trim());
-
-                html += addInput("item-price-" + val.id.trim(), "", "Price", "number", "price", "col-xs-12 col-sm-6 col-md-3");
-                html += addInput("item-shipdate-" + val.id.trim(), "", "Shipping Date", "date", "shipdate", "col-xs-12 col-sm-6 col-md-3");
-                html += '<input id="item-id-' + val.id.trim() + '" type="hidden" class="id" value="' + val.id.trim() +'">';
-                html += '</div>';
-
-                html += addTextBox("item-description-" + val.id.trim(), val.description.trim(), "Description", "description", "col-xs-12 col-sm-6 col-md-4");
-                html += addTextBox("item-qualitiy-" + val.id.trim(), "", "Quality", "quality", "col-xs-12 col-sm-6 col-md-4");
-                html += addTextBox("item-comment-" + val.id.trim(), "", "Comment", "comment", "col-xs-12 col-sm-6 col-md-4");
-
-                $("#" + accItemsId).append(html);
-
-                $('#' + accItemsSectionTitle).click(function (e) {
-                    // Grab current anchor value
-                    
-                    var currentAttrValue = $(this).attr('href');
-                    console.log(currentAttrValue);
-                    if ($(e.target).is('.active')) {
-                        close_accordion_section();
-                    } else {
-                        close_accordion_section();
-
-                        // Add active class to section title
-                        $(this).addClass('active');
-                        // Open up the hidden content panel
-                        $('.acc-items ' + currentAttrValue).slideDown(300).addClass('open').css("display", "inline-block");
-                    }
-
-                    e.preventDefault();
-                });
-
-                $('#modalUnselectedItems').modal('hide');
-            });
-
-            $(".acc-items-section-title .close").each(function (index, el) {
-                $(el).click(function (e) {
-                    e.stopPropagation();
-                    $(this).parent().parent().remove();
-                });
-            });
-
-            //cleanup
-            $("#project-unselected-items-table").bootstrapTable('uncheckAll');
-
-        });
-
-        function close_accordion_section() {
-            $('.acc-items .acc-items-section-title').removeClass('active');
-            $('.acc-items .acc-items-section-content').slideUp(300).removeClass('open');
+            e.preventDefault();
         }
 
-        $("#submit-project").click(function () {
-            //1. Getting project basic info
+
+        $('#' + parent.sectionTitle).click(sectionTitleClick);
+
+        $(parent.modalId).modal('hide');
+
+        $(".acc-items-section-title .close").each(function (index, el) {
+            $(el).click(function (e) {
+                e.stopPropagation();
+                $(this).parent().parent().remove();
+            });
+        });
+
+        //cleanup
+        $("#project-unselected-items-table").bootstrapTable('uncheckAll');
+    }
+
+    var table = {
+        $: $("#project-unselected-items-table"),
+        addNewItemsBtn: $("#add-new-items-btn"),
+        confirmItemsAddBtn: $('#modal-add-items-confirm'),
+        submitBtn: $("#submit-project")
+    };
+    table.setup = function () {
+        if (table.$.length > 0) {
+            this.eventSetup();
+            return true;
+        }
+        return false;
+    }
+    table.eventSetup = function () {
+        console.log("event setup");
+        var parent = this;
+        
+        var addItems = function (button) {
+            var data = parent.$.bootstrapTable('getSelections');
+            $.each(data, function (index, val) {
+                accordionItem.sectionId = "acc-items-section-" + val.id.trim() + "-" + randomString();
+                accordionItem.sectionTitle = 'acc-items-section-title-' + val.id.trim() + randomString();
+                accordionItem.id = "acc-items-" + val.id.trim() + "-" + randomString();
+                accordionItem.className = "acc-items";
+                accordionItem.modalId = '#modalUnselectedItems';
+                accordionItem.val = val;
+                accordionItem.setup();
+            });
+
+        }
+        var submitAllData = function () {
+            //1. Get project basic info
             var reqToken = $("input[name='__RequestVerificationToken']").val();
             var project = {
                 __RequestVerificationToken: reqToken,
@@ -257,7 +260,6 @@
                 deliveryDate: $("#deliveryDate").val(),
                 description: $("#description").val()
             };
-            console.log(project);
             //2. Getting project items
             var items = [];
             $(".acc-items .acc-items-section").each(function (index, el) {
@@ -293,45 +295,149 @@
                         items[i].project = projectID;
                         items[i].__RequestVerificationToken = reqToken;
                         console.log(items[i]);
-                        $.ajax({
-                            url: "/ProjectItem/CreateViaAjax",
-                            type: "POST",
-                            data: items[i]
-                        }).done(function (data) {
-                            console.log(data);
-                        });
+                        $.ajax(
+                            {
+                                url: "/ProjectItem/CreateViaAjax",
+                                type: "POST",
+                                data: items[i]
+                            }).done(function (data) {
+                                console.log("item:" + data);
+                            });
                     }
                 }
-                
+
             }).error(function () {
                 console.log("nema veze");
                 errorRaised = true;
                 errorMsg = "Došlo je pogreške prilikom pohranjivanja projekta. Provjerite podatke i pokušajte ponovno!";
-            });
+            })
+        }
 
+
+        //FIX for chboxes
+        var selectedItems = [];
+        this.$.on('check.bs.table', function (e, row) {
+            if (selectedItems.indexOf($("#" + row._id).data("index")) === -1) {
+                selectedItems.push($("#" + row._id).data("index"));
+            }
         });
+        this.$.on('uncheck.bs.table', function (e, row) {
+            selectedItems.splice(selectedItems.indexOf($("#" + row._id).data("index")), 1);
+        });
+        this.$.on('page-change.bs.table', function (e, rows) {
+            $.each(selectedItems, function (index, el) {
+                if (el !== null) {
+                    table.$.bootstrapTable('check', el);
+                }
+            });
+        });
+
+        this.addNewItemsBtn.click(function () {
+            selectedItems = [];
+        });
+        this.confirmItemsAddBtn.click(addItems);
+        this.submitBtn.click(submitAllData);
     }
+    //MAIN START
+    table.setup();
+    // MAIN END
+    
+    //to be deleted
+    function close_accordion_section() {
+        $('.acc-items .acc-items-section-title').removeClass('active');
+        $('.acc-items .acc-items-section-content').slideUp(300).removeClass('open');
+    }
+
 
     /**
      *
      * ITEMS CART
      *
      **/
-    var modalCart = $("#modalItemToCart");
-    var form = {
-        quantity: modalCart.find("#supply-item-quantity"),
-        price: modalCart.find("#supply-item-price"),
-        date: modalCart.find("#supply-item-date"),
-        quality: modalCart.find("#supply-item-quality"),
-        comment: modalCart.find("#supply-item-comment")
+   
+    var cart = {
+        $: $(".moderator-sidebar #cart"),
+        body: $("#cart .body")
     }
-    function cartSetup() {
+    cart.setup = function (modalObj) {
+        if (modalObj.length == 0 || this.$.length == 0) {
+            return false;
+        }
+        this.modal = {
+            $: modalObj
+        }
+        this.modal.title = this.modal.$.find(".modal-title");
+        this.modal.quantity = this.modal.$.find(".item-quantity");
+        this.modal.unitOfMeasure = this.modal.$.find(".item-unitofmeasure");
+        this.modal.dismissBtn = this.modal.$.find("#dismiss-btn");
+        this.modal.addBtn = this.modal.$.find("#add-to-cart-btn");
+        this.modal.clean = function () {
+            this.title.html("");
+            this.quantity.html("");
+            this.unitOfMeasure.html("");
+
+            this.dismissBtn.unbind("click");
+            this.addBtn.unbind("click");
+        }
+
+        this.form = {
+            quantity: this.modal.$.find("#supply-item-quantity"),
+            price: this.modal.$.find("#supply-item-price"),
+            date: this.modal.$.find("#supply-item-date"),
+            quality: this.modal.$.find("#supply-item-quality"),
+            comment: this.modal.$.find("#supply-item-comment")
+        }
+        this.form._setProps = function (formClass, input) {
+            if (!$(formClass).hasClass("hidden")) {
+                $(formClass).addClass("hidden");
+                $(input).prop("required", false);
+            }
+        }
+        this.form.clean = function () {
+            this.quality.val("");
+            this.quantity.val("");
+            this.price.val("");
+            this.date.val("");
+            this.comment.val("");
+
+            this._setProps(".form-quantity", "#supply-item-quantity");
+            this._setProps(".form-comment", "#supply-item-comment");
+            this._setProps(".form-quality", "#supply-item-quality");
+            this._setProps(".form-date", "#supply-item-date");
+        }
+        var parent = this;
+        this.clean = function () {
+            parent.modal.clean();
+            parent.form.clean();
+        }
+        this.modal.$.on("hidden.bs.modal", this.clean);
+        return true;
+    } 
+    cart.linkSetup = function () {
+        var parent = this;
+        var setupByCriterias = function (that) {
+            //show only defined inputs - CRITERIAS
+            $(that).parent().parent().children(".item-criterias").children("span").each(function (index, el) {
+                if ($(el).html() == "kolicina") {
+                    $(".form-quantity").removeClass("hidden");
+                    $("#supply-item-quantity").prop("required", true);
+                } else if ($(el).html() == "napomena") {
+                    $(".form-comment").removeClass("hidden");
+                    $("#supply-item-comment").prop("required", true);
+                } else if ($(el).html() == "kvaliteta sukladna specifikaciji") {
+                    $(".form-quality").removeClass("hidden");
+                    $("#supply-item-quality").prop("required", true);
+                } else if ($(el).html() == "rok isporuke") {
+                    $(".form-date").removeClass("hidden");
+                    $("#supply-item-date").prop("required", true);
+                }
+            });
+        }
         $(".shopping-cart-link").each(function (index, el) {
             $(el).click(function (e) {
-                console.log("cart click");
                 //MODAL setup
                 e.preventDefault();
-                var row = $(this).parent().parent();
+                var row = $(this).parent().parent(); //table row
                 var product = {
                     id: row.children(".item-id").html().trim(),
                     name: row.children(".item-name").html().trim(),
@@ -339,76 +445,17 @@
                     unitofmeasure: row.children(".item-value").children(".item-unitofmeasure").html().trim()
                 }
 
-                //show only defined inputs - CRITERIAS
-                $(this).parent().parent().children(".item-criterias").children("span").each(function (index, el) {
-                    if ($(el).html() == "kolicina") {
-                        $(".form-quantity").removeClass("hidden");
-                        $("#supply-item-quantity").prop("required", true);
-                    } else if ($(el).html() == "napomena") {
-                        $(".form-comment").removeClass("hidden");
-                        $("#supply-item-comment").prop("required", true);
-                    } else if ($(el).html() == "kvaliteta sukladna specifikaciji") {
-                        $(".form-quality").removeClass("hidden");
-                        $("#supply-item-quality").prop("required", true);
-                    } else if ($(el).html() == "rok isporuke") {
-                        $(".form-date").removeClass("hidden");
-                        $("#supply-item-date").prop("required", true);
-                    }
-                });
+                parent.modal.title.html(product.name);
+                parent.modal.quantity.html(product.quantityMax);
+                parent.form.quantity.attr("max", product.quantityMax);
+                parent.modal.unitOfMeasure.html(product.unitofmeasure);
 
-                var modalElements = {
-                    title: modalCart.find(".modal-title"),
-                    quantity: modalCart.find(".item-quantity"),
-                    unitOfMeasure: modalCart.find(".item-unitofmeasure"),
-                    dismissBtn: modalCart.find("#dismiss-btn"),
-                    addBtn: modalCart.find("#add-to-cart-btn")
-                };
-                function clean() {
-                    modalElements.title.html("");
-                    modalElements.quantity.html("");
-                    modalElements.unitOfMeasure.html("");
-                    
-                    form.quality.val("");
-                    form.quantity.val("");
-                    form.price.val("");
-                    form.date.val("");
-                    form.comment.val("");
-
-                    if (!$(".form-quantity").hasClass("hidden")) {
-                        $(".form-quantity").addClass("hidden");
-                        $("#supply-item-quantity").prop("required", false);
-                    }
-                    if (!$(".form-comment").hasClass("hidden")) {
-                        $(".form-comment").addClass("hidden");
-                        $("#supply-item-comment").prop("required", false);
-                    }
-                    if (!$(".form-quality").hasClass("hidden")) {
-                        $(".form-quality").addClass("hidden");
-                        $("#supply-item-quality").prop("required", false);
-                    }
-                    if (!$(".form-date").hasClass("hidden")) {
-                        $(".form-date").addClass("hidden");
-                        $("#supply-item-date").prop("required", false);
-                    }
-
-                    modalElements.dismissBtn.unbind("click");
-                    modalElements.addBtn.unbind("click");
-                }
-                modalElements.title.html(product.name);
-                modalElements.quantity.html(product.quantityMax);
-                form.quantity.attr("max", product.quantityMax);
-                modalElements.unitOfMeasure.html(product.unitofmeasure);
-
-                //modalElements.dismissBtn.click(clean);
-                //$(".modal-dialog .close").click(clean);
-                $("#modalItemToCart").on("hidden.bs.modal", clean);
-
+                setupByCriterias(this);
 
                 //VALIDATION SETUP
                 $("#add-to-cart-form").unbind("submit").bind("submit", function () {
-                    
                     //1. get data (update product)
-                    product.tempId = Math.random().toString(36).slice(2);
+                    product.tempId = randomString();
                     product.quality = form.quality.val();
                     product.quantity = form.quantity.val();
                     product.price = form.price.val();
@@ -416,55 +463,53 @@
                     product.comment = form.comment.val();
 
                     //2. add to session
-                    var cart = JSON.parse(sessionStorage.getItem("cart"));
-                    if (cart == null) {
-                        cart = [];
+                    var sessionCart = JSON.parse(sessionStorage.getItem("cart"));
+                    if (sessionCart == null) {
+                        sessionCart = [];
                     }
-                    console.log("cart push");
-                    cart.push(product);
-                    //sessionStorage.removeItem("cart");
-                    sessionStorage.setItem("cart", JSON.stringify(cart));
+                    sessionCart.push(product);
+                    sessionStorage.setItem("cart", JSON.stringify(sessionCart));
+
                     //3. update cart
-                    cartUpdate();
-                    modalCart.modal('hide');
-                    clean();
+                    parent.update();
+                    parent.modal.$.modal('hide');
+                    parent.clean();
                     return false;
                 });
             });
         });
     }
-    cartSetup();
-    cartUpdate();
-    $("#products-table").on("post-body.bs.table", function (e, rows) {
-        cartSetup();
-    });
-
-    //session storage listener
-    $(window).bind('storage', function (e) {
-        cartUpdate();
-        //console.log(e.originalEvent.key, e.originalEvent.newValue);
-    });
-    function cartUpdate() {
-        if($(".moderator-sidebar #cart").length > 0) {
+    cart.update = function() {
+        if (this.$.length > 0) {
             //sessionStorage.clear();
-            cart = sessionStorage.getItem("cart");
-            if (cart != null) {
-                cart = JSON.parse(cart);
-                console.log(cart);
-                var cartBody = $("#cart .body");
-                $.each(cart, function (index, el) {
-                    if (cartBody.find("#" + el.tempId).length == 0) {
+            sessionCart = sessionStorage.getItem("cart");
+            if (sessionCart != null) {
+                sessionCart = JSON.parse(sessionCart);
+                var parent = this;
+                $.each(sessionCart, function (index, el) {
+                    if (parent.body.find("#" + el.tempId).length == 0) {
                         $("<tr/>", {
                             id: el.tempId,
                             class: "cart-item",
                             role: "cart-item",
                             html: "<td class='name'>" + el.name + "</td><td class='price'>" + el.price + "</td>"
-                        }).appendTo(cartBody);
+                        }).appendTo(parent.body);
                     }
                 });
             }
         }
     }
+
+    cart.setup($("#modalItemToCart"));
+    cart.linkSetup();
+    cart.update();
+    $("#products-table").on("post-body.bs.table", function () {
+        cart.setup($("#modalItemToCart"));
+        cart.linkSetup();
+    });
+    //session storage listener
+    $(window).bind('storage', cart.update);
+
 
     /**
      *
@@ -476,7 +521,7 @@
             cart = JSON.parse(sessionStorage.getItem("cart"));
             $.each(cart, function (index, el) {
 
-                var rand = Math.floor(Math.random() * 1000);
+                var rand = randomString();
                 var accItemsSectionId = "acc-items-section-" + el.tempId;
                 var accItemsSectionTitle = 'acc-items-section-title-' + el.tempId;
                 var accItemsId = "acc-items-" + el.tempId;
