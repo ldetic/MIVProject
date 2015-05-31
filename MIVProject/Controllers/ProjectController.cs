@@ -63,6 +63,12 @@ namespace MIVProject.Controllers
             {
                 db.project.Add(project);
                 db.SaveChanges();
+
+                string username = Session["username"].ToString();
+                DateTime date = DateTime.Now;
+                string msg = "Project created " + project.name + " id:" + project.id;
+                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+
                 return RedirectToAction("Index");
             }
 
@@ -80,6 +86,12 @@ namespace MIVProject.Controllers
             {
                 db.project.Add(project);
                 db.SaveChanges();
+
+                string username = Session["username"].ToString();
+                DateTime date = DateTime.Now;
+                string msg = "Project created " + project.name + " id:" + project.id;
+                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+
                 return project.id.ToString();
             }
 
@@ -117,6 +129,12 @@ namespace MIVProject.Controllers
                 {
                     db.Entry(project).State = EntityState.Modified;
                     db.SaveChanges();
+
+                    string username = Session["username"].ToString();
+                    DateTime date = DateTime.Now;
+                    string msg = "Project edited " + project.name + " id:" + project.id;
+                    db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+
                     return RedirectToAction("Index");
                 }
                 ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", project.deliveryMethod);
@@ -149,14 +167,23 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var supply = db.Database.SqlQuery<supplyHeader>("Select * from supply where project = @p0", id);
-            if (supply.Count() == 0)
+            /*
+            mivEntities mivEntities = new mivEntities();
+            var supply = mivEntities.supplyHeader.Where(x => x.project == id).Count();
+            if (supply == 0)
             {
                 db.Database.ExecuteSqlCommand("Delete from projectItem where project = @p0", id);
             }
+            */
+            
             project project = db.project.Find(id);
-            db.project.Remove(project);
-            db.SaveChanges();
+            if (project != null)
+            {
+                db.Database.ExecuteSqlCommand("Delete from projectItem where project = @p0", id);
+                db.project.Remove(project);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 
@@ -168,9 +195,20 @@ namespace MIVProject.Controllers
             try
             {
                 project project = db.project.Find(id);
-                db.project.Remove(project);
-                db.SaveChanges();
-                return "OK";
+                if (project != null)
+                {
+                    db.Database.ExecuteSqlCommand("Delete from projectItem where project = @p0", id);
+                    db.project.Remove(project);
+                    db.SaveChanges();
+
+                    string username = Session["username"].ToString();
+                    DateTime date = DateTime.Now;
+                    string msg = "Project edited " + project.name + " id:" + project.id;
+                    db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+
+                    return "OK";
+                }
+                return "ERROR";          
             }
             catch
             {

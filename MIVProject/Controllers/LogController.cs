@@ -34,16 +34,17 @@ namespace MIVProject.Controllers
             }
             return View(logs);
         }
-
+        /*
         // GET: Log/Create
         public ActionResult Create()
         {
             return View();
         }
-
+        */
         // POST: Log/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,userID,username,msg,date")] logs logs)
@@ -57,8 +58,9 @@ namespace MIVProject.Controllers
 
             return View(logs);
         }
-
+        */
         // GET: Log/Edit/5
+        /*
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -72,10 +74,11 @@ namespace MIVProject.Controllers
             }
             return View(logs);
         }
-
+        */
         // POST: Log/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,userID,username,msg,date")] logs logs)
@@ -87,8 +90,8 @@ namespace MIVProject.Controllers
                 return RedirectToAction("Index");
             }
             return View(logs);
-        }
-
+        }*/
+        /*
         // GET: Log/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -122,6 +125,6 @@ namespace MIVProject.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }

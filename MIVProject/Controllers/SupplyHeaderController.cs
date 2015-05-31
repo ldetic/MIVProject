@@ -104,7 +104,7 @@ namespace MIVProject.Controllers
             return View(supplyHeader);
         }
 
-        [CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
+        [CustomAuthorize(Roles = "administrator,dobavljac")]
         public ActionResult Create()
         {
             ViewBag.currency = new SelectList(db.currency, "currencyID", "name");
@@ -136,7 +136,7 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "supplyID,paymentMethod,deliveryMethod,paymentDate,deliveryDate,supplier,date,project,status,currency")] supplyHeader supplyHeader)
         {
-            if (Session["type"].ToString() == "dobavljač" || Session["type"].ToString() == "dobavljac")
+            if (Session["type"].ToString() == "dobavljac")
             {
                 supplyHeader.supplier = Convert.ToInt32(Session["userID"]);
                 var supplyStatus = db.supplyStatus.Where(x => x.name == "U izradi");
@@ -147,6 +147,12 @@ namespace MIVProject.Controllers
             {
                 db.supplyHeader.Add(supplyHeader);
                 db.SaveChanges();
+
+                string username = Session["username"].ToString();
+                DateTime date = DateTime.Now;
+                string msg = "Supply created " + " id:" + supplyHeader.supplyID;
+                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+
                 var supplier = db.supplier.Where(x => x.mivUser == supplyHeader.supplier);
                 string body = Local.NewSupply + " " + supplier.First().name;
                 string subject = Local.NewSupply + " " + supplier.First().name;
@@ -177,6 +183,12 @@ namespace MIVProject.Controllers
             {
                 db.supplyHeader.Add(supplyHeader);
                 db.SaveChanges();
+
+                string username = Session["username"].ToString();
+                DateTime date = DateTime.Now;
+                string msg = "Supply created " + " id:" + supplyHeader.supplyID;
+                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+
                 var supplier = db.supplier.Where(x => x.mivUser == supplyHeader.supplier);
                 string body = Local.NewSupply + " " + supplier.First().name;
                 string subject = Local.NewSupply + " " + supplier.First().name;
@@ -192,21 +204,21 @@ namespace MIVProject.Controllers
 
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Unauthorized", "Account");
             }
             supplyHeader supplyHeader = db.supplyHeader.Find(id);
             if (supplyHeader == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Unauthorized", "Account");
             }
 
-           
-                ViewBag.currency = new SelectList(db.currency, "currencyID", "name", supplyHeader.currency);
-                ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", supplyHeader.deliveryMethod);
-                ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", supplyHeader.paymentMethod);
-                ViewBag.project = new SelectList(db.project, "id", "name", supplyHeader.project);
-                ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name", supplyHeader.supplier);
-           
+
+            ViewBag.currency = new SelectList(db.currency, "currencyID", "name", supplyHeader.currency);
+            ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", supplyHeader.deliveryMethod);
+            ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", supplyHeader.paymentMethod);
+            ViewBag.project = new SelectList(db.project, "id", "name", supplyHeader.project);
+            ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name", supplyHeader.supplier);
+
 
 
             ViewBag.status = new SelectList(db.supplyStatus, "statusID", "name", supplyHeader.status);
@@ -224,6 +236,12 @@ namespace MIVProject.Controllers
             {
                 db.Entry(supplyHeader).State = EntityState.Modified;
                 db.SaveChanges();
+
+                string username = Session["username"].ToString();
+                DateTime date = DateTime.Now;
+                string msg = "Supply edited " + " id:" + supplyHeader.supplyID;
+                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+
                 return RedirectToAction("Index");
             }
             ViewBag.currency = new SelectList(db.currency, "currencyID", "name", supplyHeader.currency);
@@ -255,11 +273,28 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            db.Database.ExecuteSqlCommand("Delete from supplyItem where supply = @p0", id);
-            
+
             supplyHeader supplyHeader = db.supplyHeader.Find(id);
-            db.supplyHeader.Remove(supplyHeader);
-            db.SaveChanges();
+            if (supplyHeader != null)
+            {
+                try
+                {
+                    db.Database.ExecuteSqlCommand("Delete from supplyItem where supply = @p0", id);
+                    db.supplyHeader.Remove(supplyHeader);
+                    db.SaveChanges();
+                    string username = Session["username"].ToString();
+                    DateTime date = DateTime.Now;
+                    string msg = "Supply removed " + " id:" + supplyHeader.supplyID;
+                    db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return RedirectToAction("Index");
+                }
+
+            }
+
             return RedirectToAction("Index");
         }
 
