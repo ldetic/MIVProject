@@ -10,7 +10,7 @@ using MIVProject;
 
 namespace MIVProject.Controllers
 {
-    [CustomAuthorize(Roles = "administrator,referent")]
+    [CustomAuthorize(Roles = "superuser")]
     public class criteriaController : Controller
     {
         private mivEntities db = new mivEntities();

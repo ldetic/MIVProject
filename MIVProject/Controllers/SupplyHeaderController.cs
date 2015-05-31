@@ -159,7 +159,7 @@ namespace MIVProject.Controllers
             ViewBag.project = new SelectList(db.project, "id", "name", supplyHeader.project);
             ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name", supplyHeader.supplier);
             ViewBag.status = new SelectList(db.supplyStatus, "statusID", "name", supplyHeader.status);
-            
+
             return View(supplyHeader);
         }
 
@@ -198,11 +198,16 @@ namespace MIVProject.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.currency = new SelectList(db.currency, "currencyID", "name", supplyHeader.currency);
-            ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", supplyHeader.deliveryMethod);
-            ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", supplyHeader.paymentMethod);
-            ViewBag.project = new SelectList(db.project, "id", "name", supplyHeader.project);
-            ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name", supplyHeader.supplier);
+
+           
+                ViewBag.currency = new SelectList(db.currency, "currencyID", "name", supplyHeader.currency);
+                ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", supplyHeader.deliveryMethod);
+                ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", supplyHeader.paymentMethod);
+                ViewBag.project = new SelectList(db.project, "id", "name", supplyHeader.project);
+                ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name", supplyHeader.supplier);
+           
+
+
             ViewBag.status = new SelectList(db.supplyStatus, "statusID", "name", supplyHeader.status);
             return View(supplyHeader);
         }
