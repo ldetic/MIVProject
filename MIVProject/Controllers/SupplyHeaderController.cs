@@ -185,10 +185,18 @@ namespace MIVProject.Controllers
             }
             return "ERROR";
         }
-
-        [CustomAuthorize(Roles = "administrator,referent")]
+        
+        [CustomAuthorize(Roles = "administrator,referent,dobavljac,dobavljač")]
         public ActionResult Edit(int? id)
         {
+            if (Session["type"].ToString() == "dobavljac")
+            {
+                string username = Session["username"].ToString();
+                if (!(db.supplyHeader.Any(o => o.supplyID == id && o.supplier1.mivUser1.username == username)))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
 
             if (id == null)
             {
@@ -200,15 +208,15 @@ namespace MIVProject.Controllers
                 return HttpNotFound();
             }
 
-           
-                ViewBag.currency = new SelectList(db.currency, "currencyID", "name", supplyHeader.currency);
-                ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", supplyHeader.deliveryMethod);
-                ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", supplyHeader.paymentMethod);
-                ViewBag.project = new SelectList(db.project, "id", "name", supplyHeader.project);
-                ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name", supplyHeader.supplier);
-           
+            IQueryable<supplyItem> supplyItems = db.supplyItem.Where(a => a.supply == id);
+            ViewBag.supplyItems = supplyItems;
 
-
+            ViewBag.currency = new SelectList(db.currency, "currencyID", "name", supplyHeader.currency);
+            ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", supplyHeader.deliveryMethod);
+            ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", supplyHeader.paymentMethod);
+            ViewBag.project = new SelectList(db.project, "id", "name", supplyHeader.project);
+            ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name", supplyHeader.supplier);
+           
             ViewBag.status = new SelectList(db.supplyStatus, "statusID", "name", supplyHeader.status);
             return View(supplyHeader);
         }
