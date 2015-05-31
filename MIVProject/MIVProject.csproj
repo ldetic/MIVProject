@@ -470,8 +470,8 @@
     <Content Include="Views\Account\Registered.cshtml" />
     <Content Include="Views\Account\PassworGenerated.cshtml" />
     <Content Include="Views\Account\Unauthorized.cshtml" />
-    <Content Include="Views\Shared\_LayoutCMS.cshtml" />
     <Content Include="Views\CMS\Index.cshtml" />
+    <Content Include="Views\Shared\_CMS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
