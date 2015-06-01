@@ -40,40 +40,41 @@ namespace MIVProject.Controllers
         }
 
 
-      
+
         public ActionResult Index()
         {
-           // var u = db.Database.SqlQuery<userType>("Select * from userType where type = 'dobavljac or type = 'dobavljač'");
-          
-            if (Session["type"].ToString() == "referent") 
+            // var u = db.Database.SqlQuery<userType>("Select * from userType where type = 'dobavljac or type = 'dobavljač'");
+
+            if (Session["type"].ToString() == "referent")
             {
-                 var mivUser = db.mivUser.Include(m => m.userType).Where(x => x.userType.type=="dobavljac" || x.type == null);
-                 if (mivUser != null)
-                 {
-                     return View(mivUser.ToList());
-                 }
-                 else return RedirectToAction("Unauthorized", "Account");
-               
+                var mivUser = db.mivUser.Include(m => m.userType).Where(x => x.userType.type == "dobavljac" || x.type == null);
+                if (mivUser != null)
+                {
+                    return View(mivUser.ToList());
+                }
+                else return RedirectToAction("Unauthorized", "Account");
+
             }
             else
             {
-                 var mivUser = db.mivUser.Include(m => m.userType);
-                 return View(mivUser.ToList());
+                var mivUser = db.mivUser.Include(m => m.userType);
+                return View(mivUser.ToList());
             }
-           
+
         }
 
-       
+
         public ActionResult Details(int? id)
         {
+
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Unauthorized", "Account");
             }
             mivUser mivUser = db.mivUser.Find(id);
             if (mivUser == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Unauthorized", "Account");
             }
             return View(mivUser);
         }
@@ -106,13 +107,13 @@ namespace MIVProject.Controllers
             return View(mivUser);
         }
 
-    
+
         public ActionResult Edit(int? id)
         {
 
             mivUser mivUser = null;
 
-                
+
 
             if (id == null)
             {
@@ -125,7 +126,7 @@ namespace MIVProject.Controllers
                 {
                     mivUser = user;
                 }
-                
+
             }
             else
             {
@@ -145,11 +146,24 @@ namespace MIVProject.Controllers
             var user = db.mivUser.Find(id);
             if (user.type == null)
             {
-                db.Database.ExecuteSqlCommand("Update mivUser set type = (select typeID from userType where type like 'dobavlja%') where userID=@p0", id);
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Database.ExecuteSqlCommand("Update mivUser set type = (select typeID from userType where type like 'dobavlja%') where userID=@p0", id);
+
+                    string username = Session["username"].ToString();
+                    DateTime date = DateTime.Now;
+                    string msg = "Supplier confirmation " + user.username;
+                    db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return RedirectToAction("Index");
+                }
+
             }
             else return RedirectToAction("Unauthorized", "Account");
-            
+
         }
 
         // POST: mivUser/Edit/5
@@ -164,6 +178,10 @@ namespace MIVProject.Controllers
             {
                 db.Entry(mivUser).State = EntityState.Modified;
                 db.SaveChanges();
+                string username = Session["username"].ToString();
+                DateTime date = DateTime.Now;
+                string msg = "User edited " + mivUser.username;
+                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
                 return RedirectToAction("Index");
             }
             ViewBag.type = new SelectList(db.userType, "typeID", "type", mivUser.type);
@@ -171,7 +189,7 @@ namespace MIVProject.Controllers
             return View(mivUser);
         }
 
-       
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -191,8 +209,24 @@ namespace MIVProject.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             mivUser mivUser = db.mivUser.Find(id);
-            db.mivUser.Remove(mivUser);
-            db.SaveChanges();
+            if (mivUser != null)
+            {
+                try
+                {
+                    db.mivUser.Remove(mivUser);
+                    db.SaveChanges();
+                    string username = Session["username"].ToString();
+                    DateTime date = DateTime.Now;
+                    string msg = "User removed " + mivUser.username + " id:" + mivUser.userID;
+                    db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -205,6 +239,6 @@ namespace MIVProject.Controllers
             base.Dispose(disposing);
         }
 
-        
+
     }
 }
