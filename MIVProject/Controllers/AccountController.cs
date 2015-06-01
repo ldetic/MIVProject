@@ -89,7 +89,6 @@ namespace MIVProject.Controllers
         public ActionResult Login(mivUser mivUser)
         {
             string username = mivUser.username;
-            int userID = (int)Session["userID"];
             DateTime date = DateTime.Now;
 
             mivUser.password = GetMD5HashData(mivUser.password.ToString());
