@@ -196,6 +196,7 @@ namespace MIVProject.Controllers
             {
                 supplyHeader.supplier = Convert.ToInt32(Session["userID"]);
             }
+
             if (ModelState.IsValid)
             {
                 db.supplyHeader.Add(supplyHeader);
@@ -291,6 +292,8 @@ namespace MIVProject.Controllers
             {
                 supplyHeader.supplier = Convert.ToInt32(Session["userID"]);
             }
+
+            
             if (ModelState.IsValid)
             {
                 db.Entry(supplyHeader).State = EntityState.Modified;
@@ -301,6 +304,14 @@ namespace MIVProject.Controllers
                 string msg = "Supply edited " + " id:" + supplyHeader.supplyID;
                 int userID = (int)Session["userID"];
                 db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
+
+                if (supplyHeader.supplyStatus.name == "Prihvacena")
+                {
+                    var supplier = supplyHeader.supplier1.mivUser1.email;
+                    string body = Local.SupplyAccepted + " " + supplyHeader.supplyID;
+                    string subject = Local.SupplyAccepted + " " + supplyHeader.supplyID;
+                    SendEmail(supplier, body, subject);
+                }
 
                 return supplyHeader.supplyID.ToString();
             }

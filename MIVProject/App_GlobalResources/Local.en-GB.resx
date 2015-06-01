@@ -513,4 +513,7 @@ Gospodarska bb, 42 000 Varaždin, Croatia
   <data name="Visible" xml:space="preserve">
     <value>Visible</value>
   </data>
+  <data name="SupplyAccepted" xml:space="preserve">
+    <value>Your offer is accepted. Supply number: </value>
+  </data>
 </root>

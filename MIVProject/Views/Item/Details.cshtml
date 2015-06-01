@@ -50,6 +50,21 @@
             @Html.DisplayFor(model => model.itemSubCategory.name)
         </dd>
 
+        <dt>
+            @Local.Category
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.itemSubCategory.itemCategory.name)
+        </dd>
+        <dt>
+            @Local.Visible
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.visible)
+        </dd>
+
     </dl>
 </div>
 <p>
