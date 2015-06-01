@@ -120,7 +120,8 @@ namespace MIVProject.Controllers
                 }
 
                 string msg = "User loged in";
-                mivEntities.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                int userID = (int)Session["userID"];
+                mivEntities.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
                 return Redirect(FormsAuthentication.GetRedirectUrl(Session["username"].ToString(), false));
                 //return RedirectToAction("Index", "Home");
             }
@@ -133,7 +134,8 @@ namespace MIVProject.Controllers
             string username = Session["username"].ToString();
             DateTime date = DateTime.Now;
             string msg = "User loged out";
-            mivEntities.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+            int userID = (int)Session["userID"];
+            mivEntities.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
             Session.RemoveAll();
             return RedirectToAction("Index", "Home");
         }
@@ -253,10 +255,13 @@ namespace MIVProject.Controllers
 
             mivEntities.Database.ExecuteSqlCommand("Update mivUser set password = @p0 where username = @p1", newPassword, Request.Form["username"]);
             string username = Request.Form["username"].ToString();
+            int userID = (int)Session["userID"];
             var user = mivEntities.mivUser.Where(x => x.username == username);
 
             string body = Local.PasswordIsChanged + ". " + Local.PasswordGenerated + ": " + plainPassword;
             string subject = Local.PasswordIsChanged;
+
+            DateTime date = DateTime.Now;
 
             if (user != null)
             {
@@ -264,18 +269,16 @@ namespace MIVProject.Controllers
                 if (SendEmail(user.First().email.ToString(), body, subject) != 0)
                 {
 
-                    DateTime date = DateTime.Now;
+
                     string msg = "New password generated, and email sent";
-                    mivEntities.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                    mivEntities.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
                     return RedirectToAction("PasswordGenerated");
 
                 }
                 else
                 {
-
-                    DateTime date = DateTime.Now;
                     string msg = "An error occured when sending new password mail";
-                    mivEntities.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                    mivEntities.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
 
                     ViewBag.Msg = Local.SendingMailProblem;
                     return View();
@@ -319,9 +322,10 @@ namespace MIVProject.Controllers
                 string username = Session["username"].ToString();
                 DateTime date = DateTime.Now;
                 string msg = "Password changed";
-                mivEntities.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
-                string newPassword = GetMD5HashData(pass);
                 int userID = (int)Session["userID"];
+                mivEntities.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
+                string newPassword = GetMD5HashData(pass);
+
                 mivEntities.Database.ExecuteSqlCommand("Update mivUser set password = @p0 where userID = @p1", newPassword, userID);
                 return RedirectToAction("PasswordIsChanged");
             }

@@ -10,24 +10,28 @@
 <p>
     @Html.ActionLink(Local.CreateNew, "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Local.Type
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.type)
-        </td>
-        <td>
-            @Html.ActionLink(Local.Edit, "Edit", new { id=item.typeID }) |            
-            @Html.ActionLink(Local.Delete, "Delete", new { id=item.typeID })
-        </td>
-    </tr>
-}
+<table id="userType-table" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
+       data-search="true" data-toolbar="#toolbar" data-pagination="true"
+       data-query-params="queryParams">
+    <thead>
+        <tr>
+            <th>
+                @Local.Type
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.ActionLink(Local.Edit, "Edit", new { id = item.typeID }) |
+                @Html.ActionLink(Local.Delete, "Delete", new { id = item.typeID })
+            </td>
+        </tr>
+    }
 
 </table>

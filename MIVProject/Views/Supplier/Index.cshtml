@@ -7,29 +7,33 @@
 <p>
     @Html.ActionLink(Local.CreateNew, "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Local.Name
-        </th>
-        <th>
-           @Local.username
-        </th>
-        <th>
-            @Local.Email
-        </th>
-        <th>
-           @Local.Phone
-        </th>
-        <th>
-            OIB
-        </th>
-    
-        <th>
-            @Local.Category
-        </th>
-        <th></th>
-    </tr>
+<table id="supplier-table" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
+       data-search="true" data-toolbar="#toolbar" data-pagination="true"
+       data-query-params="queryParams">
+    <thead>
+        <tr>
+            <th>
+                @Local.Name
+            </th>
+            <th>
+                @Local.username
+            </th>
+            <th>
+                @Local.Email
+            </th>
+            <th>
+                @Local.Phone
+            </th>
+            <th>
+                OIB
+            </th>
+
+            <th>
+                @Local.Category
+            </th>
+            <th></th>
+        </tr>
+    </thead>
     @foreach (var item in Model)
     {
         <tr>
@@ -47,7 +51,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OIB)
-            </td>         
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.supplierCategory.name)
             </td>

@@ -165,7 +165,8 @@ namespace MIVProject.Controllers
                 string username = Session["username"].ToString();
                 DateTime date = DateTime.Now;
                 string msg = "Supply created " + " id:" + supplyHeader.supplyID;
-                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                int userID = (int)Session["userID"];
+                db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
 
                 var supplier = db.supplier.Where(x => x.mivUser == supplyHeader.supplier);
                 string body = Local.NewSupply + " " + supplier.First().name;
@@ -203,7 +204,8 @@ namespace MIVProject.Controllers
                 string username = Session["username"].ToString();
                 DateTime date = DateTime.Now;
                 string msg = "Supply created " + " id:" + supplyHeader.supplyID;
-                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                int userID = (int)Session["userID"];
+                db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
 
                 var supplier = db.supplier.Where(x => x.mivUser == supplyHeader.supplier);
                 string body = Local.NewSupply + " " + supplier.First().name;
@@ -266,7 +268,8 @@ namespace MIVProject.Controllers
                 string username = Session["username"].ToString();
                 DateTime date = DateTime.Now;
                 string msg = "Supply edited " + " id:" + supplyHeader.supplyID;
-                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                int userID = (int)Session["userID"];
+                db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
 
                 return RedirectToAction("Index");
             }
@@ -296,7 +299,8 @@ namespace MIVProject.Controllers
                 string username = Session["username"].ToString();
                 DateTime date = DateTime.Now;
                 string msg = "Supply edited " + " id:" + supplyHeader.supplyID;
-                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                int userID = (int)Session["userID"];
+                db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
 
                 return supplyHeader.supplyID.ToString();
             }
@@ -336,7 +340,8 @@ namespace MIVProject.Controllers
                     string username = Session["username"].ToString();
                     DateTime date = DateTime.Now;
                     string msg = "Supply removed " + " id:" + supplyHeader.supplyID;
-                    db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                    int userID = (int)Session["userID"];
+                    db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
                     return RedirectToAction("Index");
                 }
                 catch
