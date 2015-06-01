@@ -2,6 +2,11 @@
 @using Resources
 @{
     ViewBag.Title = Local.Edit;
+    bool isProject = true;
+    if (Model.project == null)
+    {
+        isProject = false;
+    }
 }
 
 <h2>@Local.Edit</h2>
@@ -13,6 +18,7 @@
     
     <div class="form-horizontal supply-header-edit">
         <h4>@Local.SupplyHeader</h4>
+         
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.supplyID)
@@ -26,12 +32,13 @@
                 </div>
             </div>
         }
-        @if ((string)Session["type"] != "dobavljac" && Model.project1 != null)
+        @if (isProject)
         {
             <div class="form-group">
                 <label class="control-label col-md-2">@Local.Project</label>
                 <div class="col-md-10">
                     @Model.project1.name
+                    <input id="projectId" name="projectId" type="hidden" value=@Model.project1.id />
                 </div>
             </div>
         }
@@ -98,7 +105,10 @@
         <div id="acc-items-section-@si.itemNumber" class="acc-items-section">
             <a class="acc-items-section-title" id="acc-items-section-title-@si.itemNumber" href="#acc-items-@si.itemNumber">
                 @si.item1.name
-                <div type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></div>              
+                @if (!isProject)
+                {
+                <div type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></div>      
+                }
             </a>
             <div class="acc-items-section-content" id="acc-items-@si.itemNumber">
                 <div class="full-width">
