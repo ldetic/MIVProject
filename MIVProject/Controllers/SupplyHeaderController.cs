@@ -110,7 +110,22 @@ namespace MIVProject.Controllers
             ViewBag.currency = new SelectList(db.currency, "currencyID", "name");
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name");
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name");
-            ViewBag.project = new SelectList(db.project, "id", "name");
+
+            try { 
+                Uri reqUri = new Uri(Request.Url.AbsoluteUri.ToString());
+                bool isProject = Boolean.Parse(HttpUtility.ParseQueryString(reqUri.Query).Get("project"));
+                if (isProject)
+                {
+                    int projectId = Int16.Parse(HttpUtility.ParseQueryString(reqUri.Query).Get("id").ToString());
+                    project prt= db.project.Single(a => a.id == projectId);
+                    ViewBag.project = prt;
+                    IQueryable<projectItem> pts = db.projectItem.Where(b => b.project1.id == projectId); 
+                    ViewBag.projectItems = pts;
+                }
+            } catch(Exception)
+            {
+                //is not a project
+            }
 
             ViewBag.status = new SelectList(db.supplyStatus, "statusID", "name");
 
@@ -130,8 +145,6 @@ namespace MIVProject.Controllers
         }
 
         // POST: SupplyHeader/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "supplyID,paymentMethod,deliveryMethod,paymentDate,deliveryDate,supplier,date,project,status,currency")] supplyHeader supplyHeader)
@@ -163,7 +176,9 @@ namespace MIVProject.Controllers
             ViewBag.currency = new SelectList(db.currency, "currencyID", "name", supplyHeader.currency);
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", supplyHeader.deliveryMethod);
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", supplyHeader.paymentMethod);
+
             ViewBag.project = new SelectList(db.project, "id", "name", supplyHeader.project);
+
             ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name", supplyHeader.supplier);
             ViewBag.status = new SelectList(db.supplyStatus, "statusID", "name", supplyHeader.status);
 

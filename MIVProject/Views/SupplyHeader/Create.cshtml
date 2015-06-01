@@ -3,9 +3,22 @@
 @{
     ViewBag.Title = Local.Confirm;
     ViewBag.HideSidebar = true;
-}
-<h2>@Local.Confirm</h2>
 
+    project Project = null;
+    if (ViewBag.project != null) {
+        Project = (project)ViewBag.project;
+
+    }
+
+}
+@if (Project != null)
+{
+    <h2>Ponuda za @Project.name</h2>
+}
+else
+{
+<h2>@Local.Confirm</h2>
+}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -13,7 +26,13 @@
     <div class="form-horizontal supply-header-create">
         <hr />
         <span>@ViewBag.Msg</span>
+        
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @if(Project != null)
+        {
+            <input id="project-id" type="hidden" value=@Project.id />
+            <input id="project-name" type="hidden" value="@Project.name" />
+        }
         <div class="form-group">
             <label class = "control-label col-md-2" >@Local.PaymentMethod</label>
             <div class="col-md-10">
@@ -75,20 +94,36 @@
             </div>
         </div>
         <div class="items-wrapper">
-            <div class="acc-items"></div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input id="save-btn" type="button" value="Sačuvaj" class="btn btn-default" />
-            </div>
-            <div class="col-md-offset-2 col-md-10">
-                <input id="send-btn" type="button" value="Pošalji" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+            <div class="acc-items">
+                @if (Project != null)
+                {
+                    foreach (var item in ViewBag.projectItems)
+                    {
+                        projectItem pt = (projectItem)item;
+                        <div id="acc-items-section-@pt.projectItemID" class="acc-items-section">
+                            <a class="acc-items-section-title" id="acc-items-section-title-@pt.projectItemID" href="#acc-items-@pt.projectItemID">
+                                @pt.item1.name
+                            </a>
+                            <div class="acc-items-section-content" id="acc-items-@pt.projectItemID">
+                                <div class="full-width"></div>
+                            </div>
+                        </div>
+                      }
+                  }
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input id="save-btn" type="button" value="Sačuvaj" class="btn btn-default" />
+                                </div>
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input id="send-btn" type="button" value="Pošalji" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+                    @section Scripts {
+                        @Scripts.Render("~/bundles/jqueryval")
+                    }
