@@ -57,7 +57,7 @@ namespace MIVProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description")] project project)
+        public ActionResult Create([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description,src,visible,validTillDate")] project project)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +74,7 @@ namespace MIVProject.Controllers
         // POST: Project/CreateViaAjax
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public String CreateViaAjax([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description")] project project)
+        public String CreateViaAjax([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description,src,visible,validTillDate")] project project)
         {
             if (ModelState.IsValid)
             {
@@ -109,7 +109,7 @@ namespace MIVProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description")] project project)
+        public ActionResult Edit([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description,src,visible,validTillDate")] project project)
         {
             try
             {

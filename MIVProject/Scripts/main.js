@@ -514,10 +514,10 @@
 
     /**
      *
-     * ITEM PURCHASE CONFIRMATION
+     * ITEM OFFER CONFIRMATION
      *
      **/
-    if ($(".supply-header-create").length > 0) {
+    if ($(".supply-header-items-create").length > 0) {
         if (sessionStorage.length > 0) {
             cart = JSON.parse(sessionStorage.getItem("cart"));
             $.each(cart, function (index, el) {
@@ -688,6 +688,34 @@
         }
     }
 
+    /**
+     *
+     * PROJECT OFFER CONFIRMATION
+     *
+     **/
+    if ($(".supply-header-project-create").length > 0) {
+        $(".acc-items-section-title").each(function (index, el) {
+            $(el).click(function (e) {
+                // Grab current anchor value
+
+                var currentAttrValue = $(this).attr('href');
+                if ($(e.target).is('.active')) {
+                    close_accordion_section();
+                } else {
+                    close_accordion_section();
+
+                    // Add active class to section title
+                    $(this).addClass('active');
+                    // Open up the hidden content panel
+                    $('.acc-items ' + currentAttrValue).slideDown(300).addClass('open').css("display", "inline-block");
+                }
+
+                e.preventDefault();
+            });
+        });
+    }
+
+
 
     /**
      *
@@ -742,7 +770,6 @@
             currency: $("#currency").val(),
             __RequestVerificationToken: reqToken
         }
-        console.log(supplyHeader);
         //save supplyHeader
         //potential break: ignores ajax url name and calls default edit method
         $.ajax({

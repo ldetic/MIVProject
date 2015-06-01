@@ -485,4 +485,10 @@ Gospodarska bb (prodaja armatura i fazona)
   <data name="Msg" xml:space="preserve">
     <value>Poruka</value>
   </data>
+  <data name="OfferFor" xml:space="preserve">
+    <value>Ponuda za</value>
+  </data>
+  <data name="ValidityDate" xml:space="preserve">
+    <value>Rok valjanosti</value>
+  </data>
 </root>

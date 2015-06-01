@@ -20,7 +20,6 @@ namespace MIVProject.Controllers
         {
             //var item = db.item.Include(i => i.itemSubCategory);
             var item = db.item.Include(i => i.itemSubCategory).Include(i => i.itemSubCategory.itemCategory);
-
             return View(item.ToList());
         }
 
@@ -51,7 +50,7 @@ namespace MIVProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "itemID,name,subcategory,description,unitOfMeasure,quantity")] item item)
+        public ActionResult Create([Bind(Include = "itemID,name,subcategory,description,unitOfMeasure,quantity,visible")] item item)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +84,7 @@ namespace MIVProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "itemID,name,subcategory,description,unitOfMeasure,quantity")] item item)
+        public ActionResult Edit([Bind(Include = "itemID,name,subcategory,description,unitOfMeasure,quantity,visible")] item item)
         {
             if (ModelState.IsValid)
             {

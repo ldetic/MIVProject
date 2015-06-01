@@ -119,8 +119,9 @@ namespace MIVProject.Controllers
                     int projectId = Int16.Parse(HttpUtility.ParseQueryString(reqUri.Query).Get("id").ToString());
                     project prt= db.project.Single(a => a.id == projectId);
                     ViewBag.project = prt;
-                    IQueryable<projectItem> pts = db.projectItem.Where(b => b.project1.id == projectId); 
+                    IQueryable<projectItem> pts = db.projectItem.Include(i => i.item1.itemSubCategory).Include(i => i.item1.itemSubCategory.itemCategory).Where(b => b.project1.id == projectId); 
                     ViewBag.projectItems = pts;
+                    
                 }
             } catch(Exception)
             {

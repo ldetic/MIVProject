@@ -501,4 +501,10 @@ Gospodarska bb, 42 000 Varaždin, Croatia
   <data name="Msg" xml:space="preserve">
     <value>Message</value>
   </data>
+  <data name="OfferFor" xml:space="preserve">
+    <value>Offer for</value>
+  </data>
+  <data name="ValidityDate" xml:space="preserve">
+    <value>Validity Date</value>
+  </data>
 </root>
