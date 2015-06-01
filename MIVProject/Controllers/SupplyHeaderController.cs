@@ -234,14 +234,16 @@ namespace MIVProject.Controllers
         }
 
         // POST: SupplyHeader/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "supplyID,paymentMethod,deliveryMethod,paymentDate,deliveryDate,supplier,date,project,status,currency")] supplyHeader supplyHeader)
         {
             if (ModelState.IsValid)
             {
+                if (Session["type"].ToString() == "dobavljac")
+                {
+                    supplyHeader.supplier = Convert.ToInt32(Session["userID"]);
+                }
                 db.Entry(supplyHeader).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -259,6 +261,31 @@ namespace MIVProject.Controllers
             ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name", supplyHeader.supplier);
             ViewBag.status = new SelectList(db.supplyStatus, "statusID", "name", supplyHeader.status);
             return View(supplyHeader);
+        }
+
+        // POST: SupplyHeader/EditViaAjax/5
+        [HttpPost, ActionName("UpdateViaAjax")]
+        [ValidateAntiForgeryToken]
+        public string UpdateViaAjax([Bind(Include = "supplyID,paymentMethod,deliveryMethod,paymentDate,deliveryDate,supplier,date,project,status,currency")] supplyHeader supplyHeader)
+        {
+            if (Session["type"].ToString() == "dobavljac")
+            {
+                supplyHeader.supplier = Convert.ToInt32(Session["userID"]);
+            }
+            if (ModelState.IsValid)
+            {
+                db.Entry(supplyHeader).State = EntityState.Modified;
+                db.SaveChanges();
+
+                string username = Session["username"].ToString();
+                DateTime date = DateTime.Now;
+                string msg = "Supply edited " + " id:" + supplyHeader.supplyID;
+                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+
+                return supplyHeader.supplyID.ToString();
+            }
+
+            return "ERROR";
         }
 
         [CustomAuthorize(Roles = "administrator,referent")]

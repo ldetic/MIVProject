@@ -137,8 +137,6 @@ namespace MIVProject.Controllers
         }
 
         // POST: SupplyItem/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "supply,item,itemNumber,quantity,price,quality,comment,shipDate,supplyItemID")] supplyItem supplyItem)
@@ -154,6 +152,21 @@ namespace MIVProject.Controllers
             ViewBag.item = new SelectList(db.item, "itemID", "name", supplyItem.item);
             ViewBag.supply = new SelectList(db.supplyHeader, "supplyID", "supplyID", supplyItem.supply);
             return View(supplyItem);
+        }
+
+        // POST: SupplyItem/EditViaAjax/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public String EditViaAjax([Bind(Include = "supply,item,itemNumber,quantity,price,quality,comment,shipDate,supplyItemID")] supplyItem supplyItem)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Database.ExecuteSqlCommand("Update supplyItem set supply=@p0, item=@p1, quantity=@p2, price=@p3, quality=@p4, comment=@p5,shipDate=@p6 where supplyItemID = @p7",
+                    supplyItem.supply, supplyItem.item, supplyItem.quantity, supplyItem.price, supplyItem.quality, supplyItem.comment, supplyItem.shipDate, supplyItem.supplyItemID);
+                
+                return "OK";
+            }
+            return "ERROR";
         }
 
         [CustomAuthorize(Roles = "administrator,referent")]
@@ -180,6 +193,17 @@ namespace MIVProject.Controllers
             db.supplyItem.Remove(supplyItem);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // POST: SupplyItem/DeleteViaAjax/5
+        [HttpPost, ActionName("DeleteViaAjax")]
+        [ValidateAntiForgeryToken]
+        public string DeleteConfirmedViaAjax(int id)
+        {
+            supplyItem supplyItem = db.supplyItem.Find(id);
+            db.supplyItem.Remove(supplyItem);
+            db.SaveChanges();
+            return "OK";
         }
 
         protected override void Dispose(bool disposing)
