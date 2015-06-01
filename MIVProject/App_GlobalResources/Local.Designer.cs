@@ -286,6 +286,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kriteriji.
+        /// </summary>
+        internal static string Criterias {
+            get {
+                return ResourceManager.GetString("Criterias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Valute.
         /// </summary>
         internal static string Currency {
@@ -435,6 +444,15 @@ namespace Resources {
         internal static string FurtherWork {
             get {
                 return ResourceManager.GetString("FurtherWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Početna.
+        /// </summary>
+        internal static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
             }
         }
         

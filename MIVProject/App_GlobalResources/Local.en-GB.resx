@@ -522,4 +522,10 @@ Gospodarska bb, 42 000 Varaždin, Croatia
   <data name="SupplyNav" xml:space="preserve">
     <value>My Offers</value>
   </data>
+  <data name="Criterias" xml:space="preserve">
+    <value>Criterias</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
 </root>
