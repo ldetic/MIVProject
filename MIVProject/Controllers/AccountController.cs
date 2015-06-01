@@ -120,6 +120,7 @@ namespace MIVProject.Controllers
                 }
 
                 string msg = "User loged in";
+                int userID = (int)Session["userID"];
                 mivEntities.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
                 return Redirect(FormsAuthentication.GetRedirectUrl(Session["username"].ToString(), false));
                 //return RedirectToAction("Index", "Home");
