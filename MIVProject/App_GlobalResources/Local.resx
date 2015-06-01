@@ -497,4 +497,7 @@ Gospodarska bb (prodaja armatura i fazona)
   <data name="Visible" xml:space="preserve">
     <value>Vidljiv</value>
   </data>
+  <data name="SupplyAccepted" xml:space="preserve">
+    <value>Vaša ponuda je prihvaćena. Broj ponude:</value>
+  </data>
 </root>

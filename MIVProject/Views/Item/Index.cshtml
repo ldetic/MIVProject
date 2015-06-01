@@ -25,7 +25,13 @@
                 @Local.Quantity
             </th>
             <th data-field="category" data-sortable="true">
+                @Local.SubCategory
+            </th>
+            <th data-field="category2" data-sortable="true">
                 @Local.Category
+            </th>
+            <th data-field="visible" data-sortable="true">
+                @Local.Visible
             </th>
             <th class="hidden">Criterias</th>
             <th></th>
@@ -45,8 +51,14 @@
                 <td class="item-value">
                     <span class="item-quantity">@Html.DisplayFor(modelItem => item.quantity)</span><span class="item-unitofmeasure">@Html.DisplayFor(modelItem => item.unitOfMeasure)</span>
                 </td>
-                <td class="item-subcategory">
+                <td class="item-category">
                     @Html.DisplayFor(modelItem => item.itemSubCategory.name)
+                </td>
+                <td class="item-category2">
+                    @Html.DisplayFor(modelItem => item.itemSubCategory.itemCategory.name)
+                </td>
+                <td class="item-visible">
+                    @Html.DisplayFor(modelItem => item.visible)
                 </td>
                 <td class="item-criterias hidden">
                     @foreach (var i in item.itemSubCategory.itemCategory.criteria)
