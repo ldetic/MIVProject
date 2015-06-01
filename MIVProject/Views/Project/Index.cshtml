@@ -9,15 +9,17 @@
 <h2>@Local.Projects</h2>
 <div class="alerts"></div>
 <div id="toolbar">
-    @Html.ActionLink(Local.CreateNew, "Create")
+    <a class="btn btn-default" href="Project/Create">
+        <span class="glyphicon glyphicon-plus add-but" aria-hidden="true"></span>
+        @Local.CreateNew
+    </a>
 </div>
-<table id="projects-table" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
+<table id="projects-table" data-card-view="true" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
        data-search="true" data-toolbar="#toolbar" data-pagination="true"
        data-query-params="queryParams">
     <thead>
         <tr>
             <th data-field="name" data-sortable="true">
-                @Local.Name
             </th>
             <th data-field="description">
                 @Local.Description
@@ -60,48 +62,50 @@
                     @Html.DisplayFor(modelItem => item.paymentMethod1.name)
                 </td>
                 <td>
-                    @if ((string)Session["type"] == "referent" || (string)Session["type"] == "administrator")
-                    {
-                    <a href="@Url.Action("Edit", new { id = item.id })">
-                        <span class="glyphicon glyphicon-edit"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="left"
-                              title="@Local.Edit"></span>
-                    </a>
-                    }
                     <a href="@Url.Action("Details", new { id = item.id })">
-                        <span class="glyphicon glyphicon-list-alt"
+                        <span class="glyphicon glyphicon-list-alt glyp-xbig"
                               aria-hidden="true"
                               data-toggle="tooltip"
                               data-placement="left"
                               title="@Local.Details"></span>
                     </a>
-                    @if ((string)Session["type"] == "referent" || (string)Session["type"] == "administrator")
-                    {
-                    <a href="#"
-                       data-target="#modalDelete"
-                       data-toggle="modal"
-                       data-object-name="@Html.DisplayFor(modelItem => item.name)"
-                       data-object-id="@Html.DisplayFor(modelItem => item.id)"
-                       data-object-type="project">
-                        <span class="glyphicon glyphicon-trash"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="left"
-                              title="@Local.Delete"></span>
-                    </a>
-                    }
                     @if ((string)Session["type"] == "dobavljac")
                     {
                         <a href="/supplyHeader/Create?project=true&id=@item.id&name=@HttpUtility.UrlEncode(item.name)" class="">
-                            <span class="glyphicon glyphicon-shopping-cart"
+                            <span class="glyphicon glyphicon-shopping-cart glyp-xbig"
                                   aria-hidden="true"
                                   data-toggle="tooltip"
                                   data-placement="left"
                                   title="Kreiraj ponudu"></span>
                         </a>
                     }
+                    @if ((string)Session["type"] == "referent" || (string)Session["type"] == "administrator")
+                    {
+                        <a href="@Url.Action("Edit", new { id = item.id })">
+                            <span class="glyphicon glyphicon-edit glyp-big"
+                                  aria-hidden="true"
+                                  data-toggle="tooltip"
+                                  data-placement="left"
+                                  title="@Local.Edit"></span>
+                        </a>
+                    }
+                    
+                    @if ((string)Session["type"] == "referent" || (string)Session["type"] == "administrator")
+                    {
+                        <a href="#"
+                           data-target="#modalDelete"
+                           data-toggle="modal"
+                           data-object-name="@Html.DisplayFor(modelItem => item.name)"
+                           data-object-id="@Html.DisplayFor(modelItem => item.id)"
+                           data-object-type="project">
+                            <span class="glyphicon glyphicon-trash glyp-big"
+                                  aria-hidden="true"
+                                  data-toggle="tooltip"
+                                  data-placement="left"
+                                  title="@Local.Delete"></span>
+                        </a>
+                    }
+                   
                     @Html.AntiForgeryToken()
                 </td>
             </tr>

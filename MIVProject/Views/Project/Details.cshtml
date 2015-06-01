@@ -79,7 +79,7 @@
 <h4>@Local.Products</h4>
 
 
-<table id="project-items-table" class="table object-table" data-toggle="table" data-sort-order="asc"
+<table id="project-items-table" data-card-view="true" class="table object-table" data-toggle="table" data-sort-order="asc"
        data-pagination="true" data-query-params="queryParams">
     <thead>
         <tr>
@@ -108,7 +108,7 @@
     </thead>
     <tbody>
         @foreach (var item in projectItems)
-            {
+        {
             <tr id="object-row-" + @item.projectPosition>
                 <td>
                     @item.item1.name
@@ -135,6 +135,8 @@
         }
     </tbody>
 </table>
+
+
 
 <p>
     @Html.ActionLink(Local.Edit, "Edit", new { id = Model.id }) |

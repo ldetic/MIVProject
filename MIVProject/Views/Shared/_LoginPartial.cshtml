@@ -19,15 +19,31 @@ else
     <ul class="nav navbar-nav navbar-right">
        
         @if (Session["username"] != null)
-        {
-            <li><a href="#">@Local.Welcome @Session["username"] !</a></li>
-            <li>@Html.ActionLink(Local.Logout, "Logout", "Account")</li>
-        }
-        else
-        {
-            <li>@Html.ActionLink(Local.Registration, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-            <li>@Html.ActionLink(Local.Login, "Login", "Account")</li>
-        }
+{
+    if (Session["type"] == "dobavljac")
+    {
+        <li>
+            <a href='@(Url.Action("Details", "Supplier",new{id= Session["userID"]}))'><span class="glyphicon glyphicon-user glyp-style" aria-hidden="true"></span>@Session["username"]</a>
+        </li>
+    }
+    else
+    {
+        <li><a href='@(Url.Action("Details", "mivUser", new { id = Session["userID"] }))'><span class="glyphicon glyphicon-user glyp-style" aria-hidden="true"></span>@Session["username"]</a></li>
+
+    }
+    <li class="logut-colo">
+        <a href='@(Url.Action("Logout", "Account"))'><span class="glyphicon glyphicon-log-out glyp-style" aria-hidden="true"></span>@Local.Logout</a>
+    </li>
+}
+else
+{
+    <li class="reg-colo">
+        <a href='@(Url.Action("Register", "Account"))'><span class="glyphicon glyphicon-user glyp-style" aria-hidden="true"></span>@Local.Registration</a>
+    </li>
+    <li class="login-colo">
+        <a href='@(Url.Action("Login", "Account"))'><span class="glyphicon glyphicon-log-in glyp-style" aria-hidden="true"></span>@Local.Login</a>
+    </li>
+}
         
     </ul>
 }

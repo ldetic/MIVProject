@@ -80,14 +80,21 @@
             }
         </div>
         <hr />
-        <footer class="col-xs-12 row">
-            <p>&copy; @DateTime.Now.Year - @Local.CompanyNameLong</p>
-
+        <footer class="col-xs-12 row foot_poz">
+            <br>
+            <a class="footer-link" href="http://miv.hr/">Početna</a>
+            <span class="footer-razmaci">|</span>
+            <a class="footer-link" href="http://miv.hr/default.asp?lang=Hr&amp;LanguageID=-1&amp;FlashID=11089">Kontakt</a>
+            <span class="footer-razmaci">|</span>
+            <a class="footer-link" href="http://miv.hr/default.asp?lang=Hr&amp;LanguageID=-1&amp;FlashID=11085">O nama</a>
+            <br><br>
             <form method="get" name="Localization">
-                @Html.AntiForgeryToken()
-                <input type="submit" name="en-GB" class="btn btn-default" value="English" />
-                <input type="submit" name="hr-HR" class="btn btn-default" value="Hrvatski" />
+                <input name="__RequestVerificationToken" type="hidden" value="FnooAT5q8PEXAMFEZl30xwM66gHGAiEh4tiezgTuDl7s3abP3A0jkKb2-Ji3rfbU0isxuaLOTfLLpaF4bfYQW892_fMUSqWPk0GR8dCdg941">
+                <input class="footer-sub-act btn btn-default" type="submit" name="hr-HR"  value="Hrvatski">
+                <input class="footer-sub-no btn btn-default" type="submit" name="en-GB"  value="English">
             </form>
+            <br>
+            <p class="miv_cpr">© 2015 - Metalska industrija Varaždin</p><br>
         </footer>
     </div>
 

@@ -6,35 +6,58 @@
 <h2>@Local.Registration</h2>
 
 
-<div>
+<hr>
+
+<div class="form-horizontal">
     <form action="Register" method="post">
-        <label>@Local.username</label>
-        <input name="username" type="text" required/>
-        <br />
-
-        <label>@Local.password</label>
-        <input name="password" type="password" required />
-        <br />
-        
-        <label>@Local.Name</label>
-        <input name="name" type="text" required />
-        <br />
-
-        <label>@Local.Phone</label>
-        <input name="phone" type="text" required />
-        <br />
-
-        <label>@Local.Email</label>
-        <input name="email" type="email" required />
-        <br />
-
-        <label>OIB</label>
-        <input name="oib" type="text" required />
-        <br />
-        <h5>@ViewBag.Msg</h5>
-        <input id="submit" type="submit" value=@Local.Register />
+        <div class="form-group">
+            <label class="control-label col-md-2">@Local.username</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" name="username" type="text" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">@Local.password</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" name="password" type="text" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">@Local.Name</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" name="name" type="text" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">@Local.Phone</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" name="phone" type="text" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">@Local.Email</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" name="email" type="text" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">OIB</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" name="oib" type="text" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                <p>*sva polja su obavezna</p>
+            </div>
+        </div>
+        <div>
+            <div class="col-md-4"></div>
+            <div>
+                <input id="submit" class="btn btn-default" value="@Local.Register" type="submit">
+            </div>
+        </div>
     </form>
 </div>
-
-
-
+<h5>@ViewBag.Msg</h5>
