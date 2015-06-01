@@ -999,6 +999,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dobavljač.
+        /// </summary>
+        internal static string Supplier1 {
+            get {
+                return ResourceManager.GetString("Supplier1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kategorije dobavljača.
         /// </summary>
         internal static string SupplierCategory {

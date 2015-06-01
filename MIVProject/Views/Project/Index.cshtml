@@ -9,10 +9,12 @@
 <h2>@Local.Projects</h2>
 <div class="alerts"></div>
 <div id="toolbar">
-    <a class="btn btn-default" href="Project/Create">
-        <span class="glyphicon glyphicon-plus add-but" aria-hidden="true"></span>
-        @Local.CreateNew
-    </a>
+    @if (Session["type"] == "referent" || Session["type"] == "administrator")
+    {
+        <a class="btn btn-default" href="Project/Create">
+            <span class="glyphicon glyphicon-plus add-but" aria-hidden="true"></span>
+            @Local.CreateNew
+        </a>}
 </div>
 <table id="projects-table" data-card-view="true" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
        data-search="true" data-toolbar="#toolbar" data-pagination="true"
@@ -95,7 +97,7 @@
                                   title="@Local.Edit"></span>
                         </a>
                     }
-                    
+
                     @if ((string)Session["type"] == "referent" || (string)Session["type"] == "administrator")
                     {
                         <a href="#"
@@ -111,7 +113,7 @@
                                   title="@Local.Delete"></span>
                         </a>
                     }
-                   
+
                     @Html.AntiForgeryToken()
                 </td>
             </tr>

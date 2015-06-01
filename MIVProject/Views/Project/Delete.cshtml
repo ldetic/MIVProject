@@ -58,6 +58,13 @@
             @Html.DisplayFor(model => model.paymentMethod1.name)
         </dd>
 
+        <dt>
+            @Local.Currency1
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.currency1.name)
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {

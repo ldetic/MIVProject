@@ -7,7 +7,13 @@
 <h2>@Local.Products</h2>
 <div class="alerts"></div>
 <div id="toolbar">
-    @Html.ActionLink(Local.CreateNew, "Create")
+    @if (Session["type"] == "referent" || Session["type"] == "administrator")
+    {
+        <a class="btn btn-default" href="Item/Create">
+            <span class="glyphicon glyphicon-plus add-but" aria-hidden="true"></span>
+            @Local.CreateNew
+        </a>
+      }
 </div>
 <table id="products-table" data-card-view="true" class="table object-table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
        data-search="true" data-toolbar="#toolbar" data-pagination="true"
@@ -36,7 +42,7 @@
                     @Local.Visible
                 </th>
             }
-            <th class="hidden">Criterias</th>
+            <th class="hidden">@Local.Criterias</th>
             <th></th>
         </tr>
     </thead>

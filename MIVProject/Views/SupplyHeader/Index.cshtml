@@ -6,9 +6,7 @@
 
 <h2>@Local.Supply</h2>
 
-<p>
-    @Html.ActionLink(Local.CreateNew, "Create")
-</p>
+
 <table id="supplyHeader-table" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
        data-search="true" data-toolbar="#toolbar" data-pagination="true"
        data-query-params="queryParams">
@@ -24,7 +22,7 @@
                 @Local.Date
             </th>
             <th>
-                @Local.Currency
+                @Local.Currency1
             </th>
             <th>
                 @Local.DeliveryMethod
@@ -39,7 +37,7 @@
             @if ((string)Session["type"] == "administrator" || (string)Session["type"] == "referent")
             {
                 <th>
-                    @Local.Supplier
+                    @Local.Supplier1
                 </th>
             }
             <th>
@@ -85,7 +83,7 @@
                 {
                     @Html.ActionLink(Local.Edit, "Edit", new { id = item.supplyID })  } 
 
-                @if ((string)Session["type"] == "administrator" || (string)Session["type"] == "referent")
+                @if ((string)Session["type"] == "administrator" || (string)Session["type"] == "referent" || ((string)Session["type"]=="dobavljac" && item.supplyStatus.name=="U izradi"))
                 {
                     @Html.ActionLink(Local.Delete, "Delete", new { id = item.supplyID })}
 

@@ -512,4 +512,7 @@ Gospodarska bb (prodaja armatura i fazona)
   <data name="Home" xml:space="preserve">
     <value>Početna</value>
   </data>
+  <data name="Supplier1" xml:space="preserve">
+    <value>Dobavljač</value>
+  </data>
 </root>
