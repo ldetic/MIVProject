@@ -500,4 +500,10 @@ Gospodarska bb (prodaja armatura i fazona)
   <data name="SupplyAccepted" xml:space="preserve">
     <value>Vaša ponuda je prihvaćena. Broj ponude:</value>
   </data>
+  <data name="Currency1" xml:space="preserve">
+    <value>Valuta</value>
+  </data>
+  <data name="SupplyNav" xml:space="preserve">
+    <value>Moje Ponude</value>
+  </data>
 </root>
