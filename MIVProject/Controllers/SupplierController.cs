@@ -10,7 +10,7 @@ using MIVProject;
 
 namespace MIVProject.Controllers
 {
-    
+
     public class supplierController : Controller
     {
         private mivEntities db = new mivEntities();
@@ -66,6 +66,12 @@ namespace MIVProject.Controllers
             {
                 db.supplier.Add(supplier);
                 db.SaveChanges();
+
+                string username = Session["username"].ToString();
+                DateTime date = DateTime.Now;
+                string msg = "Supplier created " + supplier.name + " id:" + supplier.mivUser;
+                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+
                 return RedirectToAction("Index");
             }
 
@@ -77,7 +83,7 @@ namespace MIVProject.Controllers
         [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Edit(int? id)
         {
-            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -103,6 +109,12 @@ namespace MIVProject.Controllers
             {
                 db.Entry(supplier).State = EntityState.Modified;
                 db.SaveChanges();
+
+                string username = Session["username"].ToString();
+                DateTime date = DateTime.Now;
+                string msg = "Supplier edited " + supplier.name + " id:" + supplier.mivUser;
+                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+
                 return RedirectToAction("Index");
             }
             ViewBag.mivUser = new SelectList(db.mivUser, "userID", "username", supplier.mivUser);
@@ -131,8 +143,20 @@ namespace MIVProject.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             supplier supplier = db.supplier.Find(id);
-            db.supplier.Remove(supplier);
-            db.SaveChanges();
+            try
+            {
+                db.supplier.Remove(supplier);
+                db.SaveChanges();
+
+                string username = Session["username"].ToString();
+                DateTime date = DateTime.Now;
+                string msg = "Supplier removed " + supplier.name + " id:" + supplier.mivUser;
+                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 
