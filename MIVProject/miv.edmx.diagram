@@ -32,11 +32,12 @@
         <AssociationConnector Association="mivModel.categoryCriteria" />
         <EntityTypeShape EntityType="mivModel.logs" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="mivModel.item" Width="1.5" PointX="8.25" PointY="8" />
-        <EntityTypeShape EntityType="mivModel.project" Width="1.5" PointX="3" PointY="4" />
-        <AssociationConnector Association="mivModel.FK__project__deliver__5BE2A6F2" />
         <AssociationConnector Association="mivModel.FK__item__subcategor__5812160E" />
         <AssociationConnector Association="mivModel.FK__projectIte__item__3A4CA8FD" />
         <AssociationConnector Association="mivModel.FK__supplyItem__item__18EBB532" />
+        <EntityTypeShape EntityType="mivModel.project" Width="1.5" PointX="10.25" PointY="0.75" />
+        <AssociationConnector Association="mivModel.FK__project__currenc__55F4C372" />
+        <AssociationConnector Association="mivModel.FK__project__deliver__5BE2A6F2" />
         <AssociationConnector Association="mivModel.FK__project__payment__00200768" />
         <AssociationConnector Association="mivModel.FK__projectIt__proje__14270015" />
         <AssociationConnector Association="mivModel.FK__supplyHea__proje__07C12930" />

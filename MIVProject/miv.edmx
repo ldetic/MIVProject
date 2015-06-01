@@ -105,6 +105,7 @@
           <Property Name="src" Type="varchar" MaxLength="255" />
           <Property Name="visible" Type="bit" />
           <Property Name="validTillDate" Type="date" />
+          <Property Name="currency" Type="int" />
         </EntityType>
         <EntityType Name="projectItem">
           <Key>
@@ -256,6 +257,18 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
             </Principal>
             <Dependent Role="mivUser">
               <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__project__currenc__55F4C372">
+          <End Role="currency" Type="Self.currency" Multiplicity="0..1" />
+          <End Role="project" Type="Self.project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="currency">
+              <PropertyRef Name="currencyID" />
+            </Principal>
+            <Dependent Role="project">
+              <PropertyRef Name="currency" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -476,6 +489,10 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
             <End Role="userType" EntitySet="userType" />
             <End Role="mivUser" EntitySet="mivUser" />
           </AssociationSet>
+          <AssociationSet Name="FK__project__currenc__55F4C372" Association="Self.FK__project__currenc__55F4C372">
+            <End Role="currency" EntitySet="currency" />
+            <End Role="project" EntitySet="project" />
+          </AssociationSet>
           <AssociationSet Name="FK__project__deliver__5BE2A6F2" Association="Self.FK__project__deliver__5BE2A6F2">
             <End Role="deliveryMethod" EntitySet="deliveryMethod" />
             <End Role="project" EntitySet="project" />
@@ -599,11 +616,6 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           </AssociationSet>
           <EntitySet Name="logs" EntityType="mivModel.logs" />
           <EntitySet Name="item" EntityType="mivModel.item" />
-          <EntitySet Name="project" EntityType="mivModel.project" />
-          <AssociationSet Name="FK__project__deliver__5BE2A6F2" Association="mivModel.FK__project__deliver__5BE2A6F2">
-            <End Role="deliveryMethod" EntitySet="deliveryMethod" />
-            <End Role="project" EntitySet="project" />
-          </AssociationSet>
           <AssociationSet Name="FK__item__subcategor__5812160E" Association="mivModel.FK__item__subcategor__5812160E">
             <End Role="itemSubCategory" EntitySet="itemSubCategory" />
             <End Role="item" EntitySet="item" />
@@ -615,6 +627,15 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <AssociationSet Name="FK__supplyItem__item__18EBB532" Association="mivModel.FK__supplyItem__item__18EBB532">
             <End Role="item" EntitySet="item" />
             <End Role="supplyItem" EntitySet="supplyItem" />
+          </AssociationSet>
+          <EntitySet Name="project" EntityType="mivModel.project" />
+          <AssociationSet Name="FK__project__currenc__55F4C372" Association="mivModel.FK__project__currenc__55F4C372">
+            <End Role="currency" EntitySet="currency" />
+            <End Role="project" EntitySet="project" />
+          </AssociationSet>
+          <AssociationSet Name="FK__project__deliver__5BE2A6F2" Association="mivModel.FK__project__deliver__5BE2A6F2">
+            <End Role="deliveryMethod" EntitySet="deliveryMethod" />
+            <End Role="project" EntitySet="project" />
           </AssociationSet>
           <AssociationSet Name="FK__project__payment__00200768" Association="mivModel.FK__project__payment__00200768">
             <End Role="paymentMethod" EntitySet="paymentMethod" />
@@ -661,6 +682,7 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="abbreviation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="supplyHeader" Relationship="mivModel.FK__supplyHea__curre__1DB06A4F" FromRole="currency" ToRole="supplyHeader" />
+          <NavigationProperty Name="project" Relationship="mivModel.FK__project__currenc__55F4C372" FromRole="currency" ToRole="project" />
         </EntityType>
         <EntityType Name="deliveryMethod">
           <Key>
@@ -954,37 +976,6 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <NavigationProperty Name="projectItem" Relationship="mivModel.FK__projectIte__item__3A4CA8FD" FromRole="item" ToRole="projectItem" />
           <NavigationProperty Name="supplyItem" Relationship="mivModel.FK__supplyItem__item__18EBB532" FromRole="item" ToRole="supplyItem" />
         </EntityType>
-        <EntityType Name="project">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="paymentMethod" Type="Int32" Nullable="false" />
-          <Property Name="paymentDate" Type="DateTime" Precision="0" />
-          <Property Name="deliveryMethod" Type="Int32" Nullable="false" />
-          <Property Name="deliveryDate" Type="DateTime" Precision="0" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="src" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="visible" Type="Boolean" />
-          <Property Name="validTillDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="deliveryMethod1" Relationship="mivModel.FK__project__deliver__5BE2A6F2" FromRole="project" ToRole="deliveryMethod" />
-          <NavigationProperty Name="paymentMethod1" Relationship="mivModel.FK__project__payment__00200768" FromRole="project" ToRole="paymentMethod" />
-          <NavigationProperty Name="projectItem" Relationship="mivModel.FK__projectIt__proje__14270015" FromRole="project" ToRole="projectItem" />
-          <NavigationProperty Name="supplyHeader" Relationship="mivModel.FK__supplyHea__proje__07C12930" FromRole="project" ToRole="supplyHeader" />
-        </EntityType>
-        <Association Name="FK__project__deliver__5BE2A6F2">
-          <End Type="mivModel.deliveryMethod" Role="deliveryMethod" Multiplicity="1" />
-          <End Type="mivModel.project" Role="project" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="deliveryMethod">
-              <PropertyRef Name="deliveryID" />
-            </Principal>
-            <Dependent Role="project">
-              <PropertyRef Name="deliveryMethod" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__item__subcategor__5812160E">
           <End Type="mivModel.itemSubCategory" Role="itemSubCategory" Multiplicity="1" />
           <End Type="mivModel.item" Role="item" Multiplicity="*" />
@@ -1018,6 +1009,51 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
             </Principal>
             <Dependent Role="supplyItem">
               <PropertyRef Name="item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="project">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="paymentMethod" Type="Int32" Nullable="false" />
+          <Property Name="paymentDate" Type="DateTime" Precision="0" />
+          <Property Name="deliveryMethod" Type="Int32" Nullable="false" />
+          <Property Name="deliveryDate" Type="DateTime" Precision="0" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="src" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="visible" Type="Boolean" />
+          <Property Name="validTillDate" Type="DateTime" Precision="0" />
+          <Property Name="currency" Type="Int32" />
+          <NavigationProperty Name="currency1" Relationship="mivModel.FK__project__currenc__55F4C372" FromRole="project" ToRole="currency" />
+          <NavigationProperty Name="deliveryMethod1" Relationship="mivModel.FK__project__deliver__5BE2A6F2" FromRole="project" ToRole="deliveryMethod" />
+          <NavigationProperty Name="paymentMethod1" Relationship="mivModel.FK__project__payment__00200768" FromRole="project" ToRole="paymentMethod" />
+          <NavigationProperty Name="projectItem" Relationship="mivModel.FK__projectIt__proje__14270015" FromRole="project" ToRole="projectItem" />
+          <NavigationProperty Name="supplyHeader" Relationship="mivModel.FK__supplyHea__proje__07C12930" FromRole="project" ToRole="supplyHeader" />
+        </EntityType>
+        <Association Name="FK__project__currenc__55F4C372">
+          <End Type="mivModel.currency" Role="currency" Multiplicity="0..1" />
+          <End Type="mivModel.project" Role="project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="currency">
+              <PropertyRef Name="currencyID" />
+            </Principal>
+            <Dependent Role="project">
+              <PropertyRef Name="currency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__project__deliver__5BE2A6F2">
+          <End Type="mivModel.deliveryMethod" Role="deliveryMethod" Multiplicity="1" />
+          <End Type="mivModel.project" Role="project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="deliveryMethod">
+              <PropertyRef Name="deliveryID" />
+            </Principal>
+            <Dependent Role="project">
+              <PropertyRef Name="deliveryMethod" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1255,6 +1291,7 @@ warning 6002: The table/view 'miv.sys.database_firewall_rules' does not have a p
           <EntitySetMapping Name="project">
             <EntityTypeMapping TypeName="mivModel.project">
               <MappingFragment StoreEntitySet="project">
+                <ScalarProperty Name="currency" ColumnName="currency" />
                 <ScalarProperty Name="validTillDate" ColumnName="validTillDate" />
                 <ScalarProperty Name="visible" ColumnName="visible" />
                 <ScalarProperty Name="src" ColumnName="src" />

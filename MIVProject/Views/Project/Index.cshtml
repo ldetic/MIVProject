@@ -36,6 +36,9 @@
             <th data-field="paymentMethod" data-sortable="true">
                 @Local.PaymentMethod
             </th>
+            <th data-field="currency" data-sortable="true">
+                @Local.Currency1
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -60,6 +63,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.paymentMethod1.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.currency1.name)
                 </td>
                 <td>
                     <a href="@Url.Action("Details", new { id = item.id })">

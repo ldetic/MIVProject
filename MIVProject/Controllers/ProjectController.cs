@@ -68,7 +68,7 @@ namespace MIVProject.Controllers
 
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name");
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name");
-             
+            ViewBag.currency = new SelectList(db.currency, "currencyID", "name"); 
             return View();
 
             
@@ -97,6 +97,7 @@ namespace MIVProject.Controllers
 
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", project.deliveryMethod);
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", project.paymentMethod);
+            ViewBag.currency = new SelectList(db.currency, "currencyID", "name", project.currency); 
             return View(project);
         }
 
@@ -136,6 +137,7 @@ namespace MIVProject.Controllers
             }
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", project.deliveryMethod);
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", project.paymentMethod);
+            ViewBag.currency = new SelectList(db.currency, "currencyID", "name", project.currency); 
             currentEditId = (int)id;
             return View(project);
         }
@@ -164,6 +166,7 @@ namespace MIVProject.Controllers
                 }
                 ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", project.deliveryMethod);
                 ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", project.paymentMethod);
+                ViewBag.currency = new SelectList(db.currency, "currencyID", "name", project.currency); 
                 return View(project);
             }
             catch
