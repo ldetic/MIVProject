@@ -254,12 +254,15 @@
             var project = {
                 __RequestVerificationToken: reqToken,
                 name: $("#name").val(),
+                visible: $("#visible").prop("checked"),
+                validTillDate: $("#validTillDate").val(),
                 paymentMethod: $("#paymentMethod").val(),
                 paymentDate: $("#paymentDate").val(),
                 deliveryMethod: $("#deliveryMethod").val(),
                 deliveryDate: $("#deliveryDate").val(),
                 description: $("#description").val()
             };
+            console.log(project);
             //2. Getting project items
             var items = [];
             $(".acc-items .acc-items-section").each(function (index, el) {

@@ -1161,6 +1161,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vrijedi do.
+        /// </summary>
+        internal static string validTillDate {
+            get {
+                return ResourceManager.GetString("validTillDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vidljiv.
+        /// </summary>
+        internal static string Visible {
+            get {
+                return ResourceManager.GetString("Visible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dobro došli.
         /// </summary>
         internal static string Welcome {

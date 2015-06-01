@@ -2,12 +2,14 @@
 @using Resources
 @{
     project Project = null;
-    if (ViewBag.project != null) {
+    if (ViewBag.project != null)
+    {
         Project = (project)ViewBag.project;
         ViewBag.Title = Local.OfferFor + " " + Project.name;
 
     }
-    else {
+    else
+    {
         ViewBag.Title = Local.Confirm;
         ViewBag.HideSidebar = true;
     }
@@ -18,51 +20,53 @@
 }
 else
 {
-<h2>@Local.Confirm</h2>
+    <h2>@Local.Confirm</h2>
 }
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal supply-header-create  ">
         <hr />
-        @if (Project != null) {
-            <div class="supply-header-project-create"></div>
-        } else
+        @if (Project != null)
         {
-             <div class="supply-header-items-create"></div>
-        } 
+            <div class="supply-header-project-create"></div>
+        }
+        else
+        {
+            <div class="supply-header-items-create"></div>
+        }
 
         <span>@ViewBag.Msg</span>
-        
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @if(Project != null)
+        @if (Project != null)
         {
             <input id="project-id" type="hidden" value=@Project.id />
             <input id="project-name" type="hidden" value="@Project.name" />
         }
         <div class="form-group">
-            <label class = "control-label col-md-2" >@Local.PaymentMethod</label>
+            <label class="control-label col-md-2">@Local.PaymentMethod</label>
             <div class="col-md-10">
                 @Html.DropDownList("paymentMethod", null, htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.paymentMethod, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            <label class = "control-label col-md-2" >@Local.DeliveryMethod</label>
+            <label class="control-label col-md-2">@Local.DeliveryMethod</label>
             <div class="col-md-10">
                 @Html.DropDownList("deliveryMethod", null, htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.deliveryMethod, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            <label class = "control-label col-md-2" >@Local.PaymentDate</label>
+            <label class="control-label col-md-2">@Local.PaymentDate</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.paymentDate, new { htmlAttributes = new { @class = "form-control", required = "required", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.paymentDate, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            <label class = "control-label col-md-2" >@Local.DeliveryDate</label>
+            <label class="control-label col-md-2">@Local.DeliveryDate</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.deliveryDate, new { htmlAttributes = new { @class = "form-control", required = "required", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.deliveryDate, "", new { @class = "text-danger" })
@@ -70,31 +74,31 @@ else
         </div>
         @if (Session["type"].ToString() != "dobavljač" && Session["type"].ToString() != "dobavljac")
         {<div class="form-group">
-            <label class= "control-label col-md-2" >@Local.Supplier</label>
+            <label class="control-label col-md-2">@Local.Supplier</label>
             <div class="col-md-10">
                 @Html.DropDownList("supplier", null, htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.supplier, "", new { @class = "text-danger" })
             </div>
         </div>
 
-            <div class="form-group">
-                <label class = "control-label col-md-2" >@Local.SupplyStatus</label>
-                <div class="col-md-10">
-                    @Html.DropDownList("status", null, htmlAttributes: new { @class = "form-control", required = "required" })
-                    @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">@Local.SupplyStatus</label>
+            <div class="col-md-10">
+                @Html.DropDownList("status", null, htmlAttributes: new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
             </div>
+        </div>
         }
         <div class="form-group">
-            <label class = "control-label col-md-2" >@Local.ValidityDate</label>
+            <label class="control-label col-md-2">@Local.ValidityDate</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control", @type="date" } })
+                @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2" >@Local.Currency</label>
+            <label class="control-label col-md-2">@Local.Currency</label>
             <div class="col-md-10">
                 @Html.DropDownList("currency", null, htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.currency, "", new { @class = "text-danger" })
@@ -112,7 +116,10 @@ else
                                 @pt.item1.name
                             </a>
                             <div class="acc-items-section-content" id="acc-items-@pt.projectItemID">
-                                @{ Dictionary<int, string> criterias = new Dictionary<int, string>();}
+                                @{
+                                    Dictionary<int, string> criterias = new Dictionary<int, string>();
+                                    List<int> criteriaIds = new List<int>();
+                                }
                                 @foreach (var i in pt.item1.itemSubCategory.itemCategory.criteria)
                                 {
                                     if (i.criteriaID == 1 || i.criteriaID == 6)
@@ -129,72 +136,75 @@ else
                                     var list = criterias.Values.ToList();
                                     list.Sort();
                                 }
-                                @foreach(var val in list)
-                                {
-                                    <div>@val</div>
-                                }
 
-                                @foreach (var i in pt.item1.itemSubCategory.itemCategory.criteria)
+                                @foreach (var val in list)
                                 {
-                                    <div class="full-width">
-                                    @if (i.criteriaID == 8) //kolicina
+                                    foreach (var criteria in criterias)
+                                    {
+                                        if (@val == @criteria.Value)
+                                        {
+                                            criteriaIds.Add(criteria.Key);
+                                        }
+                                    }
+                                }
+                                @foreach (var i in criteriaIds)
+                                {
+                                    if (i == 8) //kolicina
                                     {
                                         <div class="col-xs-12 col-sm-6 col-md-3">
                                             <label for="item-quantity-@pt.projectItemID">@Local.Quantity:</label>
-                                            <input id="item-quantity-@pt.projectItemID" type="number" class="form-control text-box quantity valid" max="@pt.item1.quantity" min="1" aria-invalid="false"/>
-                                            <span>t</span>
+                                            <input id="item-quantity-@pt.projectItemID" type="number" class="form-control text-box quantity valid" max="@pt.item1.quantity" min="1" aria-invalid="false" />
+                                            <span>@pt.item1.unitOfMeasure</span>
                                         </div>
                                     }
-                                    else if (i.criteriaID == 2) //cijena
+                                    else if (i == 2) //cijena
                                     {
                                         <div class="col-xs-12 col-sm-6 col-md-3">
                                             <label for="item-price-@pt.projectItemID">@Local.Price:</label>
                                             <input id="item-price-@pt.projectItemID" type="number" step="0.01" min="0" class="form-control text-box price valid" value="" aria-invalid="false">
                                         </div>
                                     }
-                                    else if (i.criteriaID == 9) //rok isporuke
+                                    else if (i == 9) //rok isporuke
                                     {
                                         <div class="col-xs-12 col-sm-6 col-md-3">
                                             <label for="item-shipdate-@pt.projectItemID">@Local.shipDate:</label>
-                                            <input id="item-shipdate-@pt.projectItemID" type="date" class="form-control text-box shipdate valid" aria-invalid="false" >
+                                            <input id="item-shipdate-@pt.projectItemID" type="date" class="form-control text-box shipdate valid" aria-invalid="false">
                                         </div>
                                     }
-                                    </div>
-                                    if (i.criteriaID == 1) //kvaliteta sukladna specifikaciji
+
+                                    if (i == 1) //kvaliteta sukladna specifikaciji
                                     {
                                         <div class="col-xs-12 col-sm-6 col-md-4">
                                             <label for="item-qualitiy-@pt.projectItemID">@Local.Quality:</label><br>
-                                            <textarea id="item-qualitiy-@pt.projectItemID" class="col-xs-12 quality valid" aria-invalid="false">
-                                            </textarea>
+                                            <textarea id="item-qualitiy-@pt.projectItemID" class="col-xs-12 quality valid" aria-invalid="false"></textarea>
                                         </div>
                                     }
-                                    else if (i.criteriaID == 6) //napomena
+                                    else if (i == 6) //napomena
                                     {
                                         <div class="col-xs-12 col-sm-6 col-md-4">
                                             <label for="item-comment-@pt.projectItemID">@Local.Comment:</label><br>
-                                            <textarea id="item-comment-@pt.projectItemID" class="col-xs-12 comment valid" aria-invalid="false">
-                                            </textarea>
+                                            <textarea id="item-comment-@pt.projectItemID" class="col-xs-12 comment valid" aria-invalid="false"></textarea>
                                         </div>
                                     }
                                 }
                             </div>
                         </div>
-                        }
-                  }
-                </div>
+                                        }
+                                    }
             </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input id="save-btn" type="button" value="Sačuvaj" class="btn btn-default" />
-                                </div>
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input id="send-btn" type="button" value="Pošalji" class="btn btn-default" />
-                                </div>
-                            </div>
-                        </div>
-                    }
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="save-btn" type="button" value="Sačuvaj" class="btn btn-default" />
+            </div>
+            <div class="col-md-offset-2 col-md-10">
+                <input id="send-btn" type="button" value="Pošalji" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+                                    }
 
 
-                    @section Scripts {
-                        @Scripts.Render("~/bundles/jqueryval")
-                    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

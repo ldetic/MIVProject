@@ -491,4 +491,10 @@ Gospodarska bb (prodaja armatura i fazona)
   <data name="ValidityDate" xml:space="preserve">
     <value>Rok valjanosti</value>
   </data>
+  <data name="validTillDate" xml:space="preserve">
+    <value>Vrijedi do</value>
+  </data>
+  <data name="Visible" xml:space="preserve">
+    <value>Vidljiv</value>
+  </data>
 </root>
