@@ -18,7 +18,7 @@
         <div class="form-group">
             <label class = "control-label col-md-2">@Local.Quantity</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -26,7 +26,7 @@
         <div class="form-group">
             <label class = "control-label col-md-2" >@Local.Price</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,7 +34,7 @@
         <div class="form-group">
             <label class = "control-label col-md-2" >@Local.Quality</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.quality, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.quality, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.quality, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +42,7 @@
         <div class="form-group">
             <label class = "control-label col-md-2" >@Local.Description</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -54,7 +54,7 @@
         <div class="form-group">
             <label class = "control-label col-md-2" >@Local.Comment</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.comment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.comment, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.comment, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="form-group">
             <label class = "control-label col-md-2" >@Local.shipDate</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.shipDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.shipDate, new { htmlAttributes = new { @class = "form-control", @Value = Model.shipDate.Value.ToString("yyyy-MM-dd"), required = "required" } })
                 @Html.ValidationMessageFor(model => model.shipDate, "", new { @class = "text-danger" })
             </div>
         </div>

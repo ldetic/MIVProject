@@ -27,19 +27,11 @@
         </dd>
 
         <dt>
-            @Local.MeasureUnit
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.unitOfMeasure)
-        </dd>
-
-        <dt>
             @Local.Quantity
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.quantity)
+            @Model.quantity  @Model.unitOfMeasure
         </dd>
 
         <dt>
