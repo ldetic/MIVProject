@@ -69,6 +69,8 @@ namespace MIVProject.Controllers
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name");
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name");
             return View();
+
+            
         }
 
         // POST: Project/Create

@@ -9,58 +9,64 @@
 <p>
     @Html.ActionLink(Local.CreateNew, "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Local.username
-        </th>
-        
-        <th>
-            @Local.FirstName
-        </th>
-        <th>
-            @Local.LastName
-        </th>
-        <th>
-            @Local.Email
-        </th>
-        <th>
-            @Local.Type
-        </th>
-       
-        <th></th>
-    </tr>
+<table id="mivUser-table" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
+       data-search="true" data-toolbar="#toolbar" data-pagination="true"
+       data-query-params="queryParams">
+    <thead>
+        <tr>
+            <th>
+                @Local.username
+            </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.username)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.userType.type)
-        </td>
-        
-        <td>
-            @if (item.type != null) { 
-            @Html.ActionLink(Local.Edit, "Edit", new { id=item.userID })
-            } 
-            else{
-            @Html.ActionLink(Local.Check, "CheckSupplier", new { id = item.userID })
-            } |
-            @Html.ActionLink(Local.Details, "Details", new { id=item.userID }) |
-            @Html.ActionLink(Local.Delete, "Delete", new { id = item.userID })
-        </td>
-    </tr>
-}
+            <th>
+                @Local.FirstName
+            </th>
+            <th>
+                @Local.LastName
+            </th>
+            <th>
+                @Local.Email
+            </th>
+            <th>
+                @Local.Type
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.username)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.userType.type)
+            </td>
+
+            <td>
+                @if (item.type != null)
+                {
+                    @Html.ActionLink(Local.Edit, "Edit", new { id = item.userID })
+                }
+                else
+                {
+                    @Html.ActionLink(Local.Check, "CheckSupplier", new { id = item.userID })
+                } |
+                @Html.ActionLink(Local.Details, "Details", new { id = item.userID }) |
+                @Html.ActionLink(Local.Delete, "Delete", new { id = item.userID })
+            </td>
+        </tr>
+    }
 
 </table>

@@ -9,24 +9,28 @@
 <p>
     @Html.ActionLink(Local.CreateNew, "Create")
 </p>
-<table class="table">
+<table id="supplyStatus-table" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
+       data-search="true" data-toolbar="#toolbar" data-pagination="true"
+       data-query-params="queryParams">
+    <thead>
     <tr>
         <th>
             @Local.Name
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.ActionLink(Local.Edit, "Edit", new { id=item.statusID }) |            
-            @Html.ActionLink(Local.Delete, "Delete", new { id=item.statusID })
-        </td>
-    </tr>
-}
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.ActionLink(Local.Edit, "Edit", new { id = item.statusID }) |
+                @Html.ActionLink(Local.Delete, "Delete", new { id = item.statusID })
+            </td>
+        </tr>
+    }
 
 </table>
