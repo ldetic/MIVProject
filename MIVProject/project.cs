@@ -11,6 +11,7 @@ namespace MIVProject
 {
     using System;
     using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
     
     public partial class project
     {
@@ -23,12 +24,15 @@ namespace MIVProject
         public int id { get; set; }
         public string name { get; set; }
         public int paymentMethod { get; set; }
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> paymentDate { get; set; }
         public int deliveryMethod { get; set; }
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> deliveryDate { get; set; }
         public string description { get; set; }
         public string src { get; set; }
         public Nullable<bool> visible { get; set; }
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> validTillDate { get; set; }
     
         public virtual deliveryMethod deliveryMethod1 { get; set; }

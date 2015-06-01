@@ -18,9 +18,27 @@ namespace MIVProject.Controllers
         //[CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Index()
         {
+            bool visible = true;
+
             //var item = db.item.Include(i => i.itemSubCategory);
-            var item = db.item.Include(i => i.itemSubCategory).Include(i => i.itemSubCategory.itemCategory);
-            return View(item.ToList());
+            if (Session["type"] != null)
+            {
+                if (Session["type"].ToString() != "administrator" && Session["type"].ToString() != "referent")
+                {
+                    var item = db.item.Include(i => i.itemSubCategory).Include(i => i.itemSubCategory.itemCategory).Where(x => x.visible == visible);
+                    return View(item.ToList());
+                }
+                else
+                {
+                    var item = db.item.Include(i => i.itemSubCategory).Include(i => i.itemSubCategory.itemCategory);
+                    return View(item.ToList());
+                }
+            }
+            else
+            {
+                var item = db.item.Include(i => i.itemSubCategory).Include(i => i.itemSubCategory.itemCategory).Where(x => x.visible == visible);
+                return View(item.ToList());
+            }
         }
 
         //[CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]

@@ -18,8 +18,27 @@ namespace MIVProject.Controllers
         //[CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]
         public ActionResult Index()
         {
-            var project = db.project.Include(p => p.deliveryMethod1).Include(p => p.paymentMethod1);
-            return View(project.ToList());
+            bool visible = true;
+
+            if (Session["type"] != null)
+            {
+                if (Session["type"].ToString() == "dobavljac")
+                {
+                    var project = db.project.Include(p => p.deliveryMethod1).Include(p => p.paymentMethod1).Where(x => x.visible == visible);
+                    return View(project.ToList());
+                }
+                else
+                {
+                    var project = db.project.Include(p => p.deliveryMethod1).Include(p => p.paymentMethod1);
+                    return View(project.ToList());
+                }
+            }
+            else
+            {
+                var project = db.project.Include(p => p.deliveryMethod1).Include(p => p.paymentMethod1).Where(x => x.visible == visible);
+                return View(project.ToList());
+            }
+
         }
 
         //[CustomAuthorize(Roles = "administrator,referent,dobavljač,dobavljac")]

@@ -11,6 +11,7 @@ namespace MIVProject
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class supplyHeader
     {
@@ -22,9 +23,12 @@ namespace MIVProject
         public int supplyID { get; set; }
         public int paymentMethod { get; set; }
         public int deliveryMethod { get; set; }
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> paymentDate { get; set; }
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> deliveryDate { get; set; }
         public int supplier { get; set; }
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> date { get; set; }
         public Nullable<int> project { get; set; }
         public int status { get; set; }
