@@ -1,27 +1,25 @@
 ﻿@model IEnumerable<MIVProject.logs>
-
+@using Resources
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Local.Logs;
 }
 
-<h2>Index</h2>
+<h2>@Local.Logs</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.userID)
+            UserID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.username)
+            @Local.username
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.msg)
+            @Local.Msg
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.date)
+            @Local.Date
         </th>
         <th></th>
     </tr>
@@ -41,9 +39,7 @@
             @Html.DisplayFor(modelItem => item.date)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Details", "Details", new { id=item.id })
         </td>
     </tr>
 }

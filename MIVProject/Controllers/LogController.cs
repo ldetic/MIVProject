@@ -10,6 +10,8 @@ using MIVProject;
 
 namespace MIVProject.Controllers
 {
+
+    [CustomAuthorize(Roles = "administrator")]
     public class LogController : Controller
     {
         private mivEntities db = new mivEntities();

@@ -482,4 +482,7 @@ Gospodarska bb (prodaja armatura i fazona)
   <data name="Logs" xml:space="preserve">
     <value>Logovi</value>
   </data>
+  <data name="Msg" xml:space="preserve">
+    <value>Poruka</value>
+  </data>
 </root>
