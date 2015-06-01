@@ -86,9 +86,10 @@ namespace MIVProject.Controllers
                 db.SaveChanges();
 
                 string username = Session["username"].ToString();
+                int userID = (int)Session["userID"];
                 DateTime date = DateTime.Now;
                 string msg = "Project created " + project.name + " id:" + project.id;
-                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
 
                 return RedirectToAction("Index");
             }
@@ -109,9 +110,10 @@ namespace MIVProject.Controllers
                 db.SaveChanges();
 
                 string username = Session["username"].ToString();
+                int userID = (int)Session["userID"];
                 DateTime date = DateTime.Now;
                 string msg = "Project created " + project.name + " id:" + project.id;
-                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
 
                 return project.id.ToString();
             }
@@ -152,9 +154,10 @@ namespace MIVProject.Controllers
                     db.SaveChanges();
 
                     string username = Session["username"].ToString();
+                    int userID = (int)Session["userID"];
                     DateTime date = DateTime.Now;
                     string msg = "Project edited " + project.name + " id:" + project.id;
-                    db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                    db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
 
                     return RedirectToAction("Index");
                 }
@@ -223,9 +226,10 @@ namespace MIVProject.Controllers
                     db.SaveChanges();
 
                     string username = Session["username"].ToString();
+                    int userID = (int)Session["userID"];
                     DateTime date = DateTime.Now;
                     string msg = "Project edited " + project.name + " id:" + project.id;
-                    db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                    db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
 
                     return "OK";
                 }

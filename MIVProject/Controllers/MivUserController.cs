@@ -151,9 +151,10 @@ namespace MIVProject.Controllers
                     db.Database.ExecuteSqlCommand("Update mivUser set type = (select typeID from userType where type like 'dobavlja%') where userID=@p0", id);
 
                     string username = Session["username"].ToString();
+                    int userID = (int)Session["userID"];
                     DateTime date = DateTime.Now;
                     string msg = "Supplier confirmation " + user.username;
-                    db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                    db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
                     return RedirectToAction("Index");
                 }
                 catch
@@ -179,9 +180,10 @@ namespace MIVProject.Controllers
                 db.Entry(mivUser).State = EntityState.Modified;
                 db.SaveChanges();
                 string username = Session["username"].ToString();
+                int userID = (int)Session["userID"];
                 DateTime date = DateTime.Now;
                 string msg = "User edited " + mivUser.username;
-                db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
                 return RedirectToAction("Index");
             }
             ViewBag.type = new SelectList(db.userType, "typeID", "type", mivUser.type);
@@ -216,9 +218,10 @@ namespace MIVProject.Controllers
                     db.mivUser.Remove(mivUser);
                     db.SaveChanges();
                     string username = Session["username"].ToString();
+                    int userID = (int)Session["userID"];
                     DateTime date = DateTime.Now;
                     string msg = "User removed " + mivUser.username + " id:" + mivUser.userID;
-                    db.Database.ExecuteSqlCommand("Insert into logs values(0, @p0, @p1, @p2 )", username, msg, date);
+                    db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
                     return RedirectToAction("Index");
                 }
                 catch
