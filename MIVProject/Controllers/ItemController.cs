@@ -70,6 +70,10 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "itemID,name,subcategory,description,unitOfMeasure,quantity,visible")] item item)
         {
+            if (item.visible == null)
+            {
+                item.visible = false;
+            }
             if (ModelState.IsValid)
             {
                 db.item.Add(item);
@@ -104,6 +108,13 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "itemID,name,subcategory,description,unitOfMeasure,quantity,visible")] item item)
         {
+            if (item.visible == null)
+            {
+                item.visible = false;
+            }
+            
+            
+
             if (ModelState.IsValid)
             {
                 db.Entry(item).State = EntityState.Modified;

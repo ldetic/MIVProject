@@ -9,77 +9,89 @@
 <p>
     @Html.ActionLink(Local.CreateNew, "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-           @Local.PaymentDate
-        </th>
-        <th>
-            @Local.DeliveryDate
-        </th>
-        <th>
-            @Local.Date
-        </th>
-        <th>
-            @Local.Currency
-        </th>
-        <th>
-            @Local.DeliveryMethod
-        </th>
-        <th>
-            @Local.PaymentMethod
-        </th>
-        <th>
-            @Local.Project
-        </th>
-        
-        @if ((string)Session["type"] == "dobavljac")
-        {
-        <th>
-            @Local.Supplier
-        </th>
-        }
-        <th>
-            @Local.SupplyStatus
-        </th>
-        <th></th>
-    </tr>
+<table id="supplyHeader-table" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
+       data-search="true" data-toolbar="#toolbar" data-pagination="true"
+       data-query-params="queryParams">
+    <thead>
+        <tr>
+            <th>
+                @Local.PaymentDate
+            </th>
+            <th>
+                @Local.DeliveryDate
+            </th>
+            <th>
+                @Local.Date
+            </th>
+            <th>
+                @Local.Currency
+            </th>
+            <th>
+                @Local.DeliveryMethod
+            </th>
+            <th>
+                @Local.PaymentMethod
+            </th>
+            <th>
+                @Local.Project
+            </th>
 
-@foreach (var item in Model) {
-    <tr>        
-        <td>
-            @Html.DisplayFor(modelItem => item.paymentDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.deliveryDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.currency1.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.deliveryMethod1.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.paymentMethod1.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.project1.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.supplier1.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.supplyStatus.name)
-        </td>
-        <td>
-            @Html.ActionLink(Local.Edit, "Edit", new { id= item.supplyID }) |
-            @Html.ActionLink(Local.Details, "Details", new { id=item.supplyID }) |
-            @Html.ActionLink(Local.Delete, "Delete", new { id = item.supplyID })
-        </td>
-    </tr>
-}
+            @if ((string)Session["type"] == "administrator" || (string)Session["type"] == "referent")
+            {
+                <th>
+                    @Local.Supplier
+                </th>
+            }
+            <th>
+                @Local.SupplyStatus
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.paymentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.deliveryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.currency1.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.deliveryMethod1.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.paymentMethod1.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.project1.name)
+            </td>
+            @if ((string)Session["type"] == "administrator" || (string)Session["type"] == "referent")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.supplier1.name)
+                </td>}
+            <td>
+                @Html.DisplayFor(modelItem => item.supplyStatus.name)
+            </td>
+            <td>
+                @if ((string)Session["type"] == "administrator" || (string)Session["type"] == "referent")
+                {
+                    @Html.ActionLink(Local.Edit, "Edit", new { id = item.supplyID })  } 
+
+                @if ((string)Session["type"] == "administrator" || (string)Session["type"] == "referent")
+                {
+                    @Html.ActionLink(Local.Delete, "Delete", new { id = item.supplyID })}
+
+                @Html.ActionLink(Local.Details, "Details", new { id = item.supplyID })
+            </td>
+        </tr>
+    }
 
 </table>

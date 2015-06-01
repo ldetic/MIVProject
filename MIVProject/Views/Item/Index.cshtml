@@ -9,10 +9,10 @@
 <div id="toolbar">
     @Html.ActionLink(Local.CreateNew, "Create")
 </div>
-    <table id="products-table" class="table object-table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
-           data-search="true" data-toolbar="#toolbar" data-pagination="true"
-           data-query-params="queryParams">
-        <thead>
+<table id="products-table" class="table object-table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
+       data-search="true" data-toolbar="#toolbar" data-pagination="true"
+       data-query-params="queryParams">
+    <thead>
         <tr>
             <th class="hidden"></th>
             <th data-field="name" data-sortable="true">
@@ -30,14 +30,17 @@
             <th data-field="category2" data-sortable="true">
                 @Local.Category
             </th>
-            <th data-field="visible" data-sortable="true">
-                @Local.Visible
-            </th>
+            @if (Session["type"] == "referent" || Session["type"]=="administrator")
+            {
+                <th data-field="visible" data-sortable="true">
+                    @Local.Visible
+                </th>
+            }
             <th class="hidden">Criterias</th>
             <th></th>
         </tr>
-        </thead>
-        <tbody>
+    </thead>
+    <tbody>
         @foreach (var item in Model)
         {
             <tr id="object-row-@Html.DisplayFor(modelItem => item.itemID)">
@@ -57,25 +60,27 @@
                 <td class="item-category2">
                     @Html.DisplayFor(modelItem => item.itemSubCategory.itemCategory.name)
                 </td>
-                <td class="item-visible">
-                    @Html.DisplayFor(modelItem => item.visible)
-                </td>
+                @if (Session["type"] == "referent" || Session["type"]=="administrator")
+                {
+                    <td class="item-visible">
+                        @Html.DisplayFor(modelItem => item.visible)
+                    </td>}
                 <td class="item-criterias hidden">
                     @foreach (var i in item.itemSubCategory.itemCategory.criteria)
                     {
-                    <span>@Html.DisplayFor(modelItem => i.name)</span>
+                        <span>@Html.DisplayFor(modelItem => i.name)</span>
                     }
                 </td>
                 <td>
                     @if ((string)Session["type"] == "referent" || (string)Session["type"] == "administrator")
                     {
-                    <a href="@Url.Action("Edit", new { id = item.itemID })">
-                        <span class="glyphicon glyphicon-edit"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="left"
-                              title="@Local.Edit"></span>
-                    </a>
+                        <a href="@Url.Action("Edit", new { id = item.itemID })">
+                            <span class="glyphicon glyphicon-edit"
+                                  aria-hidden="true"
+                                  data-toggle="tooltip"
+                                  data-placement="left"
+                                  title="@Local.Edit"></span>
+                        </a>
                     }
                     <a href="@Url.Action("Details", new { id = item.itemID })">
                         <span class="glyphicon glyphicon-list-alt"
@@ -86,37 +91,37 @@
                     </a>
                     @if ((string)Session["type"] == "referent" || (string)Session["type"] == "administrator")
                     {
-                    <a href="#"
-                       data-target="#modalDelete"
-                       data-toggle="modal"
-                       data-object-name="@Html.DisplayFor(modelItem => item.name)"
-                       data-object-id="@Html.DisplayFor(modelItem => item.itemID)"
-                       data-object-type="item">
-                        <span class="glyphicon glyphicon-trash"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="left"
-                              title="@Local.Delete"></span>
-                    </a>
+                        <a href="#"
+                           data-target="#modalDelete"
+                           data-toggle="modal"
+                           data-object-name="@Html.DisplayFor(modelItem => item.name)"
+                           data-object-id="@Html.DisplayFor(modelItem => item.itemID)"
+                           data-object-type="item">
+                            <span class="glyphicon glyphicon-trash"
+                                  aria-hidden="true"
+                                  data-toggle="tooltip"
+                                  data-placement="left"
+                                  title="@Local.Delete"></span>
+                        </a>
                     }
                     @if ((string)Session["type"] == "dobavljac")
                     {
-                    <a href="#" class="shopping-cart-link"
-                       data-target="#modalItemToCart"
-                       data-toggle="modal">
-                        <span class="glyphicon glyphicon-shopping-cart"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="left"
-                              title="Dodaj u košaricu"></span>
-                    </a>
+                        <a href="#" class="shopping-cart-link"
+                           data-target="#modalItemToCart"
+                           data-toggle="modal">
+                            <span class="glyphicon glyphicon-shopping-cart"
+                                  aria-hidden="true"
+                                  data-toggle="tooltip"
+                                  data-placement="left"
+                                  title="Dodaj u košaricu"></span>
+                        </a>
                     }
                     @Html.AntiForgeryToken()
                 </td>
             </tr>
         }
-            </tbody>
-    </table>
+    </tbody>
+</table>
 
 <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -154,7 +159,7 @@
                 <div class="form-group form-price">
                     <label for="supply-item-price" class="control-label col-md-2">@Local.Price:</label>
                     <div class="col-md-10">
-                        <input id="supply-item-price" name="price" class="form-control text-box single-line" type="number" step="0.01"  required/>
+                        <input id="supply-item-price" name="price" class="form-control text-box single-line" type="number" step="0.01" required />
                         <div class="supply-item-quantity-info">/ <span class="item-unitofmeasure"></span></div>
                     </div>
                 </div>

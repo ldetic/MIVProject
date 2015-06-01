@@ -58,6 +58,16 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.visible, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBox("RFP.DatesFlexible", Model.visible ?? false)
+                    @Html.ValidationMessageFor(model => model.visible, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value=@Local.Save class="btn btn-default" />
             </div>
