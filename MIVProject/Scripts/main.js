@@ -234,7 +234,7 @@
     table.eventSetup = function () {
         console.log("event setup");
         var parent = this;
-        
+
         var addItems = function (button) {
             var data = parent.$.bootstrapTable('getSelections');
             $.each(data, function (index, val) {
@@ -294,18 +294,26 @@
                 } else {
                     projectID = data;
                     //4. Saving project items
+                    
+                    var itemFlags = [];
+                    $(".acc-items .acc-items-section").each(function (i, el) {
+                        itemFlags.push(i);
+                    });
+                         
                     for (var i = 0; i < items.length; i++) {
                         items[i].project = projectID;
                         items[i].__RequestVerificationToken = reqToken;
-                        console.log(items[i]);
-                        $.ajax(
-                            {
-                                url: "/ProjectItem/CreateViaAjax",
-                                type: "POST",
-                                data: items[i]
-                            }).done(function (data) {
-                                console.log("item:" + data);
-                            });
+
+                        $.ajax({
+                            url: "/ProjectItem/CreateViaAjax",
+                            type: "POST",
+                            data: items[i]
+                        }).done(function (data) {
+                            itemFlags.pop();
+                            if (itemFlags.length == 0) {
+                                window.location.href = "/supplyHeader/Details/" + projectID;
+                            }
+                        });
                     }
                 }
 
@@ -344,7 +352,7 @@
     //MAIN START
     table.setup();
     // MAIN END
-    
+
     //to be deleted
     function close_accordion_section() {
         $('.acc-items .acc-items-section-title').removeClass('active');
@@ -357,7 +365,7 @@
      * ITEMS CART
      *
      **/
-   
+
     var cart = {
         $: $(".moderator-sidebar #cart"),
         body: $("#cart .body")
@@ -415,7 +423,7 @@
         }
         this.modal.$.on("hidden.bs.modal", this.clean);
         return true;
-    } 
+    }
     cart.linkSetup = function () {
         var parent = this;
         var setupByCriterias = function (that) {
@@ -451,7 +459,7 @@
                 parent.modal.title.html(product.name);
                 parent.modal.quantity.html(product.quantityMax);
                 parent.form.quantity.attr("max", product.quantityMax);
-               
+
                 parent.modal.unitOfMeasure.html(product.unitofmeasure);
 
                 setupByCriterias(this);
@@ -483,7 +491,7 @@
             });
         });
     }
-    cart.update = function() {
+    cart.update = function () {
         if (this.$.length > 0) {
             //sessionStorage.clear();
             sessionCart = sessionStorage.getItem("cart");
@@ -544,7 +552,7 @@
                     id: accItemsId,
                     class: "acc-items-section-content"
                 }).appendTo("#" + accItemsSectionId);
-                
+
                 html = '<div class="full-width">';
                 if (el.quantity != "") {
                     html += addInput("item-quantity-" + el.id, el.quantity, "Quantity", "number", "quantity", "col-xs-12 col-sm-6 col-md-3", el.unitofmeasure, 'max="' + el.quantityMax + '"');
@@ -565,7 +573,7 @@
                     html += addTextBox("item-comment-" + el.id, el.comment, "Comment", "comment", "col-xs-12 col-sm-6 col-md-4");
                 }
                 $("#" + accItemsId).append(html);
-                
+
                 $('#' + accItemsSectionTitle).click(function (e) {
                     // Grab current anchor value
 
@@ -590,7 +598,7 @@
                         $(this).parent().parent().remove();
                     });
                 });
-                
+
             });
 
             $("#save-btn").click(function () {
@@ -599,7 +607,7 @@
             $("#send-btn").click(function () {
                 saveData("send");
             });
-            
+
             //paymentMethod,deliveryMethod,paymentDate,deliveryDate,supplier,date,project,status,currency
             function saveData(statusType) {
                 var projectID;
@@ -620,73 +628,73 @@
                     currency: $("#currency").val(),
                     __RequestVerificationToken: reqToken
                 }
-                
+
                 //save supplyHeader
                 $.ajax({
-                        url: "CreateViaAjax",
-                        type: "POST",
-                        data: supplyHeader
-                    }).done(function (data) {
-                        if (data == "ERROR") {
-                            console.log("error");
-                            errorRaised = true;
-                            errorMsg = "Došlo je pogreške prilikom pohranjivanja ponude. Provjerite podatke i pokušajte ponovno!";
-                        } else {
-                            projectID = data;
-                            console.log("projectID: " + projectID);
-                            //Saving supply items
-
-                            //used for redirect
-                            var itemFlags = [];
-                            $(".acc-items .acc-items-section").each(function (i, el) {
-                                itemFlags.push(i);
-                            });
-                            
-                            // supply, item, quantity, price, quality, comment, shipDate
-                            $(".acc-items .acc-items-section").each(function (index, el) {
-                                var supplyItem = {
-                                    supply: projectID,
-                                    __RequestVerificationToken: reqToken
-                                };
-                                $(el).find("input").each(function (index, subel) {
-                                    if ($(subel).hasClass("quantity")) {
-                                        supplyItem.quantity = $(subel).val();
-                                    } else if ($(subel).hasClass("price")) {
-                                        supplyItem.price = $(subel).val();
-                                    } else if ($(subel).hasClass("shipdate")) {
-                                        supplyItem.shipDate = $(subel).val();
-                                    } else if ($(subel).hasClass("id")) {
-                                        supplyItem.item = $(subel).val();
-                                    }
-                                });
-                                $(el).find("textarea").each(function (index, subel) {
-                                    if ($(subel).hasClass("quality")) {
-                                        supplyItem.quality = $(subel).html();
-                                    } else if ($(subel).hasClass("comment")) {
-                                        supplyItem.comment = $(subel).html();
-                                    }
-                                });
-                                
-                                $.ajax({
-                                    url: "/SupplyItem/CreateViaAjax",
-                                    type: "POST",
-                                    data: supplyItem
-                                }).done(function (data) {
-                                    itemFlags.pop();
-                                    if (itemFlags.length == 0) {
-                                        console.log("done");
-                                        sessionStorage.clear();
-                                        window.location.href = "/supplyHeader/Details/" + projectID;
-                                    }
-                                });
-                            });
-
-                        }
-                    }).error(function () {
-                        console.log("nema veze");
+                    url: "CreateViaAjax",
+                    type: "POST",
+                    data: supplyHeader
+                }).done(function (data) {
+                    if (data == "ERROR") {
+                        console.log("error");
                         errorRaised = true;
-                        errorMsg = "Došlo je pogreške prilikom pohranjivanja projekta. Provjerite podatke i pokušajte ponovno!";
-                    });
+                        errorMsg = "Došlo je pogreške prilikom pohranjivanja ponude. Provjerite podatke i pokušajte ponovno!";
+                    } else {
+                        projectID = data;
+                        console.log("projectID: " + projectID);
+                        //Saving supply items
+
+                        //used for redirect
+                        var itemFlags = [];
+                        $(".acc-items .acc-items-section").each(function (i, el) {
+                            itemFlags.push(i);
+                        });
+
+                        // supply, item, quantity, price, quality, comment, shipDate
+                        $(".acc-items .acc-items-section").each(function (index, el) {
+                            var supplyItem = {
+                                supply: projectID,
+                                __RequestVerificationToken: reqToken
+                            };
+                            $(el).find("input").each(function (index, subel) {
+                                if ($(subel).hasClass("quantity")) {
+                                    supplyItem.quantity = $(subel).val();
+                                } else if ($(subel).hasClass("price")) {
+                                    supplyItem.price = $(subel).val();
+                                } else if ($(subel).hasClass("shipdate")) {
+                                    supplyItem.shipDate = $(subel).val();
+                                } else if ($(subel).hasClass("id")) {
+                                    supplyItem.item = $(subel).val();
+                                }
+                            });
+                            $(el).find("textarea").each(function (index, subel) {
+                                if ($(subel).hasClass("quality")) {
+                                    supplyItem.quality = $(subel).html();
+                                } else if ($(subel).hasClass("comment")) {
+                                    supplyItem.comment = $(subel).html();
+                                }
+                            });
+
+                            $.ajax({
+                                url: "/SupplyItem/CreateViaAjax",
+                                type: "POST",
+                                data: supplyItem
+                            }).done(function (data) {
+                                itemFlags.pop();
+                                if (itemFlags.length == 0) {
+                                    console.log("done");
+                                    sessionStorage.clear();
+                                    window.location.href = "/supplyHeader/Details/" + projectID;
+                                }
+                            });
+                        });
+
+                    }
+                }).error(function () {
+                    console.log("nema veze");
+                    errorRaised = true;
+                    errorMsg = "Došlo je pogreške prilikom pohranjivanja projekta. Provjerite podatke i pokušajte ponovno!";
+                });
             } //function saveData
         }
     }
@@ -725,7 +733,7 @@
      * SUPPLY HEADER EDIT
      *
      **/
-    accSupplyEditSetup = function() {
+    accSupplyEditSetup = function () {
         var sectionTitleClick = function (e) {
             var currentAttrValue = $(this).attr('href');
             if ($(e.target).is('.active')) {
