@@ -98,6 +98,7 @@
             </form>
             <br>
             <p class="miv_cpr">© 2015 - Metalska industrija Varaždin</p><br>
+            
         </footer>
     </div>
 
@@ -109,7 +110,14 @@
     <!-- bootstrap table source-->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.0/bootstrap-table.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.0/bootstrap-table.min.js"></script>
+    @if (Culture == "en-GB")
+    {
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.0/locale/bootstrap-table-en-US.min.js"></script>
+    }
+    else
+    {
+    @Scripts.Render("~/Scripts/bootstrap-table-hr-HR.min.js")
+    }
     @Scripts.Render("~/Scripts/main.js")
 </body>
 </html>

@@ -15,7 +15,7 @@
         </a>
       }
 </div>
-<table id="products-table" data-card-view="true" class="table object-table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
+<table id="products-table" class="table object-table" data-toggle="table" data-sort-name="name" data-sort-order="desc"
        data-search="true" data-toolbar="#toolbar" data-pagination="true"
        data-query-params="queryParams">
     <thead>
@@ -36,12 +36,7 @@
             <th data-field="category2" data-sortable="true">
                 @Local.Category
             </th>
-            @if (Session["type"] == "referent" || Session["type"] == "administrator")
-            {
-                <th data-field="visible" data-sortable="true">
-                    @Local.Visible
-                </th>
-            }
+            
             <th class="hidden">@Local.Criterias</th>
             <th></th>
         </tr>
@@ -66,11 +61,7 @@
                 <td class="item-category2">
                     @Html.DisplayFor(modelItem => item.itemSubCategory.itemCategory.name)
                 </td>
-                @if (Session["type"] == "referent" || Session["type"] == "administrator")
-                {
-                    <td class="item-visible">
-                        @Html.DisplayFor(modelItem => item.visible)
-                    </td>}
+                
                 <td class="item-criterias hidden">
                     @foreach (var i in item.itemSubCategory.itemCategory.criteria)
                     {

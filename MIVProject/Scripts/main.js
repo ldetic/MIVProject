@@ -415,6 +415,7 @@
                 __RequestVerificationToken: reqToken
             }
             console.log(supplyHeader);
+            
             //save supplyHeader
             //"id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description,src,visible,validTillDate"
             $.ajax({
@@ -430,7 +431,7 @@
                     projectID = data;
                     console.log("projectID: " + projectID);
                     //Saving supply items
-
+                    
                     $.each(deletedItems, function (i, el) {
                         $.ajax({
                             url: "/ProjectItem/DeleteViaAjax",

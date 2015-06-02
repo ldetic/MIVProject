@@ -30,6 +30,22 @@ textarea {
 .modal-large {
     width: 96%;
 }
+.fixed-table-container {
+    border: 0px;
+}
+.fixed-table-container tbody td {
+  border-left: 2px solid #fff !important;
+}
+.bootstrap-table .table {
+    border-bottom: 0px !important;
+}
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+    border-top: 2px solid #fff !important;
+    border-bottom: 2px solid #fff !important;
+}
+.fixed-table-container {
+    border: 0px !important;
+}
 
 /*----- Accordion -----*/
 .acc-items, .acc-items * {
@@ -172,6 +188,7 @@ textarea {
 .btn-default {
     color: #ffffff;
     background-color: #00A88D;
+    border: 0px;
 }
 
     .btn-default:hover {
@@ -298,6 +315,7 @@ textarea {
 /*titles mods*/
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
     background-color: #009278;
+    border: 0px;
 }
 
 .h1 {
@@ -390,4 +408,23 @@ textarea {
 
 .button-home{
     align-self:flex-end;
+}
+
+/* FRONT PAGE */
+.home-pro-title{
+  color: #ffffff;
+  background-color: #00A88D;
+  padding: 10px;
+  font-family: 'Segoe UI';
+  font-weight: 400;
+  font-size: 26px;  
+}
+
+.home-pro-body{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.home-pro-btn{
+  margin-left: 10px;
+  margin-bottom: 10px;
 }

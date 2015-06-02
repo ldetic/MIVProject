@@ -104,7 +104,7 @@ namespace MIVProject.Controllers
         // POST: Project/CreateViaAjax
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public String CreateViaAjax([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description,src,visible,validTillDate")] project project)
+        public String CreateViaAjax([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description,src,visible,validTillDate,currency")] project project)
         {
             if (ModelState.IsValid)
             {
@@ -146,7 +146,7 @@ namespace MIVProject.Controllers
         // POST: Project/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description,src,visible,validTillDate")] project project)
+        public ActionResult Edit([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description,src,visible,validTillDate, currency")] project project)
         {
             try
             {
@@ -177,7 +177,7 @@ namespace MIVProject.Controllers
         // POST: Project/EditViaAjax/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public String EditViaAjax([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description,src,visible,validTillDate")] project project)
+        public String EditViaAjax([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description,src,visible,validTillDate, currency")] project project)
         {
             try
             {
@@ -185,13 +185,13 @@ namespace MIVProject.Controllers
                 {
                     db.Entry(project).State = EntityState.Modified;
                     db.SaveChanges();
-                    /*
+                    
                     string username = Session["username"].ToString();
                     int userID = (int)Session["userID"];
                     DateTime date = DateTime.Now;
                     string msg = "Project edited " + project.name + " id:" + project.id;
                     db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
-                    */
+                    
                     return project.id.ToString();
                 }
                 return "ERROR";

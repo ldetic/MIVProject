@@ -14,7 +14,7 @@ namespace MIVProject.Controllers
             mivEntities db = new mivEntities();
             DateTime date = DateTime.Today;
             bool visible = true;            
-            var project = db.project.Where(x => x.validTillDate >= date && x.visible == visible);
+            var project = db.project.Where(x => x.validTillDate >= date && x.visible == visible).Take(6);
             return View(project.ToList());
             
         }
