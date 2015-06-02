@@ -5,10 +5,12 @@
 }
 
 <h2>@Local.MivUser</h2>
-
-<p>
-    @Html.ActionLink(Local.CreateNew, "Create")
-</p>
+<div id="toolbar">
+    <a class="btn btn-default" href="mivUser/Create">
+        <span class="glyphicon glyphicon-plus add-but" aria-hidden="true"></span>
+        @Local.CreateNew
+    </a>
+</div>
 <table id="mivUser-table" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
        data-search="true" data-toolbar="#toolbar" data-pagination="true"
        data-query-params="queryParams">
@@ -57,14 +59,33 @@
             <td>
                 @if (item.type != null)
                 {
-                    @Html.ActionLink(Local.Edit, "Edit", new { id = item.userID })
+                    <a href="@Url.Action("Edit", new { id = item.userID })">
+                        <span class="glyphicon glyphicon-edit"
+                              aria-hidden="true"
+                              data-toggle="tooltip"
+                              data-placement="left"
+                              title="@Local.Edit"></span>
+                    </a>
                 }
                 else
                 {
                     @Html.ActionLink(Local.Check, "CheckSupplier", new { id = item.userID })
-                } |
-                @Html.ActionLink(Local.Details, "Details", new { id = item.userID }) |
-                @Html.ActionLink(Local.Delete, "Delete", new { id = item.userID })
+                } 
+                <a href="@Url.Action("Details", new { id = item.userID })">
+                    <span class="glyphicon glyphicon-list-alt"
+                          aria-hidden="true"
+                          data-toggle="tooltip"
+                          data-placement="left"
+                          title="@Local.Details"></span>
+                </a>
+
+                <a href="@Url.Action("Delete", new { id = item.userID })">
+                    <span class="glyphicon glyphicon-trash"
+                          aria-hidden="true"
+                          data-toggle="tooltip"
+                          data-placement="left"
+                          title="@Local.Delete"></span>
+                </a>
             </td>
         </tr>
     }

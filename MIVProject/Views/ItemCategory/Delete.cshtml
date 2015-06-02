@@ -4,7 +4,7 @@
     ViewBag.Title = Local.Delete;
 }
 
-<h2>Local.Delete</h2>
+<h2>@Local.Delete</h2>
 
 <h3>@Local.SureYouWantToDelete</h3>
 <div>
@@ -25,8 +25,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value=@Local.Delete class="btn btn-default" /> |
-            @Html.ActionLink(Local.Back, "Index")
+            <input type="submit" value=@Local.Delete class="btn btn-default" />
         </div>
     }
 </div>

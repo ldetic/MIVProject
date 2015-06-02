@@ -43,7 +43,13 @@
                 @Html.DisplayFor(modelItem => item.date)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.id })
+                <a href="@Url.Action("Details", new { id = item.id })">
+                    <span class="glyphicon glyphicon-list-alt"
+                          aria-hidden="true"
+                          data-toggle="tooltip"
+                          data-placement="left"
+                          title="@Local.Details"></span>
+                </a>
             </td>
         </tr>
     }

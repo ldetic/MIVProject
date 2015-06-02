@@ -86,13 +86,32 @@
                 <td>
                     @if ((string)Session["type"] == "administrator" || (string)Session["type"] == "referent")
                     {
-                        @Html.ActionLink(Local.Edit, "Edit", new { id = item.supplyID })  }
-
+                        <a href="@Url.Action("Edit", new { id = item.supplyID })">
+                            <span class="glyphicon glyphicon-edit"
+                                  aria-hidden="true"
+                                  data-toggle="tooltip"
+                                  data-placement="left"
+                                  title="@Local.Edit"></span>
+                        </a>
+                    }
                     @if ((string)Session["type"] == "administrator" || (string)Session["type"] == "referent" || ((string)Session["type"] == "dobavljac" && item.supplyStatus.name == "U izradi"))
                     {
-                        @Html.ActionLink(Local.Delete, "Delete", new { id = item.supplyID })}
+                        <a href="@Url.Action("Delete", new { id = item.supplyID })">
+                            <span class="glyphicon glyphicon-trash"
+                                  aria-hidden="true"
+                                  data-toggle="tooltip"
+                                  data-placement="left"
+                                  title="@Local.Delete"></span>
+                        </a>
+                    }
 
-                    @Html.ActionLink(Local.Details, "Details", new { id = item.supplyID })
+                    <a href="@Url.Action("Details", new { id = item.supplyID })">
+                        <span class="glyphicon glyphicon-list-alt"
+                              aria-hidden="true"
+                              data-toggle="tooltip"
+                              data-placement="left"
+                              title="@Local.Details"></span>
+                    </a>
                 </td>
             </tr>
         }

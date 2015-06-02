@@ -1,5 +1,5 @@
 ﻿@model MIVProject.logs
-
+@using Resources;
 @{
     ViewBag.Title = "Details";
 }
@@ -45,6 +45,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(Local.Back, "Index")
 </p>

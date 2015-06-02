@@ -6,9 +6,12 @@
 
 <h2>@Local.ItemSubCategory</h2>
 
-<p>
-    @Html.ActionLink(Local.CreateNew, "Create")
-</p>
+<div id="toolbar">
+    <a class="btn btn-default" href="ItemSubCategory/Create">
+        <span class="glyphicon glyphicon-plus add-but" aria-hidden="true"></span>
+        @Local.CreateNew
+    </a>
+</div>
 <table id="itemSubCategory-table" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
        data-search="false" data-toolbar="#toolbar" data-pagination="true"
        data-query-params="queryParams">
@@ -33,8 +36,20 @@
                 @Html.DisplayFor(modelItem => item.itemCategory.name)
             </td>
             <td>
-                @Html.ActionLink(Local.Edit, "Edit", new { id = item.subCategoryID }) |
-                @Html.ActionLink(Local.Delete, "Delete", new { id = item.subCategoryID })
+                <a href="@Url.Action("Edit", new { id = item.subCategoryID })">
+                    <span class="glyphicon glyphicon-edit"
+                          aria-hidden="true"
+                          data-toggle="tooltip"
+                          data-placement="left"
+                          title="@Local.Edit"></span>
+                </a>
+                <a href="@Url.Action("Delete", new { id = item.subCategoryID })">
+                    <span class="glyphicon glyphicon-trash"
+                          aria-hidden="true"
+                          data-toggle="tooltip"
+                          data-placement="left"
+                          title="@Local.Delete"></span>
+                </a>
             </td>
         </tr>
     }
