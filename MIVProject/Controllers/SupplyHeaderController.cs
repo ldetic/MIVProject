@@ -111,19 +111,21 @@ namespace MIVProject.Controllers
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name");
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name");
 
-            try { 
+            try
+            {
                 Uri reqUri = new Uri(Request.Url.AbsoluteUri.ToString());
                 bool isProject = Boolean.Parse(HttpUtility.ParseQueryString(reqUri.Query).Get("project"));
                 if (isProject)
                 {
                     int projectId = Int16.Parse(HttpUtility.ParseQueryString(reqUri.Query).Get("id").ToString());
-                    project prt= db.project.Single(a => a.id == projectId);
+                    project prt = db.project.Single(a => a.id == projectId);
                     ViewBag.project = prt;
-                    IQueryable<projectItem> pts = db.projectItem.Include(i => i.item1.itemSubCategory).Include(i => i.item1.itemSubCategory.itemCategory).Where(b => b.project1.id == projectId); 
+                    IQueryable<projectItem> pts = db.projectItem.Include(i => i.item1.itemSubCategory).Include(i => i.item1.itemSubCategory.itemCategory).Where(b => b.project1.id == projectId);
                     ViewBag.projectItems = pts;
-                    
+
                 }
-            } catch(Exception)
+            }
+            catch (Exception)
             {
                 //is not a project
             }
@@ -234,20 +236,20 @@ namespace MIVProject.Controllers
                 return RedirectToAction("Unauthorized", "Account");
             }
             supplyHeader supplyHeader = db.supplyHeader.Find(id);
-            if (supplyHeader == null)
+            if (supplyHeader == null || (Session["type"] == "dobavljac" && supplyHeader.supplyStatus.name != "U izradi"))
             {
                 return RedirectToAction("Unauthorized", "Account");
             }
 
             IQueryable<supplyItem> supplyItems = db.supplyItem.Where(a => a.supply == id);
             ViewBag.supplyItems = supplyItems;
-           
-                ViewBag.currency = new SelectList(db.currency, "currencyID", "name", supplyHeader.currency);
-                ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", supplyHeader.deliveryMethod);
-                ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", supplyHeader.paymentMethod);
-                ViewBag.project = new SelectList(db.project, "id", "name", supplyHeader.project);
-                ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name", supplyHeader.supplier);
-           
+
+            ViewBag.currency = new SelectList(db.currency, "currencyID", "name", supplyHeader.currency);
+            ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", supplyHeader.deliveryMethod);
+            ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", supplyHeader.paymentMethod);
+            ViewBag.project = new SelectList(db.project, "id", "name", supplyHeader.project);
+            ViewBag.supplier = new SelectList(db.supplier, "mivUser", "name", supplyHeader.supplier);
+
             ViewBag.status = new SelectList(db.supplyStatus, "statusID", "name", supplyHeader.status);
             return View(supplyHeader);
         }
@@ -293,7 +295,7 @@ namespace MIVProject.Controllers
                 supplyHeader.supplier = Convert.ToInt32(Session["userID"]);
             }
 
-            
+
             if (ModelState.IsValid)
             {
                 db.Entry(supplyHeader).State = EntityState.Modified;
@@ -319,7 +321,7 @@ namespace MIVProject.Controllers
             return "ERROR";
         }
 
-        [CustomAuthorize(Roles = "administrator,referent")]
+        [CustomAuthorize(Roles = "administrator,referent,dobavljac")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -327,9 +329,9 @@ namespace MIVProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             supplyHeader supplyHeader = db.supplyHeader.Find(id);
-            if (supplyHeader == null)
+            if (supplyHeader == null || (Session["type"].ToString() == "dobavljac" && (int)Session["userID"] != supplyHeader.supplier))
             {
-                return HttpNotFound();
+                return RedirectToAction("Unauthorized", "Account");
             }
             return View(supplyHeader);
         }
@@ -339,15 +341,15 @@ namespace MIVProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            
+
             supplyHeader supplyHeader = db.supplyHeader.Find(id);
             if (supplyHeader != null)
             {
                 try
                 {
                     db.Database.ExecuteSqlCommand("Delete from supplyItem where supply = @p0", id);
-            db.supplyHeader.Remove(supplyHeader);
-            db.SaveChanges();
+                    db.supplyHeader.Remove(supplyHeader);
+                    db.SaveChanges();
                     string username = Session["username"].ToString();
                     DateTime date = DateTime.Now;
                     string msg = "Supply removed " + " id:" + supplyHeader.supplyID;

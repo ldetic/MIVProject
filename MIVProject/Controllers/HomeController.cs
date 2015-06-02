@@ -11,8 +11,12 @@ namespace MIVProject.Controllers
         
         public ActionResult Index()
         {
-            //return RedirectToAction("Index", "Home");
-            return View();
+            mivEntities db = new mivEntities();
+            DateTime date = DateTime.Today;
+            bool visible = true;            
+            var project = db.project.Where(x => x.validTillDate >= date && x.visible == visible);
+            return View(project.ToList());
+            
         }
 
         

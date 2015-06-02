@@ -35,7 +35,7 @@
         </dd>
 
         <dt>
-            @Local.Currency
+            @Local.Currency1
         </dt>
 
         <dd>
@@ -57,23 +57,27 @@
         <dd>
             @Html.DisplayFor(model => model.paymentMethod1.name)
         </dd>
+        @if (Model.project != null)
+        {
+            <dt>
+                @Local.Project
+            </dt>
 
-        <dt>
-            @Local.Project
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.project1.name)
+            </dd>
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.project1.name)
-        </dd>
+        @if (Session["type"] != "dobavljac")
+        {
+            <dt>
+                @Local.Supplier1
+            </dt>
 
-        <dt>
-            @Local.Supplier
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.supplier1.name)
-        </dd>
-
+            <dd>
+                @Html.DisplayFor(model => model.supplier1.name)
+            </dd>
+        }
         <dt>
             @Local.SupplyStatus
         </dt>
@@ -113,7 +117,7 @@
     </thead>
     <tbody>
         @foreach (var item in ViewBag.supplyItems)
-            {
+        {
             supplyItem si = (supplyItem)item;
             <tr id="object-row-@si.supplyItemID">
                 <td>
@@ -142,6 +146,8 @@
     </tbody>
 </table>
 <p>
-    @Html.ActionLink(Local.Edit, "Edit", new { id = Model.supplyID }) |
+    @if (Model.supplyStatus.name == "U izradi")
+    {
+        @Html.ActionLink(Local.Edit, "Edit", new { id = Model.supplyID })}
     @Html.ActionLink(Local.Back, "Index")
 </p>

@@ -506,4 +506,16 @@ Gospodarska bb (prodaja armatura i fazona)
   <data name="SupplyNav" xml:space="preserve">
     <value>Moje Ponude</value>
   </data>
+  <data name="Criterias" xml:space="preserve">
+    <value>Kriteriji</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Početna</value>
+  </data>
+  <data name="Supplier1" xml:space="preserve">
+    <value>Dobavljač</value>
+  </data>
+  <data name="ProjectsHome" xml:space="preserve">
+    <value>Projekti</value>
+  </data>
 </root>

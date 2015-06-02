@@ -10,11 +10,11 @@
     @Html.ActionLink(Local.CreateNew, "Create")
 </p>
 <table id="supplyStatus-table" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
-       data-search="true" data-toolbar="#toolbar" data-pagination="true"
+       data-search="false" data-toolbar="#toolbar" data-pagination="true"
        data-query-params="queryParams">
     <thead>
     <tr>
-        <th>
+        <th data-sortable="true">
             @Local.Name
         </th>
         <th></th>

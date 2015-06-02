@@ -380,3 +380,14 @@ textarea {
     background-color: #fff;
     height: 20px;
 }
+
+
+/*Ljiljana*/
+.project-home{
+    background-color: #F5F5F5;
+    
+}
+
+.button-home{
+    align-self:flex-end;
+}

@@ -57,7 +57,7 @@
         <dd>
             @Html.DisplayFor(model => model.paymentMethod1.name)
         </dd>
-        
+
         <dt>
             @Local.Currency1
         </dt>
@@ -67,7 +67,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.validTillDate)
+            @Local.validTillDate
         </dt>
 
         <dd>
@@ -75,7 +75,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.visible)
+            @Local.Visible
         </dt>
 
         <dd>
@@ -147,7 +147,8 @@
 
 
 <p>
-    @Html.ActionLink(Local.Edit, "Edit", new { id = Model.id }) |
+    @if (Session["type"] == "administrator" || Session["type"] == "referent")
+    {
+        @Html.ActionLink(Local.Edit, "Edit", new { id = Model.id }) }
     @Html.ActionLink(Local.Back, "Index")
 </p>
-

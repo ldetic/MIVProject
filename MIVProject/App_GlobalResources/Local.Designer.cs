@@ -286,6 +286,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kriteriji.
+        /// </summary>
+        internal static string Criterias {
+            get {
+                return ResourceManager.GetString("Criterias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Valute.
         /// </summary>
         internal static string Currency {
@@ -435,6 +444,15 @@ namespace Resources {
         internal static string FurtherWork {
             get {
                 return ResourceManager.GetString("FurtherWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Početna.
+        /// </summary>
+        internal static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
             }
         }
         
@@ -882,6 +900,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Projekti.
+        /// </summary>
+        internal static string ProjectsHome {
+            get {
+                return ResourceManager.GetString("ProjectsHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kvaliteta.
         /// </summary>
         internal static string Quality {
@@ -977,6 +1004,15 @@ namespace Resources {
         internal static string Supplier {
             get {
                 return ResourceManager.GetString("Supplier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dobavljač.
+        /// </summary>
+        internal static string Supplier1 {
+            get {
+                return ResourceManager.GetString("Supplier1", resourceCulture);
             }
         }
         

@@ -89,7 +89,7 @@
         </div>
         
         <div class="form-group">
-            <label class = "control-label col-md-2" >@Local.Currency</label>
+            <label class = "control-label col-md-2" >@Local.Currency1</label>
             <div class="col-md-10">
                 @Html.DropDownList("currency", null, htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.currency, "", new { @class = "text-danger" })
