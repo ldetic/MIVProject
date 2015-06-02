@@ -900,6 +900,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Projekti.
+        /// </summary>
+        internal static string ProjectsHome {
+            get {
+                return ResourceManager.GetString("ProjectsHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kvaliteta.
         /// </summary>
         internal static string Quality {
