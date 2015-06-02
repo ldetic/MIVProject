@@ -86,6 +86,20 @@ textarea {
 .acc-items-section-content {
     padding: 15px;
     display: none;
+    width: 100%;
+}
+.acc-items-section-content textarea {
+    height: 300px;
+    padding: 4px 6px;
+}
+.acc-items-section-content .quantity {
+    float: left;
+    width: 90%;
+}
+.acc-items-section-content span {
+    float: left;
+    padding-left: 1%;
+    padding-top: 6px;
 }
 
 .full-width {
@@ -136,6 +150,24 @@ textarea {
 #cart .body {
     width: 100%;
 }
+
+#cart .header {
+    font-family: 'Segoe UI';
+    font-size: 16px;
+}
+#cart .footer {
+    text-align: center;
+}
+
+
+
+/* CART */
+.kosarica-zel{
+    color:#00a88d;
+    font-size:large;
+}
+
+
 /*nkarnicar*/
 /*fonts*/
 
@@ -180,6 +212,10 @@ textarea {
 
     .navbar-inverse .navbar-brand {
     font-weight: bold;
+}
+
+.supply-header-items-create form #save-btn, .supply-header-items-create form #send-btn  {
+    margin-top: 12px;
 }
 
 /*buttons mods*/
@@ -563,19 +599,23 @@ textarea {
     font-size: larger;
     color: #939487;
 }
-.modal-footer .btn-primary:hover {
+.modal-footer .btn-default:hover {
     background-color: #f59680;
     border-color: #9C7D7D;
     border: 0px;
     padding-left: 20px;
     padding-right: 20px;
 }
-}
-.modal-footer .btn-primary {
-    background-color: #f59680;
+
+.modal-footer .btn-default {
+    background-color: #f59680 !important;
     border-color: #E9846D;
     border: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
 }
+.modal-footer .btn-primary {
+    background-color: #00A88D;
+    border-color: #00A88D;
 }
+
