@@ -19,6 +19,19 @@
         $('[data-toggle="tooltip"]').tooltip();
     });
 
+    //CMS submenu setup
+    if ($("#cms-btn").length > 0) {
+        $("#cms-btn").click(function () {
+            if ($(this).data("active") == false) {
+                $(this).data("active", true);
+                $(".navbar-fixed-left").slideDown(300, "swing");
+            } else {
+                $(this).data("active", false);
+                $(".navbar-fixed-left").slideUp(300, "swing");
+            }
+        });
+    }
+
     /**
      *
      * GLOBAL FUNCTIONS
@@ -150,7 +163,7 @@
     accordionItem.createTitle = function () {
         //accordion title
         var html = '<a class="acc-items-section-title" id="' + this.sectionTitle + '" href="#' + this.id + '">' + this.val.name.trim();
-        html += '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>';
+        html += '<button type="button" class="close" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>';
         html += '</a>';
         $("#" + this.sectionId).append(html);
     }
@@ -684,7 +697,7 @@
 
                 //accordion title
                 var html = '<a class="acc-items-section-title" id="' + accItemsSectionTitle + '" href="#' + accItemsId + '">' + el.name;
-                html += '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>';
+                html += '<button type="button" class="close" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>';
                 html += '</a>';
                 $("#" + accItemsSectionId).append(html);
 

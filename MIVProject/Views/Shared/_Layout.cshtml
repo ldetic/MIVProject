@@ -35,9 +35,27 @@
                 <ul class="nav navbar-nav">                   
                     <li>@Html.ActionLink(Local.Projects, "Index", "Project")</li>
                     <li>@Html.ActionLink(Local.Products, "Index", "Item")</li>
-                    @if (Session["type"] == "dobavljac")
+                    @if ((string)Session["type"] == "dobavljac")
                     {
                         <li>@Html.ActionLink(Local.SupplyNav, "Index", "SupplyHeader")</li>
+                    }
+                    @if ((string)Session["type"] == "referent" || (string)Session["type"] == "administrator")
+                    {
+                        <li><a id="cms-btn" data-active="false" href="#">CMS</a></li>
+
+                        <li class="mobile-submenu">@Html.ActionLink(Local.SupplyHeader, "Index", "SupplyHeader")</li>
+                        <li class="mobile-submenu">@Html.ActionLink(Local.Supplier, "Index", "Supplier")</li>
+                        <li class="mobile-submenu">@Html.ActionLink(Local.ItemCategory, "Index", "ItemCategory")</li>
+                        <li class="mobile-submenu">@Html.ActionLink(Local.ItemSubCategory, "Index", "ItemSubCategory")</li>
+                        <li class="mobile-submenu">@Html.ActionLink(Local.SupplierCategory, "Index", "SupplierCategory")</li>
+                        <li class="mobile-submenu">@Html.ActionLink(Local.Currency, "Index", "Currency")</li>
+                        <li class="mobile-submenu">@Html.ActionLink(Local.DeliveryMethod, "Index", "DeliveryMethod")</li>
+                        <li class="mobile-submenu">@Html.ActionLink(Local.PaymentMethod, "Index", "PaymentMethod")</li>
+                        if ((string)Session["type"] == "administrator")
+                        {
+                            <li>@Html.ActionLink(Local.MivUser, "Index", "mivUser")</li>
+                            <li>@Html.ActionLink(Local.Logs, "Index", "Log")</li>
+                        }
                     }
                 </ul>
 
