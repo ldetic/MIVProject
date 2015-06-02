@@ -45,8 +45,6 @@ namespace MIVProject.Controllers
         }
 
         // POST: projectItem/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "quantity,price,quality,description,projectPosition,project,comment,shipDate,item, projectItemID")] projectItem projectItem)
@@ -100,8 +98,6 @@ namespace MIVProject.Controllers
         }
 
         // POST: projectItem/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "quantity,price,quality,description,projectPosition,project,comment,shipDate,item")] projectItem projectItem)
@@ -120,6 +116,21 @@ namespace MIVProject.Controllers
             return View(projectItem);
         }
 
+        // POST: projectItem/EditViaAjax/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public String EditViaAjax([Bind(Include = "quantity,price,quality,description,projectPosition,project,comment,shipDate,item")] projectItem projectItem)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Database.ExecuteSqlCommand("update projectItem set quantity=@p0,price=@p1,quality=@p2,description=@p3,project=@p4,comment=@p5,shipDate=@p6,item=@p7 where projectItemID = @p8",
+                   projectItem.quantity, projectItem.price, projectItem.quality, projectItem.description, projectItem.project, projectItem.comment, projectItem.shipDate, projectItem.item, projectItem.projectItemID);
+
+                return "OK";
+            }
+            return "ERROR";
+        }
+
         [CustomAuthorize(Roles = "administrator,referent")]
         public ActionResult Delete(int? id)
         {
@@ -135,6 +146,7 @@ namespace MIVProject.Controllers
             return View(projectItem);
         }
 
+        
         // POST: projectItem/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -144,6 +156,17 @@ namespace MIVProject.Controllers
             db.projectItem.Remove(projectItem);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // POST: projectItem/DeleteViaAjax/5
+        [HttpPost, ActionName("DeleteViaAjax")]
+        [ValidateAntiForgeryToken]
+        public String DeleteViaAjax(int id)
+        {
+            projectItem projectItem = db.projectItem.Find(id);
+            db.projectItem.Remove(projectItem);
+            db.SaveChanges();
+            return "OK";
         }
 
         protected override void Dispose(bool disposing)

@@ -137,14 +137,13 @@ namespace MIVProject.Controllers
             }
             ViewBag.deliveryMethod = new SelectList(db.deliveryMethod, "deliveryID", "name", project.deliveryMethod);
             ViewBag.paymentMethod = new SelectList(db.paymentMethod, "paymentID", "name", project.paymentMethod);
-            ViewBag.currency = new SelectList(db.currency, "currencyID", "name", project.currency); 
+            ViewBag.currency = new SelectList(db.currency, "currencyID", "name", project.currency);
+            ViewBag.projectItems = db.projectItem.Where(a => a.project1.id == id);
             currentEditId = (int)id;
             return View(project);
         }
 
         // POST: Project/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description,src,visible,validTillDate")] project project)
@@ -172,6 +171,34 @@ namespace MIVProject.Controllers
             catch
             {
                 return Edit(currentEditId);
+            }
+        }
+
+        // POST: Project/EditViaAjax/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public String EditViaAjax([Bind(Include = "id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description,src,visible,validTillDate")] project project)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(project).State = EntityState.Modified;
+                    db.SaveChanges();
+                    /*
+                    string username = Session["username"].ToString();
+                    int userID = (int)Session["userID"];
+                    DateTime date = DateTime.Now;
+                    string msg = "Project edited " + project.name + " id:" + project.id;
+                    db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
+                    */
+                    return project.id.ToString();
+                }
+                return "ERROR";
+            }
+            catch
+            {
+                return "ERROR";
             }
         }
 

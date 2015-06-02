@@ -314,7 +314,7 @@
                         }).done(function (data) {
                             itemFlags.pop();
                             if (itemFlags.length == 0) {
-                                window.location.href = "/supplyHeader/Details/" + projectID;
+                                window.location.href = "/Project/Details/" + projectID;
                             }
                         });
                     }
@@ -360,6 +360,143 @@
     function close_accordion_section() {
         $('.acc-items .acc-items-section-title').removeClass('active');
         $('.acc-items .acc-items-section-content').slideUp(300).removeClass('open');
+    }
+
+    /**
+     *
+     * PROJECT EDIT
+     *
+     **/
+    if ($(".project-edit").length > 0) {
+        var deletedItems = [];
+
+        $(".acc-items-section-title").each(function (index, el) {
+            $(el).click(function (e) {
+                var currentAttrValue = $(this).attr('href');
+                if ($(e.target).is('.active')) {
+                    close_accordion_section();
+                } else {
+                    close_accordion_section();
+                    $(this).addClass('active');
+                    $('.acc-items ' + currentAttrValue).slideDown(300).addClass('open').css("display", "inline-block");
+                }
+
+                e.preventDefault();
+            });
+        });
+
+        $(".acc-items-section-title .close").each(function (index, el) {
+            $(el).click(function (e) {
+                e.stopPropagation();
+                var id = $(this).parent().parent().find(".projectItemId").val();
+                if (id != undefined) {
+                    deletedItems.push(id);
+                }
+                console.log(deletedItems);
+                $(this).parent().parent().remove();
+            });
+        });
+
+        $("#save-btn").click(function (e) {
+            e.preventDefault();
+            //1. set data
+            var reqToken = $('input[name="__RequestVerificationToken"]').val();
+            var supplyHeader = {
+                name: $("#name").val(),
+                paymentMethod: $("#paymentMethod").val(),
+                deliveryMethod: $("#deliveryMethod").val(),
+                paymentDate: $("#paymentDate").val(),
+                deliveryDate: $("#deliveryDate").val(),
+                validTillDate: $("#validTillDate").val(),
+                description: $("#description").val(),
+                id: $("#id").val(),
+                currency: $("#currency").val(),
+                visible: $("#visible").prop("checked"),
+                __RequestVerificationToken: reqToken
+            }
+            console.log(supplyHeader);
+            //save supplyHeader
+            //"id,name,paymentMethod,paymentDate,deliveryMethod,deliveryDate,description,src,visible,validTillDate"
+            $.ajax({
+                url: "/Project/EditViaAjax",
+                type: "POST",
+                data: supplyHeader
+            }).done(function (data) {
+                if (data == "ERROR") {
+                    console.log("error");
+                    errorRaised = true;
+                    errorMsg = "Došlo je pogreške prilikom pohranjivanja ponude. Provjerite podatke i pokušajte ponovno!";
+                } else {
+                    projectID = data;
+                    console.log("projectID: " + projectID);
+                    //Saving supply items
+
+                    $.each(deletedItems, function (i, el) {
+                        $.ajax({
+                            url: "/ProjectItem/DeleteViaAjax",
+                            type: "POST",
+                            data: { id: deletedItems[i], __RequestVerificationToken: reqToken }
+                        }).done(function (data) {
+                            console.log("deleted: " + deletedItems[i]);
+                        });
+                    });
+
+                    //used for redirect
+                    var itemFlags = [];
+                    $(".acc-items .acc-items-section").each(function (i, el) {
+                        itemFlags.push(i);
+                    });
+
+                    // supply, item, quantity, price, quality, comment, shipDate
+                    $(".acc-items .acc-items-section").each(function (index, el) {
+                        var projectItem = {
+                            project: projectID,
+                            __RequestVerificationToken: reqToken
+                        };
+                        $(el).find("input").each(function (index, subel) {
+                            if ($(subel).hasClass("quantity")) {
+                                projectItem.quantity = $(subel).val();
+                            } else if ($(subel).hasClass("price")) {
+                                projectItem.price = $(subel).val();
+                            } else if ($(subel).hasClass("shipdate")) {
+                                projectItem.shipDate = $(subel).val();
+                            } else if ($(subel).hasClass("id")) {
+                                projectItem.item = $(subel).val();
+                            } else if ($(subel).hasClass("projectItemId")) {
+                                projectItem.projectItemID = $(subel).val();
+                            }
+                        });
+                        $(el).find("textarea").each(function (index, subel) {
+                            if ($(subel).hasClass("quality")) {
+                                projectItem.quality = $(subel).html();
+                            } else if ($(subel).hasClass("comment")) {
+                                projectItem.comment = $(subel).html();
+                            } else if ($(subel).hasClass("description")) {
+                                projectItem.description = $(subel).html();
+                            }
+                        });
+                        console.log(projectItem);
+                        $.ajax({
+                            url: "/projectItem/EditViaAjax",
+                            type: "POST",
+                            data: projectItem
+                        }).done(function (data) {
+                            itemFlags.pop();
+                            if (itemFlags.length == 0) {
+                                console.log("done");
+                                sessionStorage.clear();
+                                window.location.href = "/Project/Details/" + projectID;
+                            }
+                        });
+                    });
+
+                }
+            }).error(function () {
+                console.log("nema veze");
+                errorRaised = true;
+                errorMsg = "Došlo je pogreške prilikom pohranjivanja projekta. Provjerite podatke i pokušajte ponovno!";
+            });
+        });
     }
 
 
@@ -535,7 +672,6 @@
         if (sessionStorage.length > 0) {
             cart = JSON.parse(sessionStorage.getItem("cart"));
             $.each(cart, function (index, el) {
-
                 var rand = randomString();
                 var accItemsSectionId = "acc-items-section-" + el.tempId;
                 var accItemsSectionTitle = 'acc-items-section-title-' + el.tempId;
@@ -828,8 +964,7 @@
 
     }
 
-
-
+    
     /**
      *
      * SUPPLY HEADER EDIT
@@ -886,6 +1021,7 @@
         if ($("#projectId").length > 0) {
             supplyHeader.project = $("#projectId").val();
         }
+        
         //save supplyHeader
         //potential break: ignores ajax url name and calls default edit method
         $.ajax({

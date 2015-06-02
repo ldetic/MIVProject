@@ -2,7 +2,7 @@
 @using Resources
 @{
     ViewBag.Title = Local.EditProject;
-
+    IQueryable<projectItem> projectItems = ViewBag.projectItems;
 }
 
 <h2>@Local.EditProject</h2>
@@ -12,18 +12,17 @@
 {
     @Html.HiddenFor(model => model.id);
     @Html.AntiForgeryToken()
-    <div class="form-horizontal">
+    <div class="form-horizontal project-edit">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
         <div class="form-group">
-            @Html.LabelForModel(Local.Name, htmlAttributes: new { @class = "control-label col-md-2", @for="name" })
+            @Html.LabelForModel(Local.Name, htmlAttributes: new { @class = "control-label col-md-2", @for = "name" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             @Html.LabelForModel(Local.PaymentMethod, htmlAttributes: new { @class = "control-label col-md-2", @for = "paymentMethod" })
             <div class="col-md-10">
@@ -35,7 +34,7 @@
         <div class="form-group">
             @Html.LabelForModel(Local.PaymentDate, htmlAttributes: new { @class = "control-label col-md-2", @for = "paymentDate" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.paymentDate, new { htmlAttributes = new { @class = "form-control", @type = "date", required = "required" } })
+                @Html.EditorFor(model => model.paymentDate, new { htmlAttributes = new { @class = "form-control", @type = "date", required = "required", @Value= Model.paymentDate.Value.ToString("yyyy-MM-dd") } })
                 @Html.ValidationMessageFor(model => model.paymentDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,20 +50,20 @@
         <div class="form-group">
             @Html.LabelForModel(Local.DeliveryDate, htmlAttributes: new { @class = "control-label col-md-2", @for = "deliveryDate" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.deliveryDate, new { htmlAttributes = new { @class = "form-control", @type = "date", required = "required" } })
+                @Html.EditorFor(model => model.deliveryDate, new { htmlAttributes = new { @class = "form-control", @type = "date", required = "required", @Value = Model.deliveryDate.Value.ToString("yyyy-MM-dd") } })
                 @Html.ValidationMessageFor(model => model.deliveryDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelForModel(Local.Description, htmlAttributes: new { @class = "control-label col-md-2", @for = "description" })
+            @Html.LabelForModel(Local.Description, htmlAttributes: new { @class = "control-label col-md-2", @for = "description" } )
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.description, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.TextAreaFor(model => model.description, new { @class = "form-control", required = "required" })
+               
                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-                
+
             </div>
         </div>
-
 
         <div class="form-group">
             @Html.LabelForModel(Local.Currency1, htmlAttributes: new { @class = "control-label col-md-2", @for = "currency" })
@@ -74,13 +73,14 @@
             </div>
         </div>
 
-
-
-
         <div class="form-group">
             @Html.LabelFor(model => model.validTillDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.validTillDate, new { htmlAttributes = new { @class = "form-control" } })
+                @try {
+                    @Html.EditorFor(model => model.validTillDate, new { htmlAttributes = new { @class = "form-control", @Value = Model.validTillDate.Value.ToString("yyyy-MM-dd") } })
+                } catch(Exception) {
+                    @Html.EditorFor(model => model.validTillDate, new { htmlAttributes = new { @class = "form-control" } })
+                }
                 @Html.ValidationMessageFor(model => model.validTillDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -90,14 +90,74 @@
             @Html.LabelFor(model => model.visible, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.CheckBox("RFP.DatesFlexible", Model.visible ?? false)
+                    @Html.CheckBox("visible", Model.visible ?? false)
                 </div>
+            </div>
+        </div>
+
+        <div class="items-wrapper">
+            <div class="acc-items">
+                @foreach (var item in projectItems)
+                {
+                    projectItem pi = (projectItem)item;
+                    <div id="acc-items-section-@pi.projectItemID" class="acc-items-section">
+                        <a class="acc-items-section-title" id="acc-items-section-title-@pi.projectItemID" href="#acc-items-@pi.projectItemID">
+                            @pi.item1.name
+                            <div type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></div>    
+                        </a>
+                        <div class="acc-items-section-content" id="acc-items-@pi.projectItemID">
+                            <div class="full-width">
+                                <div>
+                                    <input id="item-id-@pi.projectItemID" type="hidden" class="id" value="@pi.item1.itemID" aria-invalid="false">
+                                    <input id="item-id-@pi.projectItemID" type="hidden" class="projectItemId" value="@pi.projectItemID" aria-invalid="false">
+                                </div>
+                                @if (pi.item1.quantity >= 0)
+                                {
+                                    <div>
+                                        <label for="item-quantity-@pi.projectItemID">@Local.Quantity:</label>
+                                        <input id="item-quantity-@pi.projectItemID" type="number" class="form-control text-box quantity valid" value="@pi.quantity" min="0" max="@pi.item1.quantity" aria-invalid="false" required>
+                                        <span>@pi.item1.unitOfMeasure</span>
+                                    </div>
+                                }
+                                @if (pi.price != null)
+                                {
+                                    <div>
+                                        <label for="item-price-@pi.projectItemID">@Local.Price:</label>
+                                        <input id="item-price-@pi.projectItemID" type="number" class="form-control text-box price valid" value="@pi.price" min="0" step="0.01" aria-invalid="false" required>
+                                    </div>
+                                }
+
+                                @if (pi.shipDate.HasValue)
+                                {
+                                    <div>
+                                        <label for="item-date-@pi.projectItemID">@Local.shipDate:</label>
+                                        <input id="item-date-@pi.projectItemID" type="date" class="form-control text-box shipDate valid" value="@pi.shipDate.Value.ToString("yyyy-MM-dd")" aria-invalid="false" required>
+                                    </div>
+                                }
+                                @if (pi.quality != null)
+                                {
+                                    <div>
+                                        <label for="item-quality-@pi.projectItemID">@Local.Quality:</label>
+                                        <textarea id="item-quality-@pi.projectItemID" class="form-control text-box quality valid" aria-invalid="false">@pi.quality</textarea>
+                                    </div>
+                                }
+                                @if (pi.comment != null)
+                                {
+                                    <div>
+                                        <label for="item-comment-@pi.projectItemID">@Local.Comment:</label>
+                                        <textarea id="item-comment-@pi.projectItemID" class="form-control text-box comment valid" aria-invalid="false">@pi.comment</textarea>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@Local.Save" class="btn btn-default" />
+                <button id="save-btn" class="btn btn-default">@Local.Save</button>
             </div>
         </div>
     </div>
