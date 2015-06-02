@@ -534,4 +534,7 @@ Gospodarska bb, 42 000 Varaždin, Croatia
   <data name="ProjectsHome" xml:space="preserve">
     <value>Projects</value>
   </data>
+  <data name="Unvisible" xml:space="preserve">
+    <value>Unvisible</value>
+  </data>
 </root>

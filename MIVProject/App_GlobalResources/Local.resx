@@ -518,4 +518,7 @@ Gospodarska bb (prodaja armatura i fazona)
   <data name="ProjectsHome" xml:space="preserve">
     <value>Projekti</value>
   </data>
+  <data name="Unvisible" xml:space="preserve">
+    <value>Nije vidljivo</value>
+  </data>
 </root>

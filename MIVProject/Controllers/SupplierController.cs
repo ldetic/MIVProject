@@ -162,6 +162,31 @@ namespace MIVProject.Controllers
             }
             return RedirectToAction("Index");
         }
+        public ActionResult CheckSupplier(int? id)
+        {
+            var user = db.mivUser.Find(id);
+            if (user.type == null)
+            {
+                try
+                {
+                    db.Database.ExecuteSqlCommand("Update mivUser set type = (select typeID from userType where type like 'dobavlja%') where userID=@p0", id);
+
+                    string username = Session["username"].ToString();
+                    int userID = (int)Session["userID"];
+                    DateTime date = DateTime.Now;
+                    string msg = "Supplier confirmation " + user.username;
+                    db.Database.ExecuteSqlCommand("Insert into logs values(@p0, @p1, @p2, @p3 )", userID, username, msg, date);
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return RedirectToAction("Index");
+                }
+
+            }
+            else return RedirectToAction("Unauthorized", "Account");
+
+        }
 
         protected override void Dispose(bool disposing)
         {

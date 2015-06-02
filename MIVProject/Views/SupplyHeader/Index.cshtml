@@ -22,6 +22,7 @@
                 <th data-sortable="true">
                     @Local.Date
                 </th>
+                @if ((string)Session["type"] == "administrator" || (string)Session["type"] == "referent") { 
                 <th data-sortable="true">
                     @Local.Currency1
                 </th>
@@ -31,12 +32,13 @@
                 <th data-sortable="true">
                     @Local.PaymentMethod
                 </th>
+                }
                 <th data-sortable="true">
                     @Local.Project
                 </th>
 
-                @if ((string)Session["type"] == "administrator" || (string)Session["type"] == "referent")
-                {
+                @if ((string)Session["type"] == "administrator" || (string)Session["type"] == "referent") { 
+
                     <th data-sortable="true">
                         @Local.Supplier1
                     </th>
@@ -59,6 +61,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.date)
                 </td>
+                @if ((string)Session["type"] == "administrator" || (string)Session["type"] == "referent") {
                 <td>
                     @Html.DisplayFor(modelItem => item.currency1.name)
                 </td>
@@ -68,6 +71,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.paymentMethod1.name)
                 </td>
+                }
                 <td>
                     @Html.DisplayFor(modelItem => item.project1.name)
                 </td>

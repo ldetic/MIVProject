@@ -215,6 +215,7 @@ namespace MIVProject.Controllers
             {
                 try
                 {
+                    db.Database.ExecuteSqlCommand("Delete from  supplier where mivUser = @p0", id);
                     db.mivUser.Remove(mivUser);
                     db.SaveChanges();
                     string username = Session["username"].ToString();

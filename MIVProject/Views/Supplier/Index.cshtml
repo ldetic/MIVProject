@@ -3,10 +3,8 @@
 @{
     ViewBag.Title = Local.Supplier;
 }
-<h2>Index</h2>
-<p>
-    @Html.ActionLink(Local.CreateNew, "Create")
-</p>
+<h2>@Local.Supplier</h2>
+
 <table id="supplier-table" class="table object-table" data-toggle="table" data-sort-name="id" data-sort-order="asc"
        data-search="true" data-toolbar="#toolbar" data-pagination="true"
        data-query-params="queryParams">
@@ -59,15 +57,41 @@
                 @if (item.mivUser1.type == null)
                 {
                     //@Html.ActionLink(Local.Check, "CheckSupplier", new { controller = "mivUser", id = item.mivUser });
-                    @Html.ActionLink(Local.Check, "CheckSupplier", new { id = item.mivUser });
+                    //@Html.ActionLink(Local.Check, "CheckSupplier", new { id = item.mivUser });
+                    <a href="@Url.Action("CheckSupplier", new { id = item.mivUser })">
+                        <span class="glyphicon glyphicon-ok"
+                              aria-hidden="true"
+                              data-toggle="tooltip"
+                              data-placement="left"
+                              title="@Local.Check"></span>
+                    </a>
                 }
 
                 else
                 {
-                    @Html.ActionLink(Local.Edit, "Edit", new { id = item.mivUser })
-                } |
-                @Html.ActionLink(Local.Details, "Details", new { id = item.mivUser }) |
-                @Html.ActionLink(Local.Delete, "Delete", new { id = item.mivUser })
+                    <a href="@Url.Action("Edit", new { id = item.mivUser })">
+                        <span class="glyphicon glyphicon-edit"
+                              aria-hidden="true"
+                              data-toggle="tooltip"
+                              data-placement="left"
+                              title="@Local.Edit"></span>
+                    </a>
+                }
+                <a href="@Url.Action("Details", new { id = item.mivUser })">
+                    <span class="glyphicon glyphicon-list-alt"
+                          aria-hidden="true"
+                          data-toggle="tooltip"
+                          data-placement="left"
+                          title="@Local.Details"></span>
+                </a>
+                
+                <a href="@Url.Action("Delete", new { id = item.mivUser })">
+                    <span class="glyphicon glyphicon-trash"
+                          aria-hidden="true"
+                          data-toggle="tooltip"
+                          data-placement="left"
+                          title="@Local.Delete"></span>
+                </a>
             </td>
         </tr>
     }
