@@ -93,8 +93,16 @@
             <br><br>
             <form method="get" name="Localization">
                 <input name="__RequestVerificationToken" type="hidden" value="FnooAT5q8PEXAMFEZl30xwM66gHGAiEh4tiezgTuDl7s3abP3A0jkKb2-Ji3rfbU0isxuaLOTfLLpaF4bfYQW892_fMUSqWPk0GR8dCdg941">
-                <input class="footer-sub-act btn btn-default" type="submit" name="hr-HR" value="Hrvatski">
-                <input class="footer-sub-no btn btn-default" type="submit" name="en-GB" value="English">
+                @if (Culture == "en-GB")
+                {
+                    <input class="footer-sub-no btn btn-default" type="submit" name="hr-HR" value="Hrvatski">
+                    <input class="footer-sub-act btn btn-default" type="submit" name="en-GB" value="English">
+                }
+                else
+                {
+                    <input class="footer-sub-act btn btn-default" type="submit" name="hr-HR" value="Hrvatski">
+                    <input class="footer-sub-no btn btn-default" type="submit" name="en-GB" value="English">
+                }
             </form>
             <br>
             <p class="miv_cpr">© 2015 - Metalska industrija Varaždin</p><br>

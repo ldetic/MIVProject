@@ -1,6 +1,5 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -244,6 +243,10 @@ textarea {
     color: #00A88D;
     font-size: medium;
 }
+.footer-link:hover {
+    color: #ff9580;
+    text-decoration: none;
+}
 
 .footer-razmaci {
     color: #9f9f9f;
@@ -347,6 +350,7 @@ textarea {
 .add-but {
     color: #ffffff;
     font-size: large;
+    top: 3px;
 }
 
 .add-but-back {
@@ -427,4 +431,56 @@ textarea {
 .home-pro-btn{
   margin-left: 10px;
   margin-bottom: 10px;
+}
+
+/* NAVIGATION */
+.navbar-right li:first-child, .login-colo, .logut-colo {
+    margin-top: 7.5px;
+    margin-right: 7px;
+}
+@media (max-width: 767px) {
+    .navbar-right li:first-child, .login-colo, .logut-colo {
+        margin-top: 0px;
+        margin-right: 0px;
+    }
+}
+
+.navbar-right li:first-child a {
+    padding: 8px 14px !important;
+}
+
+.navbar-right li:first-child a {
+    padding: 8px 14px !important;
+}
+.login-colo a, .logut-colo a {
+    padding: 8px 29px !important;
+}
+
+/* FOOTER */
+.footer-sub-no:hover, .footer-sub-no:active, .footer-sub-no:focus {
+    background-color: transparent !important;
+    color: rgb(0, 168, 141);
+}
+.footer-sub-act:hover, .footer-sub-act:active, .footer-sub-act:focus {
+    background-color: transparent !important;
+    color: rgb(0, 168, 141);
+}
+.dropdown-toggle {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ddd;
+    padding-left: 4px;
+    padding-right: 6px;
+}
+.pagination li a {
+    border: 0px;
+    color: #f59680;
+}
+
+/* TOOLBAR */
+#toolbar a.btn-default {
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 8px;
+    padding-top: 4px;
 }
